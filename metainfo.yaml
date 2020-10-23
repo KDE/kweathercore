@@ -1,1 +1,21 @@
-tier: "unknown"
+maintainer: Devin Lin, Han Young
+description: Query weather data
+tier: 2
+type: functional
+platforms:
+    - name: Linux
+    - name: FreeBSD
+    - name: Windows
+    - name: macOS
+    - name: Android
+portingAid: false
+deprecated: false
+release: false
+libraries:
+ - qmake: LibKWeather
+   cmake: "KF5::LibKWeather"
+cmakename: KF5LibKWeather
+
+public_lib: true
+group: Frameworks
+subgroup: Tier 2
