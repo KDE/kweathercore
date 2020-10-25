@@ -1,5 +1,6 @@
 set(kweathercore_SRCS
     locationquery.cpp
+    locationqueryresult.cpp
 )
 
 
@@ -24,6 +25,7 @@ set_target_properties(KF5KWeatherCore
 ecm_generate_headers(KWeatherCore_HEADERS
     HEADER_NAMES
         LocationQuery
+        LocationQueryResult
         # other classes
 
     REQUIRED_HEADERS KWeatherCore_HEADERS
