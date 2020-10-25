@@ -1,6 +1,6 @@
 maintainer: Devin Lin, Han Young
 description: Query weather data
-tier: 2
+tier: 1
 type: functional
 platforms:
     - name: Linux
@@ -12,10 +12,10 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
- - qmake: LibKWeather
-   cmake: "KF5::LibKWeather"
-cmakename: KF5LibKWeather
+ - qmake: KWeatherCore
+   cmake: "KF5::KWeatherCore"
+cmakename: KF5KWeatherCore
 
 public_lib: true
 group: Frameworks
-subgroup: Tier 2
+subgroup: Tier 1

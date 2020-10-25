@@ -1,49 +1,49 @@
-set(libkweather_SRCS
+set(kweathercore_SRCS
     locationquery.cpp
 )
 
 
-add_library(KF5LibKWeather ${libkweather_SRCS})
-generate_export_header(KF5LibKWeather BASE_NAME LibKWeather)
-add_library(KF5::LibKWeather ALIAS KF5LibKWeather)
+add_library(KF5KWeatherCore ${kweathercore_SRCS})
+generate_export_header(KF5KWeatherCore BASE_NAME KWeatherCore)
+add_library(KF5::KWeatherCore ALIAS KF5KWeatherCore)
 
-target_include_directories(KF5LibKWeather INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/LibKWeather>")
+target_include_directories(KF5KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KWeatherCore>")
 
-target_link_libraries(KF5LibKWeather
+target_link_libraries(KF5KWeatherCore
 PUBLIC Qt5::Core
 PRIVATE Qt5::Network
         KF5::I18n
 )
 
-set_target_properties(KF5LibKWeather
+set_target_properties(KF5KWeatherCore
     PROPERTIES VERSION ${LIBKWEATHER_VERSION_STRING}
     SOVERSION ${LIBKWEATHER_SOVERSION}
-    EXPORT_NAME "libkweather"
+    EXPORT_NAME "kweathercore"
 )
 
-ecm_generate_headers(LibKWeather_HEADERS
+ecm_generate_headers(KWeatherCore_HEADERS
     HEADER_NAMES
         LocationQuery
         # other classes
 
-    REQUIRED_HEADERS LibKWeather_HEADERS
+    REQUIRED_HEADERS KWeatherCore_HEADERS
 )
 
 # Install files
-install(TARGETS KF5LibKWeather
-        EXPORT KF5LibKWeatherTargets
+install(TARGETS KF5KWeatherCore
+        EXPORT KF5KWeatherCoreTargets
         ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
-            ${CMAKE_CURRENT_BINARY_DIR}/libkweather_export.h
-            ${LibKWeather_HEADERS}
-        DESTINATION ${INCLUDE_INSTALL_DIR}/LibKWeather
+            ${CMAKE_CURRENT_BINARY_DIR}/kweathercore_export.h
+            ${KWeatherCore_HEADERS}
+        DESTINATION ${INCLUDE_INSTALL_DIR}/KWeatherCore
         COMPONENT Devel)
 
 include(ECMGeneratePriFile)
 ecm_generate_pri_file(
-    BASE_NAME LibKWeather
-    LIB_NAME KF5LibKWeather
+    BASE_NAME KWeatherCore
+    LIB_NAME KF5KWeatherCore
     DEPS "core"
     FILENAME_VAR PRI_FILENAME
 )

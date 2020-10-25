@@ -4,5 +4,5 @@ include(CMakeFindDependencyMacro)
 find_dependency(Qt5Core @REQUIRED_QT_VERSION@)
 
 
-include("${CMAKE_CURRENT_LIST_DIR}/KF5LibKWeatherTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KF5KWeatherCoreTargets.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@
