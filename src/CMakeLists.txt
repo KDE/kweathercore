@@ -3,6 +3,7 @@ set(kweathercore_SRCS
     locationqueryresult.cpp
     weatherforecast.cpp
     hourlyforecast.cpp
+    dailyforecast.cpp
 )
 
 

@@ -2,6 +2,14 @@
 #include <QJsonObject>
 namespace KWeatherCore
 {
+HourlyWeatherForecast::HourlyWeatherForecast()
+{
+    m_date = QDateTime::currentDateTime();
+    m_weatherDescription = QStringLiteral("Unknown");
+    m_weatherIcon = QStringLiteral("weather-none-available");
+    m_neutralWeatherIcon = QStringLiteral("weather-none-available");
+}
+
 HourlyWeatherForecast::HourlyWeatherForecast(QDateTime date,
                                              QString weatherDescription,
                                              QString weatherIcon,
@@ -62,8 +70,9 @@ HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
                                  obj[QStringLiteral("precipitationAmount")].toDouble());
 }
 
-QDateTime &HourlyWeatherForecast::date() const {
-
+QDateTime HourlyWeatherForecast::date() const
+{
+    return m_date;
 };
 void HourlyWeatherForecast::setDate(QDateTime date)
 {

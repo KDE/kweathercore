@@ -32,7 +32,7 @@ public:
     QJsonObject toJson();
     static HourlyWeatherForecast fromJson(QJsonObject obj);
 
-    QDateTime &date() const;
+    QDateTime date() const;
     void setDate(QDateTime date);
     QString weatherDescription() const;
     void setWeatherDescription(const QString &weatherDescription);
