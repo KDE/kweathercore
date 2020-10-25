@@ -13,6 +13,7 @@ target_include_directories(KF5KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${INCL
 target_link_libraries(KF5KWeatherCore
 PUBLIC Qt5::Core
 PRIVATE Qt5::Network
+        Qt5::Positioning
         KF5::I18n
 )
 

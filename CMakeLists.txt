@@ -26,7 +26,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWeatherCore
 set(REQUIRED_QT_VERSION 5.12.0)
 
 # Required Qt5 components to build this framework
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network)
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
 
 # TODO: Add all required find_package() calls here. For example:
 # find_package(KF5CoreAddons ${KF5_VERSION} REQUIRED)

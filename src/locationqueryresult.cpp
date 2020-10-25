@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "locationquery.h"
-namespace LibKWeather
+namespace KWeatherCore
 {
 LocationQueryResult::LocationQueryResult(double latitude, double longitude, QString toponymName, QString name, QString countryCode, QString countryName, QString geonameId)
     : m_latitude(latitude)

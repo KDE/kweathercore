@@ -7,26 +7,29 @@
 
 #pragma once
 #include "locationqueryresult.h"
+#include <QGeoPositionInfo>
 #include <QObject>
-class QNetworkAccessManager;
-namespace LibKWeather
+class QNetworkReply;
+namespace KWeatherCore
 {
+class LocationQueryPrivate;
 class LocationQuery : public QObject
 {
     Q_OBJECT
 public:
-    enum class LocateMethod { GeoIP, GPS };
-    LocationQuery();
-
+    LocationQuery(QObject *parent = nullptr);
+    ~LocationQuery();
     void query(QString name, int number = 30);
-    void locate(LocateMethod method = LocateMethod::GeoIP);
+    void locate();
 Q_SIGNALS:
     void queryFinished(QVector<LocationQueryResult> result);
     void located(LocationQueryResult result);
+    void queryError();
+private Q_SLOTS:
+    void handleQueryResult(QNetworkReply *reply);
+    void positionUpdated(const QGeoPositionInfo &update);
 
 private:
-    void geoIPLocate();
-    void GPSLocate();
-    QNetworkAccessManager *m_manager = nullptr;
+    LocationQueryPrivate *d = nullptr;
 };
 }

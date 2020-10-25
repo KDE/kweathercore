@@ -7,21 +7,19 @@
 
 #pragma once
 #include <QString>
-namespace LibKWeather
+namespace KWeatherCore
 {
 class LocationQueryResult
 {
-    explicit LocationQueryResult()
-    {
-    }
-    explicit LocationQueryResult(double latitude, double longitude, QString toponymName, QString name, QString countryCode, QString countryName, QString geonameId);
+public:
+    LocationQueryResult(double latitude, double longitude, QString toponymName = QString(), QString name = QString(), QString countryCode = QString(), QString countryName = QString(), QString geonameId = QString());
     double latitude() const;
     double longitude() const;
-    QString toponymName() const;
-    QString name() const;
-    QString countryCode() const;
-    QString countryName() const;
-    QString geonameId() const;
+    QString &toponymName() const;
+    QString &name() const;
+    QString &countryCode() const;
+    QString &countryName() const;
+    QString &geonameId() const;
 
 private:
     double m_latitude, m_longitude;
