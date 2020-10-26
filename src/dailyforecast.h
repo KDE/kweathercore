@@ -1,4 +1,5 @@
 #pragma once
+#include "hourlyforecast.h"
 #include <QDate>
 #include <QJsonObject>
 namespace KWeatherCore
@@ -33,6 +34,13 @@ public:
 
     DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
+    DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
+    DailyWeatherForecast &operator<<(const DailyWeatherForecast &forecast);
+    bool operator==(const DailyWeatherForecast &forecast) const;
+    bool operator<(const DailyWeatherForecast &forecast) const;
+    bool operator>(const DailyWeatherForecast &forecast) const;
+    bool operator>=(const DailyWeatherForecast &forecast) const;
+    bool operator<=(const DailyWeatherForecast &forecast) const;
 
 private:
     double m_maxTemp = std::numeric_limits<double>::min();

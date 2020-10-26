@@ -20,14 +20,14 @@ public:
                           QString weatherDescription,
                           QString weatherIcon,
                           QString neutralWeatherIcon,
-                          float temperature,
-                          float pressure,
+                          double temperature,
+                          double pressure,
                           WindDirection windDirection,
-                          float windSpeed,
-                          float humidity,
-                          float fog,
-                          float uvIndex,
-                          float precipitationAmount);
+                          double windSpeed,
+                          double humidity,
+                          double fog,
+                          double uvIndex,
+                          double precipitationAmount);
 
     QJsonObject toJson();
     static HourlyWeatherForecast fromJson(QJsonObject obj);
@@ -42,22 +42,22 @@ public:
     void setNeutralWeatherIcon(QString neutralWeatherIcon);
     QString symbolCode() const;
     void setSymbolCode(QString symbolCode);
-    float temperature() const;
-    void setTemperature(float temperature);
-    float pressure() const;
-    void setPressure(float pressure);
+    double temperature() const;
+    void setTemperature(double temperature);
+    double pressure() const;
+    void setPressure(double pressure);
     WindDirection windDirection() const;
     void setWindDirection(WindDirection windDirection);
-    float windSpeed() const;
-    void setWindSpeed(float windSpeed);
-    float humidity() const;
-    void setHumidity(float humidity);
-    float fog() const;
-    void setFog(float fog);
-    float uvIndex() const;
-    void setUvIndex(float uvIndex);
-    float precipitationAmount() const;
-    void setPrecipitationAmount(float precipitationAmount);
+    double windSpeed() const;
+    void setWindSpeed(double windSpeed);
+    double humidity() const;
+    void setHumidity(double humidity);
+    double fog() const;
+    void setFog(double fog);
+    double uvIndex() const;
+    void setUvIndex(double uvIndex);
+    double precipitationAmount() const;
+    void setPrecipitationAmount(double precipitationAmount);
 
 private:
     QDateTime m_date;
@@ -65,13 +65,13 @@ private:
     QString m_weatherIcon;
     QString m_neutralWeatherIcon; // weather icon without time of day
     QString m_symbolCode;
-    float m_temperature = 0; // celsius
-    float m_pressure = 0;    // hPa
+    double m_temperature = 0; // celsius
+    double m_pressure = 0;    // hPa
     WindDirection m_windDirection = WindDirection::E;
-    float m_windSpeed = 0;           // m/s
-    float m_humidity = 0;            // %
-    float m_fog = 0;                 // %
-    float m_uvIndex = 0;             // 0-1
-    float m_precipitationAmount = 0; // mm
+    double m_windSpeed = 0;           // m/s
+    double m_humidity = 0;            // %
+    double m_fog = 0;                 // %
+    double m_uvIndex = 0;             // 0-1
+    double m_precipitationAmount = 0; // mm
 };
 }

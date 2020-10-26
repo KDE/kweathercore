@@ -17,16 +17,10 @@ public:
     void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
     void setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast);
 
-    WeatherForecast &operator+(const DailyWeatherForecast &forecast);
-    WeatherForecast &operator+(DailyWeatherForecast &&forecast);
-    WeatherForecast &operator+(const HourlyWeatherForecast &forecast);
-    WeatherForecast &operator+(HourlyWeatherForecast &&forecast);
     WeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     WeatherForecast &operator+=(DailyWeatherForecast &&forecast);
     WeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
-    WeatherForecast &operator+(const WeatherForecast &forecast);
-    WeatherForecast &operator+(WeatherForecast &&forecast);
     WeatherForecast &operator+=(const WeatherForecast &forecast);
     WeatherForecast &operator+=(WeatherForecast &&forecast);
 

@@ -14,14 +14,14 @@ HourlyWeatherForecast::HourlyWeatherForecast(QDateTime date,
                                              QString weatherDescription,
                                              QString weatherIcon,
                                              QString neutralWeatherIcon,
-                                             float temperature,
-                                             float pressure,
+                                             double temperature,
+                                             double pressure,
                                              WindDirection windDirection,
-                                             float windSpeed,
-                                             float humidity,
-                                             float fog,
-                                             float uvIndex,
-                                             float precipitationAmount)
+                                             double windSpeed,
+                                             double humidity,
+                                             double fog,
+                                             double uvIndex,
+                                             double precipitationAmount)
     : m_date(std::move(date))
     , m_weatherDescription(std::move(weatherDescription))
     , m_weatherIcon(std::move(weatherIcon))
@@ -110,19 +110,19 @@ void HourlyWeatherForecast::setSymbolCode(QString symbolCode)
 {
     m_symbolCode = std::move(symbolCode);
 };
-float HourlyWeatherForecast::temperature() const
+double HourlyWeatherForecast::temperature() const
 {
     return m_temperature;
 };
-void HourlyWeatherForecast::setTemperature(float temperature)
+void HourlyWeatherForecast::setTemperature(double temperature)
 {
     m_temperature = temperature;
 };
-float HourlyWeatherForecast::pressure() const
+double HourlyWeatherForecast::pressure() const
 {
     return m_pressure;
 };
-void HourlyWeatherForecast::setPressure(float pressure)
+void HourlyWeatherForecast::setPressure(double pressure)
 {
     m_pressure = pressure;
 };
@@ -134,43 +134,43 @@ void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
 {
     m_windDirection = windDirection;
 };
-float HourlyWeatherForecast::windSpeed() const
+double HourlyWeatherForecast::windSpeed() const
 {
     return m_windSpeed;
 };
-void HourlyWeatherForecast::setWindSpeed(float windSpeed)
+void HourlyWeatherForecast::setWindSpeed(double windSpeed)
 {
     m_windSpeed = windSpeed;
 };
-float HourlyWeatherForecast::humidity() const
+double HourlyWeatherForecast::humidity() const
 {
     return m_humidity;
 };
-void HourlyWeatherForecast::setHumidity(float humidity)
+void HourlyWeatherForecast::setHumidity(double humidity)
 {
     m_humidity = humidity;
 };
-float HourlyWeatherForecast::fog() const
+double HourlyWeatherForecast::fog() const
 {
     return m_fog;
 };
-void HourlyWeatherForecast::setFog(float fog)
+void HourlyWeatherForecast::setFog(double fog)
 {
     m_fog = fog;
 };
-float HourlyWeatherForecast::uvIndex() const
+double HourlyWeatherForecast::uvIndex() const
 {
     return m_uvIndex;
 };
-void HourlyWeatherForecast::setUvIndex(float uvIndex)
+void HourlyWeatherForecast::setUvIndex(double uvIndex)
 {
     m_uvIndex = uvIndex;
 };
-float HourlyWeatherForecast::precipitationAmount() const
+double HourlyWeatherForecast::precipitationAmount() const
 {
     return m_precipitationAmount;
 };
-void HourlyWeatherForecast::setPrecipitationAmount(float precipitationAmount)
+void HourlyWeatherForecast::setPrecipitationAmount(double precipitationAmount)
 {
     m_precipitationAmount = precipitationAmount;
 };
