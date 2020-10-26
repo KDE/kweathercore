@@ -32,6 +32,9 @@ public:
     QString weatherDescription() const;
     QDate date() const;
 
+    const QVector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
+    QVector<HourlyWeatherForecast> &hourlyWeatherForecast();
+
     DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
@@ -52,5 +55,7 @@ private:
     QString m_weatherIcon;
     QString m_weatherDescription;
     QDate m_date;
+
+    QVector<HourlyWeatherForecast> m_hourlyWeatherForecast;
 };
 }

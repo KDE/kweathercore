@@ -119,6 +119,16 @@ QDate DailyWeatherForecast::date() const
     return m_date;
 };
 
+const QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
+{
+    return m_hourlyWeatherForecast;
+}
+
+QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast()
+{
+    return m_hourlyWeatherForecast;
+}
+
 DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
     if (*this == forecast) {
