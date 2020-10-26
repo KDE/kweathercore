@@ -5,10 +5,6 @@ const QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() con
 {
     return m_dailyWeatherForecast;
 }
-const QVector<HourlyWeatherForecast> &WeatherForecast::houlyWeatherForecast() const
-{
-    return m_hourlyWeatherForecast;
-}
 
 void WeatherForecast::setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast)
 {
@@ -16,17 +12,7 @@ void WeatherForecast::setDailyWeatherForecast(const QVector<DailyWeatherForecast
 }
 void WeatherForecast::setDailyWeatherForecast(QVector<DailyWeatherForecast> &&forecast)
 {
-    m_dailyWeatherForecast = std::move(forecast);
-}
-
-void WeatherForecast::setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast)
-{
-    m_hourlyWeatherForecast = forecast;
-}
-
-void WeatherForecast::setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast)
-{
-    m_hourlyWeatherForecast = std::move(forecast);
+    m_dailyWeatherForecast = forecast;
 }
 
 WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecast)

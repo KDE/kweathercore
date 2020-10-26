@@ -34,6 +34,8 @@ public:
 
     const QVector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
     QVector<HourlyWeatherForecast> &hourlyWeatherForecast();
+    void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
+    void setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast);
 
     DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);

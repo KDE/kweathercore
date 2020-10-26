@@ -129,6 +129,15 @@ QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast()
     return m_hourlyWeatherForecast;
 }
 
+void DailyWeatherForecast::setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast)
+{
+    m_hourlyWeatherForecast = forecast;
+}
+
+void DailyWeatherForecast::setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast)
+{
+    m_hourlyWeatherForecast = forecast;
+}
 DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
     if (*this == forecast) {
