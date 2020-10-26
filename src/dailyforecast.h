@@ -31,9 +31,12 @@ public:
     QString weatherDescription() const;
     QDate date() const;
 
+    DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
+    DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
+
 private:
-    double m_maxTemp = 0;
-    double m_minTemp = 0;
+    double m_maxTemp = std::numeric_limits<double>::min();
+    double m_minTemp = std::numeric_limits<double>::max();
     double m_precipitation = 0; // mm
     double m_uvIndex = 0;       // 0-1
     double m_humidity = 0;      // %

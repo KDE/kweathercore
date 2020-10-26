@@ -106,4 +106,23 @@ QDate DailyWeatherForecast::date() const
 {
     return m_date;
 };
+
+DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
+{
+    if (this->date() == forecast.date()) {
+        this->setPrecipitation(this->precipitation() + forecast.precipitation());
+        this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
+        this->setHumidity(std::max(this->humidity(), forecast.humidity()));
+        this->setPressure(std::max(this->pressure(), forecast.pressure()));
+        this->setMaxTemp(std::max(this->maxTemp(), forecast.maxTemp()));
+        this->setMinTemp(std::min(this->minTemp(), forecast.minTemp()));
+    }
+
+    return *this;
+}
+
+DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
+{
+    return *this + forecast;
+}
 }
