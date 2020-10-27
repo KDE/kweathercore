@@ -5,6 +5,7 @@ set(kweathercore_SRCS
     weatherforecast.cpp
     hourlyforecast.cpp
     dailyforecast.cpp
+    geotimezone.cpp
 )
 
 

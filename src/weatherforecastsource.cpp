@@ -1,4 +1,5 @@
 #include "weatherforecastsource.h"
+#include "geotimezone.h"
 #include "weatherforecast.h"
 #include <KLocalizedString>
 #include <QCoreApplication>
@@ -28,7 +29,7 @@ WeatherForecastSource::~WeatherForecastSource()
     delete d;
 }
 
-void WeatherForecastSource::requestData(double latitude, double longitude)
+void WeatherForecastSource::requestData(double latitude, double longitude, QString timezone)
 {
     // query weather api
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
@@ -42,7 +43,7 @@ void WeatherForecastSource::requestData(double latitude, double longitude)
     req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
     // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QLatin1String(" (kde-pim@kde.org)")));
+    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
 
     d->manager->get(req);
 }
@@ -52,7 +53,7 @@ void WeatherForecastSource::parseResults(QNetworkReply *reply)
     reply->deleteLater();
     if (reply->error()) {
         qWarning() << "network error when fetching forecast:" << reply->errorString();
-        emit networkError();
+        Q_EMIT networkError();
         return;
     }
     QJsonDocument jsonDocument = QJsonDocument::fromJson(reply->readAll());

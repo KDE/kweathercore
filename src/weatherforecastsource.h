@@ -13,7 +13,7 @@ public:
     WeatherForecastSource(QObject *parent = nullptr);
     ~WeatherForecastSource();
 
-    void requestData(double latitude, double longitude);
+    void requestData(double latitude, double longitude, QString timezone = QString());
     void requestData(const LocationQueryResult &location);
 Q_SIGNALS:
     void requestFinished(const WeatherForecast &forecast);
