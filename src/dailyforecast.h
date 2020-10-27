@@ -41,6 +41,7 @@ public:
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     DailyWeatherForecast &operator<<(const DailyWeatherForecast &forecast);
+    DailyWeatherForecast &operator<<(const HourlyWeatherForecast &forecast);
     bool operator==(const DailyWeatherForecast &forecast) const;
     bool operator<(const DailyWeatherForecast &forecast) const;
     bool operator>(const DailyWeatherForecast &forecast) const;

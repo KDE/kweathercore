@@ -140,6 +140,9 @@ void DailyWeatherForecast::setHourlyWeatherForecast(QVector<HourlyWeatherForecas
 }
 DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
+    if (this->date().isNull())
+        this->date() = forecast.date();
+
     if (*this == forecast) {
         this->setPrecipitation(this->precipitation() + forecast.precipitation());
         this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
@@ -159,6 +162,9 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecas
 
 DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
+    if (this->date().isNull())
+        this->date() = forecast.date().date();
+
     if (this->date().daysTo(forecast.date().date()) == 0) {
         this->setPrecipitation(this->precipitation() + forecast.precipitationAmount());
         this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
@@ -173,6 +179,10 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
 DailyWeatherForecast &DailyWeatherForecast::operator<<(const DailyWeatherForecast &forecast)
 {
     return *this + forecast;
+}
+DailyWeatherForecast &DailyWeatherForecast::operator<<(const HourlyWeatherForecast &forecast)
+{
+    return *this += forecast;
 }
 bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) const
 {
