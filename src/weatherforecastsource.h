@@ -1,7 +1,6 @@
 #pragma once
-#include "dailyforecast.h"
-#include "hourlyforecast.h"
 #include "locationqueryresult.h"
+#include "weatherforecast.h"
 #include <QObject>
 class QNetworkReply;
 namespace KWeatherCore
@@ -17,12 +16,14 @@ public:
     void requestData(double latitude, double longitude);
     void requestData(const LocationQueryResult &location);
 Q_SIGNALS:
-    void requestFinished(const QVector<>);
+    void requestFinished(const WeatherForecast &forecast);
     void networkError();
 private Q_SLOTS:
     void parseResults(QNetworkReply *reply);
 
 private:
     WeatherForecastSourcePrivate *d = nullptr;
+
+    void parseOneElement(const QJsonObject &obj, WeatherForecast &forecast);
 };
 }

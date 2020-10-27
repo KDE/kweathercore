@@ -5,7 +5,18 @@ const QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() con
 {
     return m_dailyWeatherForecast;
 }
-
+const QString &WeatherForecast::timezone() const
+{
+    return m_timezone;
+}
+void WeatherForecast::setTimezone(const QString &timezone)
+{
+    m_timezone = timezone;
+}
+void WeatherForecast::setTimezone(QString &&timezone)
+{
+    m_timezone = std::move(timezone);
+}
 void WeatherForecast::setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast)
 {
     m_dailyWeatherForecast = forecast;

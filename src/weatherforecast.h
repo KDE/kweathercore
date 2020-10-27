@@ -10,6 +10,9 @@ public:
     WeatherForecast(QVector<DailyWeatherForecast> daily, QVector<HourlyWeatherForecast> hourly);
     const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
     QVector<DailyWeatherForecast> &dailyWeatherForecast();
+    const QString &timezone() const;
+    void setTimezone(const QString &timezone);
+    void setTimezone(QString &&timezone);
     void setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(QVector<DailyWeatherForecast> &&forecast);
     void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
@@ -22,5 +25,7 @@ public:
 
 private:
     QVector<DailyWeatherForecast> m_dailyWeatherForecast;
+
+    QString m_timezone;
 };
 }
