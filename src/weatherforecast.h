@@ -1,6 +1,6 @@
 #pragma once
 #include "dailyforecast.h"
-#include "hourlyforecast.h"
+#include "sunrise.h"
 namespace KWeatherCore
 {
 class WeatherForecast
@@ -10,13 +10,14 @@ public:
     WeatherForecast(QVector<DailyWeatherForecast> daily, QVector<HourlyWeatherForecast> hourly);
     const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
     QVector<DailyWeatherForecast> &dailyWeatherForecast();
+    const QVector<Sunrise> &sunriseForecast() const;
     const QString &timezone() const;
     void setTimezone(const QString &timezone);
     void setTimezone(QString &&timezone);
     void setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(QVector<DailyWeatherForecast> &&forecast);
-    void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
-    void setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast);
+    void setSunriseForecast(const QVector<Sunrise> &sunrise);
+    void setSunriseForecast(QVector<Sunrise> &&sunrise);
 
     WeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     WeatherForecast &operator+=(DailyWeatherForecast &&forecast);
@@ -25,7 +26,7 @@ public:
 
 private:
     QVector<DailyWeatherForecast> m_dailyWeatherForecast;
-
+    QVector<Sunrise> m_sunriseForecast;
     QString m_timezone;
 };
 }

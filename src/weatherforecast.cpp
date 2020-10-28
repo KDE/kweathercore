@@ -25,7 +25,14 @@ void WeatherForecast::setDailyWeatherForecast(QVector<DailyWeatherForecast> &&fo
 {
     m_dailyWeatherForecast = std::move(forecast);
 }
-
+void WeatherForecast::setSunriseForecast(const QVector<Sunrise> &sunrise)
+{
+    m_sunriseForecast = sunrise;
+}
+void WeatherForecast::setSunriseForecast(QVector<Sunrise> &&sunrise)
+{
+    m_sunriseForecast = std::move(sunrise);
+}
 WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {

@@ -13,10 +13,12 @@ public:
     QString timezone;
 };
 
-PendingWeatherForecast::PendingWeatherForecast(const QString &timezone)
+template<class T>
+PendingWeatherForecast::PendingWeatherForecast(const QString &timezone, T &&sunrise)
     : d(new PendingWeatherForecastPrivate)
 {
     d->timezone = timezone;
+    d->forecast.setSunriseForecast(std::forward<T>(sunrise));
 }
 PendingWeatherForecast::~PendingWeatherForecast()
 {

@@ -9,7 +9,7 @@ class PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:
-    PendingWeatherForecast(const QString &timezone);
+    template<class T> PendingWeatherForecast(const QString &timezone, T &&sunrise);
     ~PendingWeatherForecast();
     WeatherForecast value();
     bool isFinished();
