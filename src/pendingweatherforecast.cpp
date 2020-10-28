@@ -30,6 +30,8 @@ void PendingWeatherForecast::parseResults(QNetworkReply *reply)
         Q_EMIT networkError();
         return;
     }
+
+    auto hourlyForecast = QVector<HourlyWeatherForecast>();
     QJsonDocument jsonDocument = QJsonDocument::fromJson(reply->readAll());
 
     if (jsonDocument.isObject()) {
@@ -39,20 +41,11 @@ void PendingWeatherForecast::parseResults(QNetworkReply *reply)
         if (prop.contains(QStringLiteral("timeseries"))) {
             QJsonArray timeseries = prop[QStringLiteral("timeseries")].toArray();
 
-            auto weatherForecast = WeatherForecast();
             // loop over all forecast data
             for (QJsonValueRef ref : timeseries) {
                 QJsonObject refObj = ref.toObject();
-                parseOneElement(refObj, weatherForecast);
+                parseOneElement(refObj, hourlyForecast);
             }
-
-            // TODO
-            //            // sort the daily forecasts
-            //            auto daysList = dayCache.values();
-            //            std::sort(daysList.begin(), daysList.end(), [](AbstractDailyWeatherForecast h1, AbstractDailyWeatherForecast h2) -> bool { return h1.date() < h2.date(); });
-
-            //            // process and build abstract forecast
-            //            currentData_ = AbstractWeatherForecast(QDateTime::currentDateTime(), locationId_, latitude_, longitude_, hoursList, daysList);
         }
     }
 
@@ -65,7 +58,7 @@ void PendingWeatherForecast::parseResults(QNetworkReply *reply)
     //    emit updated(currentData_);
 }
 
-void PendingWeatherForecast::parseOneElement(const QJsonObject &obj, WeatherForecast &forecast)
+void PendingWeatherForecast::parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast)
 {
     /*~~~~~~~~~~ static variable ~~~~~~~~~~~*/
     // rank weather (for what best describes the day overall)
@@ -280,33 +273,6 @@ void PendingWeatherForecast::parseOneElement(const QJsonObject &obj, WeatherFore
                                               instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble(),
                                               precipitationAmount);
 
-    // TODO
-    //    // add day if not already created
-    //    if (!dayCache.contains(date.date())) {
-    //        dayCache[date.date()] = AbstractDailyWeatherForecast(-1e9, 1e9, 0, 0, 0, 0, "weather-none-available", "Unknown", date.date());
-    //    }
-
-    //    // update day forecast with hour information if needed
-    //    AbstractDailyWeatherForecast &dayForecast = dayCache[date.date()];
-
-    //    dayForecast.setPrecipitation(dayForecast.precipitation() + hourForecast.precipitationAmount());
-    //    dayForecast.setUvIndex(std::max(dayForecast.uvIndex(), hourForecast.uvIndex()));
-    //    dayForecast.setHumidity(std::max(dayForecast.humidity(), hourForecast.humidity()));
-    //    dayForecast.setPressure(std::max(dayForecast.pressure(), hourForecast.pressure()));
-
-    //    if (data.contains("next_6_hours")) {
-    //        QJsonObject details = data["next_6_hours"].toObject()["details"].toObject();
-    //        dayForecast.setMaxTemp(std::max(dayForecast.maxTemp(), (float)details["air_temperature_max"].toDouble()));
-    //        dayForecast.setMinTemp(std::min(dayForecast.minTemp(), (float)details["air_temperature_min"].toDouble()));
-    //    }
-
-    //    // set description and icon if it is higher ranked
-    //    if (rank[hourForecast.neutralWeatherIcon()] >= rank[dayForecast.weatherIcon()]) {
-    //        dayForecast.setWeatherDescription(apiDescMap[symbolCode + "_neutral"].desc);
-    //        dayForecast.setWeatherIcon(hourForecast.neutralWeatherIcon());
-    //    }
-
-    //    // add hour forecast to list
-    //    hoursList.append(hourForecast);
+    hourlyForecast.append(std::move(hourForecast));
 }
 }

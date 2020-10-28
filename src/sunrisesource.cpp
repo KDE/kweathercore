@@ -91,6 +91,11 @@ void SunriseSource::setOffset(int offset)
     m_offset = offset;
 }
 
+const QVector<Sunrise> &SunriseSource::value() const
+{
+    return m_sunriseVec;
+}
+
 void SunriseSource::popDay()
 {
     auto today = QDateTime::currentDateTime();

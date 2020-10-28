@@ -22,6 +22,6 @@ public Q_SLOTS:
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;
-    void parseOneElement(const QJsonObject &obj, WeatherForecast &forecast);
+    void parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast);
 };
 }
