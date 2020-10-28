@@ -8,6 +8,7 @@ set(kweathercore_SRCS
     geotimezone.cpp
     pendingweatherforecast.cpp
     sunrise.cpp
+    sunrisesource.cpp
 )
 
 
