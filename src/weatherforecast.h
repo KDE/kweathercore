@@ -1,9 +1,10 @@
 #pragma once
 #include "dailyforecast.h"
 #include "sunrise.h"
+#include <QSharedData>
 namespace KWeatherCore
 {
-class WeatherForecast
+class WeatherForecast : public QSharedData
 {
 public:
     WeatherForecast();
