@@ -1,30 +1,44 @@
 #include "pendingweatherforecast.h"
 #include <KLocalizedString>
+#include <QExplicitlySharedDataPointer>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkReply>
 namespace KWeatherCore
 {
-class PendingWeatherForecastPrivate
+class PendingWeatherForecastPrivate : public QObject
 {
+    Q_OBJECT
 public:
-    WeatherForecast forecast;
+    template<class T> PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, T &&sunrise);
+    QExplicitlySharedDataPointer<WeatherForecast> forecast;
     QString timezone;
-};
+Q_SIGNALS:
+    void networkError();
+    void finished();
+public Q_SLOTS:
+    void parseWeatherForecastResults(QNetworkReply *ret);
+    void parseSunriseResults(QNetworkReply *ret);
+    void parseTimezoneResults(QNetworkReply *ret);
 
+private:
+    void parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast);
+    void getTimezone(double latitude, double longitude);
+    void getSunrise(double latitude, double longitude, int offset);
+};
 template<class T>
-PendingWeatherForecast::PendingWeatherForecast(const QString &timezone, T &&sunrise)
-    : d(new PendingWeatherForecastPrivate)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, T &&sunrise)
+    : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
 {
-    d->timezone = timezone;
-    d->forecast.setSunriseForecast(std::forward<T>(sunrise));
+    forecast->setSunriseForecast(std::forward<T>(sunrise));
+    if (timezone.isEmpty()) {
+        getTimezone(latitude, longitude);
+    } else if (forecast->sunriseForecast().size() <= 10) {
+        // getSunrise()
+    }
 }
-PendingWeatherForecast::~PendingWeatherForecast()
-{
-    delete d;
-}
-void PendingWeatherForecast::parseResults(QNetworkReply *reply)
+void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
@@ -60,7 +74,7 @@ void PendingWeatherForecast::parseResults(QNetworkReply *reply)
     //    emit updated(currentData_);
 }
 
-void PendingWeatherForecast::parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast)
+void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast)
 {
     /*~~~~~~~~~~ static variable ~~~~~~~~~~~*/
     // rank weather (for what best describes the day overall)

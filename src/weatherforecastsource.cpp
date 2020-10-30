@@ -26,24 +26,24 @@ WeatherForecastSource::~WeatherForecastSource()
 
 PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone)
 {
-    auto pf = new PendingWeatherForecast(timezone);
-    // query weather api
-    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
-    QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), QString::number(latitude));
-    query.addQueryItem(QStringLiteral("lon"), QString::number(longitude));
+    //     auto pf = new PendingWeatherForecast(timezone);
+    //    // query weather api
+    //    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
+    //    QUrlQuery query;
+    //    query.addQueryItem(QStringLiteral("lat"), QString::number(latitude));
+    //    query.addQueryItem(QStringLiteral("lon"), QString::number(longitude));
 
-    url.setQuery(query);
+    //    url.setQuery(query);
 
-    QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+    //    QNetworkRequest req(url);
+    //    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
-    // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
+    //    // see §Identification on https://api.met.no/conditions_service.html
+    //    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
 
-    auto reply = d->manager->get(req);
-    connect(reply, &QNetworkReply::finished, pf, &PendingWeatherForecast::parseResults);
+    //    auto reply = d->manager->get(req);
+    //    connect(reply, &QNetworkReply::finished, pf, &PendingWeatherForecast::parseResults);
 
-    return pf;
+    //    return pf;
 }
 }
