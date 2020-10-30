@@ -15,11 +15,11 @@ public:
     LocationQueryResult(double latitude, double longitude, QString toponymName = QString(), QString name = QString(), QString countryCode = QString(), QString countryName = QString(), QString geonameId = QString());
     double latitude() const;
     double longitude() const;
-    QString &toponymName() const;
-    QString &name() const;
-    QString &countryCode() const;
-    QString &countryName() const;
-    QString &geonameId() const;
+    const QString &toponymName() const;
+    const QString &name() const;
+    const QString &countryCode() const;
+    const QString &countryName() const;
+    const QString &geonameId() const;
 
 private:
     double m_latitude, m_longitude;

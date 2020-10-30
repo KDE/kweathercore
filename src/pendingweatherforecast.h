@@ -10,7 +10,8 @@ class PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:
-    WeatherForecast value();
+    ~PendingWeatherForecast();
+    QExplicitlySharedDataPointer<WeatherForecast> value() const;
     bool isFinished();
 
 Q_SIGNALS:
@@ -18,7 +19,11 @@ Q_SIGNALS:
     void networkError();
 
 protected:
-    QExplicitlySharedDataPointer<PendingWeatherForecastPrivate> d;
-    PendingWeatherForecast(PendingWeatherForecastPrivate *dd);
+    friend class WeatherForecastSource;
+    explicit PendingWeatherForecast(PendingWeatherForecastPrivate *dd);
+
+private:
+    PendingWeatherForecastPrivate *d = nullptr;
+    bool m_finished = false;
 };
 }

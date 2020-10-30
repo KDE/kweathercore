@@ -24,23 +24,23 @@ double LocationQueryResult::longitude() const
 {
     return m_longitude;
 }
-QString LocationQueryResult::toponymName() const
+const QString &LocationQueryResult::toponymName() const
 {
     return m_toponymName;
 }
-QString LocationQueryResult::name() const
+const QString &LocationQueryResult::name() const
 {
     return m_name;
 }
-QString LocationQueryResult::countryName() const
+const QString &LocationQueryResult::countryName() const
 {
     return m_countryName;
 }
-QString LocationQueryResult::countryCode() const
+const QString &LocationQueryResult::countryCode() const
 {
     return m_countryCode;
 }
-QString LocationQueryResult::geonameId() const
+const QString &LocationQueryResult::geonameId() const
 {
     return m_geonameId;
 }
