@@ -42,17 +42,17 @@ void SunriseSource::requestData()
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
     int hour = qFabs(m_offset) / 3600;
     if (hour >= 10)
-        offset.append(QString::number(hour) + ":");
+        offset.append(QString::number(hour) + QStringLiteral(":"));
     else {
-        offset.append("0" + QString::number(hour) + ":");
+        offset.append(QStringLiteral("0") + QString::number(hour) + QStringLiteral(":"));
     }
     int min = (qFabs(m_offset) - hour * 3600) / 60;
     if (min >= 10) {
         offset.append(QString::number(min));
     } else {
-        offset.append("0" + QString::number(min));
+        offset.append(QStringLiteral("0") + QString::number(min));
     }
-    query.addQueryItem(QLatin1String("offset"), offset);
+    query.addQueryItem(QStringLiteral("offset"), offset);
 
     url.setQuery(query);
     QNetworkRequest req(url);

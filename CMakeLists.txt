@@ -28,9 +28,6 @@ set(REQUIRED_QT_VERSION 5.12.0)
 # Required Qt5 components to build this framework
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
 
-# TODO: Add all required find_package() calls here. For example:
-# find_package(KF5CoreAddons ${KF5_VERSION} REQUIRED)
-
 find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
 
 

@@ -11,6 +11,14 @@ const QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() con
 {
     return m_dailyWeatherForecast;
 }
+QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast()
+{
+    return m_dailyWeatherForecast;
+}
+const QVector<Sunrise> &WeatherForecast::sunriseForecast() const
+{
+    return m_sunriseForecast;
+}
 const QString &WeatherForecast::timezone() const
 {
     return m_timezone;

@@ -28,7 +28,9 @@ Sunrise::Sunrise(const QDateTime &sunRise,
     , m_moonPhase(moonphase)
 {
 }
-
+Sunrise::Sunrise()
+{
+}
 Sunrise Sunrise::fromJson(QJsonObject obj)
 {
     Sunrise s;

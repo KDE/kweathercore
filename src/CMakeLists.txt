@@ -26,8 +26,8 @@ PRIVATE Qt5::Network
 )
 
 set_target_properties(KF5KWeatherCore
-    PROPERTIES VERSION ${LIBKWEATHER_VERSION_STRING}
-    SOVERSION ${LIBKWEATHER_SOVERSION}
+    PROPERTIES VERSION ${KWEATHERCORE_VERSION_STRING}
+    SOVERSION ${KWEATHERCORE_SOVERSION}
     EXPORT_NAME "kweathercore"
 )
 
@@ -35,6 +35,14 @@ ecm_generate_headers(KWeatherCore_HEADERS
     HEADER_NAMES
         LocationQuery
         LocationQueryResult
+        DailyForecast
+        HourlyForecast
+        PendingWeatherForecast
+        Sunrise
+        SunriseSource
+        WeatherForecast
+        WeatherForecastSource
+        GeoTimezone
         # other classes
 
     REQUIRED_HEADERS KWeatherCore_HEADERS
