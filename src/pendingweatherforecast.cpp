@@ -17,11 +17,25 @@
 #include <QTimeZone>
 namespace KWeatherCore
 {
-template<class T>
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, T &&sunrise)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, QVector<Sunrise> &&sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
 {
-    forecast->setSunriseForecast(std::forward<T>(sunrise));
+    forecast->setSunriseForecast(std::move(sunrise));
+    if (timezone.isEmpty()) {
+        hasTimezone = false;
+        getTimezone(latitude, longitude);
+    } else {
+        forecast->setTimezone(timezone);
+    }
+    if (forecast->sunriseForecast().size() <= 10) {
+        hasSunrise = false;
+    }
+}
+
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const QVector<Sunrise> &sunrise)
+    : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
+{
+    forecast->setSunriseForecast(sunrise);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);

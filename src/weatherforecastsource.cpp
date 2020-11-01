@@ -48,7 +48,7 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
     req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
 
     auto reply = d->manager->get(req);
-    connect(reply, &QNetworkReply::finished, pf, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
+    connect(reply, &QNetworkReply::finished, [pf, reply] { pf->parseWeatherForecastResults(reply); });
 
     return new PendingWeatherForecast(pf);
 }
@@ -70,8 +70,8 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
     req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
 
     auto reply = d->manager->get(req);
-    connect(reply, &QNetworkReply::finished, pf, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
+    connect(reply, &QNetworkReply::finished, pf, [pf, reply] { pf->parseWeatherForecastResults(reply); });
 
     return new PendingWeatherForecast(pf);
-};
+}
 }

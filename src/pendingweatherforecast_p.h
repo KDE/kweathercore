@@ -11,7 +11,8 @@ class PendingWeatherForecastPrivate : public QObject
 {
     Q_OBJECT
 public:
-    template<class T> PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, T &&sunrise);
+    PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const QVector<Sunrise> &sunrise);
+    PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, QVector<Sunrise> &&sunrise);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
     QString timezone;
 

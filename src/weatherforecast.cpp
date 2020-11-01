@@ -7,6 +7,9 @@
 #include "weatherforecast.h"
 namespace KWeatherCore
 {
+WeatherForecast::WeatherForecast()
+{
+}
 const QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const
 {
     return m_dailyWeatherForecast;

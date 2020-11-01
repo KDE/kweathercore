@@ -15,7 +15,6 @@ class WeatherForecast : public QSharedData
 {
 public:
     WeatherForecast();
-    WeatherForecast(QVector<DailyWeatherForecast> daily, QVector<HourlyWeatherForecast> hourly);
     const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
     QVector<DailyWeatherForecast> &dailyWeatherForecast();
     const QVector<Sunrise> &sunriseForecast() const;
