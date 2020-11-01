@@ -8,6 +8,7 @@
 #include "sunrise.h"
 #include <QDateTime>
 #include <QObject>
+#include <kweathercore/kweathercore_export.h>
 class QNetworkAccessManager;
 class QNetworkReply;
 namespace KWeatherCore

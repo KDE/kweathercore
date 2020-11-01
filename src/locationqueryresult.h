@@ -7,6 +7,7 @@
 
 #pragma once
 #include <QString>
+#include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
 class LocationQueryResult

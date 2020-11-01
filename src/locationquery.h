@@ -9,6 +9,7 @@
 #include "locationqueryresult.h"
 #include <QGeoPositionInfo>
 #include <QObject>
+#include <kweathercore/kweathercore_export.h>
 class QNetworkReply;
 namespace KWeatherCore
 {

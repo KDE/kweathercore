@@ -8,6 +8,7 @@
 #include "hourlyforecast.h"
 #include <QDate>
 #include <QJsonObject>
+#include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
 class DailyWeatherForecast

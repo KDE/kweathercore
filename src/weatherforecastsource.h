@@ -9,6 +9,7 @@
 #include "pendingweatherforecast.h"
 #include "weatherforecast.h"
 #include <QObject>
+#include <kweathercore/kweathercore_export.h>
 class QNetworkReply;
 namespace KWeatherCore
 {

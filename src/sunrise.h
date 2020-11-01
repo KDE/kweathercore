@@ -8,6 +8,7 @@
 #include <QDateTime>
 #include <QObject>
 #include <QPair>
+#include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
 class Sunrise

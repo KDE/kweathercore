@@ -6,8 +6,8 @@
  */
 
 #pragma once
-
 #include <QObject>
+#include <kweathercore/kweathercore_export.h>
 class QNetworkReply;
 class QNetworkAccessManager;
 namespace KWeatherCore

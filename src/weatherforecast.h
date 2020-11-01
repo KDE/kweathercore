@@ -8,6 +8,7 @@
 #include "dailyforecast.h"
 #include "sunrise.h"
 #include <QSharedData>
+#include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
 class WeatherForecast : public QSharedData

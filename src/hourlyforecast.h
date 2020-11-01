@@ -8,6 +8,7 @@
 #pragma once
 #include <QDateTime>
 #include <QObject>
+#include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
