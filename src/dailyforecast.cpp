@@ -5,7 +5,8 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "dailyforecast.h"
-
+#include "kweathercore_p.h"
+#include "pendingweatherforecast_p.h"
 namespace KWeatherCore
 {
 DailyWeatherForecast::DailyWeatherForecast()
@@ -181,6 +182,11 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
     }
 
     if (this->date().daysTo(forecast.date().date()) == 0) {
+        // set description and icon if it is higher ranked
+        if (rank[forecast.neutralWeatherIcon()] >= rank[this->weatherIcon()]) {
+            this->setWeatherDescription(apiDescMap[forecast.symbolCode() + QStringLiteral("_neutral")].desc);
+            this->setWeatherIcon(forecast.neutralWeatherIcon());
+        }
         this->setPrecipitation(this->precipitation() + forecast.precipitationAmount());
         this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
         this->setHumidity(std::max(this->humidity(), forecast.humidity()));

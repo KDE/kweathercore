@@ -1,6 +1,5 @@
 #pragma once
 #include "weatherforecast.h"
-#include <KLocalizedString>
 #include <QObject>
 class QNetworkReply;
 namespace KWeatherCore
@@ -38,20 +37,5 @@ private:
     QVector<HourlyWeatherForecast> hourlyForecast; // tmp hourly vector
 
     SunriseSource *m_sunriseSource = nullptr;
-
-    // rank weather (for what best describes the day overall)
-    static const QHash<QString, int> rank;
-    struct ResolvedWeatherDesc {
-        QString icon = QStringLiteral("weather-none-available"), desc = QStringLiteral("Unknown");
-        ResolvedWeatherDesc() = default;
-        ResolvedWeatherDesc(QString icon, QString desc)
-        {
-            this->icon = icon;
-            this->desc = desc;
-        }
-    };
-
-    // https://api.met.no/weatherapi/weathericon/2.0/legends
-    static const QMap<QString, ResolvedWeatherDesc> apiDescMap;
 };
 }
