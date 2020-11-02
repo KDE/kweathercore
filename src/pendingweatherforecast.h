@@ -13,7 +13,7 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 class PendingWeatherForecastPrivate;
-class PendingWeatherForecast : public QObject
+class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:

@@ -12,7 +12,8 @@ DailyWeatherForecast::DailyWeatherForecast()
 {
     m_weatherDescription = QStringLiteral("Unknown");
     m_weatherIcon = QStringLiteral("weather-none-available");
-    m_date = QDate::currentDate();
+    m_date = QDate();
+    m_isNull = true;
 }
 DailyWeatherForecast::DailyWeatherForecast(double maxTemp, double minTemp, double precipitation, double uvIndex, double humidity, double pressure, QString weatherIcon, QString weatherDescription, QDate date)
     : m_maxTemp(maxTemp)
@@ -51,79 +52,83 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
                                 obj[QStringLiteral("weatherDescription")].toString(),
                                 QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
 }
+bool DailyWeatherForecast::isNull() const
+{
+    return m_isNull;
+}
+
 void DailyWeatherForecast::setMaxTemp(double maxTemp)
 {
     m_maxTemp = maxTemp;
-};
+}
 void DailyWeatherForecast::setMinTemp(double minTemp)
 {
     m_minTemp = minTemp;
-};
+}
 void DailyWeatherForecast::setPrecipitation(double precipitation)
 {
     m_precipitation = precipitation;
-};
+}
 void DailyWeatherForecast::setUvIndex(double uvIndex)
 {
     m_uvIndex = uvIndex;
-};
+}
 void DailyWeatherForecast::setHumidity(double humidity)
 {
     m_humidity = humidity;
-};
+}
 void DailyWeatherForecast::setPressure(double pressure)
 {
     m_pressure = pressure;
-};
+}
 void DailyWeatherForecast::setWeatherIcon(QString icon)
 {
     m_weatherIcon = std::move(icon);
-};
+}
 void DailyWeatherForecast::setWeatherDescription(QString description)
 {
     m_weatherDescription = std::move(description);
-};
+}
 void DailyWeatherForecast::setDate(QDate date)
 {
     m_date = std::move(date);
-};
+}
 double DailyWeatherForecast::maxTemp() const
 {
     return m_maxTemp;
-};
+}
 double DailyWeatherForecast::minTemp() const
 {
     return m_minTemp;
-};
+}
 double DailyWeatherForecast::precipitation() const
 {
     return m_precipitation;
-    ;
-};
+}
 double DailyWeatherForecast::uvIndex() const
 {
     return m_uvIndex;
-};
+}
 double DailyWeatherForecast::humidity() const
 {
     return m_humidity;
-};
+}
 double DailyWeatherForecast::pressure() const
 {
     return m_pressure;
-};
+}
 QString DailyWeatherForecast::weatherIcon() const
 {
     return m_weatherIcon;
-};
+}
 QString DailyWeatherForecast::weatherDescription() const
 {
     return m_weatherDescription;
-};
+}
 QDate DailyWeatherForecast::date() const
 {
     return m_date;
-};
+}
 
 const QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
@@ -168,8 +173,12 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecas
 
 DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
-    if (this->date().isNull())
+    if (this->isNull()) {
         this->date() = forecast.date().date();
+        this->setWeatherDescription(forecast.weatherDescription());
+        this->setWeatherIcon(forecast.weatherIcon());
+        this->m_isNull = false;
+    }
 
     if (this->date().daysTo(forecast.date().date()) == 0) {
         this->setPrecipitation(this->precipitation() + forecast.precipitationAmount());

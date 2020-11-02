@@ -11,7 +11,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class Sunrise
+class KWEATHERCORE_EXPORT Sunrise
 {
 public:
     Sunrise(const QDateTime &sunRise,

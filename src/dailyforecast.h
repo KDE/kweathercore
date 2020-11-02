@@ -11,7 +11,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class DailyWeatherForecast
+class KWEATHERCORE_EXPORT DailyWeatherForecast
 {
 public:
     DailyWeatherForecast();
@@ -20,6 +20,7 @@ public:
     QJsonObject toJson();
     static DailyWeatherForecast fromJson(QJsonObject obj);
 
+    bool isNull() const;
     void setMaxTemp(double maxTemp);
     void setMinTemp(double minTemp);
     void setPrecipitation(double precipitation);
@@ -56,6 +57,8 @@ public:
     bool operator<=(const DailyWeatherForecast &forecast) const;
 
 private:
+    bool m_isNull = false;
+
     double m_maxTemp = std::numeric_limits<double>::min();
     double m_minTemp = std::numeric_limits<double>::max();
     double m_precipitation = 0; // mm

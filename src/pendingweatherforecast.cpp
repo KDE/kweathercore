@@ -25,7 +25,9 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
         hasTimezone = false;
         getTimezone(latitude, longitude);
     } else {
+        hasTimezone = true;
         forecast->setTimezone(timezone);
+        getSunrise(m_latitude, m_longitude, QDateTime::currentDateTime().toTimeZone(QTimeZone(timezone.toUtf8())).offsetFromUtc());
     }
     if (forecast->sunriseForecast().size() <= 10) {
         hasSunrise = false;
@@ -40,7 +42,9 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
         hasTimezone = false;
         getTimezone(latitude, longitude);
     } else {
+        hasTimezone = true;
         forecast->setTimezone(timezone);
+        getSunrise(m_latitude, m_longitude, QDateTime::currentDateTime().toTimeZone(QTimeZone(timezone.toUtf8())).offsetFromUtc());
     }
     if (forecast->sunriseForecast().size() <= 10) {
         hasSunrise = false;
@@ -104,8 +108,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
 
     if (hasTimezone && hasSunrise)
         applySunriseToForecast();
-
-    Q_EMIT finished();
+    // Q_EMIT finished();
 }
 
 void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast)

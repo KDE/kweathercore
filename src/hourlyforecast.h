@@ -13,7 +13,7 @@ namespace KWeatherCore
 {
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
 
-class HourlyWeatherForecast
+class KWEATHERCORE_EXPORT HourlyWeatherForecast
 {
 public:
     HourlyWeatherForecast();

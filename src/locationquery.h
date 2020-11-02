@@ -14,7 +14,7 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 class LocationQueryPrivate;
-class LocationQuery : public QObject
+class KWEATHERCORE_EXPORT LocationQuery : public QObject
 {
     Q_OBJECT
 public:

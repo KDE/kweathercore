@@ -11,7 +11,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class WeatherForecast : public QSharedData
+class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
 {
 public:
     WeatherForecast();

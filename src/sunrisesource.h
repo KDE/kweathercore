@@ -13,7 +13,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 namespace KWeatherCore
 {
-class SunriseSource : public QObject
+class KWEATHERCORE_EXPORT SunriseSource : public QObject
 {
     Q_OBJECT
 public:

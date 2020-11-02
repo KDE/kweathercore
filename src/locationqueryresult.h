@@ -10,7 +10,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class LocationQueryResult
+class KWEATHERCORE_EXPORT LocationQueryResult
 {
 public:
     LocationQueryResult(double latitude, double longitude, QString toponymName = QString(), QString name = QString(), QString countryCode = QString(), QString countryName = QString(), QString geonameId = QString());

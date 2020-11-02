@@ -22,6 +22,7 @@ SunriseSource::SunriseSource(double latitude, double longitude, int offset, cons
     , QObject(parent)
     , m_manager(new QNetworkAccessManager(this))
 {
+    connect(m_manager, &QNetworkAccessManager::finished, this, &SunriseSource::parseResults);
 }
 void SunriseSource::requestData()
 {

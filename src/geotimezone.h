@@ -12,7 +12,7 @@ class QNetworkReply;
 class QNetworkAccessManager;
 namespace KWeatherCore
 {
-class GeoTimezone : public QObject
+class KWEATHERCORE_EXPORT GeoTimezone : public QObject
 {
     Q_OBJECT
 public:

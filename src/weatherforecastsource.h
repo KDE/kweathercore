@@ -14,7 +14,7 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 class WeatherForecastSourcePrivate;
-class WeatherForecastSource : public QObject
+class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 {
     Q_OBJECT
 public:
