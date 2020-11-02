@@ -21,7 +21,7 @@ public:
     WeatherForecastSource(QObject *parent = nullptr);
     ~WeatherForecastSource();
     PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const QVector<Sunrise> &sunrise = QVector<Sunrise>());
-    PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), QVector<Sunrise> &&sunrise = QVector<Sunrise>());
+
 Q_SIGNALS:
     void networkError();
 

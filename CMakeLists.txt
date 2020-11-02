@@ -80,8 +80,9 @@ install(EXPORT KF5KWeatherCoreTargets
         FILE KF5KWeatherCoreTargets.cmake
         NAMESPACE KF5::)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kweathercore_version.h
-        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}
-        COMPONENT Devel)
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/kweathercore_version.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
+)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

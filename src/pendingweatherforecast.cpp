@@ -212,12 +212,16 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     Q_EMIT finished();
 }
 
-PendingWeatherForecast::PendingWeatherForecast(PendingWeatherForecastPrivate *dd)
-    : d(dd)
+PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, QNetworkReply *reply, const QString &timezone, const QVector<Sunrise> &sunrise)
+    : d(new PendingWeatherForecastPrivate(latitude, longitude, timezone, sunrise))
 {
     connect(d, &PendingWeatherForecastPrivate::finished, [this] { this->m_finished = true; });
     connect(d, &PendingWeatherForecastPrivate::finished, this, &PendingWeatherForecast::finished);
     connect(d, &PendingWeatherForecastPrivate::networkError, this, &PendingWeatherForecast::networkError);
+    if (reply) {
+        auto d = this->d; // explicitly capture?
+        connect(reply, &QNetworkReply::finished, [d, reply] { d->parseWeatherForecastResults(reply); });
+    }
 }
 
 QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() const

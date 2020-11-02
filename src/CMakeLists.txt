@@ -26,10 +26,9 @@ PRIVATE Qt5::Network
         KF5::I18n
 )
 
-set_target_properties(KF5KWeatherCore
-    PROPERTIES VERSION ${KWEATHERCORE_VERSION_STRING}
-    SOVERSION ${KWEATHERCORE_SOVERSION}
-    EXPORT_NAME KWeatherCore
+set_target_properties(KF5KWeatherCore PROPERTIES VERSION ${KWEATHERCORE_VERSION_STRING}
+                                                 SOVERSION ${KWEATHERCORE_SOVERSION}
+                                                 EXPORT_NAME KWeatherCore
 )
 
 ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
@@ -50,9 +49,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
 )
 install(FILES ${KWeatherCore_CamelCase_HEADERS} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore/KWeatherCore COMPONENT Devel)
 
-install(TARGETS KF5KWeatherCore
-        EXPORT KF5KWeatherCoreTargets
-        ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5KWeatherCore EXPORT KF5KWeatherCoreTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/kweathercore/kweathercore_export.h
   ${KWeatherCore_HEADERS}
@@ -67,16 +64,16 @@ if(BUILD_QCH)
         VERSION ${KF5_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
-        ${KWeatherCore_HEADERS}
+            ${KWeatherCore_HEADERS}
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
-        Qt5Core_QCH
+            Qt5Core_QCH
         INCLUDE_DIRS
-        ${kweathercore_BUILD_INCLUDE_DIRS}
+            ${kweathercore_BUILD_INCLUDE_DIRS}
         BLANK_MACROS
-        KWEATHERCORE_EXPORT
-        KWEATHERCORE_DEPRECATED
-        KWEATHERCORE_DEPRECATED_EXPORT
+            KWEATHERCORE_EXPORT
+            KWEATHERCORE_DEPRECATED
+            KWEATHERCORE_DEPRECATED_EXPORT
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel

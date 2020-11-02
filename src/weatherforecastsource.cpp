@@ -32,7 +32,6 @@ WeatherForecastSource::~WeatherForecastSource()
 }
 PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone, const QVector<Sunrise> &sunrise)
 {
-    auto pf = new PendingWeatherForecastPrivate(latitude, longitude, timezone, sunrise);
     // query weather api
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
@@ -48,30 +47,8 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
     req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
 
     auto reply = d->manager->get(req);
-    connect(reply, &QNetworkReply::finished, [pf, reply] { pf->parseWeatherForecastResults(reply); });
+    auto pf = new PendingWeatherForecast(latitude, longitude, reply, timezone, sunrise);
 
-    return new PendingWeatherForecast(pf);
-}
-PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone, QVector<Sunrise> &&sunrise)
-{
-    auto pf = new PendingWeatherForecastPrivate(latitude, longitude, timezone, std::move(sunrise));
-    // query weather api
-    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
-    QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), QString::number(latitude));
-    query.addQueryItem(QStringLiteral("lon"), QString::number(longitude));
-
-    url.setQuery(query);
-
-    QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
-
-    // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
-
-    auto reply = d->manager->get(req);
-    connect(reply, &QNetworkReply::finished, pf, [pf, reply] { pf->parseWeatherForecastResults(reply); });
-
-    return new PendingWeatherForecast(pf);
+    return pf;
 }
 }

@@ -27,7 +27,7 @@ Q_SIGNALS:
 
 protected:
     friend class WeatherForecastSource;
-    explicit PendingWeatherForecast(PendingWeatherForecastPrivate *dd);
+    explicit PendingWeatherForecast(double latitude, double longitude, QNetworkReply *reply = nullptr, const QString &timezone = QString(), const QVector<Sunrise> &sunrise = QVector<Sunrise>());
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;
