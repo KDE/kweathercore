@@ -9,6 +9,19 @@ namespace KWeatherCore
 {
 WeatherForecast::WeatherForecast()
 {
+    m_createdTime = QDateTime::currentDateTime();
+}
+const QDateTime &WeatherForecast::createdTime() const
+{
+    return m_createdTime;
+}
+double WeatherForecast::latitude() const
+{
+    return m_latitude;
+}
+double WeatherForecast::longitude() const
+{
+    return m_longitude;
 }
 const QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const
 {
@@ -25,6 +38,11 @@ const QVector<Sunrise> &WeatherForecast::sunriseForecast() const
 const QString &WeatherForecast::timezone() const
 {
     return m_timezone;
+}
+void WeatherForecast::setCoordinate(double latitude, double longitude)
+{
+    m_latitude = latitude;
+    m_longitude = longitude;
 }
 void WeatherForecast::setTimezone(const QString &timezone)
 {

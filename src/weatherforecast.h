@@ -16,9 +16,13 @@ class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
 public:
     WeatherForecast();
     const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
+    double latitude() const;
+    double longitude() const;
+    const QDateTime &createdTime() const;
     QVector<DailyWeatherForecast> &dailyWeatherForecast();
     const QVector<Sunrise> &sunriseForecast() const;
     const QString &timezone() const;
+    void setCoordinate(double latitude, double longitude);
     void setTimezone(const QString &timezone);
     void setTimezone(QString &&timezone);
     void setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast);
@@ -35,5 +39,7 @@ private:
     QVector<DailyWeatherForecast> m_dailyWeatherForecast;
     QVector<Sunrise> m_sunriseForecast;
     QString m_timezone;
+    double m_latitude, m_longitude;
+    QDateTime m_createdTime;
 };
 }

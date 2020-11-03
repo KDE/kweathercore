@@ -21,6 +21,7 @@ namespace KWeatherCore
 PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, QVector<Sunrise> &&sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
 {
+    forecast->setCoordinate(latitude, longitude);
     forecast->setSunriseForecast(std::move(sunrise));
     if (timezone.isEmpty()) {
         hasTimezone = false;
