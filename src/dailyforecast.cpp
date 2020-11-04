@@ -130,6 +130,10 @@ QDate DailyWeatherForecast::date() const
 {
     return m_date;
 }
+const Sunrise &DailyWeatherForecast::sunrise() const
+{
+    return m_sunrise;
+}
 
 const QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
@@ -139,6 +143,15 @@ const QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecas
 QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast()
 {
     return m_hourlyWeatherForecast;
+}
+
+void DailyWeatherForecast::setSunrise(const Sunrise &sunrise)
+{
+    m_sunrise = sunrise;
+}
+void DailyWeatherForecast::setSunrise(Sunrise &&sunrise)
+{
+    m_sunrise = std::move(sunrise);
 }
 
 void DailyWeatherForecast::setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast)

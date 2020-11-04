@@ -31,10 +31,6 @@ QVector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast()
 {
     return m_dailyWeatherForecast;
 }
-const QVector<Sunrise> &WeatherForecast::sunriseForecast() const
-{
-    return m_sunriseForecast;
-}
 const QString &WeatherForecast::timezone() const
 {
     return m_timezone;
@@ -62,11 +58,29 @@ void WeatherForecast::setDailyWeatherForecast(QVector<DailyWeatherForecast> &&fo
 }
 void WeatherForecast::setSunriseForecast(const QVector<Sunrise> &sunrise)
 {
-    m_sunriseForecast = sunrise;
+    int i = 0, range = sunrise.size();
+    for (auto day : m_dailyWeatherForecast) {
+        if (i >= range)
+            break;
+        // if on the same day, add sunrise to day
+        if (day.date().daysTo(sunrise.at(i).sunRise().date()) == 0) {
+            day.setSunrise(sunrise.at(i));
+            ++i;
+        }
+    }
 }
 void WeatherForecast::setSunriseForecast(QVector<Sunrise> &&sunrise)
 {
-    m_sunriseForecast = std::move(sunrise);
+    int i = 0, range = sunrise.size();
+    for (auto day : m_dailyWeatherForecast) {
+        if (i >= range)
+            break;
+        // if on the same day, add sunrise to day
+        if (day.date().daysTo(sunrise.at(i).sunRise().date()) == 0) {
+            day.setSunrise(std::move(sunrise[i]));
+            ++i;
+        }
+    }
 }
 WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {

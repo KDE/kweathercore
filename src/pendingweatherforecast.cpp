@@ -22,7 +22,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
 {
     forecast->setCoordinate(latitude, longitude);
-    forecast->setSunriseForecast(std::move(sunrise));
+    sunriseVec = std::move(sunrise);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
@@ -31,7 +31,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
         forecast->setTimezone(timezone);
         getSunrise(m_latitude, m_longitude, QDateTime::currentDateTime().toTimeZone(QTimeZone(timezone.toUtf8())).offsetFromUtc());
     }
-    if (forecast->sunriseForecast().size() <= 10) {
+    if (sunriseVec.size() <= 10) {
         hasSunrise = false;
     }
 }
@@ -39,7 +39,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
 PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const QVector<Sunrise> &sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
 {
-    forecast->setSunriseForecast(sunrise);
+    sunriseVec = sunrise;
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
@@ -48,7 +48,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
         forecast->setTimezone(timezone);
         getSunrise(m_latitude, m_longitude, QDateTime::currentDateTime().toTimeZone(QTimeZone(timezone.toUtf8())).offsetFromUtc());
     }
-    if (forecast->sunriseForecast().size() <= 10) {
+    if (sunriseVec.size() <= 10) {
         hasSunrise = false;
     }
 }
@@ -67,14 +67,14 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(QString result)
 
 void PendingWeatherForecastPrivate::getSunrise(double latitude, double longitude, int offset)
 {
-    m_sunriseSource = new SunriseSource(latitude, longitude, offset, forecast->sunriseForecast(), this);
+    m_sunriseSource = new SunriseSource(latitude, longitude, offset, sunriseVec, this);
     m_sunriseSource->requestData();
     connect(m_sunriseSource, &SunriseSource::finished, this, &PendingWeatherForecastPrivate::parseSunriseResults);
 }
 void PendingWeatherForecastPrivate::parseSunriseResults()
 {
     if (m_sunriseSource) {
-        forecast->setSunriseForecast(m_sunriseSource->value());
+        sunriseVec = m_sunriseSource->value();
         hasSunrise = true;
     }
 
@@ -206,13 +206,14 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         hourForecast.setDate(hourForecast.date().toTimeZone(QTimeZone(m_timezone.toUtf8())));
 
         bool isDay;
-        isDay = isDayTime(hourForecast.date(), forecast->sunriseForecast());
+        isDay = isDayTime(hourForecast.date(), sunriseVec);
 
         hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
 
         *forecast += hourForecast;
     }
+    forecast->setSunriseForecast(std::move(sunriseVec));
 
     Q_EMIT finished();
 }

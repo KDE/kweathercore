@@ -35,6 +35,7 @@ private:
     QString m_timezone;
 
     QVector<HourlyWeatherForecast> hourlyForecast; // tmp hourly vector
+    QVector<Sunrise> sunriseVec;                   // tmp sunrise vector
 
     SunriseSource *m_sunriseSource = nullptr;
 };

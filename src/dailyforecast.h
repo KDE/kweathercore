@@ -6,6 +6,7 @@
  */
 #pragma once
 #include "hourlyforecast.h"
+#include "sunrise.h"
 #include <QDate>
 #include <QJsonObject>
 #include <kweathercore/kweathercore_export.h>
@@ -40,8 +41,11 @@ public:
     QString weatherDescription() const;
     QDate date() const;
 
+    const Sunrise &sunrise() const;
     const QVector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
     QVector<HourlyWeatherForecast> &hourlyWeatherForecast();
+    void setSunrise(const Sunrise &sunrise);
+    void setSunrise(Sunrise &&sunrise);
     void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
     void setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast);
 
@@ -69,6 +73,7 @@ private:
     QString m_weatherDescription;
     QDate m_date;
 
+    Sunrise m_sunrise;
     QVector<HourlyWeatherForecast> m_hourlyWeatherForecast;
 };
 }
