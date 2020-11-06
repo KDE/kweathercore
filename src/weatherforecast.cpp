@@ -5,11 +5,32 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "weatherforecast.h"
+#include <QJsonArray>
 namespace KWeatherCore
 {
 WeatherForecast::WeatherForecast()
 {
     m_createdTime = QDateTime::currentDateTime();
+}
+QJsonObject WeatherForecast::toJson() const
+{
+    QJsonObject obj;
+    QJsonArray dayArray;
+    for (auto d : dailyWeatherForecast()) {
+        dayArray.append(d.toJson());
+    }
+    obj[QStringLiteral("day")] = dayArray;
+    return obj;
+}
+WeatherForecast WeatherForecast::fromJson(QJsonObject obj)
+{
+    WeatherForecast w;
+    QVector<DailyWeatherForecast> dayVec;
+    for (auto d : obj[QStringLiteral("day")].toArray()) {
+        dayVec.append(DailyWeatherForecast::fromJson(d.toObject()));
+    }
+    w.setDailyWeatherForecast(dayVec);
+    return w;
 }
 const QDateTime &WeatherForecast::createdTime() const
 {

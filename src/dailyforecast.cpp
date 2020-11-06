@@ -7,6 +7,7 @@
 #include "dailyforecast.h"
 #include "kweathercore_p.h"
 #include "pendingweatherforecast_p.h"
+#include <QJsonArray>
 namespace KWeatherCore
 {
 DailyWeatherForecast::DailyWeatherForecast()
@@ -30,6 +31,7 @@ DailyWeatherForecast::DailyWeatherForecast(double maxTemp, double minTemp, doubl
 QJsonObject DailyWeatherForecast::toJson()
 {
     QJsonObject obj;
+    QJsonArray hourlyArray;
     obj[QStringLiteral("maxTemp")] = maxTemp();
     obj[QStringLiteral("minTemp")] = minTemp();
     obj[QStringLiteral("precipitation")] = precipitation();
@@ -39,19 +41,28 @@ QJsonObject DailyWeatherForecast::toJson()
     obj[QStringLiteral("weatherIcon")] = weatherIcon();
     obj[QStringLiteral("weatherDescription")] = weatherDescription();
     obj[QStringLiteral("date")] = date().toString(Qt::ISODate);
+    for (auto h : hourlyWeatherForecast()) {
+        hourlyArray.append(h.toJson());
+    }
+    obj[QStringLiteral("hourly")] = hourlyArray;
     return obj;
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
 {
-    return DailyWeatherForecast(obj[QStringLiteral("maxTemp")].toDouble(),
-                                obj[QStringLiteral("minTemp")].toDouble(),
-                                obj[QStringLiteral("precipitation")].toDouble(),
-                                obj[QStringLiteral("uvIndex")].toDouble(),
-                                obj[QStringLiteral("humidity")].toDouble(),
-                                obj[QStringLiteral("pressure")].toDouble(),
-                                obj[QStringLiteral("weatherIcon")].toString(),
-                                obj[QStringLiteral("weatherDescription")].toString(),
-                                QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    auto d = DailyWeatherForecast(obj[QStringLiteral("maxTemp")].toDouble(),
+                                  obj[QStringLiteral("minTemp")].toDouble(),
+                                  obj[QStringLiteral("precipitation")].toDouble(),
+                                  obj[QStringLiteral("uvIndex")].toDouble(),
+                                  obj[QStringLiteral("humidity")].toDouble(),
+                                  obj[QStringLiteral("pressure")].toDouble(),
+                                  obj[QStringLiteral("weatherIcon")].toString(),
+                                  obj[QStringLiteral("weatherDescription")].toString(),
+                                  QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    QVector<HourlyWeatherForecast> hourlyVec;
+    for (auto h : obj[QStringLiteral("hourly")].toArray())
+        hourlyVec.append(HourlyWeatherForecast::fromJson(h.toObject()));
+    d.setHourlyWeatherForecast(hourlyVec);
+    return d;
 }
 bool DailyWeatherForecast::isNull() const
 {

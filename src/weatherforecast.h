@@ -15,6 +15,8 @@ class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
 {
 public:
     WeatherForecast();
+    QJsonObject toJson() const;
+    static WeatherForecast fromJson(QJsonObject obj);
     const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
     double latitude() const;
     double longitude() const;
