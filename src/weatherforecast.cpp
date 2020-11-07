@@ -20,16 +20,21 @@ QJsonObject WeatherForecast::toJson() const
         dayArray.append(d.toJson());
     }
     obj[QStringLiteral("day")] = dayArray;
+    obj[QStringLiteral("lat")] = latitude();
+    obj[QStringLiteral("lon")] = longitude();
+    obj[QStringLiteral("timezone")] = timezone();
     return obj;
 }
-WeatherForecast WeatherForecast::fromJson(QJsonObject obj)
+QExplicitlySharedDataPointer<WeatherForecast> WeatherForecast::fromJson(QJsonObject obj)
 {
-    WeatherForecast w;
+    auto w = QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast);
     QVector<DailyWeatherForecast> dayVec;
     for (auto d : obj[QStringLiteral("day")].toArray()) {
         dayVec.append(DailyWeatherForecast::fromJson(d.toObject()));
     }
-    w.setDailyWeatherForecast(dayVec);
+    w->setDailyWeatherForecast(dayVec);
+    w->setCoordinate(obj[QStringLiteral("lat")].toDouble(), obj[QStringLiteral("lon")].toDouble());
+    w->setTimezone(obj[QStringLiteral("timezone")].toString());
     return w;
 }
 const QDateTime &WeatherForecast::createdTime() const
