@@ -26,7 +26,9 @@ DailyWeatherForecast::DailyWeatherForecast(double maxTemp, double minTemp, doubl
     , m_pressure(pressure)
     , m_weatherIcon(std::move(weatherIcon))
     , m_weatherDescription(std::move(weatherDescription))
-    , m_date(std::move(date)) {};
+    , m_date(std::move(date))
+{
+}
 
 QJsonObject DailyWeatherForecast::toJson()
 {
@@ -129,15 +131,15 @@ double DailyWeatherForecast::pressure() const
 {
     return m_pressure;
 }
-QString DailyWeatherForecast::weatherIcon() const
+const QString &DailyWeatherForecast::weatherIcon() const
 {
     return m_weatherIcon;
 }
-QString DailyWeatherForecast::weatherDescription() const
+const QString &DailyWeatherForecast::weatherDescription() const
 {
     return m_weatherDescription;
 }
-QDate DailyWeatherForecast::date() const
+const QDate &DailyWeatherForecast::date() const
 {
     return m_date;
 }
@@ -177,7 +179,7 @@ void DailyWeatherForecast::setHourlyWeatherForecast(QVector<HourlyWeatherForecas
 DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
     if (this->date().isNull())
-        this->date() = forecast.date();
+        this->setDate(forecast.date());
 
     if (*this == forecast) {
         this->setPrecipitation(this->precipitation() + forecast.precipitation());
@@ -199,12 +201,11 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecas
 DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
     if (this->isNull()) {
-        this->date() = forecast.date().date();
+        this->setDate(forecast.date().date());
         this->setWeatherDescription(forecast.weatherDescription());
         this->setWeatherIcon(forecast.weatherIcon());
         this->m_isNull = false;
     }
-
     if (this->date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
         if (rank[forecast.neutralWeatherIcon()] >= rank[this->weatherIcon()]) {
@@ -218,6 +219,8 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
         this->setMaxTemp(std::max(this->maxTemp(), forecast.temperature()));
         this->setMinTemp(std::min(this->minTemp(), forecast.temperature()));
     }
+
+    this->hourlyWeatherForecast().append(forecast);
     return *this;
 }
 

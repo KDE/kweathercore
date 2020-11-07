@@ -37,9 +37,9 @@ public:
     double uvIndex() const;
     double humidity() const;
     double pressure() const;
-    QString weatherIcon() const;
-    QString weatherDescription() const;
-    QDate date() const;
+    const QString &weatherIcon() const;
+    const QString &weatherDescription() const;
+    const QDate &date() const;
 
     const Sunrise &sunrise() const;
     const QVector<HourlyWeatherForecast> &hourlyWeatherForecast() const;

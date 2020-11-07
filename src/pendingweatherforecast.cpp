@@ -20,6 +20,8 @@ namespace KWeatherCore
 {
 PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, QVector<Sunrise> &&sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
+    , m_latitude(latitude)
+    , m_longitude(longitude)
 {
     forecast->setCoordinate(latitude, longitude);
     sunriseVec = std::move(sunrise);
@@ -38,6 +40,8 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
 
 PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const QVector<Sunrise> &sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
+    , m_latitude(latitude)
+    , m_longitude(longitude)
 {
     sunriseVec = sunrise;
     if (timezone.isEmpty()) {
@@ -177,7 +181,7 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, QVec
                                               instant[QStringLiteral("fog_area_fraction")].toDouble(),
                                               instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble(),
                                               precipitationAmount);
-
+    hourForecast.setSymbolCode(symbolCode);
     hourlyForecast.append(std::move(hourForecast));
 }
 
@@ -207,14 +211,11 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
         bool isDay;
         isDay = isDayTime(hourForecast.date(), sunriseVec);
-
         hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
-
         *forecast += hourForecast;
     }
     forecast->setSunriseForecast(std::move(sunriseVec));
-
     Q_EMIT finished();
 }
 

@@ -137,9 +137,11 @@ WeatherForecast &WeatherForecast::operator+=(DailyWeatherForecast &&forecast)
 WeatherForecast &WeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
-        if (dailyWeatherForecast().at(i).date().daysTo(forecast.date().date()) == 0) {
+        if (dailyWeatherForecast().at(i).date().isValid() && dailyWeatherForecast().at(i).date().daysTo(forecast.date().date()) == 0) {
             dailyWeatherForecast()[i] += forecast;
             return *this;
+        } else {
+            break;
         }
     }
 

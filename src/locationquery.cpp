@@ -98,6 +98,7 @@ void LocationQuery::positionUpdated(const QGeoPositionInfo &update)
     urlQuery.addQueryItem(QStringLiteral("lon"), QString::number(update.coordinate().longitude()));
     url.setQuery(urlQuery);
 
+    qWarning() << "lat: " << update.coordinate().latitude() << "lon: " << update.coordinate().longitude();
     auto reply = d->manager->get(QNetworkRequest(url));
 
     connect(reply, &QNetworkReply::finished, [this, update, reply] {
