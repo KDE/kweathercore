@@ -96,6 +96,7 @@ void LocationQuery::positionUpdated(const QGeoPositionInfo &update)
     urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
     urlQuery.addQueryItem(QStringLiteral("lat"), QString::number(update.coordinate().latitude()));
     urlQuery.addQueryItem(QStringLiteral("lon"), QString::number(update.coordinate().longitude()));
+    urlQuery.addQueryItem(QStringLiteral("email"), QStringLiteral("hanyoung@protonmail.com"));
     url.setQuery(urlQuery);
 
     qWarning() << "lat: " << update.coordinate().latitude() << "lon: " << update.coordinate().longitude();
