@@ -59,7 +59,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
 
     auto counts = root[QStringLiteral("totalResultsCount")].toInt();
     // if no result
-    if (counts) {
+    if (!counts) {
         Q_EMIT queryError();
         return;
     }
@@ -82,7 +82,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
                                           res.value(QStringLiteral("countryCode")).toString(),
                                           res.value(QStringLiteral("countryName")).toString(),
                                           QString::number(res.value(QStringLiteral("geonameId")).toInt()));
-        retVec[counts - 1] = result;
+        retVec.append(result);
     }
 
     Q_EMIT queryFinished(retVec);
