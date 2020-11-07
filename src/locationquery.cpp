@@ -44,7 +44,6 @@ void LocationQuery::query(QString name, int number)
     urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
     urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
-    qDebug() << url.toString();
     d->manager->get(QNetworkRequest(url));
     connect(d->manager, &QNetworkAccessManager::finished, this, &LocationQuery::handleQueryResult);
 }
@@ -56,6 +55,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject root = document.object();
+    reply->deleteLater();
 
     auto counts = root[QStringLiteral("totalResultsCount")].toInt();
     // if no result
@@ -90,6 +90,27 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
 
 void LocationQuery::positionUpdated(const QGeoPositionInfo &update)
 {
-    Q_EMIT located(LocationQueryResult(update.coordinate().latitude(), update.coordinate().longitude()));
+    QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
+    QUrlQuery urlQuery;
+
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
+    urlQuery.addQueryItem(QStringLiteral("lat"), QString::number(update.coordinate().latitude()));
+    urlQuery.addQueryItem(QStringLiteral("lon"), QString::number(update.coordinate().longitude()));
+    url.setQuery(urlQuery);
+
+    auto reply = d->manager->get(QNetworkRequest(url));
+
+    connect(reply, &QNetworkReply::finished, [this, update, reply] {
+        QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject root = document.object();
+        Q_EMIT this->located(LocationQueryResult(update.coordinate().latitude(),
+                                                 update.coordinate().longitude(),
+                                                 root[QStringLiteral("display_name")].toString(),
+                                                 root[QStringLiteral("name")].toString(),
+                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country_code")].toString(),
+                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country")].toString(),
+                                                 root[QStringLiteral("osm_id")].toString()));
+        reply->deleteLater();
+    });
 }
 }
