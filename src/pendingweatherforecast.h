@@ -13,16 +13,40 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 class PendingWeatherForecastPrivate;
+/**
+ * @short The PendingWeatherForecast class contains the reply to an asynchronous weather forecast request.
+ *
+ * The PendingWeatherForecast class contains the reply to an asynchronous weather forecast request.
+ *
+ * @see WeatherForecastSource
+ *
+ * @author Han Young <hanyoung@protonmail.com>
+ */
 class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:
     ~PendingWeatherForecast();
+    /**
+     * @brief value pointer to the shared weather data
+     * the pointer is nullptr until finished() raised
+     * @return
+     */
     QExplicitlySharedDataPointer<WeatherForecast> value() const;
+    /**
+     * @brief isFinished if the call has finished
+     * @return
+     */
     bool isFinished();
 
 Q_SIGNALS:
+    /**
+     * @brief finished signals the call has finished
+     */
     void finished();
+    /**
+     * @brief networkError indicate there is network error
+     */
     void networkError();
 
 protected:

@@ -14,15 +14,37 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 class WeatherForecastSourcePrivate;
+/**
+ * @short The WeatherForecastSource class is intened for query weather information about a location
+ *
+ * @see WeatherForecast
+ *
+ * @author Han Young <hanyoung@protonmail.com>
+ */
 class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief WeatherForecastSource
+     * @param parent
+     */
     WeatherForecastSource(QObject *parent = nullptr);
     ~WeatherForecastSource();
+    /**
+     * @brief requestData
+     * @param latitude
+     * @param longitude
+     * @param timezone
+     * @param sunrise caching purpose
+     * @return it is the client's responsibility to delete the PendingWeatherForecast to avoid memory leak
+     */
     PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const QVector<Sunrise> &sunrise = QVector<Sunrise>());
 
 Q_SIGNALS:
+    /**
+     * @brief networkError network error
+     */
     void networkError();
 
 private:
