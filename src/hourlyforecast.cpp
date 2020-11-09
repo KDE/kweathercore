@@ -43,7 +43,7 @@ HourlyWeatherForecast::HourlyWeatherForecast(QDateTime date,
 
 {
 }
-QJsonObject HourlyWeatherForecast::toJson()
+QJsonObject HourlyWeatherForecast::toJson() const
 {
     QJsonObject obj;
     obj[QStringLiteral("date")] = date().toString(Qt::ISODate);
@@ -76,7 +76,7 @@ HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
                                  obj[QStringLiteral("precipitationAmount")].toDouble());
 }
 
-QDateTime HourlyWeatherForecast::date() const
+const QDateTime &HourlyWeatherForecast::date() const
 {
     return m_date;
 };
@@ -84,7 +84,7 @@ void HourlyWeatherForecast::setDate(QDateTime date)
 {
     m_date = std::move(date);
 };
-QString HourlyWeatherForecast::weatherDescription() const
+const QString &HourlyWeatherForecast::weatherDescription() const
 {
     return m_weatherDescription;
 };
@@ -92,7 +92,7 @@ void HourlyWeatherForecast::setWeatherDescription(const QString &weatherDescript
 {
     m_weatherDescription = std::move(weatherDescription);
 };
-QString HourlyWeatherForecast::weatherIcon() const
+const QString &HourlyWeatherForecast::weatherIcon() const
 {
     return m_weatherIcon;
 };
@@ -100,7 +100,7 @@ void HourlyWeatherForecast::setWeatherIcon(const QString &weatherIcon)
 {
     m_weatherIcon = std::move(weatherIcon);
 };
-QString HourlyWeatherForecast::neutralWeatherIcon() const
+const QString &HourlyWeatherForecast::neutralWeatherIcon() const
 {
     return m_neutralWeatherIcon;
 };
@@ -108,7 +108,7 @@ void HourlyWeatherForecast::setNeutralWeatherIcon(QString neutralWeatherIcon)
 {
     m_neutralWeatherIcon = std::move(neutralWeatherIcon);
 };
-QString HourlyWeatherForecast::symbolCode() const
+const QString &HourlyWeatherForecast::symbolCode() const
 {
     return m_symbolCode;
 };
