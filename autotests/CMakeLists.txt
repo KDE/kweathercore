@@ -1,16 +1,14 @@
+include(ECMAddTests)
+
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Test)
 
-include(ECMMarkAsTest)
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../src")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/../src")
 
-macro(libkweather_tests)
-    foreach(_testname ${ARGN})
-        add_executable(${_testname} ${_testname}.cpp)
-        target_link_libraries(${_testname} Qt5::Test KF5LibKWeather)
-        add_test(libkweather-${_testname} ${_testname})
-        ecm_mark_as_test(${_testname})
-    endforeach(_testname)
-endmacro()
+ecm_add_tests(
+    hourlyforecasttest.cpp
+    dailyforecasttest.cpp
+    weatherforecasttest.cpp
+    LINK_LIBRARIES KF5::KWeatherCore Qt5::Test
+)
 
-#libkweather_tests(
-#    libkweathertest
-#)
