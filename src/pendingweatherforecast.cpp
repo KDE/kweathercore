@@ -213,7 +213,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         isDay = isDayTime(hourForecast.date(), sunriseVec);
         hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
-        *forecast += hourForecast;
+        *forecast += std::move(hourForecast);
     }
     forecast->setSunriseForecast(std::move(sunriseVec));
     Q_EMIT finished();
