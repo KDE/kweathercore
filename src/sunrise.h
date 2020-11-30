@@ -6,6 +6,7 @@
  */
 #pragma once
 #include <QDateTime>
+#include <QJsonObject>
 #include <QObject>
 #include <QPair>
 #include <kweathercore/kweathercore_export.h>

@@ -5,7 +5,6 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "sunrise.h"
-#include <QJsonObject>
 namespace KWeatherCore
 {
 Sunrise::Sunrise(const QDateTime &sunRise,
