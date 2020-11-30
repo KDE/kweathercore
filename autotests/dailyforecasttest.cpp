@@ -32,7 +32,7 @@ void DailyForecastTest::testJson()
 {
     auto d3 = DailyWeatherForecast::fromJson(d2.toJson());
 
-    QCOMPARE(d3, d2);
+    QCOMPARE(d3.toJson(), d2.toJson());
 }
 void DailyForecastTest::testSunrise()
 {

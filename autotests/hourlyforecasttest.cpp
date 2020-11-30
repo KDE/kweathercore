@@ -11,6 +11,6 @@ void HourlyForecastTest::testJson()
 
     auto d2 = HourlyWeatherForecast::fromJson(d1.toJson());
 
-    QCOMPARE(d2.date(), d1.date());
+    QCOMPARE(d2.toJson(), d1.toJson());
 }
 QTEST_MAIN(HourlyForecastTest)
