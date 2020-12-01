@@ -30,7 +30,11 @@ void SunriseSource::requestData()
     popDay();
 
     if (m_sunriseVec.size() >= 10) // don't update if we have enough data
+    {
+        Q_EMIT finished();
         return;
+    }
+
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/sunrise/2.0/.json"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(m_latitude));
