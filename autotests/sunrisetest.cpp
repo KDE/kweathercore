@@ -7,3 +7,4 @@ void SunriseTest::testJson()
     d2 = Sunrise::fromJson(d1.toJson());
     QCOMPARE(d2.toJson(), d1.toJson());
 }
+QTEST_MAIN(SunriseTest)
