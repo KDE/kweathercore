@@ -12,6 +12,7 @@ ecm_add_tests(
     sunrisetest.cpp
     geotimezonetest.cpp
     sunrisesourcetest.cpp
+    locationquerytest.cpp
     LINK_LIBRARIES KF5::KWeatherCore Qt5::Test
 )
 
