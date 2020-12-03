@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 Han Young <hanyoung@protonmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
 #include "pendingweatherforecasttest.h"
 
 void PendingWeatherForecastTest::initTestCase()
@@ -18,3 +23,4 @@ void PendingWeatherForecastTest::testFetch()
         QVERIFY(networkError_spy->size() > 0);
     }
 }
+QTEST_MAIN(PendingWeatherForecastTest)
