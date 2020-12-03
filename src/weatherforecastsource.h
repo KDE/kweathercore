@@ -41,11 +41,12 @@ public:
      */
     PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const QVector<Sunrise> &sunrise = QVector<Sunrise>());
 
-Q_SIGNALS:
     /**
-     * @brief networkError network error
+     * @brief requestData
+     * @param result
+     * @return it is the client's responsibility to delete the PendingWeatherForecast to avoid memory leak
      */
-    void networkError();
+    PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 
 private:
     WeatherForecastSourcePrivate *d = nullptr;

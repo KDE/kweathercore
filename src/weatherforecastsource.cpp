@@ -51,4 +51,8 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
 
     return pf;
 }
+PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)
+{
+    return requestData(result.latitude(), result.longitude());
+}
 }

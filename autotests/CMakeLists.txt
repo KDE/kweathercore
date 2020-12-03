@@ -13,6 +13,7 @@ ecm_add_tests(
     geotimezonetest.cpp
     sunrisesourcetest.cpp
     locationquerytest.cpp
+    pendingweatherforecasttest.cpp
     LINK_LIBRARIES KF5::KWeatherCore Qt5::Test
 )
 
