@@ -78,105 +78,109 @@ HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
 const QDateTime &HourlyWeatherForecast::date() const
 {
     return m_date;
-};
+}
 void HourlyWeatherForecast::setDate(QDateTime date)
 {
     m_date = std::move(date);
-};
+}
 const QString &HourlyWeatherForecast::weatherDescription() const
 {
     return m_weatherDescription;
-};
+}
 void HourlyWeatherForecast::setWeatherDescription(const QString &weatherDescription)
 {
     m_weatherDescription = std::move(weatherDescription);
-};
+}
 const QString &HourlyWeatherForecast::weatherIcon() const
 {
     return m_weatherIcon;
-};
+}
 void HourlyWeatherForecast::setWeatherIcon(const QString &weatherIcon)
 {
     m_weatherIcon = std::move(weatherIcon);
-};
+}
 const QString &HourlyWeatherForecast::neutralWeatherIcon() const
 {
     return m_neutralWeatherIcon;
-};
+}
 void HourlyWeatherForecast::setNeutralWeatherIcon(QString neutralWeatherIcon)
 {
     m_neutralWeatherIcon = std::move(neutralWeatherIcon);
-};
+}
 const QString &HourlyWeatherForecast::symbolCode() const
 {
     return m_symbolCode;
-};
+}
 void HourlyWeatherForecast::setSymbolCode(QString symbolCode)
 {
     m_symbolCode = std::move(symbolCode);
-};
+}
 double HourlyWeatherForecast::temperature() const
 {
     return m_temperature;
-};
+}
 void HourlyWeatherForecast::setTemperature(double temperature)
 {
     m_temperature = temperature;
-};
+}
 double HourlyWeatherForecast::pressure() const
 {
     return m_pressure;
-};
+}
 void HourlyWeatherForecast::setPressure(double pressure)
 {
     m_pressure = pressure;
-};
+}
 WindDirection HourlyWeatherForecast::windDirection() const
 {
     return m_windDirection;
-};
+}
 void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
 {
     m_windDirection = windDirection;
-};
+}
 double HourlyWeatherForecast::windSpeed() const
 {
     return m_windSpeed;
-};
+}
 void HourlyWeatherForecast::setWindSpeed(double windSpeed)
 {
     m_windSpeed = windSpeed;
-};
+}
 double HourlyWeatherForecast::humidity() const
 {
     return m_humidity;
-};
+}
 void HourlyWeatherForecast::setHumidity(double humidity)
 {
     m_humidity = humidity;
-};
+}
 double HourlyWeatherForecast::fog() const
 {
     return m_fog;
-};
+}
 void HourlyWeatherForecast::setFog(double fog)
 {
     m_fog = fog;
-};
+}
 double HourlyWeatherForecast::uvIndex() const
 {
     return m_uvIndex;
-};
+}
 void HourlyWeatherForecast::setUvIndex(double uvIndex)
 {
     m_uvIndex = uvIndex;
-};
+}
 double HourlyWeatherForecast::precipitationAmount() const
 {
     return m_precipitationAmount;
-};
+}
 void HourlyWeatherForecast::setPrecipitationAmount(double precipitationAmount)
 {
     m_precipitationAmount = precipitationAmount;
-};
+}
+bool HourlyWeatherForecast::operator==(const KWeatherCore::HourlyWeatherForecast &rhs) const
+{
+    return (weatherDescription() == rhs.weatherDescription() && weatherIcon() == rhs.weatherIcon() && date() == rhs.date() && qAbs(temperature() - rhs.temperature()) < 0.01);
+}
 }

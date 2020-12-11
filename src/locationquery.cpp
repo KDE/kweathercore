@@ -5,7 +5,6 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "locationquery.h"
-#include <QGeoPositionInfoSource>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>

@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include <QMetaType>
 #include <QString>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
@@ -22,6 +23,8 @@ namespace KWeatherCore
 class KWEATHERCORE_EXPORT LocationQueryResult
 {
 public:
+    // for QMetaType
+    LocationQueryResult() {};
     /**
      * @brief LocationQueryResult construct location result with given data
      * @param latitude latitude
@@ -74,3 +77,4 @@ private:
     QString m_toponymName, m_name, m_countryCode, m_countryName, m_geonameId;
 };
 }
+Q_DECLARE_METATYPE(KWeatherCore::LocationQueryResult)

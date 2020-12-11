@@ -11,7 +11,7 @@ void GeoTimezoneTest::testTimezone()
     auto ret = finished_spy.wait(10000);
 
     if (ret)
-        QCOMPARE(finished_spy.takeFirst().at(0).toString(), "Asia/Oral");
+        QCOMPARE(finished_spy.takeFirst().at(0).toString(), QStringLiteral("Asia/Oral"));
     else
         QVERIFY(networkError_spy.size() > 0);
 }

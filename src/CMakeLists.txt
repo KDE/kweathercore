@@ -20,9 +20,8 @@ target_include_directories(KF5KWeatherCore PUBLIC "$<BUILD_INTERFACE:${kweatherc
 target_include_directories(KF5KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore>")
 
 target_link_libraries(KF5KWeatherCore
-PUBLIC Qt5::Core
+PUBLIC Qt5::Core Qt5::Positioning
 PRIVATE Qt5::Network
-        Qt5::Positioning
         KF5::I18n
 )
 

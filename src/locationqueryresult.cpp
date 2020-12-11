@@ -14,7 +14,9 @@ LocationQueryResult::LocationQueryResult(double latitude, double longitude, QStr
     , m_name(std::move(name))
     , m_countryCode(std::move(countryCode))
     , m_countryName(std::move(countryName))
-    , m_geonameId(std::move(geonameId)) {};
+    , m_geonameId(std::move(geonameId))
+{
+}
 
 double LocationQueryResult::latitude() const
 {

@@ -198,6 +198,8 @@ public:
      */
     void setPrecipitationAmount(double precipitationAmount);
 
+    bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
+
 private:
     QDateTime m_date;
     QString m_weatherDescription;

@@ -120,7 +120,7 @@ WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecas
     // if not find, append it at end
     dailyWeatherForecast().append(forecast);
     return *this;
-};
+}
 WeatherForecast &WeatherForecast::operator+=(DailyWeatherForecast &&forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
@@ -133,7 +133,7 @@ WeatherForecast &WeatherForecast::operator+=(DailyWeatherForecast &&forecast)
     // if not find, append it at end
     dailyWeatherForecast().append(std::move(forecast));
     return *this;
-};
+}
 WeatherForecast &WeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
@@ -150,7 +150,7 @@ WeatherForecast &WeatherForecast::operator+=(const HourlyWeatherForecast &foreca
     newDay += forecast;
     dailyWeatherForecast().append(std::move(newDay));
     return *this;
-};
+}
 WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
@@ -165,6 +165,6 @@ WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
     newDay += forecast;
     dailyWeatherForecast().append(std::move(newDay));
     return *this;
-};
+}
 
 }

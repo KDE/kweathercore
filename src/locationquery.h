@@ -7,7 +7,7 @@
 
 #pragma once
 #include "locationqueryresult.h"
-#include <QGeoPositionInfo>
+#include <QGeoPositionInfoSource>
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
 class QNetworkReply;
