@@ -36,7 +36,7 @@ Q_SIGNALS:
      * @brief finished
      * @param timezone
      */
-    void finished(QString timezone);
+    void finished(const QString &timezone);
     /**
      * @brief networkError encounted network error
      */
