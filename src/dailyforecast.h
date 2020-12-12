@@ -154,12 +154,12 @@ public:
      * @brief hourlyWeatherForecast returns all HourlyWeathreForecast belonged to this day
      * @return all HourlyWeathreForecast belonged to this day
      */
-    const QVector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
+    const std::vector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
     /**
      * @brief hourlyWeatherForecast overloaded version
-     * @return reference to internal QVector
+     * @return reference to internal std::vector
      */
-    QVector<HourlyWeatherForecast> &hourlyWeatherForecast();
+    std::vector<HourlyWeatherForecast> &hourlyWeatherForecast();
     /**
      * @brief setSunrise set sunrise
      * @param sunrise if this object and sunrise isn't on the same day, this function does nothing
@@ -174,12 +174,12 @@ public:
      * @brief setHourlyWeatherForecast set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day
      */
-    void setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast);
+    void setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast);
     /**
      * @brief setHourlyWeatherForecast overloaded version
      * @param forecast
      */
-    void setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast);
+    void setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast);
 
     /**
      * @brief operator + merge two daily forecast
@@ -256,6 +256,6 @@ private:
     QDate m_date;
 
     Sunrise m_sunrise;
-    QVector<HourlyWeatherForecast> m_hourlyWeatherForecast;
+    std::vector<HourlyWeatherForecast> m_hourlyWeatherForecast;
 };
 }

@@ -14,7 +14,7 @@
 #include <QtMath>
 namespace KWeatherCore
 {
-SunriseSource::SunriseSource(double latitude, double longitude, int offset, const QVector<Sunrise> &sunrise, QObject *parent)
+SunriseSource::SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise, QObject *parent)
     : m_latitude(latitude)
     , m_longitude(longitude)
     , m_offset(offset)
@@ -40,8 +40,8 @@ void SunriseSource::requestData()
     query.addQueryItem(QStringLiteral("lat"), QString::number(m_latitude));
     query.addQueryItem(QStringLiteral("lon"), QString::number(m_longitude));
     // if we already have data, request data beyond the last day
-    query.addQueryItem(QStringLiteral("date"), m_sunriseVec.isEmpty() ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd")) : QDate::currentDate().addDays(m_sunriseVec.size()).toString(QStringLiteral("yyyy-MM-dd")));
-    query.addQueryItem(QStringLiteral("days"), m_sunriseVec.isEmpty() ? QString::number(10) : QString::number(11 - m_sunriseVec.size()));
+    query.addQueryItem(QStringLiteral("date"), !m_sunriseVec.size() ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd")) : QDate::currentDate().addDays(m_sunriseVec.size()).toString(QStringLiteral("yyyy-MM-dd")));
+    query.addQueryItem(QStringLiteral("days"), !m_sunriseVec.size() ? QString::number(10) : QString::number(11 - m_sunriseVec.size()));
 
     // calculate offset (form example: -04:00)
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
@@ -102,7 +102,7 @@ void SunriseSource::setOffset(int offset)
     m_offset = offset;
 }
 
-const QVector<Sunrise> &SunriseSource::value() const
+const std::vector<Sunrise> &SunriseSource::value() const
 {
     return m_sunriseVec;
 }
@@ -112,7 +112,7 @@ void SunriseSource::popDay()
     auto today = QDateTime::currentDateTime();
     for (auto day : m_sunriseVec) {
         if (day.sunRise().daysTo(today) > 0) {
-            m_sunriseVec.pop_front();
+            m_sunriseVec.erase(m_sunriseVec.begin());
         } else {
             // since vector is always sorted
             break;

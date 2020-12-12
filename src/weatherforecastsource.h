@@ -39,7 +39,7 @@ public:
      * @param sunrise caching purpose
      * @return it is the client's responsibility to delete the PendingWeatherForecast to avoid memory leak
      */
-    PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const QVector<Sunrise> &sunrise = QVector<Sunrise>());
+    PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
 
     /**
      * @brief requestData

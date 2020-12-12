@@ -30,7 +30,7 @@ WeatherForecastSource::~WeatherForecastSource()
 {
     delete d;
 }
-PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone, const QVector<Sunrise> &sunrise)
+PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone, const std::vector<Sunrise> &sunrise)
 {
     // query weather api
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));

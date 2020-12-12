@@ -48,7 +48,7 @@ Q_SIGNALS:
      * @brief queryFinished the name search has completed
      * @param result
      */
-    void queryFinished(QVector<LocationQueryResult> result);
+    void queryFinished(std::vector<LocationQueryResult> result);
     /**
      * @brief located current location has been determined
      * @param result

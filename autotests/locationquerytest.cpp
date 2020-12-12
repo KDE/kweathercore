@@ -35,7 +35,7 @@ void LocationQueryTest::testQuery()
     auto ret = finished_spy->wait(30000);
 
     if (ret) {
-        QVERIFY(finished_spy->takeFirst().at(0).value<QVector<LocationQueryResult>>().size() > 0);
+        QVERIFY(finished_spy->takeFirst().at(0).value<std::vector<LocationQueryResult>>().size() > 0);
     } else {
         QVERIFY(networkError_spy->count() > 0);
     }

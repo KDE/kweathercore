@@ -18,7 +18,7 @@
 #include <QTimeZone>
 namespace KWeatherCore
 {
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, QVector<Sunrise> &&sunrise)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, std::vector<Sunrise> &&sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -38,7 +38,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, do
     }
 }
 
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const QVector<Sunrise> &sunrise)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude, double longitude, const QString &timezone, const std::vector<Sunrise> &sunrise)
     : forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -117,7 +117,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
     // Q_EMIT finished();
 }
 
-void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, QVector<HourlyWeatherForecast> &hourlyForecast)
+void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std::vector<HourlyWeatherForecast> &hourlyForecast)
 {
     /*~~~~~~~~~~ lambda ~~~~~~~~~~~*/
 
@@ -182,13 +182,13 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, QVec
                                               instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble(),
                                               precipitationAmount);
     hourForecast.setSymbolCode(symbolCode);
-    hourlyForecast.append(std::move(hourForecast));
+    hourlyForecast.push_back(std::move(hourForecast));
 }
 
 void PendingWeatherForecastPrivate::applySunriseToForecast()
 {
     // ************* Lambda *************** //
-    auto isDayTime = [](QDateTime date, const QVector<Sunrise> &sunrise) {
+    auto isDayTime = [](QDateTime date, const std::vector<Sunrise> &sunrise) {
         for (auto sr : sunrise) {
             // if on the same day
             if (sr.sunRise().date().daysTo(date.date()) == 0 && sr.sunRise().date().day() == date.date().day()) {
@@ -219,7 +219,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     Q_EMIT finished();
 }
 
-PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, QNetworkReply *reply, const QString &timezone, const QVector<Sunrise> &sunrise)
+PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, QNetworkReply *reply, const QString &timezone, const std::vector<Sunrise> &sunrise)
     : d(new PendingWeatherForecastPrivate(latitude, longitude, timezone, sunrise))
 {
     connect(d, &PendingWeatherForecastPrivate::finished, [this] { this->m_finished = true; });

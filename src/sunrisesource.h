@@ -32,7 +32,7 @@ public:
      * @param sunrise for caching purpose
      * @param parent
      */
-    SunriseSource(double latitude, double longitude, int offset, const QVector<Sunrise> &sunrise = QVector<Sunrise>(), QObject *parent = nullptr);
+    SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(), QObject *parent = nullptr);
     /**
      * @brief requestData start downloading data
      */
@@ -46,7 +46,7 @@ public:
      * @brief value get the value
      * @return
      */
-    const QVector<Sunrise> &value() const;
+    const std::vector<Sunrise> &value() const;
 Q_SIGNALS:
     /**
      * @brief networkError network error
@@ -62,7 +62,7 @@ private Q_SLOTS:
 private:
     double m_latitude, m_longitude;
     int m_offset;
-    QVector<Sunrise> m_sunriseVec;
+    std::vector<Sunrise> m_sunriseVec;
     QNetworkAccessManager *m_manager = nullptr;
 
     void popDay();

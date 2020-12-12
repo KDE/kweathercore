@@ -40,7 +40,7 @@ public:
      * @brief dailyWeatherForecast return daily weather forecast
      * @return
      */
-    const QVector<DailyWeatherForecast> &dailyWeatherForecast() const;
+    const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const;
     /**
      * @brief latitude
      * @return
@@ -57,10 +57,10 @@ public:
      */
     const QDateTime &createdTime() const;
     /**
-     * @brief dailyWeatherForecast internal QVector
+     * @brief dailyWeatherForecast internal std::vector
      * @return
      */
-    QVector<DailyWeatherForecast> &dailyWeatherForecast();
+    std::vector<DailyWeatherForecast> &dailyWeatherForecast();
     /**
      * @brief timezone timezone
      * @return
@@ -86,22 +86,22 @@ public:
      * @brief setDailyWeatherForecast
      * @param forecast
      */
-    void setDailyWeatherForecast(const QVector<DailyWeatherForecast> &forecast);
+    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
     /**
      * @brief setDailyWeatherForecast
      * @param forecast
      */
-    void setDailyWeatherForecast(QVector<DailyWeatherForecast> &&forecast);
+    void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
      * @brief setSunriseForecast the vector should be sorted
      * @param sunrise
      */
-    void setSunriseForecast(const QVector<Sunrise> &sunrise);
+    void setSunriseForecast(const std::vector<Sunrise> &sunrise);
     /**
      * @brief setSunriseForecast overloaded version
      * @param sunrise
      */
-    void setSunriseForecast(QVector<Sunrise> &&sunrise);
+    void setSunriseForecast(std::vector<Sunrise> &&sunrise);
 
     /**
      * @brief operator += merge DailyWeatherForecast
@@ -129,8 +129,8 @@ public:
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 
 private:
-    QVector<DailyWeatherForecast> m_dailyWeatherForecast;
-    // QVector<Sunrise> m_sunriseForecast;
+    std::vector<DailyWeatherForecast> m_dailyWeatherForecast;
+    // std::vector<Sunrise> m_sunriseForecast;
     QString m_timezone;
     double m_latitude, m_longitude;
     QDateTime m_createdTime;

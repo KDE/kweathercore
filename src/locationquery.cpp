@@ -62,7 +62,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
         Q_EMIT queryError();
         return;
     }
-    QVector<LocationQueryResult> retVec;
+    std::vector<LocationQueryResult> retVec;
 
     // if our api calls reached daily limit
     if (root[QStringLiteral("status")].toObject()[QStringLiteral("value")].toInt() == 18) {
@@ -81,7 +81,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
                                           res.value(QStringLiteral("countryCode")).toString(),
                                           res.value(QStringLiteral("countryName")).toString(),
                                           QString::number(res.value(QStringLiteral("geonameId")).toInt()));
-        retVec.append(result);
+        retVec.push_back(result);
     }
 
     Q_EMIT queryFinished(retVec);

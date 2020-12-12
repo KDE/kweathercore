@@ -60,9 +60,9 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
                                   obj[QStringLiteral("weatherIcon")].toString(),
                                   obj[QStringLiteral("weatherDescription")].toString(),
                                   QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
-    QVector<HourlyWeatherForecast> hourlyVec;
+    std::vector<HourlyWeatherForecast> hourlyVec;
     for (auto h : obj[QStringLiteral("hourly")].toArray())
-        hourlyVec.append(HourlyWeatherForecast::fromJson(h.toObject()));
+        hourlyVec.push_back(HourlyWeatherForecast::fromJson(h.toObject()));
     d.setHourlyWeatherForecast(hourlyVec);
     return d;
 }
@@ -148,12 +148,12 @@ const Sunrise &DailyWeatherForecast::sunrise() const
     return m_sunrise;
 }
 
-const QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
+const std::vector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
     return m_hourlyWeatherForecast;
 }
 
-QVector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast()
+std::vector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast()
 {
     return m_hourlyWeatherForecast;
 }
@@ -167,12 +167,12 @@ void DailyWeatherForecast::setSunrise(Sunrise &&sunrise)
     m_sunrise = std::move(sunrise);
 }
 
-void DailyWeatherForecast::setHourlyWeatherForecast(const QVector<HourlyWeatherForecast> &forecast)
+void DailyWeatherForecast::setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
 {
     m_hourlyWeatherForecast = forecast;
 }
 
-void DailyWeatherForecast::setHourlyWeatherForecast(QVector<HourlyWeatherForecast> &&forecast)
+void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast)
 {
     m_hourlyWeatherForecast = forecast;
 }
@@ -220,7 +220,7 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
         this->setMinTemp(std::min(this->minTemp(), forecast.temperature()));
     }
 
-    this->hourlyWeatherForecast().append(forecast);
+    this->hourlyWeatherForecast().push_back(forecast);
     return *this;
 }
 
