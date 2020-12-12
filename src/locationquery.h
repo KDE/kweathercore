@@ -7,7 +7,6 @@
 
 #pragma once
 #include "locationqueryresult.h"
-#include <QGeoPositionInfoSource>
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
 class QNetworkReply;
@@ -48,19 +47,18 @@ Q_SIGNALS:
      * @brief queryFinished the name search has completed
      * @param result
      */
-    void queryFinished(std::vector<LocationQueryResult> result);
+    void queryFinished(const std::vector<LocationQueryResult> &result);
     /**
      * @brief located current location has been determined
      * @param result
      */
-    void located(LocationQueryResult result);
+    void located(const LocationQueryResult &result);
     /**
      * @brief queryError a error has encounted during query, network error or no result found
      */
     void queryError();
 private Q_SLOTS:
     void handleQueryResult(QNetworkReply *reply);
-    void positionUpdated(const QGeoPositionInfo &update);
 
 private:
     LocationQueryPrivate *d = nullptr;

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "locationquery.h"
+#include <QGeoPositionInfoSource>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -13,25 +14,78 @@
 #include <QUrlQuery>
 namespace KWeatherCore
 {
-class LocationQueryPrivate
+class LocationQueryPrivate : public QObject
 {
+    Q_OBJECT
 public:
-    QGeoPositionInfoSource *locationSource = nullptr;
+    LocationQueryPrivate();
+    ~LocationQueryPrivate();
+    void requestUpdate();
     QNetworkAccessManager *manager = nullptr;
+
+Q_SIGNALS:
+    void located(const LocationQueryResult &);
+private Q_SLOTS:
+    void positionUpdated(const QGeoPositionInfo &update);
+
+private:
+    QGeoPositionInfoSource *locationSource = nullptr;
 };
+
+LocationQueryPrivate::LocationQueryPrivate()
+    : manager(new QNetworkAccessManager(this))
+    , locationSource(QGeoPositionInfoSource::createDefaultSource(this))
+{
+    locationSource->stopUpdates();
+
+    connect(locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQueryPrivate::positionUpdated);
+}
+
+LocationQueryPrivate::~LocationQueryPrivate()
+{
+    locationSource->deleteLater();
+    manager->deleteLater();
+}
+void LocationQueryPrivate::requestUpdate()
+{
+    locationSource->requestUpdate();
+}
+void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
+{
+    QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
+    QUrlQuery urlQuery;
+
+    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
+    urlQuery.addQueryItem(QStringLiteral("lat"), QString::number(update.coordinate().latitude()));
+    urlQuery.addQueryItem(QStringLiteral("lon"), QString::number(update.coordinate().longitude()));
+    urlQuery.addQueryItem(QStringLiteral("email"), QStringLiteral("hanyoung@protonmail.com"));
+    url.setQuery(urlQuery);
+
+    qWarning() << "lat: " << update.coordinate().latitude() << "lon: " << update.coordinate().longitude();
+    auto reply = manager->get(QNetworkRequest(url));
+
+    connect(reply, &QNetworkReply::finished, [this, update, reply] {
+        QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+        QJsonObject root = document.object();
+        Q_EMIT this->located(LocationQueryResult(update.coordinate().latitude(),
+                                                 update.coordinate().longitude(),
+                                                 root[QStringLiteral("display_name")].toString(),
+                                                 root[QStringLiteral("name")].toString(),
+                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country_code")].toString(),
+                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country")].toString(),
+                                                 root[QStringLiteral("osm_id")].toString()));
+        reply->deleteLater();
+    });
+}
 LocationQuery::LocationQuery(QObject *parent)
     : QObject(parent)
     , d(new LocationQueryPrivate)
 {
-    d->locationSource = QGeoPositionInfoSource::createDefaultSource(this);
-    d->locationSource->stopUpdates();
-    d->manager = new QNetworkAccessManager(this);
-
-    connect(d->locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQuery::positionUpdated);
+    connect(d, &LocationQueryPrivate::located, this, &LocationQuery::located);
 }
 LocationQuery::~LocationQuery()
 {
-    delete d;
+    d->deleteLater();
 }
 
 void LocationQuery::query(QString name, int number)
@@ -43,12 +97,12 @@ void LocationQuery::query(QString name, int number)
     urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
     urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
-    d->manager->get(QNetworkRequest(url));
-    connect(d->manager, &QNetworkAccessManager::finished, this, &LocationQuery::handleQueryResult);
+    auto reply = d->manager->get(QNetworkRequest(url));
+    connect(reply, &QNetworkReply::finished, [this, reply] { this->handleQueryResult(reply); });
 }
 void LocationQuery::locate()
 {
-    d->locationSource->requestUpdate();
+    d->requestUpdate();
 }
 void LocationQuery::handleQueryResult(QNetworkReply *reply)
 {
@@ -86,32 +140,6 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
 
     Q_EMIT queryFinished(retVec);
 }
-
-void LocationQuery::positionUpdated(const QGeoPositionInfo &update)
-{
-    QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
-    QUrlQuery urlQuery;
-
-    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
-    urlQuery.addQueryItem(QStringLiteral("lat"), QString::number(update.coordinate().latitude()));
-    urlQuery.addQueryItem(QStringLiteral("lon"), QString::number(update.coordinate().longitude()));
-    urlQuery.addQueryItem(QStringLiteral("email"), QStringLiteral("hanyoung@protonmail.com"));
-    url.setQuery(urlQuery);
-
-    qWarning() << "lat: " << update.coordinate().latitude() << "lon: " << update.coordinate().longitude();
-    auto reply = d->manager->get(QNetworkRequest(url));
-
-    connect(reply, &QNetworkReply::finished, [this, update, reply] {
-        QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject root = document.object();
-        Q_EMIT this->located(LocationQueryResult(update.coordinate().latitude(),
-                                                 update.coordinate().longitude(),
-                                                 root[QStringLiteral("display_name")].toString(),
-                                                 root[QStringLiteral("name")].toString(),
-                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country_code")].toString(),
-                                                 root[QStringLiteral("address")].toObject()[QStringLiteral("country")].toString(),
-                                                 root[QStringLiteral("osm_id")].toString()));
-        reply->deleteLater();
-    });
 }
-}
+
+#include "locationquery.moc"
