@@ -15,11 +15,11 @@
 namespace KWeatherCore
 {
 SunriseSource::SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise, QObject *parent)
-    : m_latitude(latitude)
+    : QObject(parent)
+    , m_latitude(latitude)
     , m_longitude(longitude)
     , m_offset(offset)
     , m_sunriseVec(sunrise)
-    , QObject(parent)
     , m_manager(new QNetworkAccessManager(this))
 {
     connect(m_manager, &QNetworkAccessManager::finished, this, &SunriseSource::parseResults);

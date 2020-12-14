@@ -200,18 +200,6 @@ public:
      */
     DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     /**
-     * @brief operator << overloaded version
-     * @param forecast
-     * @return
-     */
-    DailyWeatherForecast &operator<<(const DailyWeatherForecast &forecast);
-    /**
-     * @brief operator << overloaded version
-     * @param forecast
-     * @return
-     */
-    DailyWeatherForecast &operator<<(const HourlyWeatherForecast &forecast);
-    /**
      * @brief operator == if on the same day
      * @param forecast
      * @return @c true if on the same day

@@ -16,14 +16,14 @@ Sunrise::Sunrise(const QDateTime &sunRise,
                  const QPair<QDateTime, double> &solarMidnight,
                  const QPair<QDateTime, double> &solarNoon,
                  double moonphase)
-    : m_sunRise(sunRise)
+    : m_highMoon(highMoon)
+    , m_solarMidnight(solarMidnight)
+    , m_solarNoon(solarNoon)
+    , m_lowMoon(lowMoon)
+    , m_sunRise(sunRise)
     , m_sunSet(sunSet)
     , m_moonRise(moonRise)
     , m_moonSet(moonSet)
-    , m_highMoon(highMoon)
-    , m_lowMoon(lowMoon)
-    , m_solarMidnight(solarMidnight)
-    , m_solarNoon(solarNoon)
     , m_moonPhase(moonphase)
 {
 }

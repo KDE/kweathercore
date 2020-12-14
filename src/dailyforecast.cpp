@@ -174,7 +174,7 @@ void DailyWeatherForecast::setHourlyWeatherForecast(const std::vector<HourlyWeat
 
 void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast)
 {
-    m_hourlyWeatherForecast = forecast;
+    m_hourlyWeatherForecast = std::move(forecast);
 }
 DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
@@ -224,14 +224,6 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
     return *this;
 }
 
-DailyWeatherForecast &DailyWeatherForecast::operator<<(const DailyWeatherForecast &forecast)
-{
-    return *this + forecast;
-}
-DailyWeatherForecast &DailyWeatherForecast::operator<<(const HourlyWeatherForecast &forecast)
-{
-    return *this += forecast;
-}
 bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) const
 {
     if (this->date() == forecast.date())

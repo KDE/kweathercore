@@ -238,6 +238,6 @@ QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() co
 PendingWeatherForecast::~PendingWeatherForecast()
 {
     if (d)
-        delete d;
+        d->deleteLater();
 }
 }

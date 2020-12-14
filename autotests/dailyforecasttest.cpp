@@ -16,14 +16,14 @@ void DailyForecastTest::testNull()
 void DailyForecastTest::testHourlyMerge()
 {
     for (int i = 0; i < 24; ++i)
-        d1 << HourlyWeatherForecast(QDateTime::currentDateTime().addSecs(i * 3600), QStringLiteral("sunny"), QStringLiteral("sunny"), QString(), 25, 100, WindDirection::E, 5, 0.8, 0.1, 0.1, 0);
+        d1 += HourlyWeatherForecast(QDateTime::currentDateTime().addSecs(i * 3600), QStringLiteral("sunny"), QStringLiteral("sunny"), QString(), 25, 100, WindDirection::E, 5, 0.8, 0.1, 0.1, 0);
 
     QCOMPARE(d1.isNull(), false);
     QCOMPARE(d1.hourlyWeatherForecast().size(), 24);
 }
 void DailyForecastTest::testDailyMerge()
 {
-    d2 << d1;
+    d2 += d1;
 
     QCOMPARE(d2.isNull(), false);
     QCOMPARE(d2.hourlyWeatherForecast(), d1.hourlyWeatherForecast());
