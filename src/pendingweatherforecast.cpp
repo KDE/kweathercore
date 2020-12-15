@@ -231,7 +231,7 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude
     }
 }
 
-QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() const
+inline QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() const
 {
     return d->forecast;
 }

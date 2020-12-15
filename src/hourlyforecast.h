@@ -197,7 +197,10 @@ public:
      * @param precipitationAmount
      */
     void setPrecipitationAmount(double precipitationAmount);
-
+    /**
+     * @brief operator ==
+     * @return true if date, weather icon and description is same
+     */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
 
 private:

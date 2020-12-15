@@ -37,48 +37,48 @@ QExplicitlySharedDataPointer<WeatherForecast> WeatherForecast::fromJson(QJsonObj
     w->setTimezone(obj[QStringLiteral("timezone")].toString());
     return w;
 }
-const QDateTime &WeatherForecast::createdTime() const
+inline const QDateTime &WeatherForecast::createdTime() const
 {
     return m_createdTime;
 }
-double WeatherForecast::latitude() const
+inline double WeatherForecast::latitude() const
 {
     return m_latitude;
 }
-double WeatherForecast::longitude() const
+inline double WeatherForecast::longitude() const
 {
     return m_longitude;
 }
-const std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const
+inline const std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const
 {
     return m_dailyWeatherForecast;
 }
-std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast()
+inline std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast()
 {
     return m_dailyWeatherForecast;
 }
-const QString &WeatherForecast::timezone() const
+inline const QString &WeatherForecast::timezone() const
 {
     return m_timezone;
 }
-void WeatherForecast::setCoordinate(double latitude, double longitude)
+inline void WeatherForecast::setCoordinate(double latitude, double longitude)
 {
     m_latitude = latitude;
     m_longitude = longitude;
 }
-void WeatherForecast::setTimezone(const QString &timezone)
+inline void WeatherForecast::setTimezone(const QString &timezone)
 {
     m_timezone = timezone;
 }
-void WeatherForecast::setTimezone(QString &&timezone)
+inline void WeatherForecast::setTimezone(QString &&timezone)
 {
     m_timezone = std::move(timezone);
 }
-void WeatherForecast::setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
+inline void WeatherForecast::setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
 {
     m_dailyWeatherForecast = forecast;
 }
-void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
+inline void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
 {
     m_dailyWeatherForecast = std::move(forecast);
 }

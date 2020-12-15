@@ -63,91 +63,91 @@ QJsonObject Sunrise::toJson()
     return obj;
 }
 
-QDateTime Sunrise::highMoonTime() const
+inline QDateTime Sunrise::highMoonTime() const
 {
     return m_highMoon.first;
 }
-double Sunrise::highMoon() const
+inline double Sunrise::highMoon() const
 {
     return m_highMoon.second;
 }
-QDateTime Sunrise::lowMoonTime() const
+inline QDateTime Sunrise::lowMoonTime() const
 {
     return m_lowMoon.first;
 }
-double Sunrise::lowMoon() const
+inline double Sunrise::lowMoon() const
 {
     return m_lowMoon.second;
 }
-QDateTime Sunrise::solarMidnightTime() const
+inline QDateTime Sunrise::solarMidnightTime() const
 {
     return m_solarMidnight.first;
 }
-QDateTime Sunrise::solarNoonTime() const
+inline QDateTime Sunrise::solarNoonTime() const
 {
     return m_solarNoon.first;
 }
-double Sunrise::solarMidnight() const
+inline double Sunrise::solarMidnight() const
 {
     return m_solarMidnight.second;
 }
-double Sunrise::solarNoon() const
+inline double Sunrise::solarNoon() const
 {
     return m_solarNoon.second;
 }
-const QDateTime &Sunrise::sunRise() const
+inline const QDateTime &Sunrise::sunRise() const
 {
     return m_sunRise;
 }
-const QDateTime &Sunrise::sunSet() const
+inline const QDateTime &Sunrise::sunSet() const
 {
     return m_sunSet;
 }
-const QDateTime &Sunrise::moonRise() const
+inline const QDateTime &Sunrise::moonRise() const
 {
     return m_moonRise;
 }
-const QDateTime &Sunrise::moonSet() const
+inline const QDateTime &Sunrise::moonSet() const
 {
     return m_moonSet;
 }
-double Sunrise::moonPhase() const
+inline double Sunrise::moonPhase() const
 {
     return m_moonPhase;
 }
-void Sunrise::setHighMoon(const QPair<QDateTime, double> &highMoon)
+inline void Sunrise::setHighMoon(const QPair<QDateTime, double> &highMoon)
 {
     m_highMoon = highMoon;
 }
-void Sunrise::setSolarMidnight(const QPair<QDateTime, double> &solarMidnight)
+inline void Sunrise::setSolarMidnight(const QPair<QDateTime, double> &solarMidnight)
 {
     m_solarMidnight = solarMidnight;
 }
-void Sunrise::setSolarNoon(const QPair<QDateTime, double> &solarNoon)
+inline void Sunrise::setSolarNoon(const QPair<QDateTime, double> &solarNoon)
 {
     m_solarNoon = solarNoon;
 }
-void Sunrise::setLowMoon(const QPair<QDateTime, double> &lowMoon)
+inline void Sunrise::setLowMoon(const QPair<QDateTime, double> &lowMoon)
 {
     m_lowMoon = lowMoon;
 }
-void Sunrise::setSunRise(const QDateTime &sunRise)
+inline void Sunrise::setSunRise(const QDateTime &sunRise)
 {
     m_sunRise = sunRise;
 }
-void Sunrise::setSunSet(const QDateTime &sunSet)
+inline void Sunrise::setSunSet(const QDateTime &sunSet)
 {
     m_sunSet = sunSet;
 }
-void Sunrise::setMoonRise(const QDateTime &moonRise)
+inline void Sunrise::setMoonRise(const QDateTime &moonRise)
 {
     m_moonRise = moonRise;
 }
-void Sunrise::setMoonSet(const QDateTime &moonSet)
+inline void Sunrise::setMoonSet(const QDateTime &moonSet)
 {
     m_moonSet = moonSet;
 }
-void Sunrise::setMoonPhase(double moonPhase)
+inline void Sunrise::setMoonPhase(double moonPhase)
 {
     m_moonPhase = moonPhase;
 }

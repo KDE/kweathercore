@@ -200,9 +200,9 @@ public:
      */
     DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     /**
-     * @brief operator == if on the same day
+     * @brief operator == if on the same day and weather description/icon match
      * @param forecast
-     * @return @c true if on the same day
+     * @return @c true if on the same day and weather description/icon match
      */
     bool operator==(const DailyWeatherForecast &forecast) const;
     /**
@@ -211,24 +211,6 @@ public:
      * @return @c true if this is earlier than \param forecast
      */
     bool operator<(const DailyWeatherForecast &forecast) const;
-    /**
-     * @brief operator > if this is later than \param forecast
-     * @param forecast
-     * @return @c true if this is later than \param forecast
-     */
-    bool operator>(const DailyWeatherForecast &forecast) const;
-    /**
-     * @brief operator >= this does exactly what you think it does
-     * @param forecast
-     * @return
-     */
-    bool operator>=(const DailyWeatherForecast &forecast) const;
-    /**
-     * @brief operator <= this does exactly what you think it does
-     * @param forecast
-     * @return
-     */
-    bool operator<=(const DailyWeatherForecast &forecast) const;
 
 private:
     bool m_isNull = false;

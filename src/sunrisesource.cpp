@@ -97,12 +97,12 @@ void SunriseSource::parseResults(QNetworkReply *reply)
 
     Q_EMIT finished();
 }
-void SunriseSource::setOffset(int offset)
+inline void SunriseSource::setOffset(int offset)
 {
     m_offset = offset;
 }
 
-const std::vector<Sunrise> &SunriseSource::value() const
+inline const std::vector<Sunrise> &SunriseSource::value() const
 {
     return m_sunriseVec;
 }

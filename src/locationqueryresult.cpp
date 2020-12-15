@@ -18,31 +18,31 @@ LocationQueryResult::LocationQueryResult(double latitude, double longitude, QStr
 {
 }
 
-double LocationQueryResult::latitude() const
+inline double LocationQueryResult::latitude() const
 {
     return m_latitude;
 }
-double LocationQueryResult::longitude() const
+inline double LocationQueryResult::longitude() const
 {
     return m_longitude;
 }
-const QString &LocationQueryResult::toponymName() const
+inline const QString &LocationQueryResult::toponymName() const
 {
     return m_toponymName;
 }
-const QString &LocationQueryResult::name() const
+inline const QString &LocationQueryResult::name() const
 {
     return m_name;
 }
-const QString &LocationQueryResult::countryName() const
+inline const QString &LocationQueryResult::countryName() const
 {
     return m_countryName;
 }
-const QString &LocationQueryResult::countryCode() const
+inline const QString &LocationQueryResult::countryCode() const
 {
     return m_countryCode;
 }
-const QString &LocationQueryResult::geonameId() const
+inline const QString &LocationQueryResult::geonameId() const
 {
     return m_geonameId;
 }

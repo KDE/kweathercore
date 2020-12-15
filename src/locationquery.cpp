@@ -46,7 +46,7 @@ LocationQueryPrivate::~LocationQueryPrivate()
     locationSource->deleteLater();
     manager->deleteLater();
 }
-void LocationQueryPrivate::requestUpdate()
+inline void LocationQueryPrivate::requestUpdate()
 {
     locationSource->requestUpdate();
 }
@@ -100,7 +100,7 @@ void LocationQuery::query(QString name, int number)
     auto reply = d->manager->get(QNetworkRequest(url));
     connect(reply, &QNetworkReply::finished, [this, reply] { this->handleQueryResult(reply); });
 }
-void LocationQuery::locate()
+inline void LocationQuery::locate()
 {
     d->requestUpdate();
 }

@@ -226,29 +226,11 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
 
 bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) const
 {
-    if (this->date() == forecast.date())
-        return true;
-    else
-        return false;
+    return (this->date() == forecast.date() && this->weatherDescription() == forecast.weatherDescription() && this->weatherIcon() == forecast.weatherIcon());
 }
 
 bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
     return this->date() < forecast.date();
-}
-
-bool DailyWeatherForecast::operator<=(const DailyWeatherForecast &forecast) const
-{
-    return this->date() <= forecast.date();
-}
-
-bool DailyWeatherForecast::operator>(const DailyWeatherForecast &forecast) const
-{
-    return this->date() > forecast.date();
-}
-
-bool DailyWeatherForecast::operator>=(const DailyWeatherForecast &forecast) const
-{
-    return this->date() >= forecast.date();
 }
 }
