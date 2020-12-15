@@ -29,7 +29,7 @@ static const QHash<QString, int> rank = { // only need neutral icons
     {QStringLiteral("weather-storm"), 7}};
 
 struct ResolvedWeatherDesc {
-    QString icon = QStringLiteral("weather-none-available"), desc = QStringLiteral("Unknown");
+    QString icon = QStringLiteral("weather-none-available"), desc = i18n("Unknown");
     ResolvedWeatherDesc() = default;
     ResolvedWeatherDesc(QString icon, QString desc)
     {

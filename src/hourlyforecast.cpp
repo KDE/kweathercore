@@ -5,12 +5,13 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 #include "hourlyforecast.h"
+#include <KLocalizedString>
 namespace KWeatherCore
 {
 HourlyWeatherForecast::HourlyWeatherForecast()
 {
     m_date = QDateTime::currentDateTime();
-    m_weatherDescription = QStringLiteral("Unknown");
+    m_weatherDescription = i18n("Unknown");
     m_weatherIcon = QStringLiteral("weather-none-available");
     m_neutralWeatherIcon = QStringLiteral("weather-none-available");
 }
