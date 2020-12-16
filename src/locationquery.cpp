@@ -116,7 +116,7 @@ void LocationQuery::handleQueryResult(QNetworkReply *reply)
         Q_EMIT queryError();
         return;
     }
-    std::vector<LocationQueryResult> retVec;
+    std::vector<LocationQueryResult> retVec(counts);
 
     // if our api calls reached daily limit
     if (root[QStringLiteral("status")].toObject()[QStringLiteral("value")].toInt() == 18) {

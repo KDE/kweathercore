@@ -11,7 +11,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrlQuery>
-#include <QtMath>
+
 namespace KWeatherCore
 {
 SunriseSource::SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise, QObject *parent)
@@ -45,13 +45,13 @@ void SunriseSource::requestData()
 
     // calculate offset (form example: -04:00)
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
-    int hour = qFabs(m_offset) / 3600;
+    int hour = std::abs(m_offset) / 3600;
     if (hour >= 10)
         offset.append(QString::number(hour) + QStringLiteral(":"));
     else {
         offset.append(QStringLiteral("0") + QString::number(hour) + QStringLiteral(":"));
     }
-    int min = (qFabs(m_offset) - hour * 3600) / 60;
+    int min = (std::abs(m_offset) - hour * 3600) / 60;
     if (min >= 10) {
         offset.append(QString::number(min));
     } else {
@@ -75,6 +75,9 @@ void SunriseSource::parseResults(QNetworkReply *reply)
 
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     QJsonArray array = doc[QStringLiteral("location")].toObject()[QStringLiteral("time")].toArray();
+
+    m_sunriseVec.reserve(array.size());
+
     for (int i = 0; i <= array.count() - 2; i++) // we don't want last one
     {
         Sunrise sr;
