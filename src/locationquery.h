@@ -28,7 +28,6 @@ class KWEATHERCORE_EXPORT LocationQuery : public QObject
 public:
     /**
      * @brief LocationQuery
-     * @param parent
      */
     LocationQuery(QObject *parent = nullptr);
     ~LocationQuery();
@@ -39,22 +38,20 @@ public:
      */
     void query(QString name, int number = 30);
     /**
-     * @brief locate locate current location
+     * @brief locate current location
      */
     void locate();
 Q_SIGNALS:
     /**
-     * @brief queryFinished the name search has completed
-     * @param result
+     * @brief the name search has completed
      */
     void queryFinished(const std::vector<LocationQueryResult> &result);
     /**
-     * @brief located current location has been determined
-     * @param result
+     * @brief current location has been determined
      */
     void located(const LocationQueryResult &result);
     /**
-     * @brief queryError a error has encounted during query, network error or no result found
+     * @brief a error has encounted during query, network error or no result found
      */
     void queryError();
 private Q_SLOTS:

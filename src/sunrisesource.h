@@ -26,34 +26,30 @@ class KWEATHERCORE_EXPORT SunriseSource : public QObject
 public:
     /**
      * @brief SunriseSource
-     * @param latitude
-     * @param longitude
-     * @param offset offset from UTC, in seconds
+     * @param offset from UTC, in seconds
      * @param sunrise for caching purpose
-     * @param parent
      */
     SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(), QObject *parent = nullptr);
     /**
-     * @brief requestData start downloading data
+     * @brief start downloading data
      */
     void requestData();
     /**
-     * @brief setOffset change the offset in case of daylight time changing and something
-     * @param offset
+     * @brief change the offset in case of daylight time changing and something
      */
     void setOffset(int offset);
     /**
-     * @brief value get the value
+     * @brief get the value
      * @return
      */
     const std::vector<Sunrise> &value() const;
 Q_SIGNALS:
     /**
-     * @brief networkError network error
+     * @brief network error
      */
     void networkError();
     /**
-     * @brief finished query finished
+     * @brief query finished
      */
     void finished();
 private Q_SLOTS:

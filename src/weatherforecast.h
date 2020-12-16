@@ -22,54 +22,39 @@ class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
 {
 public:
     /**
-     * @brief WeatherForecast construct an empty object
+     * @brief construct an empty object
      */
     WeatherForecast();
     /**
-     * @brief toJson convert to QJsonObject
-     * @return
+     * @brief convert to QJsonObject
      */
     QJsonObject toJson() const;
     /**
-     * @brief fromJson construct from json
-     * @param obj
-     * @return
+     * @brief construct from json
      */
     static QExplicitlySharedDataPointer<WeatherForecast> fromJson(QJsonObject obj);
     /**
-     * @brief dailyWeatherForecast return daily weather forecast
-     * @return
+     * @return daily weather forecast
      */
     const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const;
-    /**
-     * @brief latitude
-     * @return
-     */
     double latitude() const;
-    /**
-     * @brief longitude
-     * @return
-     */
     double longitude() const;
     /**
-     * @brief createdTime the time this forecast was created
-     * @return
+     * @return the time this forecast object was created, this value won't change once constructed
      */
     const QDateTime &createdTime() const;
     /**
-     * @brief dailyWeatherForecast internal std::vector
+     * @brief internal std::vector
      * @return
      */
     std::vector<DailyWeatherForecast> &dailyWeatherForecast();
     /**
-     * @brief timezone timezone
+     * @brief IANA Time Zone ID
      * @return
      */
     const QString &timezone() const;
     /**
      * @brief setCoordinate
-     * @param latitude
-     * @param longitude
      */
     void setCoordinate(double latitude, double longitude);
     /**
@@ -79,52 +64,34 @@ public:
     void setTimezone(const QString &timezone);
     /**
      * @brief setTimezone
-     * @param timezone
+     * @param timezone valid IANA Time Zone ID
      */
     void setTimezone(QString &&timezone);
-    /**
-     * @brief setDailyWeatherForecast
-     * @param forecast
-     */
     void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
-    /**
-     * @brief setDailyWeatherForecast
-     * @param forecast
-     */
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
-     * @brief setSunriseForecast the vector should be sorted
-     * @param sunrise
+     * @brief the vector should be sorted
      */
     void setSunriseForecast(const std::vector<Sunrise> &sunrise);
     /**
-     * @brief setSunriseForecast overloaded version
-     * @param sunrise
+     * @brief overloaded version
      */
     void setSunriseForecast(std::vector<Sunrise> &&sunrise);
 
     /**
-     * @brief operator += merge DailyWeatherForecast
-     * @param forecast
-     * @return
+     * @brief merge DailyWeatherForecast
      */
     WeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     /**
-     * @brief operator += overloaded version
-     * @param forecast
-     * @return
+     * @brief overloaded version
      */
     WeatherForecast &operator+=(DailyWeatherForecast &&forecast);
     /**
-     * @brief operator += merge HourlyWeatherForecast, a new day maybe created
-     * @param forecast
-     * @return
+     * @brief merge HourlyWeatherForecast, new day is created when required
      */
     WeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     /**
-     * @brief operator += overloaded version
-     * @param forecast
-     * @return
+     * @brief overloaded version
      */
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 

@@ -25,10 +25,6 @@ class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 {
     Q_OBJECT
 public:
-    /**
-     * @brief WeatherForecastSource
-     * @param parent
-     */
     WeatherForecastSource(QObject *parent = nullptr);
     ~WeatherForecastSource();
     /**
@@ -37,14 +33,14 @@ public:
      * @param longitude
      * @param timezone
      * @param sunrise caching purpose
-     * @return it is the client's responsibility to delete the PendingWeatherForecast to avoid memory leak
+     * @return it is the client's responsibility to delete the PendingWeatherForecast afterhand to avoid memory leak
      */
     PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
 
     /**
      * @brief requestData
      * @param result
-     * @return it is the client's responsibility to delete the PendingWeatherForecast to avoid memory leak
+     * @return it is the client's responsibility to delete the PendingWeatherForecast afterhand to avoid memory leak
      */
     PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 

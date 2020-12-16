@@ -57,148 +57,119 @@ public:
                           double uvIndex,
                           double precipitationAmount);
     /**
-     * @brief toJson convert this to QJsonObject
-     * @return
+     * @brief convert this to QJsonObject
      */
     QJsonObject toJson() const;
     /**
-     * @brief fromJson construct from QJsonObject
-     * @param obj
-     * @return
+     * @brief construct from QJsonObject
      */
     static HourlyWeatherForecast fromJson(QJsonObject obj);
     /**
-     * @brief date date of the forecast
+     * @brief date of the forecast
      * @return
      */
     const QDateTime &date() const;
     /**
-     * @brief setDate set date
-     * @param date
+     * @brief set date
      */
     void setDate(QDateTime date);
     /**
-     * @brief weatherDescription weather description
-     * @return
+     * @brief weather description
      */
     const QString &weatherDescription() const;
     /**
-     * @brief setWeatherDescription set weather description
-     * @param weatherDescription
+     * @brief set weather description
      */
     void setWeatherDescription(const QString &weatherDescription);
     /**
-     * @brief weatherIcon weather icon, breeze icon if construct by WeatherForecastSource
-     * @return
+     * @brief weather icon, breeze icon if construct by WeatherForecastSource
      */
     const QString &weatherIcon() const;
     /**
-     * @brief setWeatherIcon set weather icon
-     * @param weatherIcon
+     * @brief set weather icon
      */
     void setWeatherIcon(const QString &weatherIcon);
     /**
-     * @brief neutralWeatherIcon icon without "day" or "night" attached
-     * @return
+     * @brief icon without "day" or "night" attached
      */
     const QString &neutralWeatherIcon() const;
     /**
-     * @brief setNeutralWeatherIcon set neutral weatherIcon
-     * @param neutralWeatherIcon
+     * @brief set neutral weatherIcon
      */
     void setNeutralWeatherIcon(QString neutralWeatherIcon);
     /**
-     * @brief symbolCode internal symbolcode from api, normally you can ignore this
-     * @return
+     * @brief internal symbolcode from api, normally you can ignore this
      */
     const QString &symbolCode() const;
     /**
-     * @brief setSymbolCode set internal symbolcode from api, normally you can ignore this
-     * @param symbolCode
+     * @brief set internal symbolcode from api, normally you can ignore this
      */
     void setSymbolCode(QString symbolCode);
     /**
-     * @brief temperature temperature in celsius
-     * @return
+     * @brief temperature in celsius
      */
     double temperature() const;
     /**
-     * @brief setTemperature set temperature in celsius
-     * @param temperature
+     * @brief set temperature in celsius
      */
     void setTemperature(double temperature);
     /**
-     * @brief pressure pressure in hpa
-     * @return
+     * @brief pressure in hpa
      */
     double pressure() const;
     /**
-     * @brief setPressure set pressure in hpa
-     * @param pressure
+     * @brief set pressure in hpa
      */
     void setPressure(double pressure);
     /**
-     * @brief windDirection scoped enum
-     * @return
+     * @brief scoped enum
      */
     WindDirection windDirection() const;
     /**
-     * @brief setWindDirection set wind direction
-     * @param windDirection
+     * @brief set wind direction
      */
     void setWindDirection(WindDirection windDirection);
     /**
-     * @brief windSpeed wind speed in km/h
-     * @return
+     * @brief wind speed in km/h
      */
     double windSpeed() const;
     /**
-     * @brief setWindSpeed set wind speed in km/h
-     * @param windSpeed
+     * @brief set wind speed in km/h
      */
     void setWindSpeed(double windSpeed);
     /**
-     * @brief humidity humidity in percentage
-     * @return
+     * @brief humidity in percentage
      */
     double humidity() const;
     /**
-     * @brief setHumidity set humidity in percentage
-     * @param humidity
+     * @brief set humidity in percentage
      */
     void setHumidity(double humidity);
     /**
-     * @brief fog fog in percentage
-     * @return
+     * @brief fog in percentage
      */
     double fog() const;
     /**
-     * @brief setFog set fog in percentage
-     * @param fog
+     * @brief set fog in percentage
      */
     void setFog(double fog);
     /**
-     * @brief uvIndex uv index, 0-1
-     * @return
+     * @brief uv index, 0-1
      */
     double uvIndex() const;
     /**
-     * @brief setUvIndex set uv index, 0-1
-     * @param uvIndex
+     * @brief set uv index, 0-1
      */
     void setUvIndex(double uvIndex);
     /**
-     * @brief precipitationAmount precipitation in mm
-     * @return
+     * @brief precipitation in mm
      */
     double precipitationAmount() const;
     /**
-     * @brief setPrecipitationAmount set precipitation in mm
-     * @param precipitationAmount
+     * @brief set precipitation in mm
      */
     void setPrecipitationAmount(double precipitationAmount);
     /**
-     * @brief operator ==
      * @return true if date, weather icon and description is same
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;

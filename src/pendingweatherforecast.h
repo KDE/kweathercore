@@ -16,8 +16,6 @@ class PendingWeatherForecastPrivate;
 /**
  * @short The PendingWeatherForecast class contains the reply to an asynchronous weather forecast request.
  *
- * The PendingWeatherForecast class contains the reply to an asynchronous weather forecast request.
- *
  * @see WeatherForecastSource
  *
  * @author Han Young <hanyoung@protonmail.com>
@@ -41,11 +39,11 @@ public:
 
 Q_SIGNALS:
     /**
-     * @brief finished signals the call has finished
+     * @brief signals the call has finished
      */
     void finished();
     /**
-     * @brief networkError indicate there is network error
+     * @brief indicate there is a network error
      */
     void networkError();
 
