@@ -17,8 +17,9 @@ class LocationQueryPrivate;
  * @short Class locates current location and search locations by name
  *
  * This is a class that locates current location (GPS or IP) and search locations by name
+ * ## Usage example
  *
- * @see LocationQuery
+ * \snippet snippets/locationquery.cpp example
  *
  * @author Han Young <hanyoung@protonmail.com>
  */

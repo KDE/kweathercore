@@ -44,8 +44,14 @@ add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054B00)
 add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
+
+option(BUILD_EXAMPLES "Build example applications" OFF)
+
 if (BUILD_TESTING)
     add_subdirectory(autotests)
+endif()
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
 endif()
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
