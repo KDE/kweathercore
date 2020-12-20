@@ -100,7 +100,7 @@ void LocationQuery::query(QString name, int number)
     auto reply = d->manager->get(QNetworkRequest(url));
     connect(reply, &QNetworkReply::finished, [this, reply] { this->handleQueryResult(reply); });
 }
-inline void LocationQuery::locate()
+void LocationQuery::locate()
 {
     d->requestUpdate();
 }

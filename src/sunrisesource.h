@@ -42,7 +42,10 @@ public:
      * @brief get the value
      * @return
      */
-    const std::vector<Sunrise> &value() const;
+    const std::vector<Sunrise> &value() const
+    {
+        return m_sunriseVec;
+    };
 Q_SIGNALS:
     /**
      * @brief network error

@@ -37,51 +37,7 @@ QExplicitlySharedDataPointer<WeatherForecast> WeatherForecast::fromJson(QJsonObj
     w->setTimezone(obj[QStringLiteral("timezone")].toString());
     return w;
 }
-inline const QDateTime &WeatherForecast::createdTime() const
-{
-    return m_createdTime;
-}
-inline double WeatherForecast::latitude() const
-{
-    return m_latitude;
-}
-inline double WeatherForecast::longitude() const
-{
-    return m_longitude;
-}
-inline const std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const
-{
-    return m_dailyWeatherForecast;
-}
-inline std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast()
-{
-    return m_dailyWeatherForecast;
-}
-inline const QString &WeatherForecast::timezone() const
-{
-    return m_timezone;
-}
-inline void WeatherForecast::setCoordinate(double latitude, double longitude)
-{
-    m_latitude = latitude;
-    m_longitude = longitude;
-}
-inline void WeatherForecast::setTimezone(const QString &timezone)
-{
-    m_timezone = timezone;
-}
-inline void WeatherForecast::setTimezone(QString &&timezone)
-{
-    m_timezone = std::move(timezone);
-}
-inline void WeatherForecast::setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
-{
-    m_dailyWeatherForecast = forecast;
-}
-inline void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
-{
-    m_dailyWeatherForecast = std::move(forecast);
-}
+
 void WeatherForecast::setSunriseForecast(const std::vector<Sunrise> &sunrise)
 {
     int i = 0, range = sunrise.size();

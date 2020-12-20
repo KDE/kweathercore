@@ -37,29 +37,50 @@ public:
      */
     LocationQueryResult(double latitude, double longitude, QString toponymName = QString(), QString name = QString(), QString countryCode = QString(), QString countryName = QString(), QString geonameId = QString());
 
-    double latitude() const;
+    double latitude() const
+    {
+        return m_latitude;
+    };
 
-    double longitude() const;
+    double longitude() const
+    {
+        return m_longitude;
+    };
     /**
      * @brief toponym name of location, detailed
      */
-    const QString &toponymName() const;
+    const QString &toponymName() const
+    {
+        return m_toponymName;
+    };
     /**
      * @brief display name, short
      */
-    const QString &name() const;
+    const QString &name() const
+    {
+        return m_name;
+    };
     /**
      * @brief country code, follow no standard but should be unique
      */
-    const QString &countryCode() const;
+    const QString &countryCode() const
+    {
+        return m_countryCode;
+    };
     /**
      * @brief country name
      */
-    const QString &countryName() const;
+    const QString &countryName() const
+    {
+        return m_countryName;
+    };
     /**
      * @brief internal unique id
      */
-    const QString &geonameId() const;
+    const QString &geonameId() const
+    {
+        return m_geonameId;
+    };
 
 private:
     double m_latitude, m_longitude;

@@ -36,39 +36,64 @@ public:
     /**
      * @return daily weather forecast
      */
-    const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const;
-    double latitude() const;
-    double longitude() const;
+    const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const
+    {
+        return m_dailyWeatherForecast;
+    };
+    double latitude() const
+    {
+        return m_latitude;
+    };
+    double longitude() const
+    {
+        return m_longitude;
+    };
     /**
      * @return the time this forecast object was created, this value won't change once constructed
      */
-    const QDateTime &createdTime() const;
+    const QDateTime &createdTime() const
+    {
+        return m_createdTime;
+    };
     /**
      * @brief internal std::vector
      * @return
      */
-    std::vector<DailyWeatherForecast> &dailyWeatherForecast();
+    std::vector<DailyWeatherForecast> &dailyWeatherForecast()
+    {
+        return m_dailyWeatherForecast;
+    };
     /**
      * @brief IANA Time Zone ID
      * @return
      */
-    const QString &timezone() const;
+    const QString &timezone() const
+    {
+        return m_timezone;
+    };
     /**
      * @brief setCoordinate
      */
-    void setCoordinate(double latitude, double longitude);
+    void setCoordinate(double latitude, double longitude)
+    {
+        m_latitude = latitude;
+        m_longitude = longitude;
+    };
     /**
-     * @brief setTimezone
-     * @param timezone
-     */
-    void setTimezone(const QString &timezone);
-    /**
-     * @brief setTimezone
      * @param timezone valid IANA Time Zone ID
      */
-    void setTimezone(QString &&timezone);
-    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
-    void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
+    void setTimezone(QString timezone)
+    {
+        m_timezone = std::move(timezone);
+    };
+    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
+    {
+        m_dailyWeatherForecast = forecast;
+    };
+    void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
+    {
+        m_dailyWeatherForecast = std::move(forecast);
+    };
     /**
      * @brief the vector should be sorted
      */

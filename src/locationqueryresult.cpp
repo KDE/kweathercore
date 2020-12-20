@@ -17,33 +17,4 @@ LocationQueryResult::LocationQueryResult(double latitude, double longitude, QStr
     , m_geonameId(std::move(geonameId))
 {
 }
-
-inline double LocationQueryResult::latitude() const
-{
-    return m_latitude;
-}
-inline double LocationQueryResult::longitude() const
-{
-    return m_longitude;
-}
-inline const QString &LocationQueryResult::toponymName() const
-{
-    return m_toponymName;
-}
-inline const QString &LocationQueryResult::name() const
-{
-    return m_name;
-}
-inline const QString &LocationQueryResult::countryName() const
-{
-    return m_countryName;
-}
-inline const QString &LocationQueryResult::countryCode() const
-{
-    return m_countryCode;
-}
-inline const QString &LocationQueryResult::geonameId() const
-{
-    return m_geonameId;
-}
 }

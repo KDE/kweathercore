@@ -105,11 +105,6 @@ inline void SunriseSource::setOffset(int offset)
     m_offset = offset;
 }
 
-inline const std::vector<Sunrise> &SunriseSource::value() const
-{
-    return m_sunriseVec;
-}
-
 void SunriseSource::popDay()
 {
     auto today = QDateTime::currentDateTime();

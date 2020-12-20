@@ -68,107 +68,185 @@ public:
      * @brief date of the forecast
      * @return
      */
-    const QDateTime &date() const;
+    const QDateTime &date() const
+    {
+        return m_date;
+    };
     /**
      * @brief set date
      */
-    void setDate(QDateTime date);
+    void setDate(QDateTime date)
+    {
+        m_date = std::move(date);
+    };
     /**
      * @brief weather description
      */
-    const QString &weatherDescription() const;
+    const QString &weatherDescription() const
+    {
+        return m_weatherDescription;
+    };
     /**
      * @brief set weather description
      */
-    void setWeatherDescription(const QString &weatherDescription);
+    void setWeatherDescription(QString weatherDescription)
+    {
+        m_weatherDescription = std::move(weatherDescription);
+    };
     /**
      * @brief weather icon, breeze icon if construct by WeatherForecastSource
      */
-    const QString &weatherIcon() const;
+    const QString &weatherIcon() const
+    {
+        return m_weatherIcon;
+    };
     /**
      * @brief set weather icon
      */
-    void setWeatherIcon(const QString &weatherIcon);
+    void setWeatherIcon(QString weatherIcon)
+    {
+        m_weatherIcon = std::move(weatherIcon);
+    };
     /**
      * @brief icon without "day" or "night" attached
      */
-    const QString &neutralWeatherIcon() const;
+    const QString &neutralWeatherIcon() const
+    {
+        return m_neutralWeatherIcon;
+    };
     /**
      * @brief set neutral weatherIcon
      */
-    void setNeutralWeatherIcon(QString neutralWeatherIcon);
+    void setNeutralWeatherIcon(QString neutralWeatherIcon)
+    {
+        m_neutralWeatherIcon = std::move(neutralWeatherIcon);
+    };
     /**
      * @brief internal symbolcode from api, normally you can ignore this
      */
-    const QString &symbolCode() const;
+    const QString &symbolCode() const
+    {
+        return m_symbolCode;
+    };
     /**
      * @brief set internal symbolcode from api, normally you can ignore this
      */
-    void setSymbolCode(QString symbolCode);
+    void setSymbolCode(QString symbolCode)
+    {
+        m_symbolCode = std::move(symbolCode);
+    };
     /**
      * @brief temperature in celsius
      */
-    double temperature() const;
+    double temperature() const
+    {
+        return m_temperature;
+    };
     /**
      * @brief set temperature in celsius
      */
-    void setTemperature(double temperature);
+    void setTemperature(double temperature)
+    {
+        m_temperature = temperature;
+    };
     /**
      * @brief pressure in hpa
      */
-    double pressure() const;
+    double pressure() const
+    {
+        return m_pressure;
+    };
     /**
      * @brief set pressure in hpa
      */
-    void setPressure(double pressure);
+    void setPressure(double pressure)
+    {
+        m_pressure = pressure;
+    };
     /**
      * @brief scoped enum
      */
-    WindDirection windDirection() const;
+    WindDirection windDirection() const
+    {
+        return m_windDirection;
+    };
     /**
      * @brief set wind direction
      */
-    void setWindDirection(WindDirection windDirection);
+    void setWindDirection(WindDirection windDirection)
+    {
+        m_windDirection = windDirection;
+    };
     /**
      * @brief wind speed in km/h
      */
-    double windSpeed() const;
+    double windSpeed() const
+    {
+        return m_windSpeed;
+    };
     /**
      * @brief set wind speed in km/h
      */
-    void setWindSpeed(double windSpeed);
+    void setWindSpeed(double windSpeed)
+    {
+        m_windSpeed = windSpeed;
+    };
     /**
      * @brief humidity in percentage
      */
-    double humidity() const;
+    double humidity() const
+    {
+        return m_humidity;
+    };
     /**
      * @brief set humidity in percentage
      */
-    void setHumidity(double humidity);
+    void setHumidity(double humidity)
+    {
+        m_humidity = humidity;
+    };
     /**
      * @brief fog in percentage
      */
-    double fog() const;
+    double fog() const
+    {
+        return m_fog;
+    };
     /**
      * @brief set fog in percentage
      */
-    void setFog(double fog);
+    void setFog(double fog)
+    {
+        m_fog = fog;
+    };
     /**
      * @brief uv index, 0-1
      */
-    double uvIndex() const;
+    double uvIndex() const
+    {
+        return m_uvIndex;
+    };
     /**
      * @brief set uv index, 0-1
      */
-    void setUvIndex(double uvIndex);
+    void setUvIndex(double uvIndex)
+    {
+        m_uvIndex = uvIndex;
+    };
     /**
      * @brief precipitation in mm
      */
-    double precipitationAmount() const;
+    double precipitationAmount() const
+    {
+        return m_precipitationAmount;
+    };
     /**
      * @brief set precipitation in mm
      */
-    void setPrecipitationAmount(double precipitationAmount);
+    void setPrecipitationAmount(double precipitationAmount)
+    {
+        m_precipitationAmount = precipitationAmount;
+    };
     /**
      * @return true if date, weather icon and description is same
      */
