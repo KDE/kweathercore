@@ -1,8 +1,8 @@
-# LibKWeather
+# KWeatherCore
 
 ## Introduction
 Get weather forecast and alerts anywhere on the earth easy.
-LibKWeather provides you a highly abstracted library for things related to weather.
+KWeatherCore provides you a highly abstracted library for things related to weather.
 
 Features:
 * Get local weather forecast.
@@ -23,6 +23,6 @@ Features:
 
 ## Links
 
-- Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
+- Mailing list: <https://mail.kde.org/mailman/listinfo/kde-devel>
 - IRC channel: #kde-devel on Freenode
-- Git repository: <https://projects.kde.org/projects/frameworks/libkweather/repository>
+- Git repository: <https://invent.kde.org/libraries/kweathercore/>
