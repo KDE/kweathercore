@@ -6,6 +6,7 @@
 #include "dailyforecasttest.h"
 #include <kweathercore/hourlyforecast.h>
 #include <kweathercore/sunrise.h>
+
 using namespace KWeatherCore;
 
 void DailyForecastTest::testNull()
@@ -19,14 +20,16 @@ void DailyForecastTest::testHourlyMerge()
         d1 += HourlyWeatherForecast(QDateTime::currentDateTime().addSecs(i * 3600), QStringLiteral("sunny"), QStringLiteral("sunny"), QString(), 25, 100, WindDirection::E, 5, 0.8, 0.1, 0.1, 0);
 
     QCOMPARE(d1.isNull(), false);
+
     QCOMPARE(d1.hourlyWeatherForecast().size(), 24);
 }
 void DailyForecastTest::testDailyMerge()
 {
-    d2 += d1;
+    const auto &vec = d1.hourlyWeatherForecast();
+    for (auto h : vec)
+        d2 += h;
 
-    QCOMPARE(d2.isNull(), false);
-    QCOMPARE(d2.hourlyWeatherForecast(), d1.hourlyWeatherForecast());
+    QCOMPARE(d2.hourlyWeatherForecast().size(), d1.hourlyWeatherForecast().size());
 }
 void DailyForecastTest::testJson()
 {

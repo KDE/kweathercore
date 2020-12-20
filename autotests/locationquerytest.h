@@ -12,12 +12,11 @@ class LocationQueryTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void initTestCase();
     void testLocate();
     void testQuery();
 
 private:
-    LocationQuery *d;
+    LocationQuery *d = new LocationQuery();
     QSignalSpy *finished_spy;
     QSignalSpy *networkError_spy;
 };

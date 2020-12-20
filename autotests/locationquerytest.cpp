@@ -5,13 +5,10 @@
  */
 #include "locationquerytest.h"
 
-void LocationQueryTest::initTestCase()
-{
-    d = new LocationQuery();
-}
-
 void LocationQueryTest::testLocate()
 {
+    qRegisterMetaType<LocationQueryResult>("LocationQueryResult");
+    qRegisterMetaType<std::vector<LocationQueryResult>>("std::vector<LocationQueryResult>");
     finished_spy = new QSignalSpy(d, &LocationQuery::located);
     d->locate();
 
