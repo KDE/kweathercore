@@ -3,6 +3,10 @@ description: Query weather data
 type: functional
 platforms:
     - name: Linux
+    - name: FreeBSD
+    - name: Windows
+    - name: macOS
+    - name: Android
 deprecated: false
 release: false
 public_lib: true
