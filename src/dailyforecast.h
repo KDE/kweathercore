@@ -15,8 +15,8 @@ namespace KWeatherCore
 /**
  * @short Class represents weatherforecast in a day
  *
- * This is a class to hold general weather conditions, hourly forecast and sunrise in a day
- * All QDate/DateTime are on the location's timezone
+ * This is a class to hold general weather conditions, hourly forecast and
+ * sunrise in a day All QDate/DateTime are on the location's timezone
  * @see HourlyForecast, Sunrise
  *
  * @author Han Young <hanyoung@protonmail.com>
@@ -37,12 +37,22 @@ public:
      * @param humidity humidity of the day, in percentage
      * @param pressure pressure of the day, in hpa
      * @param weatherIcon icon that presents the weather condition of the day.
-     * @param weatherDescription text describes the general weather condition of the day
+     * @param weatherDescription text describes the general weather condition of
+     * the day
      * @param date the date this object represents
      */
-    DailyWeatherForecast(double maxTemp, double minTemp, double precipitation, double uvIndex, double humidity, double pressure, QString weatherIcon, QString weatherDescription, QDate date);
+    DailyWeatherForecast(double maxTemp,
+                         double minTemp,
+                         double precipitation,
+                         double uvIndex,
+                         double humidity,
+                         double pressure,
+                         QString weatherIcon,
+                         QString weatherDescription,
+                         QDate date);
     /**
-     * Return a QJsonObject that can be converted back with DailyWeatherForecast::fromJson
+     * Return a QJsonObject that can be converted back with
+     * DailyWeatherForecast::fromJson
      */
     QJsonObject toJson();
     /**
@@ -51,7 +61,8 @@ public:
     static DailyWeatherForecast fromJson(QJsonObject obj);
     /**
      * @return @c true if the object is created without data
-     * this value won't change once the class is created with the exceptions of Day/Hour merge
+     * this value won't change once the class is created with the exceptions of
+     * Day/Hour merge
      */
     bool isNull() const
     {
@@ -131,7 +142,8 @@ public:
     };
     /**
      * @brief return maximum temperature
-     * @return maximum temperature, this value is initialized to the smallest value double can hold
+     * @return maximum temperature, this value is initialized to the smallest
+     * value double can hold
      */
     double maxTemp() const
     {
@@ -139,7 +151,8 @@ public:
     };
     /**
      * @brief return minimum temperature
-     * @return minimum temperature, this value is initialized to the largest value double can hold
+     * @return minimum temperature, this value is initialized to the largest
+     * value double can hold
      */
     double minTemp() const
     {
@@ -187,7 +200,8 @@ public:
     };
     /**
      * @brief return weather description
-     * @return weather description, can be empty string if constructed without data
+     * @return weather description, can be empty string if constructed without
+     * data
      */
     const QString &weatherDescription() const
     {
@@ -228,7 +242,8 @@ public:
     };
     /**
      * @brief set sunrise
-     * @param sunrise if this object and sunrise isn't on the same day, this function does nothing
+     * @param sunrise if this object and sunrise isn't on the same day, this
+     * function does nothing
      */
     void setSunrise(Sunrise sunrise)
     {
@@ -238,7 +253,8 @@ public:
      * @brief set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day
      */
-    void setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
+    void
+    setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
     {
         m_hourlyWeatherForecast = forecast;
     };
@@ -258,13 +274,15 @@ public:
      */
     DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
     /**
-     * @brief merge two daily forecast, note the hourly forecast is unchanged, daily forecast becomes valid afterwards
+     * @brief merge two daily forecast, note the hourly forecast is unchanged,
+     * daily forecast becomes valid afterwards
      * @param forecast make sure it is on the same day
      * @return result DailyWeatherForecast
      */
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     /**
-     * @brief append hourly forecast, you can append valid hourly forecast into a null daily forecast, daily forecast becomes valid afterwards
+     * @brief append hourly forecast, you can append valid hourly forecast into
+     * a null daily forecast, daily forecast becomes valid afterwards
      * @param forecast make sure it's on the same day
      * @return result DailyWeatherForecast
      */
@@ -288,9 +306,9 @@ private:
     double m_maxTemp = std::numeric_limits<double>::min();
     double m_minTemp = std::numeric_limits<double>::max();
     double m_precipitation = 0; // mm
-    double m_uvIndex = 0;       // 0-1
-    double m_humidity = 0;      // %
-    double m_pressure = 0;      // hPa
+    double m_uvIndex = 0; // 0-1
+    double m_humidity = 0; // %
+    double m_pressure = 0; // hPa
     QString m_weatherIcon;
     QString m_weatherDescription;
     QDate m_date;

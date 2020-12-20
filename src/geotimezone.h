@@ -15,7 +15,8 @@ namespace KWeatherCore
 /**
  * @short Class to obtain timezone via coordinate
  *
- * This is a class to obtain timezone via coordinate and signals finished() with a QString
+ * This is a class to obtain timezone via coordinate and signals finished() with
+ * a QString
  *
  * @author Han Young <hanyoung@protonmail.com>
  */

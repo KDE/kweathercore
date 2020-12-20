@@ -12,7 +12,8 @@
 namespace KWeatherCore
 {
 /**
- * @short The WeatherForecast class contains the weather information of one location for days
+ * @short The WeatherForecast class contains the weather information of one
+ * location for days
  *
  * @see WeatherForecastSource
  *
@@ -32,7 +33,8 @@ public:
     /**
      * @brief construct from json
      */
-    static QExplicitlySharedDataPointer<WeatherForecast> fromJson(QJsonObject obj);
+    static QExplicitlySharedDataPointer<WeatherForecast>
+    fromJson(QJsonObject obj);
     /**
      * @return daily weather forecast
      */
@@ -49,7 +51,8 @@ public:
         return m_longitude;
     };
     /**
-     * @return the time this forecast object was created, this value won't change once constructed
+     * @return the time this forecast object was created, this value won't
+     * change once constructed
      */
     const QDateTime &createdTime() const
     {
@@ -86,7 +89,8 @@ public:
     {
         m_timezone = std::move(timezone);
     };
-    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
+    void
+    setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
     {
         m_dailyWeatherForecast = forecast;
     };

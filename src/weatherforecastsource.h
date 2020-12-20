@@ -15,7 +15,8 @@ namespace KWeatherCore
 {
 class WeatherForecastSourcePrivate;
 /**
- * @short The WeatherForecastSource class is intened for query weather information about a location
+ * @short The WeatherForecastSource class is intened for query weather
+ * information about a location
  *
  * @see WeatherForecast, PendingWeatherForecast
  *
@@ -33,16 +34,23 @@ public:
      * @param longitude
      * @param timezone
      * @param sunrise caching purpose
-     * @return it is the client's responsibility to delete the PendingWeatherForecast afterhand to avoid memory leak
+     * @return it is the client's responsibility to delete the
+     * PendingWeatherForecast afterhand to avoid memory leak
      */
-    PendingWeatherForecast *requestData(double latitude, double longitude, QString timezone = QString(), const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+    PendingWeatherForecast *
+    requestData(double latitude,
+                double longitude,
+                QString timezone = QString(),
+                const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
 
     /**
      * @brief requestData
      * @param result
-     * @return it is the client's responsibility to delete the PendingWeatherForecast afterhand to avoid memory leak
+     * @return it is the client's responsibility to delete the
+     * PendingWeatherForecast afterhand to avoid memory leak
      */
-    PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
+    PendingWeatherForecast *
+    requestData(const KWeatherCore::LocationQueryResult &result);
 
 private:
     WeatherForecastSourcePrivate *d = nullptr;

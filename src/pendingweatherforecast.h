@@ -14,7 +14,8 @@ namespace KWeatherCore
 {
 class PendingWeatherForecastPrivate;
 /**
- * @short The PendingWeatherForecast class contains the reply to an asynchronous weather forecast request.
+ * @short The PendingWeatherForecast class contains the reply to an asynchronous
+ * weather forecast request.
  *
  * @see WeatherForecastSource
  *
@@ -49,7 +50,12 @@ Q_SIGNALS:
 
 protected:
     friend class WeatherForecastSource;
-    explicit PendingWeatherForecast(double latitude, double longitude, QNetworkReply *reply = nullptr, const QString &timezone = QString(), const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+    explicit PendingWeatherForecast(
+        double latitude,
+        double longitude,
+        QNetworkReply *reply = nullptr,
+        const QString &timezone = QString(),
+        const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;

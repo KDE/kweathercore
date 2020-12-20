@@ -17,7 +17,15 @@ DailyWeatherForecast::DailyWeatherForecast()
     m_date = QDate();
     m_isNull = true;
 }
-DailyWeatherForecast::DailyWeatherForecast(double maxTemp, double minTemp, double precipitation, double uvIndex, double humidity, double pressure, QString weatherIcon, QString weatherDescription, QDate date)
+DailyWeatherForecast::DailyWeatherForecast(double maxTemp,
+                                           double minTemp,
+                                           double precipitation,
+                                           double uvIndex,
+                                           double humidity,
+                                           double pressure,
+                                           QString weatherIcon,
+                                           QString weatherDescription,
+                                           QDate date)
     : m_maxTemp(maxTemp)
     , m_minTemp(minTemp)
     , m_precipitation(precipitation)
@@ -51,25 +59,28 @@ QJsonObject DailyWeatherForecast::toJson()
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
 {
-    auto d = DailyWeatherForecast(obj[QStringLiteral("maxTemp")].toDouble(),
-                                  obj[QStringLiteral("minTemp")].toDouble(),
-                                  obj[QStringLiteral("precipitation")].toDouble(),
-                                  obj[QStringLiteral("uvIndex")].toDouble(),
-                                  obj[QStringLiteral("humidity")].toDouble(),
-                                  obj[QStringLiteral("pressure")].toDouble(),
-                                  obj[QStringLiteral("weatherIcon")].toString(),
-                                  obj[QStringLiteral("weatherDescription")].toString(),
-                                  QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    auto d = DailyWeatherForecast(
+        obj[QStringLiteral("maxTemp")].toDouble(),
+        obj[QStringLiteral("minTemp")].toDouble(),
+        obj[QStringLiteral("precipitation")].toDouble(),
+        obj[QStringLiteral("uvIndex")].toDouble(),
+        obj[QStringLiteral("humidity")].toDouble(),
+        obj[QStringLiteral("pressure")].toDouble(),
+        obj[QStringLiteral("weatherIcon")].toString(),
+        obj[QStringLiteral("weatherDescription")].toString(),
+        QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
-        hourlyVec.push_back(HourlyWeatherForecast::fromJson(array.at(i).toObject()));
+        hourlyVec.push_back(
+            HourlyWeatherForecast::fromJson(array.at(i).toObject()));
     }
     d.setHourlyWeatherForecast(hourlyVec);
     return d;
 }
 
-DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
+DailyWeatherForecast &
+DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
     if (date().isNull()) {
         setDate(forecast.date());
@@ -90,12 +101,14 @@ DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast
     return *this;
 }
 
-DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
+DailyWeatherForecast &
+DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {
     return *this + forecast;
 }
 
-DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
+DailyWeatherForecast &
+DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
     if (this->isNull()) {
         this->setDate(forecast.date().date());
@@ -106,10 +119,13 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
     if (this->date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
         if (rank[forecast.neutralWeatherIcon()] >= rank[this->weatherIcon()]) {
-            this->setWeatherDescription(apiDescMap[forecast.symbolCode() + QStringLiteral("_neutral")].desc);
+            this->setWeatherDescription(
+                apiDescMap[forecast.symbolCode() + QStringLiteral("_neutral")]
+                    .desc);
             this->setWeatherIcon(forecast.neutralWeatherIcon());
         }
-        this->setPrecipitation(this->precipitation() + forecast.precipitationAmount());
+        this->setPrecipitation(this->precipitation() +
+                               forecast.precipitationAmount());
         this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
         this->setHumidity(std::max(this->humidity(), forecast.humidity()));
         this->setPressure(std::max(this->pressure(), forecast.pressure()));
@@ -121,7 +137,8 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
     return *this;
 }
 
-bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) const
+bool DailyWeatherForecast::operator==(
+    const DailyWeatherForecast &forecast) const
 {
     return (this->date() == forecast.date());
 }

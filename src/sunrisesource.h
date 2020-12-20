@@ -14,7 +14,8 @@ class QNetworkReply;
 namespace KWeatherCore
 {
 /**
- * @short The SunriseSource class can obtain the sunrise data of one location for several days
+ * @short The SunriseSource class can obtain the sunrise data of one location
+ * for several days
  *
  * @see Sunrise
  *
@@ -29,7 +30,11 @@ public:
      * @param offset from UTC, in seconds
      * @param sunrise for caching purpose
      */
-    SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(), QObject *parent = nullptr);
+    SunriseSource(double latitude,
+                  double longitude,
+                  int offset,
+                  const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(),
+                  QObject *parent = nullptr);
     /**
      * @brief start downloading data
      */

@@ -259,12 +259,12 @@ private:
     QString m_neutralWeatherIcon; // weather icon without time of day
     QString m_symbolCode;
     double m_temperature = 0; // celsius
-    double m_pressure = 0;    // hPa
+    double m_pressure = 0; // hPa
     WindDirection m_windDirection = WindDirection::E;
-    double m_windSpeed = 0;           // m/s
-    double m_humidity = 0;            // %
-    double m_fog = 0;                 // %
-    double m_uvIndex = 0;             // 0-1
+    double m_windSpeed = 0; // m/s
+    double m_humidity = 0; // %
+    double m_fog = 0; // %
+    double m_uvIndex = 0; // 0-1
     double m_precipitationAmount = 0; // mm
 };
 }

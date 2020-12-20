@@ -7,7 +7,13 @@
 #include "locationquery.h"
 namespace KWeatherCore
 {
-LocationQueryResult::LocationQueryResult(double latitude, double longitude, QString toponymName, QString name, QString countryCode, QString countryName, QString geonameId)
+LocationQueryResult::LocationQueryResult(double latitude,
+                                         double longitude,
+                                         QString toponymName,
+                                         QString name,
+                                         QString countryCode,
+                                         QString countryName,
+                                         QString geonameId)
     : m_latitude(latitude)
     , m_longitude(longitude)
     , m_toponymName(std::move(toponymName))

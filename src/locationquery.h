@@ -16,7 +16,8 @@ class LocationQueryPrivate;
 /**
  * @short Class locates current location and search locations by name
  *
- * This is a class that locates current location (GPS or IP) and search locations by name
+ * This is a class that locates current location (GPS or IP) and search
+ * locations by name
  * ## Usage example
  *
  * Example usage:
@@ -43,7 +44,8 @@ class LocationQueryPrivate;
  *
  * m_locationSource.locate();
  * connect(m_locationSource, &LocationQuery::located,
- *      [](const LocationQueryResult &result){qDebug() << "your coordinate: " << result.latitude() << ", " << longitude();}
+ *      [](const LocationQueryResult &result){qDebug() << "your coordinate: " <<
+ * result.latitude() << ", " << longitude();}
  * //...
  * @endcode
  *
@@ -61,7 +63,8 @@ public:
     /**
      * @brief query query locations by name
      * @param name name of location, not necessary in English
-     * @param number max numbers of query returned, the actual size could be less than @param number
+     * @param number max numbers of query returned, the actual size could be
+     * less than @param number
      */
     void query(QString name, int number = 30);
     /**
@@ -78,7 +81,8 @@ Q_SIGNALS:
      */
     void located(const LocationQueryResult &result);
     /**
-     * @brief a error has encounted during query, network error or no result found
+     * @brief a error has encounted during query, network error or no result
+     * found
      */
     void queryError();
 private Q_SLOTS:

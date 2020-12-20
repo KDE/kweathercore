@@ -30,10 +30,15 @@ WeatherForecastSource::~WeatherForecastSource()
 {
     delete d;
 }
-PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude, QString timezone, const std::vector<Sunrise> &sunrise)
+PendingWeatherForecast *
+WeatherForecastSource::requestData(double latitude,
+                                   double longitude,
+                                   QString timezone,
+                                   const std::vector<Sunrise> &sunrise)
 {
     // query weather api
-    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
+    QUrl url(QStringLiteral(
+        "https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(latitude));
     query.addQueryItem(QStringLiteral("lon"), QString::number(longitude));
@@ -41,17 +46,24 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
     url.setQuery(query);
 
     QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                     QNetworkRequest::NoLessSafeRedirectPolicy);
 
     // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader, QString(QCoreApplication::applicationName() + QLatin1Char(' ') + QCoreApplication::applicationVersion() + QStringLiteral(" (kde-pim@kde.org)")));
+    req.setHeader(QNetworkRequest::UserAgentHeader,
+                  QString(QCoreApplication::applicationName() +
+                          QLatin1Char(' ') +
+                          QCoreApplication::applicationVersion() +
+                          QStringLiteral(" (kde-pim@kde.org)")));
 
     auto reply = d->manager->get(req);
-    auto pf = new PendingWeatherForecast(latitude, longitude, reply, timezone, sunrise);
+    auto pf = new PendingWeatherForecast(
+        latitude, longitude, reply, timezone, sunrise);
 
     return pf;
 }
-PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)
+PendingWeatherForecast *WeatherForecastSource::requestData(
+    const KWeatherCore::LocationQueryResult &result)
 {
     return requestData(result.latitude(), result.longitude());
 }

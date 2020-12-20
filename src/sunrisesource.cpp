@@ -14,7 +14,11 @@
 
 namespace KWeatherCore
 {
-SunriseSource::SunriseSource(double latitude, double longitude, int offset, const std::vector<Sunrise> &sunrise, QObject *parent)
+SunriseSource::SunriseSource(double latitude,
+                             double longitude,
+                             int offset,
+                             const std::vector<Sunrise> &sunrise,
+                             QObject *parent)
     : QObject(parent)
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -22,7 +26,10 @@ SunriseSource::SunriseSource(double latitude, double longitude, int offset, cons
     , m_sunriseVec(sunrise)
     , m_manager(new QNetworkAccessManager(this))
 {
-    connect(m_manager, &QNetworkAccessManager::finished, this, &SunriseSource::parseResults);
+    connect(m_manager,
+            &QNetworkAccessManager::finished,
+            this,
+            &SunriseSource::parseResults);
 }
 void SunriseSource::requestData()
 {
@@ -40,8 +47,17 @@ void SunriseSource::requestData()
     query.addQueryItem(QStringLiteral("lat"), QString::number(m_latitude));
     query.addQueryItem(QStringLiteral("lon"), QString::number(m_longitude));
     // if we already have data, request data beyond the last day
-    query.addQueryItem(QStringLiteral("date"), !m_sunriseVec.size() ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd")) : QDate::currentDate().addDays(m_sunriseVec.size()).toString(QStringLiteral("yyyy-MM-dd")));
-    query.addQueryItem(QStringLiteral("days"), !m_sunriseVec.size() ? QString::number(10) : QString::number(11 - m_sunriseVec.size()));
+    query.addQueryItem(
+        QStringLiteral("date"),
+        !m_sunriseVec.size()
+            ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd"))
+            : QDate::currentDate()
+                  .addDays(m_sunriseVec.size())
+                  .toString(QStringLiteral("yyyy-MM-dd")));
+    query.addQueryItem(QStringLiteral("days"),
+                       !m_sunriseVec.size()
+                           ? QString::number(10)
+                           : QString::number(11 - m_sunriseVec.size()));
 
     // calculate offset (form example: -04:00)
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
@@ -49,7 +65,8 @@ void SunriseSource::requestData()
     if (hour >= 10)
         offset.append(QString::number(hour) + QStringLiteral(":"));
     else {
-        offset.append(QStringLiteral("0") + QString::number(hour) + QStringLiteral(":"));
+        offset.append(QStringLiteral("0") + QString::number(hour) +
+                      QStringLiteral(":"));
     }
     int min = (std::abs(m_offset) - hour * 3600) / 60;
     if (min >= 10) {
@@ -74,26 +91,97 @@ void SunriseSource::parseResults(QNetworkReply *reply)
     }
 
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-    QJsonArray array = doc[QStringLiteral("location")].toObject()[QStringLiteral("time")].toArray();
+    QJsonArray array = doc[QStringLiteral("location")]
+                           .toObject()[QStringLiteral("time")]
+                           .toArray();
 
     m_sunriseVec.reserve(array.size());
 
     for (int i = 0; i <= array.count() - 2; i++) // we don't want last one
     {
         Sunrise sr;
-        sr.setSunSet(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("sunset")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")));
-        sr.setSunRise(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("sunrise")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")));
-        sr.setMoonSet(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("moonset")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")));
-        sr.setMoonRise(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("moonrise")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")));
-        sr.setSolarMidnight(QPair<QDateTime, double>(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("solarmidnight")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")),
-                                                     array.at(i).toObject()[QStringLiteral("solarmidnight")].toObject()[QStringLiteral("elevation")].toString().toDouble()));
-        sr.setSolarNoon(QPair<QDateTime, double>(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("solarnoon")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")),
-                                                 array.at(i).toObject()[QStringLiteral("solarnoon")].toObject()[QStringLiteral("elevation")].toString().toDouble()));
-        sr.setHighMoon(QPair<QDateTime, double>(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("high_moon")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")),
-                                                array.at(i).toObject()[QStringLiteral("high_moon")].toObject()[QStringLiteral("elevation")].toString().toDouble()));
-        sr.setLowMoon(QPair<QDateTime, double>(QDateTime::fromString(array.at(i).toObject()[QStringLiteral("low_moon")].toObject()[QStringLiteral("time")].toString().left(19), QStringLiteral("yyyy-MM-ddThh:mm:ss")),
-                                               array.at(i).toObject()[QStringLiteral("low_moon")].toObject()[QStringLiteral("elevation")].toString().toDouble()));
-        sr.setMoonPhase(array.at(i).toObject()[QStringLiteral("moonposition")].toObject()[QStringLiteral("phase")].toString().toDouble());
+        sr.setSunSet(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("sunset")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+        sr.setSunRise(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("sunrise")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+        sr.setMoonSet(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("moonset")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+        sr.setMoonRise(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("moonrise")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+        sr.setSolarMidnight(QPair<QDateTime, double>(
+            QDateTime::fromString(
+                array.at(i)
+                    .toObject()[QStringLiteral("solarmidnight")]
+                    .toObject()[QStringLiteral("time")]
+                    .toString()
+                    .left(19),
+                QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+            array.at(i)
+                .toObject()[QStringLiteral("solarmidnight")]
+                .toObject()[QStringLiteral("elevation")]
+                .toString()
+                .toDouble()));
+        sr.setSolarNoon(QPair<QDateTime, double>(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("solarnoon")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+            array.at(i)
+                .toObject()[QStringLiteral("solarnoon")]
+                .toObject()[QStringLiteral("elevation")]
+                .toString()
+                .toDouble()));
+        sr.setHighMoon(QPair<QDateTime, double>(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("high_moon")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+            array.at(i)
+                .toObject()[QStringLiteral("high_moon")]
+                .toObject()[QStringLiteral("elevation")]
+                .toString()
+                .toDouble()));
+        sr.setLowMoon(QPair<QDateTime, double>(
+            QDateTime::fromString(array.at(i)
+                                      .toObject()[QStringLiteral("low_moon")]
+                                      .toObject()[QStringLiteral("time")]
+                                      .toString()
+                                      .left(19),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+            array.at(i)
+                .toObject()[QStringLiteral("low_moon")]
+                .toObject()[QStringLiteral("elevation")]
+                .toString()
+                .toDouble()));
+        sr.setMoonPhase(array.at(i)
+                            .toObject()[QStringLiteral("moonposition")]
+                            .toObject()[QStringLiteral("phase")]
+                            .toString()
+                            .toDouble());
 
         m_sunriseVec.push_back(sr);
     }

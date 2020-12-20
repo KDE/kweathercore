@@ -24,7 +24,7 @@ class KWEATHERCORE_EXPORT LocationQueryResult
 {
 public:
     // for QMetaType
-    LocationQueryResult() {};
+    LocationQueryResult(){};
     /**
      * @brief LocationQueryResult construct location result with given data
      * @param latitude latitude
@@ -35,7 +35,13 @@ public:
      * @param countryName country name
      * @param geonameId internal unique id
      */
-    LocationQueryResult(double latitude, double longitude, QString toponymName = QString(), QString name = QString(), QString countryCode = QString(), QString countryName = QString(), QString geonameId = QString());
+    LocationQueryResult(double latitude,
+                        double longitude,
+                        QString toponymName = QString(),
+                        QString name = QString(),
+                        QString countryCode = QString(),
+                        QString countryName = QString(),
+                        QString geonameId = QString());
 
     double latitude() const
     {

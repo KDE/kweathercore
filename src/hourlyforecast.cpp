@@ -62,22 +62,27 @@ QJsonObject HourlyWeatherForecast::toJson() const
 }
 HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
 {
-    return HourlyWeatherForecast(QDateTime::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate),
-                                 obj[QStringLiteral("weatherDescription")].toString(),
-                                 obj[QStringLiteral("weatherIcon")].toString(),
-                                 obj[QStringLiteral("neutralWeatherIcon")].toString(),
-                                 obj[QStringLiteral("temperature")].toDouble(),
-                                 obj[QStringLiteral("pressure")].toDouble(),
-                                 static_cast<WindDirection>(obj[QStringLiteral("windDirection")].toInt()),
-                                 obj[QStringLiteral("windSpeed")].toDouble(),
-                                 obj[QStringLiteral("humidity")].toDouble(),
-                                 obj[QStringLiteral("fog")].toDouble(),
-                                 obj[QStringLiteral("uvIndex")].toDouble(),
-                                 obj[QStringLiteral("precipitationAmount")].toDouble());
+    return HourlyWeatherForecast(
+        QDateTime::fromString(obj[QStringLiteral("date")].toString(),
+                              Qt::ISODate),
+        obj[QStringLiteral("weatherDescription")].toString(),
+        obj[QStringLiteral("weatherIcon")].toString(),
+        obj[QStringLiteral("neutralWeatherIcon")].toString(),
+        obj[QStringLiteral("temperature")].toDouble(),
+        obj[QStringLiteral("pressure")].toDouble(),
+        static_cast<WindDirection>(
+            obj[QStringLiteral("windDirection")].toInt()),
+        obj[QStringLiteral("windSpeed")].toDouble(),
+        obj[QStringLiteral("humidity")].toDouble(),
+        obj[QStringLiteral("fog")].toDouble(),
+        obj[QStringLiteral("uvIndex")].toDouble(),
+        obj[QStringLiteral("precipitationAmount")].toDouble());
 }
 
-bool HourlyWeatherForecast::operator==(const KWeatherCore::HourlyWeatherForecast &rhs) const
+bool HourlyWeatherForecast::operator==(
+    const KWeatherCore::HourlyWeatherForecast &rhs) const
 {
-    return (weatherDescription() == rhs.weatherDescription() && weatherIcon() == rhs.weatherIcon() && date() == rhs.date());
+    return (weatherDescription() == rhs.weatherDescription() &&
+            weatherIcon() == rhs.weatherIcon() && date() == rhs.date());
 }
 }

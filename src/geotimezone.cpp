@@ -26,11 +26,15 @@ GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(lat));
     query.addQueryItem(QStringLiteral("lng"), QString::number(lon));
-    query.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
+    query.addQueryItem(QStringLiteral("username"),
+                       QStringLiteral("kweatherdev"));
     url.setQuery(query);
     QNetworkRequest req(url);
 
-    connect(m_manager, &QNetworkAccessManager::finished, this, &GeoTimezone::downloadFinished);
+    connect(m_manager,
+            &QNetworkAccessManager::finished,
+            this,
+            &GeoTimezone::downloadFinished);
     m_manager->get(req);
 }
 

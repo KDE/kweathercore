@@ -13,7 +13,8 @@
 namespace KWeatherCore
 {
 /**
- * @short The Sunrise class contains the information of sunrise/set on a day and more
+ * @short The Sunrise class contains the information of sunrise/set on a day and
+ * more
  *
  * @see SunriseSource
  *
@@ -23,7 +24,8 @@ class KWEATHERCORE_EXPORT Sunrise
 {
 public:
     /**
-     * @brief Sunrise construct Sunrise with given data, all QDateTime are in location's timezone
+     * @brief Sunrise construct Sunrise with given data, all QDateTime are in
+     * location's timezone
      * @param sunRise sun rise time
      * @param sunSet sun set time
      * @param moonRise moon rise time
