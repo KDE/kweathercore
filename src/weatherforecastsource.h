@@ -17,10 +17,6 @@ class WeatherForecastSourcePrivate;
 /**
  * @short The WeatherForecastSource class is intened for query weather information about a location
  *
- * ## Usage example
- *
- * \snippet snippets/example.cpp example
- *
  * @see WeatherForecast, PendingWeatherForecast
  *
  * @author Han Young <hanyoung@protonmail.com>

@@ -1,8 +1,8 @@
 # LibKWeather
 
 ## Introduction
-Get weather forecast and alerts anywhere on the earth without worrying about low level thing.
-LibKWeather provides you a highly abstracted library for anything related to weather.
+Get weather forecast and alerts anywhere on the earth easy.
+LibKWeather provides you a highly abstracted library for things related to weather.
 
 Features:
 * Get local weather forecast.

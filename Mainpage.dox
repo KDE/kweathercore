@@ -1,0 +1,59 @@
+/*
+ *  This file is part of KWeatherCore
+ *  SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ *
+ *  SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+
+/** \mainpage kweathercore
+
+
+\section overview Introduction
+Get weather forecast and alerts anywhere on the earth easy.
+LibKWeather provides you a highly abstracted library for things related to weather.
+
+\section components Main Components
+- \link KWeatherCore::WeatherForecastSource  WeatherForecastSource \endlink
+- \link KWeatherCore::PendingWeatherForecast PendingWeatherForecast  \endlink
+- \link KWeatherCore::SunriseSource SunriseSource  \endlink
+- \link KWeatherCore::WeatherForecastSource WeatherForecastSource  \endlink
+- \link KWeatherCore::LocationQuery LocationQuery  \endlink
+- \link KWeatherCore::GeoTimezone GeoTimezone  \endlink
+
+\section example Minimal Example
+
+@code
+#include <KWeatherCore/WeatherForecastSource>
+using namespace KWeatherCore;
+
+//...
+    
+    // Get the weatherforecast of Paris
+    WeatherForecastSource m_source;
+
+    auto m_pendingForecast = m_source.requestData(48.86, 2.34);
+
+    connect(m_pendingForecast, &PendingWeatherForecast::finished, [m_pendingForecast]{auto m_weatherData = m_pendingForecast->value();               
+                                                                                      m_pendingForecast->deleteLater();});
+    connect(m_pendingForecast, &PendingWeatherForecast::networkError, []{qDebug() << "network error";});
+    
+//...
+
+@endcode
+
+@authors
+Han Young \<hanyoung@protonmail.com\><br>
+Devin Lin \<espidev@gmail.com\><br>
+
+@licenses
+@gpl
+
+*/
+
+
+// DOXYGEN_SET_RECURSIVE = YES
+// DOXYGEN_SET_EXCLUDE_PATTERNS += *_p.h */private/* */examples/* */doc/*
+// DOXYGEN_SET_PROJECT_NAME = KWeatherCore
+// vim:ts=4:sw=4:expandtab:filetype=doxygen
+ 
