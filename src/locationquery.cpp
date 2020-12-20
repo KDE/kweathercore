@@ -79,7 +79,7 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 }
 LocationQuery::LocationQuery(QObject *parent)
     : QObject(parent)
-    , d(new LocationQueryPrivate)
+    , d(new LocationQueryPrivate())
 {
     connect(d, &LocationQueryPrivate::located, this, &LocationQuery::located);
 }

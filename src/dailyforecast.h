@@ -51,7 +51,7 @@ public:
     static DailyWeatherForecast fromJson(QJsonObject obj);
     /**
      * @return @c true if the object is created without data
-     * this value won't change once the class is created
+     * this value won't change once the class is created with the exceptions of Day/Hour merge
      */
     bool isNull() const
     {
@@ -252,27 +252,27 @@ public:
     };
 
     /**
-     * @brief merge two daily forecast
+     * @brief merge two daily forecast, note the hourly forecast is unchanged
      * @param forecast make sure it is on the same day
      * @return result DailyWeatherForecast
      */
     DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
     /**
-     * @brief merge two daily forecast
+     * @brief merge two daily forecast, note the hourly forecast is unchanged, daily forecast becomes valid afterwards
      * @param forecast make sure it is on the same day
      * @return result DailyWeatherForecast
      */
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     /**
-     * @brief append hourly forecast, you can append valid hourly forecast into a null daily forecast
+     * @brief append hourly forecast, you can append valid hourly forecast into a null daily forecast, daily forecast becomes valid afterwards
      * @param forecast make sure it's on the same day
      * @return result DailyWeatherForecast
      */
     DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     /**
-     * @brief if on the same day and weather description/icon match
+     * @brief if on the same day
      * @param forecast
-     * @return @c true if on the same day and weather description/icon match
+     * @return @c true if on the same day
      */
     bool operator==(const DailyWeatherForecast &forecast) const;
     /**
