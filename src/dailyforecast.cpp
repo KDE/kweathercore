@@ -10,12 +10,28 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
-DailyWeatherForecast::DailyWeatherForecast()
+class DailyWeatherForecastPrivate
 {
-    m_weatherDescription = QStringLiteral("Unknown");
-    m_weatherIcon = QStringLiteral("weather-none-available");
-    m_date = QDate();
-    m_isNull = true;
+public:
+    bool isNull = true;
+
+    double maxTemp = std::numeric_limits<double>::min();
+    double minTemp = std::numeric_limits<double>::max();
+    double precipitation = 0; // mm
+    double uvIndex = 0; // 0-1
+    double humidity = 0; // %
+    double pressure = 0; // hPa
+    QString weatherIcon = QStringLiteral("Unknown");
+    QString weatherDescription = QStringLiteral("weather-none-available");
+    QDate date = QDate();
+
+    Sunrise sunrise;
+    std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
+};
+
+DailyWeatherForecast::DailyWeatherForecast()
+    : d(new DailyWeatherForecastPrivate)
+{
 }
 DailyWeatherForecast::DailyWeatherForecast(double maxTemp,
                                            double minTemp,
@@ -26,18 +42,23 @@ DailyWeatherForecast::DailyWeatherForecast(double maxTemp,
                                            QString weatherIcon,
                                            QString weatherDescription,
                                            QDate date)
-    : m_maxTemp(maxTemp)
-    , m_minTemp(minTemp)
-    , m_precipitation(precipitation)
-    , m_uvIndex(uvIndex)
-    , m_humidity(humidity)
-    , m_pressure(pressure)
-    , m_weatherIcon(std::move(weatherIcon))
-    , m_weatherDescription(std::move(weatherDescription))
-    , m_date(std::move(date))
+    : d(new DailyWeatherForecastPrivate)
 {
+    d->maxTemp = maxTemp;
+    d->minTemp = minTemp;
+    d->precipitation = precipitation;
+    d->uvIndex = uvIndex;
+    d->humidity = humidity;
+    d->pressure = pressure;
+    d->weatherIcon = std::move(weatherIcon);
+    d->weatherDescription = std::move(weatherDescription);
+    d->date = std::move(date);
+    d->isNull = false;
 }
-
+DailyWeatherForecast::~DailyWeatherForecast()
+{
+    delete d;
+}
 QJsonObject DailyWeatherForecast::toJson()
 {
     QJsonObject obj;
@@ -78,7 +99,113 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     d.setHourlyWeatherForecast(hourlyVec);
     return d;
 }
-
+bool DailyWeatherForecast::isNull() const
+{
+    return d->isNull;
+}
+void DailyWeatherForecast::setMaxTemp(double maxTemp)
+{
+    d->maxTemp = maxTemp;
+}
+void DailyWeatherForecast::setMinTemp(double minTemp)
+{
+    d->minTemp = minTemp;
+}
+void DailyWeatherForecast::setPrecipitation(double precipitation)
+{
+    d->precipitation = precipitation;
+}
+void DailyWeatherForecast::setUvIndex(double uvIndex)
+{
+    d->uvIndex = uvIndex;
+}
+void DailyWeatherForecast::setHumidity(double humidity)
+{
+    d->humidity = humidity;
+}
+void DailyWeatherForecast::setPressure(double pressure)
+{
+    d->pressure = pressure;
+}
+void DailyWeatherForecast::setWeatherIcon(QString icon)
+{
+    d->weatherIcon = std::move(icon);
+}
+void DailyWeatherForecast::setWeatherDescription(QString description)
+{
+    d->weatherDescription = std::move(description);
+}
+void DailyWeatherForecast::setDate(QDate date)
+{
+    d->date = std::move(date);
+}
+void DailyWeatherForecast::setJsDate(const QDateTime &date)
+{
+    d->date = date.date();
+}
+double DailyWeatherForecast::maxTemp() const
+{
+    return d->maxTemp;
+}
+double DailyWeatherForecast::minTemp() const
+{
+    return d->minTemp;
+}
+double DailyWeatherForecast::precipitation() const
+{
+    return d->precipitation;
+}
+double DailyWeatherForecast::uvIndex() const
+{
+    return d->uvIndex;
+}
+double DailyWeatherForecast::humidity() const
+{
+    return d->humidity;
+}
+double DailyWeatherForecast::pressure() const
+{
+    return d->pressure;
+}
+const QString &DailyWeatherForecast::weatherIcon() const
+{
+    return d->weatherIcon;
+}
+const QString &DailyWeatherForecast::weatherDescription() const
+{
+    return d->weatherDescription;
+}
+const QDate &DailyWeatherForecast::date() const
+{
+    return d->date;
+}
+QDateTime DailyWeatherForecast::jsDate() const
+{
+    return d->date.startOfDay();
+}
+const Sunrise &DailyWeatherForecast::sunrise() const
+{
+    return d->sunrise;
+}
+const std::vector<HourlyWeatherForecast> &
+DailyWeatherForecast::hourlyWeatherForecast() const
+{
+    return d->hourlyWeatherForecast;
+}
+void DailyWeatherForecast::setSunrise(Sunrise sunrise)
+{
+    d->sunrise = std::move(sunrise);
+}
+void DailyWeatherForecast::setHourlyWeatherForecast(
+    const std::vector<HourlyWeatherForecast> &forecast)
+{
+    d->hourlyWeatherForecast = forecast;
+}
+void DailyWeatherForecast::setHourlyWeatherForecast(
+    std::vector<HourlyWeatherForecast> &&forecast)
+{
+    d->hourlyWeatherForecast = std::move(forecast);
+}
 DailyWeatherForecast &
 DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
@@ -86,16 +213,16 @@ DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
         setDate(forecast.date());
         setWeatherDescription(forecast.weatherDescription());
         setWeatherIcon(forecast.weatherIcon());
-        m_isNull = false;
+        d->isNull = false;
     }
 
     if (*this == forecast) {
-        setPrecipitation(this->precipitation() + forecast.precipitation());
-        setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
-        setHumidity(std::max(this->humidity(), forecast.humidity()));
-        setPressure(std::max(this->pressure(), forecast.pressure()));
-        setMaxTemp(std::max(this->maxTemp(), forecast.maxTemp()));
-        setMinTemp(std::min(this->minTemp(), forecast.minTemp()));
+        setPrecipitation(precipitation() + forecast.precipitation());
+        setUvIndex(std::max(uvIndex(), forecast.uvIndex()));
+        setHumidity(std::max(humidity(), forecast.humidity()));
+        setPressure(std::max(pressure(), forecast.pressure()));
+        setMaxTemp(std::max(maxTemp(), forecast.maxTemp()));
+        setMinTemp(std::min(minTemp(), forecast.minTemp()));
     }
 
     return *this;
@@ -110,41 +237,40 @@ DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 DailyWeatherForecast &
 DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
-    if (this->isNull()) {
-        this->setDate(forecast.date().date());
-        this->setWeatherDescription(forecast.weatherDescription());
-        this->setWeatherIcon(forecast.weatherIcon());
-        this->m_isNull = false;
+    if (isNull()) {
+        setDate(forecast.date().date());
+        setWeatherDescription(forecast.weatherDescription());
+        setWeatherIcon(forecast.weatherIcon());
+        d->isNull = false;
     }
-    if (this->date().daysTo(forecast.date().date()) == 0) {
+    if (date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
-        if (rank[forecast.neutralWeatherIcon()] >= rank[this->weatherIcon()]) {
-            this->setWeatherDescription(
+        if (rank[forecast.neutralWeatherIcon()] >= rank[weatherIcon()]) {
+            setWeatherDescription(
                 apiDescMap[forecast.symbolCode() + QStringLiteral("_neutral")]
                     .desc);
-            this->setWeatherIcon(forecast.neutralWeatherIcon());
+            setWeatherIcon(forecast.neutralWeatherIcon());
         }
-        this->setPrecipitation(this->precipitation() +
-                               forecast.precipitationAmount());
-        this->setUvIndex(std::max(this->uvIndex(), forecast.uvIndex()));
-        this->setHumidity(std::max(this->humidity(), forecast.humidity()));
-        this->setPressure(std::max(this->pressure(), forecast.pressure()));
-        this->setMaxTemp(std::max(this->maxTemp(), forecast.temperature()));
-        this->setMinTemp(std::min(this->minTemp(), forecast.temperature()));
+        setPrecipitation(precipitation() + forecast.precipitationAmount());
+        setUvIndex(std::max(uvIndex(), forecast.uvIndex()));
+        setHumidity(std::max(humidity(), forecast.humidity()));
+        setPressure(std::max(pressure(), forecast.pressure()));
+        setMaxTemp(std::max(maxTemp(), forecast.temperature()));
+        setMinTemp(std::min(minTemp(), forecast.temperature()));
     }
 
-    this->hourlyWeatherForecast().push_back(forecast);
+    d->hourlyWeatherForecast.push_back(forecast);
     return *this;
 }
 
 bool DailyWeatherForecast::operator==(
     const DailyWeatherForecast &forecast) const
 {
-    return (this->date() == forecast.date());
+    return (date() == forecast.date());
 }
 
 bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
-    return this->date() < forecast.date();
+    return date() < forecast.date();
 }
 }

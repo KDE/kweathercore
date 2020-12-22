@@ -12,6 +12,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
+class DailyWeatherForecastPrivate;
 /**
  * @short Class represents weatherforecast in a day
  *
@@ -23,6 +24,18 @@ namespace KWeatherCore
  */
 class KWEATHERCORE_EXPORT DailyWeatherForecast
 {
+    Q_GADGET
+    Q_PROPERTY(bool null READ isNull)
+    Q_PROPERTY(qreal maxTemp READ maxTemp WRITE setMaxTemp)
+    Q_PROPERTY(qreal minTemp READ minTemp WRITE setMinTemp)
+    Q_PROPERTY(qreal precipitation READ precipitation WRITE setPrecipitation)
+    Q_PROPERTY(qreal uvIndex READ uvIndex WRITE setUvIndex)
+    Q_PROPERTY(qreal humidity READ humidity WRITE setHumidity)
+    Q_PROPERTY(qreal pressure READ pressure WRITE setPressure)
+    Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
+    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE
+                   setWeatherDescription)
+    Q_PROPERTY(QDateTime date READ jsDate WRITE setJsDate)
 public:
     /**
      * Creates a null DailyWeatherForecast.
@@ -54,6 +67,7 @@ public:
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
      */
+    ~DailyWeatherForecast();
     QJsonObject toJson();
     /**
      * Construct a DailyWeatherForecast from QJsonObject
@@ -64,208 +78,130 @@ public:
      * this value won't change once the class is created with the exceptions of
      * Day/Hour merge
      */
-    bool isNull() const
-    {
-        return m_isNull;
-    };
+    bool isNull() const;
     /**
      * @brief set the maximum temperature of the day
      * @param maxTemp maximum temperature of the day, in celsius
      */
-    void setMaxTemp(double maxTemp)
-    {
-        m_maxTemp = maxTemp;
-    };
+    void setMaxTemp(double maxTemp);
     /**
      * @brief set the minimum temperature of the day
      * @param minTemp minimum temperature of the day, in celsius
      */
-    void setMinTemp(double minTemp)
-    {
-        m_minTemp = minTemp;
-    };
+    void setMinTemp(double minTemp);
     /**
      * @brief set the precipitation of the day
      * @param precipitation precipitation of the day, in mm
      */
-    void setPrecipitation(double precipitation)
-    {
-        m_precipitation = precipitation;
-    };
+    void setPrecipitation(double precipitation);
     /**
      * @brief set the UvIndex of the day
      * @param uvIndex 0-1
      */
-    void setUvIndex(double uvIndex)
-    {
-        m_uvIndex = uvIndex;
-    };
+    void setUvIndex(double uvIndex);
     /**
      * @brief set the humidity of the day
      * @param humidity humidity of the day, in percentage
      */
-    void setHumidity(double humidity)
-    {
-        m_humidity = humidity;
-    };
+    void setHumidity(double humidity);
     /**
      * @brief set the pressure of the day
      * @param pressure pressure of the day, in hpa
      */
-    void setPressure(double pressure)
-    {
-        m_pressure = pressure;
-    };
+    void setPressure(double pressure);
     /**
      * @brief set the weather icon of the day
      * @param icon
      */
-    void setWeatherIcon(QString icon)
-    {
-        m_weatherIcon = std::move(icon);
-    };
+    void setWeatherIcon(QString icon);
     /**
      * @brief set the weather description of the day
      * @param description
      */
-    void setWeatherDescription(QString description)
-    {
-        m_weatherDescription = std::move(description);
-    };
+    void setWeatherDescription(QString description);
     /**
      * @brief set the date this object represents
      * @param date
      */
-    void setDate(QDate date)
-    {
-        m_date = std::move(date);
-    };
+    void setDate(QDate date);
     /**
      * @brief return maximum temperature
      * @return maximum temperature, this value is initialized to the smallest
      * value double can hold
      */
-    double maxTemp() const
-    {
-        return m_maxTemp;
-    };
+    KWEATHERCORE_NO_EXPORT void setJsDate(const QDateTime &date);
+    double maxTemp() const;
     /**
      * @brief return minimum temperature
      * @return minimum temperature, this value is initialized to the largest
      * value double can hold
      */
-    double minTemp() const
-    {
-        return m_minTemp;
-    };
+    double minTemp() const;
     /**
      * @brief return precipitation
      * @return this value is initialized to zero
      */
-    double precipitation() const
-    {
-        return m_precipitation;
-    };
+    double precipitation() const;
     /**
      * @brief return uvIndex
      * @return this value is initialized to zero
      */
-    double uvIndex() const
-    {
-        return m_uvIndex;
-    };
+    double uvIndex() const;
     /**
      * @brief return humidity
      * @return this value is initialized to zero
      */
-    double humidity() const
-    {
-        return m_humidity;
-    };
+    double humidity() const;
     /**
      * @brief return pressure
      * @return this value is initialized to zero
      */
-    double pressure() const
-    {
-        return m_pressure;
-    };
+    double pressure() const;
     /**
      * @brief return weather icon
      * @return weather icon, can be empty string if constructed without data
      */
-    const QString &weatherIcon() const
-    {
-        return m_weatherIcon;
-    };
+    const QString &weatherIcon() const;
     /**
      * @brief return weather description
      * @return weather description, can be empty string if constructed without
      * data
      */
-    const QString &weatherDescription() const
-    {
-        return m_weatherDescription;
-    };
+    const QString &weatherDescription() const;
     /**
      * @brief return date this object represents
      * @return date, date can be invalid if constructed without data
      */
-    const QDate &date() const
-    {
-        return m_date;
-    };
-
+    const QDate &date() const;
     /**
      * @brief return sunrise data
      * @return sunrise data
      */
-    const Sunrise &sunrise() const
-    {
-        return m_sunrise;
-    };
+    KWEATHERCORE_NO_EXPORT QDateTime jsDate() const;
+    const Sunrise &sunrise() const;
     /**
      * @brief returns all HourlyWeathreForecast belonged to this day
      * @return all HourlyWeathreForecast belonged to this day
      */
-    const std::vector<HourlyWeatherForecast> &hourlyWeatherForecast() const
-    {
-        return m_hourlyWeatherForecast;
-    };
-    /**
-     * @brief overloaded version
-     * @return reference to internal std::vector
-     */
-    std::vector<HourlyWeatherForecast> &hourlyWeatherForecast()
-    {
-        return m_hourlyWeatherForecast;
-    };
+    const std::vector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
     /**
      * @brief set sunrise
      * @param sunrise if this object and sunrise isn't on the same day, this
      * function does nothing
      */
-    void setSunrise(Sunrise sunrise)
-    {
-        m_sunrise = std::move(sunrise);
-    };
+    void setSunrise(Sunrise sunrise);
     /**
      * @brief set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day
      */
-    void
-    setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
-    {
-        m_hourlyWeatherForecast = forecast;
-    };
+    void setHourlyWeatherForecast(
+        const std::vector<HourlyWeatherForecast> &forecast);
     /**
      * @brief overloaded version
      * @param forecast
      */
-    void setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast)
-    {
-        m_hourlyWeatherForecast = std::move(forecast);
-    };
+    void
+    setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast);
 
     /**
      * @brief merge two daily forecast, note the hourly forecast is unchanged
@@ -301,19 +237,6 @@ public:
     bool operator<(const DailyWeatherForecast &forecast) const;
 
 private:
-    bool m_isNull = false;
-
-    double m_maxTemp = std::numeric_limits<double>::min();
-    double m_minTemp = std::numeric_limits<double>::max();
-    double m_precipitation = 0; // mm
-    double m_uvIndex = 0; // 0-1
-    double m_humidity = 0; // %
-    double m_pressure = 0; // hPa
-    QString m_weatherIcon;
-    QString m_weatherDescription;
-    QDate m_date;
-
-    Sunrise m_sunrise;
-    std::vector<HourlyWeatherForecast> m_hourlyWeatherForecast;
+    DailyWeatherForecastPrivate *d;
 };
 }
