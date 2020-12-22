@@ -12,6 +12,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
+class HourlyWeatherForecastPrivate;
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
 /**
  * @short Class represents weatherforecast in a hour
@@ -24,6 +25,19 @@ enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
  */
 class KWEATHERCORE_EXPORT HourlyWeatherForecast
 {
+    Q_GADGET
+    Q_PROPERTY(QDateTime date READ date WRITE setDate)
+    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
+    Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
+    Q_PROPERTY(QString neutralWeatherIcon READ neutralWeatherIcon WRITE setNeutralWeatherIcon)
+    Q_PROPERTY(QString windDirection READ windDirectionStr WRITE setWindDirectionStr)
+    Q_PROPERTY(qreal temperature READ temperature WRITE setTemperature)
+    Q_PROPERTY(qreal pressure READ pressure WRITE setPressure)
+    Q_PROPERTY(qreal windSpeed READ windSpeed WRITE setWindSpeed)
+    Q_PROPERTY(qreal humidity READ humidity WRITE setHumidity)
+    Q_PROPERTY(qreal fog READ fog WRITE setFog)
+    Q_PROPERTY(qreal uvIndex READ uvIndex WRITE setUvIndex)
+    Q_PROPERTY(qreal precipitationAmount READ precipitationAmount WRITE setPrecipitationAmount)
 public:
     /**
      * @brief HourlyWeatherForecast construct a null forecast
@@ -56,6 +70,7 @@ public:
                           double fog,
                           double uvIndex,
                           double precipitationAmount);
+    ~HourlyWeatherForecast();
     /**
      * @brief convert this to QJsonObject
      */
@@ -68,203 +83,115 @@ public:
      * @brief date of the forecast
      * @return
      */
-    const QDateTime &date() const
-    {
-        return m_date;
-    };
+    const QDateTime &date() const;
     /**
      * @brief set date
      */
-    void setDate(QDateTime date)
-    {
-        m_date = std::move(date);
-    };
+    void setDate(QDateTime date);
     /**
      * @brief weather description
      */
-    const QString &weatherDescription() const
-    {
-        return m_weatherDescription;
-    };
+    const QString &weatherDescription() const;
     /**
      * @brief set weather description
      */
-    void setWeatherDescription(QString weatherDescription)
-    {
-        m_weatherDescription = std::move(weatherDescription);
-    };
+    void setWeatherDescription(QString weatherDescription);
     /**
      * @brief weather icon, breeze icon if construct by WeatherForecastSource
      */
-    const QString &weatherIcon() const
-    {
-        return m_weatherIcon;
-    };
+    const QString &weatherIcon() const;
     /**
      * @brief set weather icon
      */
-    void setWeatherIcon(QString weatherIcon)
-    {
-        m_weatherIcon = std::move(weatherIcon);
-    };
+    void setWeatherIcon(QString weatherIcon);
     /**
      * @brief icon without "day" or "night" attached
      */
-    const QString &neutralWeatherIcon() const
-    {
-        return m_neutralWeatherIcon;
-    };
+    const QString &neutralWeatherIcon() const;
     /**
      * @brief set neutral weatherIcon
      */
-    void setNeutralWeatherIcon(QString neutralWeatherIcon)
-    {
-        m_neutralWeatherIcon = std::move(neutralWeatherIcon);
-    };
+    void setNeutralWeatherIcon(QString neutralWeatherIcon);
     /**
      * @brief internal symbolcode from api, normally you can ignore this
      */
-    const QString &symbolCode() const
-    {
-        return m_symbolCode;
-    };
+    const QString &symbolCode() const;
     /**
      * @brief set internal symbolcode from api, normally you can ignore this
      */
-    void setSymbolCode(QString symbolCode)
-    {
-        m_symbolCode = std::move(symbolCode);
-    };
+    void setSymbolCode(QString symbolCode);
     /**
      * @brief temperature in celsius
      */
-    double temperature() const
-    {
-        return m_temperature;
-    };
+    double temperature() const;
     /**
      * @brief set temperature in celsius
      */
-    void setTemperature(double temperature)
-    {
-        m_temperature = temperature;
-    };
+    void setTemperature(double temperature);
     /**
      * @brief pressure in hpa
      */
-    double pressure() const
-    {
-        return m_pressure;
-    };
+    double pressure() const;
     /**
      * @brief set pressure in hpa
      */
-    void setPressure(double pressure)
-    {
-        m_pressure = pressure;
-    };
+    void setPressure(double pressure);
     /**
      * @brief scoped enum
      */
-    WindDirection windDirection() const
-    {
-        return m_windDirection;
-    };
+    WindDirection windDirection() const;
+    KWEATHERCORE_NO_EXPORT QString windDirectionStr() const;
     /**
      * @brief set wind direction
      */
-    void setWindDirection(WindDirection windDirection)
-    {
-        m_windDirection = windDirection;
-    };
+    void setWindDirection(WindDirection windDirection);
     /**
      * @brief wind speed in km/h
      */
-    double windSpeed() const
-    {
-        return m_windSpeed;
-    };
+    KWEATHERCORE_NO_EXPORT void setWindDirectionStr(QString windDirection);
+    double windSpeed() const;
     /**
      * @brief set wind speed in km/h
      */
-    void setWindSpeed(double windSpeed)
-    {
-        m_windSpeed = windSpeed;
-    };
+    void setWindSpeed(double windSpeed);
     /**
      * @brief humidity in percentage
      */
-    double humidity() const
-    {
-        return m_humidity;
-    };
+    double humidity() const;
     /**
      * @brief set humidity in percentage
      */
-    void setHumidity(double humidity)
-    {
-        m_humidity = humidity;
-    };
+    void setHumidity(double humidity);
     /**
      * @brief fog in percentage
      */
-    double fog() const
-    {
-        return m_fog;
-    };
+    double fog() const;
     /**
      * @brief set fog in percentage
      */
-    void setFog(double fog)
-    {
-        m_fog = fog;
-    };
+    void setFog(double fog);
     /**
      * @brief uv index, 0-1
      */
-    double uvIndex() const
-    {
-        return m_uvIndex;
-    };
+    double uvIndex() const;
     /**
      * @brief set uv index, 0-1
      */
-    void setUvIndex(double uvIndex)
-    {
-        m_uvIndex = uvIndex;
-    };
+    void setUvIndex(double uvIndex);
     /**
      * @brief precipitation in mm
      */
-    double precipitationAmount() const
-    {
-        return m_precipitationAmount;
-    };
+    double precipitationAmount() const;
     /**
      * @brief set precipitation in mm
      */
-    void setPrecipitationAmount(double precipitationAmount)
-    {
-        m_precipitationAmount = precipitationAmount;
-    };
+    void setPrecipitationAmount(double precipitationAmount);
     /**
      * @return true if date, weather icon and description is same
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
 
 private:
-    QDateTime m_date;
-    QString m_weatherDescription;
-    QString m_weatherIcon;
-    QString m_neutralWeatherIcon; // weather icon without time of day
-    QString m_symbolCode;
-    double m_temperature = 0; // celsius
-    double m_pressure = 0; // hPa
-    WindDirection m_windDirection = WindDirection::E;
-    double m_windSpeed = 0; // m/s
-    double m_humidity = 0; // %
-    double m_fog = 0; // %
-    double m_uvIndex = 0; // 0-1
-    double m_precipitationAmount = 0; // mm
+    HourlyWeatherForecastPrivate *d;
 };
 }
