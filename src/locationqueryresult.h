@@ -11,6 +11,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
+class LocationQueryResultPrivate;
 /**
  * @short Class represents location query result
  *
@@ -22,6 +23,14 @@ namespace KWeatherCore
  */
 class KWEATHERCORE_EXPORT LocationQueryResult
 {
+    Q_GADGET
+    Q_PROPERTY(qreal latitude READ latitude)
+    Q_PROPERTY(qreal longitude READ longitude)
+    Q_PROPERTY(QString toponymName READ toponymName)
+    Q_PROPERTY(QString name READ name)
+    Q_PROPERTY(QString countryCode READ countryCode)
+    Q_PROPERTY(QString countryName READ countryName)
+    Q_PROPERTY(QString geonameId READ geonameId)
 public:
     // for QMetaType
     LocationQueryResult(){};
@@ -42,55 +51,33 @@ public:
                         QString countryCode = QString(),
                         QString countryName = QString(),
                         QString geonameId = QString());
+    ~LocationQueryResult();
+    double latitude() const;
 
-    double latitude() const
-    {
-        return m_latitude;
-    };
-
-    double longitude() const
-    {
-        return m_longitude;
-    };
+    double longitude() const;
     /**
      * @brief toponym name of location, detailed
      */
-    const QString &toponymName() const
-    {
-        return m_toponymName;
-    };
+    const QString &toponymName() const;
     /**
      * @brief display name, short
      */
-    const QString &name() const
-    {
-        return m_name;
-    };
+    const QString &name() const;
     /**
      * @brief country code, follow no standard but should be unique
      */
-    const QString &countryCode() const
-    {
-        return m_countryCode;
-    };
+    const QString &countryCode() const;
     /**
      * @brief country name
      */
-    const QString &countryName() const
-    {
-        return m_countryName;
-    };
+    const QString &countryName() const;
     /**
      * @brief internal unique id
      */
-    const QString &geonameId() const
-    {
-        return m_geonameId;
-    };
+    const QString &geonameId() const;
 
 private:
-    double m_latitude, m_longitude;
-    QString m_toponymName, m_name, m_countryCode, m_countryName, m_geonameId;
+    LocationQueryResultPrivate *d;
 };
 }
 Q_DECLARE_METATYPE(KWeatherCore::LocationQueryResult)
