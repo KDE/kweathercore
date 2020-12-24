@@ -6,6 +6,7 @@ namespace KWeatherCore
 {
 class WeatherForecastSource;
 class SunriseSource;
+class PendingWeatherForecast;
 class PendingWeatherForecastPrivate : public QObject
 {
     Q_OBJECT
@@ -13,29 +14,26 @@ public:
     PendingWeatherForecastPrivate(double latitude,
                                   double longitude,
                                   const QString &timezone,
+                                  QNetworkReply *reply,
                                   const std::vector<Sunrise> &sunrise,
-                                  QObject *parent = nullptr);
-    PendingWeatherForecastPrivate(double latitude,
-                                  double longitude,
-                                  const QString &timezone,
-                                  std::vector<Sunrise> &&sunrise,
-                                  QObject *parent = nullptr);
+                                  PendingWeatherForecast *parent = nullptr);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
     QString timezone;
+    bool isFinished = false;
 
 Q_SIGNALS:
     void networkError();
     void finished();
-public Q_SLOTS:
+private Q_SLOTS:
     void parseWeatherForecastResults(QNetworkReply *ret);
     void parseSunriseResults();
-    void parseTimezoneResult(QString timezone);
+    void parseTimezoneResult(const QString &timezone);
 
 private:
     void parseOneElement(const QJsonObject &obj,
                          std::vector<HourlyWeatherForecast> &hourlyForecast);
     void getTimezone(double latitude, double longitude);
-    void getSunrise(double latitude, double longitude, int offset);
+    void getSunrise(int offset);
     void applySunriseToForecast();
 
     bool hasTimezone = false;
@@ -44,8 +42,9 @@ private:
     QString m_timezone;
 
     std::vector<HourlyWeatherForecast> hourlyForecast; // tmp hourly vector
-    std::vector<Sunrise> sunriseVec; // tmp sunrise vector
 
     SunriseSource *m_sunriseSource = nullptr;
+
+    QDateTime m_expiresTime;
 };
 }

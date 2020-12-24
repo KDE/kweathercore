@@ -22,60 +22,43 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
     double latitude,
     double longitude,
     const QString &timezone,
-    std::vector<Sunrise> &&sunrise,
-    QObject *parent)
-    : QObject(parent)
-    , forecast(
-          QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
-    , m_latitude(latitude)
-    , m_longitude(longitude)
-{
-    forecast->setCoordinate(latitude, longitude);
-    sunriseVec = std::move(sunrise);
-    if (timezone.isEmpty()) {
-        hasTimezone = false;
-        getTimezone(latitude, longitude);
-    } else {
-        hasTimezone = true;
-        forecast->setTimezone(timezone);
-        getSunrise(m_latitude,
-                   m_longitude,
-                   QDateTime::currentDateTime()
-                       .toTimeZone(QTimeZone(timezone.toUtf8()))
-                       .offsetFromUtc());
-    }
-    if (sunriseVec.size() <= 10) {
-        hasSunrise = false;
-    }
-}
-
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
-    double latitude,
-    double longitude,
-    const QString &timezone,
+    QNetworkReply *reply,
     const std::vector<Sunrise> &sunrise,
-    QObject *parent)
+    PendingWeatherForecast *parent)
     : QObject(parent)
     , forecast(
           QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
 {
-    sunriseVec = sunrise;
+    connect(this, &PendingWeatherForecastPrivate::finished, [this] {
+        this->isFinished = true;
+    });
+    connect(this,
+            &PendingWeatherForecastPrivate::finished,
+            parent,
+            &PendingWeatherForecast::finished);
+    connect(this,
+            &PendingWeatherForecastPrivate::networkError,
+            parent,
+            &PendingWeatherForecast::networkError);
+    if (reply) {
+        connect(reply,
+                &QNetworkReply::finished,
+                this,
+                &PendingWeatherForecastPrivate::parseWeatherForecastResults);
+    }
+
+    m_sunriseSource = new SunriseSource(latitude, longitude, 0, sunrise, this);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
     } else {
         hasTimezone = true;
         forecast->setTimezone(timezone);
-        getSunrise(m_latitude,
-                   m_longitude,
-                   QDateTime::currentDateTime()
+        getSunrise(QDateTime::currentDateTime()
                        .toTimeZone(QTimeZone(timezone.toUtf8()))
                        .offsetFromUtc());
-    }
-    if (sunriseVec.size() <= 10) {
-        hasSunrise = false;
     }
 }
 void PendingWeatherForecastPrivate::getTimezone(double latitude,
@@ -87,24 +70,18 @@ void PendingWeatherForecastPrivate::getTimezone(double latitude,
             this,
             &PendingWeatherForecastPrivate::parseTimezoneResult);
 }
-void PendingWeatherForecastPrivate::parseTimezoneResult(QString result)
+void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 {
     hasTimezone = true;
     forecast->setTimezone(result);
-    if (!hasSunrise)
-        getSunrise(m_latitude,
-                   m_longitude,
-                   QDateTime::currentDateTime()
-                       .toTimeZone(QTimeZone(result.toUtf8()))
-                       .offsetFromUtc());
+    getSunrise(QDateTime::currentDateTime()
+                   .toTimeZone(QTimeZone(result.toUtf8()))
+                   .offsetFromUtc());
 }
 
-void PendingWeatherForecastPrivate::getSunrise(double latitude,
-                                               double longitude,
-                                               int offset)
+void PendingWeatherForecastPrivate::getSunrise(int offset)
 {
-    m_sunriseSource =
-        new SunriseSource(latitude, longitude, offset, sunriseVec, this);
+    m_sunriseSource->setOffset(offset);
     m_sunriseSource->requestData();
     connect(m_sunriseSource,
             &SunriseSource::finished,
@@ -113,10 +90,7 @@ void PendingWeatherForecastPrivate::getSunrise(double latitude,
 }
 void PendingWeatherForecastPrivate::parseSunriseResults()
 {
-    if (m_sunriseSource) {
-        sunriseVec = m_sunriseSource->value();
-        hasSunrise = true;
-    }
+    hasSunrise = true;
 
     // if this arrived later than forecast
     if (hourlyForecast.size() > 0)
@@ -249,7 +223,8 @@ void PendingWeatherForecastPrivate::parseOneElement(
 void PendingWeatherForecastPrivate::applySunriseToForecast()
 {
     // ************* Lambda *************** //
-    auto isDayTime = [](QDateTime date, const std::vector<Sunrise> &sunrise) {
+    auto isDayTime = [](const QDateTime &date,
+                        const std::vector<Sunrise> &sunrise) {
         for (auto sr : sunrise) {
             // if on the same day
             if (sr.sunRise().date().daysTo(date.date()) == 0 &&
@@ -280,14 +255,14 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
             hourForecast.date().toTimeZone(QTimeZone(m_timezone.toUtf8())));
 
         bool isDay;
-        isDay = isDayTime(hourForecast.date(), sunriseVec);
+        isDay = isDayTime(hourForecast.date(), m_sunriseSource->value());
         hourForecast.setWeatherIcon(getSymbolCodeIcon(
             isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(
             getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
         *forecast += std::move(hourForecast);
     }
-    forecast->setSunriseForecast(std::move(sunriseVec));
+    forecast->setSunriseForecast(m_sunriseSource->value());
     Q_EMIT finished();
 }
 
@@ -300,25 +275,14 @@ PendingWeatherForecast::PendingWeatherForecast(
     : d(new PendingWeatherForecastPrivate(latitude,
                                           longitude,
                                           timezone,
-                                          sunrise))
+                                          reply,
+                                          sunrise,
+                                          this))
 {
-    connect(d, &PendingWeatherForecastPrivate::finished, [this] {
-        this->m_finished = true;
-    });
-    connect(d,
-            &PendingWeatherForecastPrivate::finished,
-            this,
-            &PendingWeatherForecast::finished);
-    connect(d,
-            &PendingWeatherForecastPrivate::networkError,
-            this,
-            &PendingWeatherForecast::networkError);
-    if (reply) {
-        auto d = this->d; // explicitly capture?
-        connect(reply, &QNetworkReply::finished, [d, reply] {
-            d->parseWeatherForecastResults(reply);
-        });
-    }
+}
+bool PendingWeatherForecast::isFinished() const
+{
+    return d->isFinished;
 }
 
 QExplicitlySharedDataPointer<WeatherForecast>

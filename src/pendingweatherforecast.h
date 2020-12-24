@@ -35,7 +35,7 @@ public:
      * @brief isFinished if the call has finished
      * @return
      */
-    bool isFinished();
+    bool isFinished() const;
 
 Q_SIGNALS:
     /**
@@ -58,6 +58,5 @@ protected:
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;
-    bool m_finished = false;
 };
 }
