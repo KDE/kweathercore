@@ -85,8 +85,6 @@ Q_SIGNALS:
      * found
      */
     void queryError();
-private Q_SLOTS:
-    void handleQueryResult(QNetworkReply *reply);
 
 private:
     LocationQueryPrivate *d = nullptr;

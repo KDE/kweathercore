@@ -18,22 +18,25 @@ class LocationQueryPrivate : public QObject
 {
     Q_OBJECT
 public:
-    LocationQueryPrivate();
-    ~LocationQueryPrivate();
+    LocationQueryPrivate(LocationQuery *parent = nullptr);
     void requestUpdate();
-    QNetworkAccessManager *manager = nullptr;
-
+    void query(QString name, int number);
 Q_SIGNALS:
     void located(const LocationQueryResult &);
+    void queryFinished(const std::vector<LocationQueryResult> &result);
+    void queryError();
 private Q_SLOTS:
     void positionUpdated(const QGeoPositionInfo &update);
+    void handleQueryResult(QNetworkReply *reply);
 
 private:
     QGeoPositionInfoSource *locationSource = nullptr;
+    QNetworkAccessManager *manager = nullptr;
 };
 
-LocationQueryPrivate::LocationQueryPrivate()
-    : manager(new QNetworkAccessManager(this))
+LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
+    : QObject(parent)
+    , manager(new QNetworkAccessManager(this))
     , locationSource(QGeoPositionInfoSource::createDefaultSource(this))
 {
     locationSource->stopUpdates();
@@ -42,13 +45,18 @@ LocationQueryPrivate::LocationQueryPrivate()
             &QGeoPositionInfoSource::positionUpdated,
             this,
             &LocationQueryPrivate::positionUpdated);
+    connect(this,
+            &LocationQueryPrivate::queryFinished,
+            parent,
+            &LocationQuery::queryFinished);
+    connect(this,
+            &LocationQueryPrivate::queryError,
+            parent,
+            &LocationQuery::queryError);
+    connect(
+        this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
 }
 
-LocationQueryPrivate::~LocationQueryPrivate()
-{
-    locationSource->deleteLater();
-    manager->deleteLater();
-}
 inline void LocationQueryPrivate::requestUpdate()
 {
     locationSource->requestUpdate();
@@ -93,14 +101,13 @@ LocationQuery::LocationQuery(QObject *parent)
     : QObject(parent)
     , d(new LocationQueryPrivate())
 {
-    connect(d, &LocationQueryPrivate::located, this, &LocationQuery::located);
 }
-LocationQuery::~LocationQuery()
+void LocationQuery::query(QString name, int number)
 {
-    d->deleteLater();
+    d->query(std::move(name), number);
 }
 
-void LocationQuery::query(QString name, int number)
+void LocationQueryPrivate::query(QString name, int number)
 {
     QUrl url(QStringLiteral("http://api.geonames.org/searchJSON"));
     QUrlQuery urlQuery;
@@ -110,16 +117,17 @@ void LocationQuery::query(QString name, int number)
     urlQuery.addQueryItem(QStringLiteral("username"),
                           QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
-    auto reply = d->manager->get(QNetworkRequest(url));
-    connect(reply, &QNetworkReply::finished, [this, reply] {
-        this->handleQueryResult(reply);
-    });
+    auto reply = manager->get(QNetworkRequest(url));
+    connect(reply,
+            &QNetworkReply::finished,
+            this,
+            &LocationQueryPrivate::handleQueryResult);
 }
 void LocationQuery::locate()
 {
     d->requestUpdate();
 }
-void LocationQuery::handleQueryResult(QNetworkReply *reply)
+void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
     QJsonObject root = document.object();
