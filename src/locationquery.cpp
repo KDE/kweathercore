@@ -67,10 +67,12 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
     QUrlQuery urlQuery;
 
     urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
-    urlQuery.addQueryItem(QStringLiteral("lat"),
-                          QString::number(update.coordinate().latitude()));
-    urlQuery.addQueryItem(QStringLiteral("lon"),
-                          QString::number(update.coordinate().longitude()));
+    urlQuery.addQueryItem(
+        QStringLiteral("lat"),
+        QString::number(update.coordinate().latitude(), 'g', 2));
+    urlQuery.addQueryItem(
+        QStringLiteral("lon"),
+        QString::number(update.coordinate().longitude(), 'g', 2));
     urlQuery.addQueryItem(QStringLiteral("email"),
                           QStringLiteral("hanyoung@protonmail.com"));
     url.setQuery(urlQuery);

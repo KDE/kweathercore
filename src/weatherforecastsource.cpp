@@ -44,8 +44,10 @@ WeatherForecastSourcePrivate::requestData(double latitude,
     QUrl url(QStringLiteral(
         "https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), QString::number(latitude));
-    query.addQueryItem(QStringLiteral("lon"), QString::number(longitude));
+    query.addQueryItem(QStringLiteral("lat"),
+                       QString::number(latitude, 'g', 2));
+    query.addQueryItem(QStringLiteral("lon"),
+                       QString::number(longitude, 'g', 2));
 
     url.setQuery(query);
 
@@ -55,8 +57,8 @@ WeatherForecastSourcePrivate::requestData(double latitude,
 
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore") + QLatin1Char(' ') +
-                          VERSION_NUMBER +
+                  QString(QStringLiteral("KWeatherCore") + QLatin1Char('/') +
+                          VERSION_NUMBER + QLatin1Char(' ') +
                           QStringLiteral("kde-frameworks-devel@kde.org")));
 
     auto reply = manager->get(req);
