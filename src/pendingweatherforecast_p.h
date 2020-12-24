@@ -13,11 +13,13 @@ public:
     PendingWeatherForecastPrivate(double latitude,
                                   double longitude,
                                   const QString &timezone,
-                                  const std::vector<Sunrise> &sunrise);
+                                  const std::vector<Sunrise> &sunrise,
+                                  QObject *parent = nullptr);
     PendingWeatherForecastPrivate(double latitude,
                                   double longitude,
                                   const QString &timezone,
-                                  std::vector<Sunrise> &&sunrise);
+                                  std::vector<Sunrise> &&sunrise,
+                                  QObject *parent = nullptr);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
     QString timezone;
 

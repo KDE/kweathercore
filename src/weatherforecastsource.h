@@ -27,7 +27,6 @@ class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
     Q_OBJECT
 public:
     WeatherForecastSource(QObject *parent = nullptr);
-    ~WeatherForecastSource();
     /**
      * @brief requestData
      * @param latitude

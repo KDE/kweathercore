@@ -6,6 +6,7 @@
  */
 #include "weatherforecastsource.h"
 #include "geotimezone.h"
+#include "kweathercore_p.h"
 #include "pendingweatherforecast_p.h"
 #include "weatherforecast.h"
 #include <QCoreApplication>
@@ -14,27 +15,30 @@
 #include <QUrlQuery>
 namespace KWeatherCore
 {
-class WeatherForecastSourcePrivate
+class WeatherForecastSourcePrivate : public QObject
 {
+    Q_OBJECT
 public:
+    WeatherForecastSourcePrivate(QObject *parent = nullptr);
+    PendingWeatherForecast *
+    requestData(double latitude,
+                double longitude,
+                QString timezone = QString(),
+                const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+
+private:
     QNetworkAccessManager *manager = nullptr;
 };
-
-WeatherForecastSource::WeatherForecastSource(QObject *parent)
+WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
     : QObject(parent)
-    , d(new WeatherForecastSourcePrivate)
 {
-    d->manager = new QNetworkAccessManager(this);
-}
-WeatherForecastSource::~WeatherForecastSource()
-{
-    delete d;
+    manager = new QNetworkAccessManager(this);
 }
 PendingWeatherForecast *
-WeatherForecastSource::requestData(double latitude,
-                                   double longitude,
-                                   QString timezone,
-                                   const std::vector<Sunrise> &sunrise)
+WeatherForecastSourcePrivate::requestData(double latitude,
+                                          double longitude,
+                                          QString timezone,
+                                          const std::vector<Sunrise> &sunrise)
 {
     // query weather api
     QUrl url(QStringLiteral(
@@ -51,16 +55,26 @@ WeatherForecastSource::requestData(double latitude,
 
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QCoreApplication::applicationName() +
-                          QLatin1Char(' ') +
-                          QCoreApplication::applicationVersion() +
-                          QStringLiteral(" (kde-pim@kde.org)")));
+                  QString(QStringLiteral("KWeatherCore") + QLatin1Char(' ') +
+                          VERSION_NUMBER +
+                          QStringLiteral("kde-frameworks-devel@kde.org")));
 
-    auto reply = d->manager->get(req);
-    auto pf = new PendingWeatherForecast(
+    auto reply = manager->get(req);
+    return new PendingWeatherForecast(
         latitude, longitude, reply, timezone, sunrise);
-
-    return pf;
+}
+WeatherForecastSource::WeatherForecastSource(QObject *parent)
+    : QObject(parent)
+    , d(new WeatherForecastSourcePrivate(this))
+{
+}
+PendingWeatherForecast *
+WeatherForecastSource::requestData(double latitude,
+                                   double longitude,
+                                   QString timezone,
+                                   const std::vector<Sunrise> &sunrise)
+{
+    return d->requestData(latitude, longitude, std::move(timezone), sunrise);
 }
 PendingWeatherForecast *WeatherForecastSource::requestData(
     const KWeatherCore::LocationQueryResult &result)
@@ -68,3 +82,4 @@ PendingWeatherForecast *WeatherForecastSource::requestData(
     return requestData(result.latitude(), result.longitude());
 }
 }
+#include "weatherforecastsource.moc"

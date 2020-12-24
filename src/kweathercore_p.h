@@ -10,6 +10,7 @@
 #include <QString>
 namespace KWeatherCore
 {
+static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
 // rank weather (for what best describes the day overall)
 static const QHash<QString, int> rank = { // only need neutral icons
     {QStringLiteral("weather-none-available"), -1},

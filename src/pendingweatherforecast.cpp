@@ -22,8 +22,10 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
     double latitude,
     double longitude,
     const QString &timezone,
-    std::vector<Sunrise> &&sunrise)
-    : forecast(
+    std::vector<Sunrise> &&sunrise,
+    QObject *parent)
+    : QObject(parent)
+    , forecast(
           QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -51,8 +53,10 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
     double latitude,
     double longitude,
     const QString &timezone,
-    const std::vector<Sunrise> &sunrise)
-    : forecast(
+    const std::vector<Sunrise> &sunrise,
+    QObject *parent)
+    : QObject(parent)
+    , forecast(
           QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -321,10 +325,5 @@ QExplicitlySharedDataPointer<WeatherForecast>
 PendingWeatherForecast::value() const
 {
     return d->forecast;
-}
-PendingWeatherForecast::~PendingWeatherForecast()
-{
-    if (d)
-        d->deleteLater();
 }
 }

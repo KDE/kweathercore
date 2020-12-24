@@ -25,7 +25,6 @@ class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:
-    ~PendingWeatherForecast();
     /**
      * @brief value pointer to the shared weather data
      * the pointer is nullptr until finished() raised
@@ -49,7 +48,7 @@ Q_SIGNALS:
     void networkError();
 
 protected:
-    friend class WeatherForecastSource;
+    friend class WeatherForecastSourcePrivate;
     explicit PendingWeatherForecast(
         double latitude,
         double longitude,
