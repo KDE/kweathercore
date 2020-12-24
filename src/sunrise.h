@@ -12,6 +12,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
+class SunrisePrivate;
 /**
  * @short The Sunrise class contains the information of sunrise/set on a day and
  * more
@@ -40,16 +41,17 @@ public:
      *        50..75: "waning gibbous";
      *        75..100: "waning crescent";
      */
-    Sunrise(const QDateTime &sunRise,
-            const QDateTime &sunSet,
-            const QDateTime &moonRise,
-            const QDateTime &moonSet,
-            const QPair<QDateTime, double> &highMoon,
-            const QPair<QDateTime, double> &lowMoon,
-            const QPair<QDateTime, double> &solarMidnight,
-            const QPair<QDateTime, double> &solarNoon,
+    Sunrise(QDateTime sunRise,
+            QDateTime sunSet,
+            QDateTime moonRise,
+            QDateTime moonSet,
+            QPair<QDateTime, double> highMoon,
+            QPair<QDateTime, double> lowMoon,
+            QPair<QDateTime, double> solarMidnight,
+            QPair<QDateTime, double> solarNoon,
             double moonphase);
     Sunrise();
+    ~Sunrise();
     /**
      * @brief construct from json
      */
@@ -82,14 +84,6 @@ public:
     void setMoonPhase(double moonPhase);
 
 private:
-    QPair<QDateTime, double> m_highMoon;
-    QPair<QDateTime, double> m_solarMidnight;
-    QPair<QDateTime, double> m_solarNoon;
-    QPair<QDateTime, double> m_lowMoon;
-    QDateTime m_sunRise = QDateTime::currentDateTime();
-    QDateTime m_sunSet = QDateTime::currentDateTime();
-    QDateTime m_moonRise = QDateTime::currentDateTime();
-    QDateTime m_moonSet = QDateTime::currentDateTime();
-    double m_moonPhase;
+    SunrisePrivate *d;
 };
 }

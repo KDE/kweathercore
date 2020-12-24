@@ -7,28 +7,48 @@
 #include "sunrise.h"
 namespace KWeatherCore
 {
-Sunrise::Sunrise(const QDateTime &sunRise,
-                 const QDateTime &sunSet,
-                 const QDateTime &moonRise,
-                 const QDateTime &moonSet,
-                 const QPair<QDateTime, double> &highMoon,
-                 const QPair<QDateTime, double> &lowMoon,
-                 const QPair<QDateTime, double> &solarMidnight,
-                 const QPair<QDateTime, double> &solarNoon,
-                 double moonphase)
-    : m_highMoon(highMoon)
-    , m_solarMidnight(solarMidnight)
-    , m_solarNoon(solarNoon)
-    , m_lowMoon(lowMoon)
-    , m_sunRise(sunRise)
-    , m_sunSet(sunSet)
-    , m_moonRise(moonRise)
-    , m_moonSet(moonSet)
-    , m_moonPhase(moonphase)
+class SunrisePrivate
 {
+public:
+    QPair<QDateTime, double> highMoon;
+    QPair<QDateTime, double> solarMidnight;
+    QPair<QDateTime, double> solarNoon;
+    QPair<QDateTime, double> lowMoon;
+    QDateTime sunRise = QDateTime::currentDateTime();
+    QDateTime sunSet = QDateTime::currentDateTime();
+    QDateTime moonRise = QDateTime::currentDateTime();
+    QDateTime moonSet = QDateTime::currentDateTime();
+    double moonPhase;
+};
+
+Sunrise::Sunrise(QDateTime sunRise,
+                 QDateTime sunSet,
+                 QDateTime moonRise,
+                 QDateTime moonSet,
+                 QPair<QDateTime, double> highMoon,
+                 QPair<QDateTime, double> lowMoon,
+                 QPair<QDateTime, double> solarMidnight,
+                 QPair<QDateTime, double> solarNoon,
+                 double moonphase)
+    : d(new SunrisePrivate)
+{
+    d->sunRise = std::move(sunRise);
+    d->sunSet = std::move(sunSet);
+    d->moonRise = std::move(moonRise);
+    d->moonSet = std::move(moonSet);
+    d->highMoon = std::move(highMoon);
+    d->lowMoon = std::move(lowMoon);
+    d->solarMidnight = std::move(solarMidnight);
+    d->solarNoon = std::move(solarNoon);
+    d->moonPhase = moonphase;
 }
 Sunrise::Sunrise()
+    : d(new SunrisePrivate)
 {
+}
+Sunrise::~Sunrise()
+{
+    delete d;
 }
 Sunrise Sunrise::fromJson(QJsonObject obj)
 {
@@ -80,93 +100,92 @@ QJsonObject Sunrise::toJson()
     return obj;
 }
 
-inline QDateTime Sunrise::highMoonTime() const
+QDateTime Sunrise::highMoonTime() const
 {
-    return m_highMoon.first;
+    return d->highMoon.first;
 }
-inline double Sunrise::highMoon() const
+double Sunrise::highMoon() const
 {
-    return m_highMoon.second;
+    return d->highMoon.second;
 }
-inline QDateTime Sunrise::lowMoonTime() const
+QDateTime Sunrise::lowMoonTime() const
 {
-    return m_lowMoon.first;
+    return d->lowMoon.first;
 }
-inline double Sunrise::lowMoon() const
+double Sunrise::lowMoon() const
 {
-    return m_lowMoon.second;
+    return d->lowMoon.second;
 }
-inline QDateTime Sunrise::solarMidnightTime() const
+QDateTime Sunrise::solarMidnightTime() const
 {
-    return m_solarMidnight.first;
+    return d->solarMidnight.first;
 }
-inline QDateTime Sunrise::solarNoonTime() const
+QDateTime Sunrise::solarNoonTime() const
 {
-    return m_solarNoon.first;
+    return d->solarNoon.first;
 }
-inline double Sunrise::solarMidnight() const
+double Sunrise::solarMidnight() const
 {
-    return m_solarMidnight.second;
+    return d->solarMidnight.second;
 }
-inline double Sunrise::solarNoon() const
+double Sunrise::solarNoon() const
 {
-    return m_solarNoon.second;
+    return d->solarNoon.second;
 }
-inline const QDateTime &Sunrise::sunRise() const
+const QDateTime &Sunrise::sunRise() const
 {
-    return m_sunRise;
+    return d->sunRise;
 }
-inline const QDateTime &Sunrise::sunSet() const
+const QDateTime &Sunrise::sunSet() const
 {
-    return m_sunSet;
+    return d->sunSet;
 }
-inline const QDateTime &Sunrise::moonRise() const
+const QDateTime &Sunrise::moonRise() const
 {
-    return m_moonRise;
+    return d->moonRise;
 }
-inline const QDateTime &Sunrise::moonSet() const
+const QDateTime &Sunrise::moonSet() const
 {
-    return m_moonSet;
+    return d->moonSet;
 }
-inline double Sunrise::moonPhase() const
+double Sunrise::moonPhase() const
 {
-    return m_moonPhase;
+    return d->moonPhase;
 }
-inline void Sunrise::setHighMoon(const QPair<QDateTime, double> &highMoon)
+void Sunrise::setHighMoon(const QPair<QDateTime, double> &highMoon)
 {
-    m_highMoon = highMoon;
+    d->highMoon = highMoon;
 }
-inline void
-Sunrise::setSolarMidnight(const QPair<QDateTime, double> &solarMidnight)
+void Sunrise::setSolarMidnight(const QPair<QDateTime, double> &solarMidnight)
 {
-    m_solarMidnight = solarMidnight;
+    d->solarMidnight = solarMidnight;
 }
-inline void Sunrise::setSolarNoon(const QPair<QDateTime, double> &solarNoon)
+void Sunrise::setSolarNoon(const QPair<QDateTime, double> &solarNoon)
 {
-    m_solarNoon = solarNoon;
+    d->solarNoon = solarNoon;
 }
-inline void Sunrise::setLowMoon(const QPair<QDateTime, double> &lowMoon)
+void Sunrise::setLowMoon(const QPair<QDateTime, double> &lowMoon)
 {
-    m_lowMoon = lowMoon;
+    d->lowMoon = lowMoon;
 }
-inline void Sunrise::setSunRise(const QDateTime &sunRise)
+void Sunrise::setSunRise(const QDateTime &sunRise)
 {
-    m_sunRise = sunRise;
+    d->sunRise = sunRise;
 }
-inline void Sunrise::setSunSet(const QDateTime &sunSet)
+void Sunrise::setSunSet(const QDateTime &sunSet)
 {
-    m_sunSet = sunSet;
+    d->sunSet = sunSet;
 }
-inline void Sunrise::setMoonRise(const QDateTime &moonRise)
+void Sunrise::setMoonRise(const QDateTime &moonRise)
 {
-    m_moonRise = moonRise;
+    d->moonRise = moonRise;
 }
-inline void Sunrise::setMoonSet(const QDateTime &moonSet)
+void Sunrise::setMoonSet(const QDateTime &moonSet)
 {
-    m_moonSet = moonSet;
+    d->moonSet = moonSet;
 }
-inline void Sunrise::setMoonPhase(double moonPhase)
+void Sunrise::setMoonPhase(double moonPhase)
 {
-    m_moonPhase = moonPhase;
+    d->moonPhase = moonPhase;
 }
 }
