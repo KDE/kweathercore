@@ -32,7 +32,6 @@ public:
      * @param parent
      */
     GeoTimezone(double lat, double lon, QObject *parent = nullptr);
-    ~GeoTimezone();
 
 Q_SIGNALS:
     /**

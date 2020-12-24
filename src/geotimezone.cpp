@@ -61,10 +61,6 @@ GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
     , d(new GeoTimezonePrivate(lat, lon, this))
 {
 }
-GeoTimezone::~GeoTimezone()
-{
-    d->deleteLater();
-}
 void GeoTimezonePrivate::downloadFinished(QNetworkReply *reply)
 {
     reply->deleteLater();
