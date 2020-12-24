@@ -12,6 +12,7 @@ class QNetworkReply;
 class QNetworkAccessManager;
 namespace KWeatherCore
 {
+class GeoTimezonePrivate;
 /**
  * @short Class to obtain timezone via coordinate
  *
@@ -31,6 +32,7 @@ public:
      * @param parent
      */
     GeoTimezone(double lat, double lon, QObject *parent = nullptr);
+    ~GeoTimezone();
 
 Q_SIGNALS:
     /**
@@ -42,10 +44,8 @@ Q_SIGNALS:
      * @brief networkError encounted network error
      */
     void networkError();
-private Q_SLOTS:
-    void downloadFinished(QNetworkReply *reply);
 
 private:
-    QNetworkAccessManager *m_manager = nullptr;
+    GeoTimezonePrivate *d;
 };
 }

@@ -13,7 +13,20 @@
 #include <QUrlQuery>
 namespace KWeatherCore
 {
-GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
+class GeoTimezonePrivate : public QObject
+{
+public:
+    GeoTimezonePrivate(double lat, double lon, GeoTimezone *parent);
+Q_SIGNALS:
+    void finished(const QString &timezone);
+    void networkError();
+private Q_SLOTS:
+    void downloadFinished(QNetworkReply *reply);
+    QNetworkAccessManager *m_manager = nullptr;
+};
+GeoTimezonePrivate::GeoTimezonePrivate(double lat,
+                                       double lon,
+                                       GeoTimezone *parent)
     : QObject(parent)
 {
     m_manager = new QNetworkAccessManager(this);
@@ -34,11 +47,25 @@ GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
     connect(m_manager,
             &QNetworkAccessManager::finished,
             this,
-            &GeoTimezone::downloadFinished);
+            &GeoTimezonePrivate::downloadFinished);
+    connect(
+        this, &GeoTimezonePrivate::finished, parent, &GeoTimezone::finished);
+    connect(this,
+            &GeoTimezonePrivate::networkError,
+            parent,
+            &GeoTimezone::networkError);
     m_manager->get(req);
 }
-
-void GeoTimezone::downloadFinished(QNetworkReply *reply)
+GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
+    : QObject(parent)
+    , d(new GeoTimezonePrivate(lat, lon, this))
+{
+}
+GeoTimezone::~GeoTimezone()
+{
+    d->deleteLater();
+}
+void GeoTimezonePrivate::downloadFinished(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
@@ -55,3 +82,4 @@ void GeoTimezone::downloadFinished(QNetworkReply *reply)
     Q_EMIT finished(doc[QStringLiteral("timezoneId")].toString());
 }
 }
+#include "geotimezone.moc"
