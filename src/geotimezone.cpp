@@ -15,6 +15,7 @@ namespace KWeatherCore
 {
 class GeoTimezonePrivate : public QObject
 {
+    Q_OBJECT
 public:
     GeoTimezonePrivate(double lat, double lon, GeoTimezone *parent);
 Q_SIGNALS:
