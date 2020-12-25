@@ -188,7 +188,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
 
     Q_EMIT finished();
 }
-inline void SunriseSource::setOffset(int offset)
+void SunriseSource::setOffset(int offset)
 {
     m_offset = offset;
 }

@@ -23,6 +23,8 @@ Q_SIGNALS:
     void networkError();
 private Q_SLOTS:
     void downloadFinished(QNetworkReply *reply);
+
+private:
     QNetworkAccessManager *m_manager = nullptr;
 };
 GeoTimezonePrivate::GeoTimezonePrivate(double lat,

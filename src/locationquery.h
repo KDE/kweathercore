@@ -59,7 +59,6 @@ public:
      * @brief LocationQuery
      */
     LocationQuery(QObject *parent = nullptr);
-    ~LocationQuery();
     /**
      * @brief query query locations by name
      * @param name name of location, not necessary in English

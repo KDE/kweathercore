@@ -43,10 +43,9 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
             parent,
             &PendingWeatherForecast::networkError);
     if (reply) {
-        connect(reply,
-                &QNetworkReply::finished,
-                this,
-                &PendingWeatherForecastPrivate::parseWeatherForecastResults);
+        connect(reply, &QNetworkReply::finished, [this, reply] {
+            this->parseWeatherForecastResults(reply);
+        });
     }
 
     m_sunriseSource = new SunriseSource(latitude, longitude, 0, sunrise, this);

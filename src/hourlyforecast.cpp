@@ -178,6 +178,7 @@ QString HourlyWeatherForecast::windDirectionStr() const
     case WindDirection::W:
         return QStringLiteral("W");
     }
+    return QStringLiteral("E");
 }
 void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
 {

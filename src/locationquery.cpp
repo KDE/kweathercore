@@ -120,10 +120,9 @@ void LocationQueryPrivate::query(QString name, int number)
                           QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
     auto reply = manager->get(QNetworkRequest(url));
-    connect(reply,
-            &QNetworkReply::finished,
-            this,
-            &LocationQueryPrivate::handleQueryResult);
+    connect(reply, &QNetworkReply::finished, [this, reply] {
+        this->handleQueryResult(reply);
+    });
 }
 void LocationQuery::locate()
 {
