@@ -11,6 +11,7 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
+class WeatherForecastPrivate;
 /**
  * @short The WeatherForecast class contains the weather information of one
  * location for days
@@ -26,6 +27,7 @@ public:
      * @brief construct an empty object
      */
     WeatherForecast();
+    ~WeatherForecast();
     /**
      * @brief convert to QJsonObject
      */
@@ -38,66 +40,30 @@ public:
     /**
      * @return daily weather forecast
      */
-    const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const
-    {
-        return m_dailyWeatherForecast;
-    };
-    double latitude() const
-    {
-        return m_latitude;
-    };
-    double longitude() const
-    {
-        return m_longitude;
-    };
+    const std::vector<DailyWeatherForecast> &dailyWeatherForecast() const;
+    double latitude() const;
+    double longitude() const;
     /**
      * @return the time this forecast object was created, this value won't
      * change once constructed
      */
-    const QDateTime &createdTime() const
-    {
-        return m_createdTime;
-    };
-    /**
-     * @brief internal std::vector
-     * @return
-     */
-    std::vector<DailyWeatherForecast> &dailyWeatherForecast()
-    {
-        return m_dailyWeatherForecast;
-    };
+    const QDateTime &createdTime() const;
     /**
      * @brief IANA Time Zone ID
      * @return
      */
-    const QString &timezone() const
-    {
-        return m_timezone;
-    };
+    const QString &timezone() const;
     /**
      * @brief setCoordinate
      */
-    void setCoordinate(double latitude, double longitude)
-    {
-        m_latitude = latitude;
-        m_longitude = longitude;
-    };
+    void setCoordinate(double latitude, double longitude);
     /**
      * @param timezone valid IANA Time Zone ID
      */
-    void setTimezone(QString timezone)
-    {
-        m_timezone = std::move(timezone);
-    };
+    void setTimezone(QString timezone);
     void
-    setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
-    {
-        m_dailyWeatherForecast = forecast;
-    };
-    void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
-    {
-        m_dailyWeatherForecast = std::move(forecast);
-    };
+    setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
+    void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
      * @brief the vector should be sorted
      */
@@ -125,10 +91,6 @@ public:
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 
 private:
-    std::vector<DailyWeatherForecast> m_dailyWeatherForecast;
-    // std::vector<Sunrise> m_sunriseForecast;
-    QString m_timezone;
-    double m_latitude, m_longitude;
-    QDateTime m_createdTime;
+    WeatherForecastPrivate *d;
 };
 }

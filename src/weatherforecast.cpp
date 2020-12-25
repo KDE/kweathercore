@@ -8,9 +8,22 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
-WeatherForecast::WeatherForecast()
+class WeatherForecastPrivate
 {
-    m_createdTime = QDateTime::currentDateTime();
+public:
+    std::vector<DailyWeatherForecast> dailyWeatherForecast;
+    QString timezone;
+    double latitude, longitude;
+    QDateTime createdTime = QDateTime::currentDateTime();
+};
+
+WeatherForecast::WeatherForecast()
+    : d(new WeatherForecastPrivate)
+{
+}
+WeatherForecast::~WeatherForecast()
+{
+    delete d;
 }
 QJsonObject WeatherForecast::toJson() const
 {
@@ -39,11 +52,50 @@ WeatherForecast::fromJson(QJsonObject obj)
     w->setTimezone(obj[QStringLiteral("timezone")].toString());
     return w;
 }
-
+const std::vector<DailyWeatherForecast> &
+WeatherForecast::dailyWeatherForecast() const
+{
+    return d->dailyWeatherForecast;
+}
+double WeatherForecast::latitude() const
+{
+    return d->latitude;
+}
+double WeatherForecast::longitude() const
+{
+    return d->longitude;
+}
+const QDateTime &WeatherForecast::createdTime() const
+{
+    return d->createdTime;
+}
+const QString &WeatherForecast::timezone() const
+{
+    return d->timezone;
+}
+void WeatherForecast::setCoordinate(double latitude, double longitude)
+{
+    d->latitude = latitude;
+    d->longitude = longitude;
+}
+void WeatherForecast::setTimezone(QString timezone)
+{
+    d->timezone = std::move(timezone);
+}
+void WeatherForecast::setDailyWeatherForecast(
+    const std::vector<DailyWeatherForecast> &forecast)
+{
+    d->dailyWeatherForecast = forecast;
+}
+void WeatherForecast::setDailyWeatherForecast(
+    std::vector<DailyWeatherForecast> &&forecast)
+{
+    d->dailyWeatherForecast = std::move(forecast);
+}
 void WeatherForecast::setSunriseForecast(const std::vector<Sunrise> &sunrise)
 {
     int i = 0, range = sunrise.size();
-    for (auto day : m_dailyWeatherForecast) {
+    for (auto day : d->dailyWeatherForecast) {
         if (i >= range)
             break;
         // if on the same day, add sunrise to day
@@ -56,7 +108,7 @@ void WeatherForecast::setSunriseForecast(const std::vector<Sunrise> &sunrise)
 void WeatherForecast::setSunriseForecast(std::vector<Sunrise> &&sunrise)
 {
     int i = 0, range = sunrise.size();
-    for (auto day : m_dailyWeatherForecast) {
+    for (auto day : d->dailyWeatherForecast) {
         if (i >= range)
             break;
         // if on the same day, add sunrise to day
@@ -71,26 +123,26 @@ WeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
         if (dailyWeatherForecast().at(i) == forecast) {
-            dailyWeatherForecast()[i] += forecast;
+            d->dailyWeatherForecast[i] += forecast;
             return *this;
         }
     }
 
     // if not find, append it at end
-    dailyWeatherForecast().push_back(forecast);
+    d->dailyWeatherForecast.push_back(forecast);
     return *this;
 }
 WeatherForecast &WeatherForecast::operator+=(DailyWeatherForecast &&forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
         if (dailyWeatherForecast().at(i) == forecast) {
-            dailyWeatherForecast()[i] += forecast;
+            d->dailyWeatherForecast[i] += forecast;
             return *this;
         }
     }
 
     // if not find, append it at end
-    dailyWeatherForecast().push_back(std::move(forecast));
+    d->dailyWeatherForecast.push_back(std::move(forecast));
     return *this;
 }
 WeatherForecast &
@@ -100,7 +152,7 @@ WeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
         if (dailyWeatherForecast().at(i).date().isValid() &&
             dailyWeatherForecast().at(i).date().daysTo(
                 forecast.date().date()) == 0) {
-            dailyWeatherForecast()[i] += forecast;
+            d->dailyWeatherForecast[i] += forecast;
             return *this;
         } else {
             break;
@@ -108,9 +160,9 @@ WeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
     }
 
     // if not find, append it at end
-    auto newDay = DailyWeatherForecast();
+    DailyWeatherForecast newDay;
     newDay += forecast;
-    dailyWeatherForecast().push_back(std::move(newDay));
+    d->dailyWeatherForecast.push_back(std::move(newDay));
     return *this;
 }
 WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
@@ -118,7 +170,7 @@ WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
         if (dailyWeatherForecast().at(i).date().daysTo(
                 forecast.date().date()) == 0) {
-            dailyWeatherForecast()[i] += std::move(forecast);
+            d->dailyWeatherForecast[i] += std::move(forecast);
             return *this;
         }
     }
@@ -126,7 +178,7 @@ WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
     // if not find, append it at end
     auto newDay = DailyWeatherForecast();
     newDay += forecast;
-    dailyWeatherForecast().push_back(std::move(newDay));
+    d->dailyWeatherForecast.push_back(std::move(newDay));
     return *this;
 }
 
