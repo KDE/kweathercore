@@ -57,7 +57,7 @@ LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
         this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
 }
 
-inline void LocationQueryPrivate::requestUpdate()
+void LocationQueryPrivate::requestUpdate()
 {
     locationSource->requestUpdate();
 }
