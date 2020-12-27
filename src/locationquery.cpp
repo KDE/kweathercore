@@ -63,29 +63,25 @@ void LocationQueryPrivate::requestUpdate()
 }
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
-    auto roundCoordinate = [](QString coordinate)-> QString {
+    auto roundCoordinate = [](QString coordinate) -> QString {
         auto pointPos = coordinate.indexOf(QLatin1Char('.'));
         coordinate.truncate(pointPos + 3);
         return coordinate;
     };
     auto lat = roundCoordinate(QString::number(update.coordinate().latitude()));
-    auto lon = roundCoordinate(QString::number(update.coordinate().longitude()));
+    auto lon =
+        roundCoordinate(QString::number(update.coordinate().longitude()));
     QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
     QUrlQuery urlQuery;
 
     urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
-    urlQuery.addQueryItem(
-        QStringLiteral("lat"),
-        lat);
-    urlQuery.addQueryItem(
-        QStringLiteral("lon"),
-        lon);
+    urlQuery.addQueryItem(QStringLiteral("lat"), lat);
+    urlQuery.addQueryItem(QStringLiteral("lon"), lon);
     urlQuery.addQueryItem(QStringLiteral("email"),
                           QStringLiteral("hanyoung@protonmail.com"));
     url.setQuery(urlQuery);
 
-    qWarning() << "lat: " << lat
-               << "lon: " << lon;
+    qWarning() << "lat: " << lat << "lon: " << lon;
     auto reply = manager->get(QNetworkRequest(url));
 
     connect(reply, &QNetworkReply::finished, [this, update, reply] {
@@ -129,7 +125,7 @@ void LocationQueryPrivate::query(QString name, int number)
     url.setQuery(urlQuery);
 
     auto reply = manager->get(QNetworkRequest(url));
-    connect(reply, &QNetworkReply::finished, [reply, this]{
+    connect(reply, &QNetworkReply::finished, [reply, this] {
         this->handleQueryResult(reply);
     });
 }
@@ -149,7 +145,7 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
         Q_EMIT queryError();
         return;
     }
-    std::vector<LocationQueryResult> retVec(counts);
+    std::vector<LocationQueryResult> retVec;
 
     // if our api calls reached daily limit
     if (root[QStringLiteral("status")]

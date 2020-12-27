@@ -7,6 +7,7 @@
 
 #pragma once
 #include <QMetaType>
+#include <QSharedPointer>
 #include <QString>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
@@ -33,7 +34,7 @@ class KWEATHERCORE_EXPORT LocationQueryResult
     Q_PROPERTY(QString geonameId READ geonameId)
 public:
     // for QMetaType
-    LocationQueryResult(){};
+    LocationQueryResult();
     /**
      * @brief LocationQueryResult construct location result with given data
      * @param latitude latitude
@@ -51,7 +52,7 @@ public:
                         QString countryCode = QString(),
                         QString countryName = QString(),
                         QString geonameId = QString());
-    ~LocationQueryResult();
+
     double latitude() const;
 
     double longitude() const;
@@ -77,7 +78,7 @@ public:
     const QString &geonameId() const;
 
 private:
-    LocationQueryResultPrivate *d;
+    QSharedPointer<LocationQueryResultPrivate> d = nullptr;
 };
 }
 Q_DECLARE_METATYPE(KWeatherCore::LocationQueryResult)
