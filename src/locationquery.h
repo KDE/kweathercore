@@ -74,7 +74,7 @@ Q_SIGNALS:
     /**
      * @brief the name search has completed
      */
-    void queryFinished(const std::vector<LocationQueryResult> &result);
+    void queryFinished(std::vector<LocationQueryResult> result);
     /**
      * @brief current location has been determined
      */

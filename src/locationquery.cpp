@@ -18,20 +18,20 @@ class LocationQueryPrivate : public QObject
 {
     Q_OBJECT
 public:
-    LocationQueryPrivate(LocationQuery *parent = nullptr);
+    LocationQueryPrivate(LocationQuery *parent);
     void requestUpdate();
     void query(QString name, int number);
 Q_SIGNALS:
     void located(const LocationQueryResult &);
-    void queryFinished(const std::vector<LocationQueryResult> &result);
+    void queryFinished(std::vector<LocationQueryResult> result);
     void queryError();
 private Q_SLOTS:
     void positionUpdated(const QGeoPositionInfo &update);
     void handleQueryResult(QNetworkReply *reply);
 
 private:
-    QGeoPositionInfoSource *locationSource = nullptr;
     QNetworkAccessManager *manager = nullptr;
+    QGeoPositionInfoSource *locationSource = nullptr;
 };
 
 LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
@@ -63,22 +63,29 @@ void LocationQueryPrivate::requestUpdate()
 }
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
+    auto roundCoordinate = [](QString coordinate)-> QString {
+        auto pointPos = coordinate.indexOf(QLatin1Char('.'));
+        coordinate.truncate(pointPos + 3);
+        return coordinate;
+    };
+    auto lat = roundCoordinate(QString::number(update.coordinate().latitude()));
+    auto lon = roundCoordinate(QString::number(update.coordinate().longitude()));
     QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
     QUrlQuery urlQuery;
 
     urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
     urlQuery.addQueryItem(
         QStringLiteral("lat"),
-        QString::number(update.coordinate().latitude(), 'g', 2));
+        lat);
     urlQuery.addQueryItem(
         QStringLiteral("lon"),
-        QString::number(update.coordinate().longitude(), 'g', 2));
+        lon);
     urlQuery.addQueryItem(QStringLiteral("email"),
                           QStringLiteral("hanyoung@protonmail.com"));
     url.setQuery(urlQuery);
 
-    qWarning() << "lat: " << update.coordinate().latitude()
-               << "lon: " << update.coordinate().longitude();
+    qWarning() << "lat: " << lat
+               << "lon: " << lon;
     auto reply = manager->get(QNetworkRequest(url));
 
     connect(reply, &QNetworkReply::finished, [this, update, reply] {
@@ -96,12 +103,13 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
                                     .toObject()[QStringLiteral("country")]
                                     .toString(),
                                 root[QStringLiteral("osm_id")].toString()));
+        qWarning() << root;
         reply->deleteLater();
     });
 }
 LocationQuery::LocationQuery(QObject *parent)
     : QObject(parent)
-    , d(new LocationQueryPrivate())
+    , d(new LocationQueryPrivate(this))
 {
 }
 void LocationQuery::query(QString name, int number)
@@ -119,8 +127,9 @@ void LocationQueryPrivate::query(QString name, int number)
     urlQuery.addQueryItem(QStringLiteral("username"),
                           QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
+
     auto reply = manager->get(QNetworkRequest(url));
-    connect(reply, &QNetworkReply::finished, [this, reply] {
+    connect(reply, &QNetworkReply::finished, [reply, this]{
         this->handleQueryResult(reply);
     });
 }
