@@ -1,7 +1,7 @@
 /*
  * Copyright 2020 Han Young <hanyoung@protonmail.com>
  *
- * SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
 
