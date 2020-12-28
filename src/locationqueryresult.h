@@ -7,12 +7,16 @@
 
 #pragma once
 #include <QMetaType>
-#include <QSharedPointer>
 #include <QString>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class LocationQueryResultPrivate;
+class LocationQueryResultPrivate
+{
+public:
+    double latitude, longitude;
+    QString toponymName, name, countryCode, countryName, geonameId;
+};
 /**
  * @short Class represents location query result
  *
@@ -52,7 +56,8 @@ public:
                         QString countryCode = QString(),
                         QString countryName = QString(),
                         QString geonameId = QString());
-
+    LocationQueryResult(const LocationQueryResult &other);
+    LocationQueryResult &operator=(const LocationQueryResult &);
     double latitude() const;
 
     double longitude() const;
@@ -78,7 +83,7 @@ public:
     const QString &geonameId() const;
 
 private:
-    QSharedPointer<LocationQueryResultPrivate> d = nullptr;
+    std::unique_ptr<LocationQueryResultPrivate> d;
 };
 }
 Q_DECLARE_METATYPE(KWeatherCore::LocationQueryResult)

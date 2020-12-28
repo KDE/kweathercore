@@ -8,12 +8,6 @@
 #include <memory>
 namespace KWeatherCore
 {
-class LocationQueryResultPrivate
-{
-public:
-    double latitude, longitude;
-    QString toponymName, name, countryCode, countryName, geonameId;
-};
 LocationQueryResult::LocationQueryResult()
     : d(new LocationQueryResultPrivate())
 {
@@ -35,7 +29,17 @@ LocationQueryResult::LocationQueryResult(double latitude,
     d->countryName = std::move(countryName);
     d->geonameId = std::move(geonameId);
 }
-
+LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
+    : d(new LocationQueryResultPrivate())
+{
+    *d = *other.d;
+}
+LocationQueryResult &
+LocationQueryResult::operator=(const LocationQueryResult &other)
+{
+    *d = *other.d;
+    return *this;
+}
 double LocationQueryResult::latitude() const
 {
     return d->latitude;
