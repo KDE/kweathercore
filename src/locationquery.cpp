@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "locationquery.h"
+#include "kweathercore_p.h"
 #include <QGeoPositionInfoSource>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -71,35 +72,34 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
     auto lat = roundCoordinate(QString::number(update.coordinate().latitude()));
     auto lon =
         roundCoordinate(QString::number(update.coordinate().longitude()));
-    QUrl url(QStringLiteral("https://nominatim.openstreetmap.org/reverse"));
+    QUrl url(QStringLiteral("http://api.geonames.org/findNearbyJSON"));
     QUrlQuery urlQuery;
 
-    urlQuery.addQueryItem(QStringLiteral("format"), QStringLiteral("jsonv2"));
     urlQuery.addQueryItem(QStringLiteral("lat"), lat);
-    urlQuery.addQueryItem(QStringLiteral("lon"), lon);
-    urlQuery.addQueryItem(QStringLiteral("email"),
-                          QStringLiteral("hanyoung@protonmail.com"));
+    urlQuery.addQueryItem(QStringLiteral("lng"), lon);
+    urlQuery.addQueryItem(QStringLiteral("username"),
+                          QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
 
+    auto req = QNetworkRequest(url);
+
     qWarning() << "lat: " << lat << "lon: " << lon;
-    auto reply = manager->get(QNetworkRequest(url));
+    auto reply = manager->get(req);
 
     connect(reply, &QNetworkReply::finished, [this, update, reply] {
         QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
         QJsonObject root = document.object();
-        Q_EMIT this->located(
-            LocationQueryResult(update.coordinate().latitude(),
-                                update.coordinate().longitude(),
-                                root[QStringLiteral("display_name")].toString(),
-                                root[QStringLiteral("name")].toString(),
-                                root[QStringLiteral("address")]
-                                    .toObject()[QStringLiteral("country_code")]
-                                    .toString(),
-                                root[QStringLiteral("address")]
-                                    .toObject()[QStringLiteral("country")]
-                                    .toString(),
-                                root[QStringLiteral("osm_id")].toString()));
-        qWarning() << root;
+        auto array = root[QStringLiteral("geonames")].toArray();
+        if (array.size()) {
+            Q_EMIT this->located(LocationQueryResult(
+                update.coordinate().latitude(),
+                update.coordinate().longitude(),
+                array.at(0)[QStringLiteral("toponymName")].toString(),
+                array.at(0)[QStringLiteral("name")].toString(),
+                array.at(0)[QStringLiteral("countryCode")].toString(),
+                array.at(0)[QStringLiteral("countryName")].toString(),
+                QString::number(root[QStringLiteral("geonameId")].toInt())));
+        }
         reply->deleteLater();
     });
 }
