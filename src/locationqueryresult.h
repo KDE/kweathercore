@@ -11,7 +11,12 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class LocationQueryResultPrivate;
+class LocationQueryResultPrivate
+{
+public:
+    double latitude, longitude;
+    QString toponymName, name, countryCode, countryName, geonameId;
+};
 /**
  * @short Class represents location query result
  *
@@ -33,7 +38,7 @@ class KWEATHERCORE_EXPORT LocationQueryResult
     Q_PROPERTY(QString geonameId READ geonameId)
 public:
     // for QMetaType
-    LocationQueryResult(){};
+    LocationQueryResult();
     /**
      * @brief LocationQueryResult construct location result with given data
      * @param latitude latitude
@@ -51,7 +56,8 @@ public:
                         QString countryCode = QString(),
                         QString countryName = QString(),
                         QString geonameId = QString());
-    ~LocationQueryResult();
+    LocationQueryResult(const LocationQueryResult &other);
+    LocationQueryResult &operator=(const LocationQueryResult &);
     double latitude() const;
 
     double longitude() const;
@@ -77,7 +83,7 @@ public:
     const QString &geonameId() const;
 
 private:
-    LocationQueryResultPrivate *d;
+    std::unique_ptr<LocationQueryResultPrivate> d;
 };
 }
 Q_DECLARE_METATYPE(KWeatherCore::LocationQueryResult)

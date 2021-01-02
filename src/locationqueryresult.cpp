@@ -4,16 +4,14 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-#include "locationquery.h"
+#include "locationqueryresult.h"
+#include <memory>
 namespace KWeatherCore
 {
-class LocationQueryResultPrivate
+LocationQueryResult::LocationQueryResult()
+    : d(new LocationQueryResultPrivate())
 {
-public:
-    double latitude, longitude;
-    QString toponymName, name, countryCode, countryName, geonameId;
-};
-
+}
 LocationQueryResult::LocationQueryResult(double latitude,
                                          double longitude,
                                          QString toponymName,
@@ -31,9 +29,16 @@ LocationQueryResult::LocationQueryResult(double latitude,
     d->countryName = std::move(countryName);
     d->geonameId = std::move(geonameId);
 }
-LocationQueryResult::~LocationQueryResult()
+LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
+    : d(new LocationQueryResultPrivate())
 {
-    //delete d;
+    *d = *other.d;
+}
+LocationQueryResult &
+LocationQueryResult::operator=(const LocationQueryResult &other)
+{
+    *d = *other.d;
+    return *this;
 }
 double LocationQueryResult::latitude() const
 {

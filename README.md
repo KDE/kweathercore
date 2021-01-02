@@ -21,6 +21,10 @@ Features:
 * [LocationQuery](\ref LocationQuery) Query places by name or locate the current position
 * [GeoTimezone](\ref GeoTimezone) Class to obtain timezone via coordinate
 
+## Services Used
+* [Norwegian Meteorological Institute](https://www.met.no/) WeatherForecast and Sunrise data
+* [Geonames.org](https://geonames.org) Location name search
+
 ## Links
 
 - Mailing list: <https://mail.kde.org/mailman/listinfo/kde-devel>
