@@ -8,6 +8,7 @@
 #pragma once
 #include <QMetaType>
 #include <QString>
+#include <memory>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
