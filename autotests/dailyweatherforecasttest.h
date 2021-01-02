@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
