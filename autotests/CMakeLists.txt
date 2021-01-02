@@ -6,8 +6,8 @@ include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../src")
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/../src")
 
 ecm_add_tests(
-    hourlyforecasttest.cpp
-    dailyforecasttest.cpp
+    hourlyweatherforecasttest.cpp
+    dailyweatherforecasttest.cpp
     weatherforecasttest.cpp
     sunrisetest.cpp
     geotimezonetest.cpp

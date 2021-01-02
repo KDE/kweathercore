@@ -27,22 +27,21 @@ class KWEATHERCORE_EXPORT GeoTimezone : public QObject
 public:
     /**
      * @brief GeoTimezone
-     * @param lat latitude
-     * @param lon longitude
-     * @param parent
+     * @param latitude latitude for the request location
+     * @param longitude longitude for the request location
      */
-    GeoTimezone(double lat, double lon, QObject *parent = nullptr);
+    GeoTimezone(double latitude, double longitude, QObject *parent = nullptr);
 
 Q_SIGNALS:
     /**
-     * @brief finished
-     * @param timezone
+     * @brief finished emit when the timezone has been obtained
+     * @param timezone IANA timezone string
      */
     void finished(const QString &timezone);
     /**
      * @brief networkError encounted network error
      */
-    void networkError();
+    void networkErrorOccured();
 
 private:
     GeoTimezonePrivate *d;

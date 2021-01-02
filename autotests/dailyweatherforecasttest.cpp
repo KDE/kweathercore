@@ -3,8 +3,8 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-#include "dailyforecasttest.h"
-#include <kweathercore/hourlyforecast.h>
+#include "dailyweatherforecasttest.h"
+#include <kweathercore/hourlyweatherforecast.h>
 #include <kweathercore/sunrise.h>
 
 using namespace KWeatherCore;

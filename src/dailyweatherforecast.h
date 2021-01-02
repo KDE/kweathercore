@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "hourlyforecast.h"
+#include "hourlyweatherforecast.h"
 #include "sunrise.h"
 #include <QDate>
 #include <QJsonObject>
@@ -63,11 +63,11 @@ public:
                          QString weatherIcon,
                          QString weatherDescription,
                          QDate date);
+    ~DailyWeatherForecast();
     /**
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
      */
-    ~DailyWeatherForecast();
     QJsonObject toJson();
     /**
      * Construct a DailyWeatherForecast from QJsonObject
@@ -124,12 +124,12 @@ public:
      * @param date
      */
     void setDate(QDate date);
+    KWEATHERCORE_NO_EXPORT void setJsDate(const QDateTime &date);
     /**
      * @brief return maximum temperature
      * @return maximum temperature, this value is initialized to the smallest
      * value double can hold
      */
-    KWEATHERCORE_NO_EXPORT void setJsDate(const QDateTime &date);
     double maxTemp() const;
     /**
      * @brief return minimum temperature
@@ -173,11 +173,11 @@ public:
      * @return date, date can be invalid if constructed without data
      */
     const QDate &date() const;
+    KWEATHERCORE_NO_EXPORT QDateTime jsDate() const;
     /**
      * @brief return sunrise data
      * @return sunrise data
      */
-    KWEATHERCORE_NO_EXPORT QDateTime jsDate() const;
     const Sunrise &sunrise() const;
     /**
      * @brief returns all HourlyWeathreForecast belonged to this day

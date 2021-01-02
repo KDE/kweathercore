@@ -20,7 +20,7 @@ public:
     GeoTimezonePrivate(double lat, double lon, GeoTimezone *parent);
 Q_SIGNALS:
     void finished(const QString &timezone);
-    void networkError();
+    void networkErrorOccured();
 private Q_SLOTS:
     void downloadFinished(QNetworkReply *reply);
 
@@ -54,9 +54,9 @@ GeoTimezonePrivate::GeoTimezonePrivate(double lat,
     connect(
         this, &GeoTimezonePrivate::finished, parent, &GeoTimezone::finished);
     connect(this,
-            &GeoTimezonePrivate::networkError,
+            &GeoTimezonePrivate::networkErrorOccured,
             parent,
-            &GeoTimezone::networkError);
+            &GeoTimezone::networkErrorOccured);
     m_manager->get(req);
 }
 GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)
@@ -68,7 +68,7 @@ void GeoTimezonePrivate::downloadFinished(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
-        Q_EMIT networkError();
+        Q_EMIT networkErrorOccured();
         return;
     }
 

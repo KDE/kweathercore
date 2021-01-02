@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "weatherforecasttest.h"
-#include <kweathercore/dailyforecast.h>
-#include <kweathercore/hourlyforecast.h>
+#include <kweathercore/dailyweatherforecast.h>
+#include <kweathercore/hourlyweatherforecast.h>
 void WeatherForecastTest::testHourlyMerge()
 {
     auto date = QDateTime::currentDateTime();

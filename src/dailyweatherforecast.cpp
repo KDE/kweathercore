@@ -4,7 +4,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-#include "dailyforecast.h"
+#include "dailyweatherforecast.h"
 #include "kweathercore_p.h"
 #include "pendingweatherforecast_p.h"
 #include <QJsonArray>
@@ -15,15 +15,15 @@ class DailyWeatherForecastPrivate
 public:
     bool isNull = true;
 
-    double maxTemp = std::numeric_limits<double>::min();
+    double maxTemp = std::numeric_limits<double>::lowest();
     double minTemp = std::numeric_limits<double>::max();
     double precipitation = 0; // mm
     double uvIndex = 0; // 0-1
     double humidity = 0; // %
     double pressure = 0; // hPa
-    QString weatherIcon = QStringLiteral("Unknown");
-    QString weatherDescription = QStringLiteral("weather-none-available");
-    QDate date = QDate();
+    QString weatherIcon = QStringLiteral("weather-none-available");
+    QString weatherDescription = QStringLiteral("Unknown");
+    QDate date;
 
     Sunrise sunrise;
     std::vector<HourlyWeatherForecast> hourlyWeatherForecast;

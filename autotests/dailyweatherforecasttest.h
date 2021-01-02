@@ -7,7 +7,7 @@
 
 #include <QObject>
 #include <QTest>
-#include <kweathercore/dailyforecast.h>
+#include <kweathercore/dailyweatherforecast.h>
 
 using namespace KWeatherCore;
 

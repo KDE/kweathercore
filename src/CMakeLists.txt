@@ -3,8 +3,8 @@ set(kweathercore_LIB_SRCS
     locationqueryresult.cpp
     weatherforecastsource.cpp
     weatherforecast.cpp
-    hourlyforecast.cpp
-    dailyforecast.cpp
+    hourlyweatherforecast.cpp
+    dailyweatherforecast.cpp
     geotimezone.cpp
     pendingweatherforecast.cpp
     sunrise.cpp
@@ -35,8 +35,8 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     HEADER_NAMES
     LocationQuery
     LocationQueryResult
-    DailyForecast
-    HourlyForecast
+    DailyWeatherForecast
+    HourlyWeatherForecast
     PendingWeatherForecast
     Sunrise
     SunriseSource

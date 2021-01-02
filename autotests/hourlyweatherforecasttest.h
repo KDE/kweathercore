@@ -5,7 +5,7 @@
  */
 #pragma once
 #include <QTest>
-#include <kweathercore/hourlyforecast.h>
+#include <kweathercore/hourlyweatherforecast.h>
 using namespace KWeatherCore;
 class HourlyForecastTest : public QObject
 {

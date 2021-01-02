@@ -4,7 +4,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-#include "hourlyforecast.h"
+#include "hourlyweatherforecast.h"
 #include <KLocalizedString>
 namespace KWeatherCore
 {

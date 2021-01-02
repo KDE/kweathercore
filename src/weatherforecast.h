@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "dailyforecast.h"
+#include "dailyweatherforecast.h"
 #include "sunrise.h"
 #include <QSharedData>
 #include <kweathercore/kweathercore_export.h>

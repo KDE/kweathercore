@@ -21,7 +21,7 @@ LocationQueryResult::LocationQueryResult(double latitude,
                                          QString countryCode,
                                          QString countryName,
                                          QString geonameId)
-    : d(new LocationQueryResultPrivate)
+    : d(new LocationQueryResultPrivate())
 {
     d->latitude = latitude;
     d->longitude = longitude;
@@ -33,7 +33,7 @@ LocationQueryResult::LocationQueryResult(double latitude,
 }
 LocationQueryResult::~LocationQueryResult()
 {
-    delete d;
+    //delete d;
 }
 double LocationQueryResult::latitude() const
 {
