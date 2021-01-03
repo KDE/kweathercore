@@ -6,14 +6,32 @@
  */
 
 #pragma once
+#include <memory>
 #include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class HourlyWeatherForecastPrivate;
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
+class HourlyWeatherForecastPrivate
+{
+public:
+    QDateTime date = QDateTime::currentDateTime();
+    QString weatherDescription = QStringLiteral("Unknown");
+    QString weatherIcon = QStringLiteral("weather-none-available");
+    // weather icon without time of day
+    QString neutralWeatherIcon = QStringLiteral("weather-none-available");
+    QString symbolCode;
+    double temperature = 0; // celsius
+    double pressure = 0; // hPa
+    WindDirection windDirection = WindDirection::E;
+    double windSpeed = 0; // m/s
+    double humidity = 0; // %
+    double fog = 0; // %
+    double uvIndex = 0; // 0-1
+    double precipitationAmount = 0; // mm
+};
 /**
  * @short Class represents weatherforecast in a hour
  *
@@ -47,34 +65,7 @@ public:
      * HourlyWeatherForecast construct a null forecast
      */
     HourlyWeatherForecast();
-    /**
-     * HourlyWeatherForecast construct a forecast with given data
-     * @param date start time of the forecast
-     * @param weatherDescription description of weather
-     * @param weatherIcon icon of the weather
-     * @param neutralWeatherIcon icon without "day" or "night" attached
-     * @param temperature temperature, in celsius
-     * @param pressure pressure, in hpa
-     * @param windDirection scoped enum
-     * @param windSpeed wind speed, in km/h
-     * @param humidity humidity,in percentage
-     * @param fog fog, in percentage
-     * @param uvIndex uv index, 0-1
-     * @param precipitationAmount precipitation, in mm
-     */
-    HourlyWeatherForecast(QDateTime date,
-                          QString weatherDescription,
-                          QString weatherIcon,
-                          QString neutralWeatherIcon,
-                          double temperature,
-                          double pressure,
-                          WindDirection windDirection,
-                          double windSpeed,
-                          double humidity,
-                          double fog,
-                          double uvIndex,
-                          double precipitationAmount);
-    ~HourlyWeatherForecast();
+    HourlyWeatherForecast(const HourlyWeatherForecast &other);
     /**
      * convert this to QJsonObject
      */
@@ -195,8 +186,8 @@ public:
      * @return true if date, weather icon and description is same
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
-
+    HourlyWeatherForecast &operator=(const HourlyWeatherForecast &other);
 private:
-    HourlyWeatherForecastPrivate *d;
+    std::unique_ptr<HourlyWeatherForecastPrivate> d;
 };
 }

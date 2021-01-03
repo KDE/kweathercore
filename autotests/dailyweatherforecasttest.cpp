@@ -17,8 +17,21 @@ void DailyForecastTest::testNull()
 void DailyForecastTest::testHourlyMerge()
 {
     for (int i = 0; i < 24; ++i)
-        d1 += HourlyWeatherForecast(QDateTime::currentDateTime().addSecs(i * 3600), QStringLiteral("sunny"), QStringLiteral("sunny"), QString(), 25, 100, WindDirection::E, 5, 0.8, 0.1, 0.1, 0);
+    {
+        HourlyWeatherForecast h;
+        h.setDate(QDateTime::currentDateTime().addSecs(i * 3600));
+        h.setWeatherDescription(QStringLiteral("sunny"));
+        h.setWeatherIcon(QStringLiteral("sunny"));
+        h.setTemperature(25);
+        h.setPressure(100);
+        h.setWindDirection(WindDirection::E);
+        h.setFog(0.2);
+        h.setUvIndex(0.8);
+        h.setWindSpeed(5);
+        h.setHumidity(0.1);
 
+        d1 += h;
+    }
     QCOMPARE(d1.isNull(), false);
 
     QCOMPARE(d1.hourlyWeatherForecast().size(), 24);

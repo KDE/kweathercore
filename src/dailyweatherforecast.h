@@ -7,12 +7,31 @@
 #pragma once
 #include "hourlyweatherforecast.h"
 #include "sunrise.h"
+#include <memory>
 #include <QDate>
 #include <QJsonObject>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class DailyWeatherForecastPrivate;
+class DailyWeatherForecastPrivate
+{
+public:
+    bool isNull = true;
+
+    double maxTemp = std::numeric_limits<double>::lowest();
+    double minTemp = std::numeric_limits<double>::max();
+    double precipitation = 0; // mm
+    double uvIndex = 0; // 0-1
+    double humidity = 0; // %
+    double pressure = 0; // hPa
+    QString weatherIcon = QStringLiteral("weather-none-available");
+    QString weatherDescription = QStringLiteral("Unknown");
+    QDate date;
+
+    Sunrise sunrise;
+    std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
+};
+
 /**
  * @short Class represents weatherforecast in a day
  *
@@ -41,29 +60,7 @@ public:
      * Creates a null DailyWeatherForecast.
      */
     DailyWeatherForecast();
-    /**
-     * Creates a DailyWeatherForecast with given params.
-     * @param maxTemp maximum temperature of the day, in celsius
-     * @param minTemp minimum temperature of the day, in celsius
-     * @param precipitation precipitation of the day, in mm
-     * @param uvIndex uvIndex of the day, 0-1
-     * @param humidity humidity of the day, in percentage
-     * @param pressure pressure of the day, in hpa
-     * @param weatherIcon icon that presents the weather condition of the day.
-     * @param weatherDescription text describes the general weather condition of
-     * the day
-     * @param date the date this object represents
-     */
-    DailyWeatherForecast(double maxTemp,
-                         double minTemp,
-                         double precipitation,
-                         double uvIndex,
-                         double humidity,
-                         double pressure,
-                         QString weatherIcon,
-                         QString weatherDescription,
-                         QDate date);
-    ~DailyWeatherForecast();
+    DailyWeatherForecast(const DailyWeatherForecast &other);
     /**
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
@@ -236,7 +233,8 @@ public:
      */
     bool operator<(const DailyWeatherForecast &forecast) const;
 
+    DailyWeatherForecast &operator=(const DailyWeatherForecast &other);
 private:
-    DailyWeatherForecastPrivate *d;
+    std::unique_ptr<DailyWeatherForecastPrivate> d;
 };
 }

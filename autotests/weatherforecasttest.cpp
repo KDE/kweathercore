@@ -10,7 +10,9 @@ void WeatherForecastTest::testHourlyMerge()
 {
     auto date = QDateTime::currentDateTime();
     for (int i = 0; i < 100; ++i) {
-        d1 += HourlyWeatherForecast(date.addSecs(i * 3600), {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});
+        HourlyWeatherForecast f;
+        f.setDate(date.addSecs(i * 3600));
+        d1 += f;
     }
 
     QCOMPARE(d1.dailyWeatherForecast().size() > 0, true);
@@ -19,10 +21,14 @@ void WeatherForecastTest::testHourlyMerge()
 void WeatherForecastTest::testDailyMerge()
 {
     auto date = QDate::currentDate();
-
-    d1.setDailyWeatherForecast({DailyWeatherForecast(30, 20, 0, 0, 0, 0, QString(), QString(), date),
-                                DailyWeatherForecast(30, 20, 0, 0, 0, 0, QString(), QString(), date.addDays(1)),
-                                DailyWeatherForecast(30, 20, 0, 0, 0, 0, QString(), QString(), date.addDays(2))});
+    std::vector<DailyWeatherForecast> vec;
+    for(int i = 0; i < 3 ;i++)
+    {
+        DailyWeatherForecast d;
+        d.setDate(date.addDays(i));
+        vec.push_back(d);
+    }
+    d1.setDailyWeatherForecast(vec);
 
     QCOMPARE(d1.dailyWeatherForecast().size(), 3);
 }

@@ -10,55 +10,16 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
-class DailyWeatherForecastPrivate
-{
-public:
-    bool isNull = true;
-
-    double maxTemp = std::numeric_limits<double>::lowest();
-    double minTemp = std::numeric_limits<double>::max();
-    double precipitation = 0; // mm
-    double uvIndex = 0; // 0-1
-    double humidity = 0; // %
-    double pressure = 0; // hPa
-    QString weatherIcon = QStringLiteral("weather-none-available");
-    QString weatherDescription = QStringLiteral("Unknown");
-    QDate date;
-
-    Sunrise sunrise;
-    std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
-};
-
 DailyWeatherForecast::DailyWeatherForecast()
     : d(new DailyWeatherForecastPrivate)
 {
 }
-DailyWeatherForecast::DailyWeatherForecast(double maxTemp,
-                                           double minTemp,
-                                           double precipitation,
-                                           double uvIndex,
-                                           double humidity,
-                                           double pressure,
-                                           QString weatherIcon,
-                                           QString weatherDescription,
-                                           QDate date)
+DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other)
     : d(new DailyWeatherForecastPrivate)
 {
-    d->maxTemp = maxTemp;
-    d->minTemp = minTemp;
-    d->precipitation = precipitation;
-    d->uvIndex = uvIndex;
-    d->humidity = humidity;
-    d->pressure = pressure;
-    d->weatherIcon = std::move(weatherIcon);
-    d->weatherDescription = std::move(weatherDescription);
-    d->date = std::move(date);
-    d->isNull = false;
+    *d = *other.d;
 }
-DailyWeatherForecast::~DailyWeatherForecast()
-{
-    delete d;
-}
+
 QJsonObject DailyWeatherForecast::toJson()
 {
     QJsonObject obj;
@@ -80,24 +41,24 @@ QJsonObject DailyWeatherForecast::toJson()
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
 {
-    auto d = DailyWeatherForecast(
-        obj[QStringLiteral("maxTemp")].toDouble(),
-        obj[QStringLiteral("minTemp")].toDouble(),
-        obj[QStringLiteral("precipitation")].toDouble(),
-        obj[QStringLiteral("uvIndex")].toDouble(),
-        obj[QStringLiteral("humidity")].toDouble(),
-        obj[QStringLiteral("pressure")].toDouble(),
-        obj[QStringLiteral("weatherIcon")].toString(),
-        obj[QStringLiteral("weatherDescription")].toString(),
-        QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    DailyWeatherForecast ret;
+    ret.setMaxTemp(obj[QStringLiteral("maxTemp")].toDouble());
+    ret.setMinTemp(obj[QStringLiteral("minTemp")].toDouble());
+    ret.setPrecipitation(obj[QStringLiteral("precipitation")].toDouble());
+    ret.setUvIndex(obj[QStringLiteral("uvIndex")].toDouble());
+    ret.setHumidity(obj[QStringLiteral("humidity")].toDouble());
+    ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
+    ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
+    ret.setWeatherDescription(obj[QStringLiteral("weatherDescription")].toString());
+    ret.setDate(QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
         hourlyVec.push_back(
             HourlyWeatherForecast::fromJson(array.at(i).toObject()));
     }
-    d.setHourlyWeatherForecast(hourlyVec);
-    return d;
+    ret.setHourlyWeatherForecast(hourlyVec);
+    return ret;
 }
 bool DailyWeatherForecast::isNull() const
 {
@@ -272,5 +233,10 @@ bool DailyWeatherForecast::operator==(
 bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
     return date() < forecast.date();
+}
+DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
+{
+    *d = *other.d;
+    return *this;
 }
 }

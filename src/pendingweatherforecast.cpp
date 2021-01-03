@@ -201,20 +201,18 @@ void PendingWeatherForecastPrivate::parseOneElement(
     symbolCode = symbolCode.split(QLatin1Char(
         '_'))[0]; // trim _[day/night] from end -
                   // https://api.met.no/weatherapi/weathericon/2.0/legends
-    auto hourForecast = HourlyWeatherForecast(
-        QDateTime::fromString(obj.value(QStringLiteral("time")).toString(),
-                              Qt::ISODate),
-        QString(),
-        QString(),
-        apiDescMap[symbolCode + QStringLiteral("_neutral")].icon,
-        instant[QStringLiteral("air_temperature")].toDouble(),
-        instant[QStringLiteral("air_pressure_at_sea_level")].toDouble(),
-        getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()),
-        instant[QStringLiteral("wind_speed")].toDouble(),
-        instant[QStringLiteral("relative_humidity")].toDouble(),
-        instant[QStringLiteral("fog_area_fraction")].toDouble(),
-        instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble(),
-        precipitationAmount);
+    HourlyWeatherForecast hourForecast;
+    hourForecast.setDate(QDateTime::fromString(obj.value(QStringLiteral("time")).toString(),
+                                               Qt::ISODate));
+    hourForecast.setNeutralWeatherIcon(apiDescMap[symbolCode + QStringLiteral("_neutral")].icon);
+    hourForecast.setTemperature(instant[QStringLiteral("air_temperature")].toDouble());
+    hourForecast.setPressure(instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
+    hourForecast.setWindDirection(getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()));
+    hourForecast.setWindSpeed(instant[QStringLiteral("wind_speed")].toDouble());
+    hourForecast.setHumidity(instant[QStringLiteral("relative_humidity")].toDouble());
+    hourForecast.setFog(instant[QStringLiteral("fog_area_fraction")].toDouble());
+    hourForecast.setUvIndex(instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble());
+    hourForecast.setPrecipitationAmount(precipitationAmount);
     hourForecast.setSymbolCode(symbolCode);
     hourlyForecast.push_back(std::move(hourForecast));
 }

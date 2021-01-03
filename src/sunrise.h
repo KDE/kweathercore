@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+#include <memory>
 #include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
@@ -12,7 +13,19 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class SunrisePrivate;
+class SunrisePrivate
+{
+public:
+    QPair<QDateTime, double> highMoon;
+    QPair<QDateTime, double> solarMidnight;
+    QPair<QDateTime, double> solarNoon;
+    QPair<QDateTime, double> lowMoon;
+    QDateTime sunRise = QDateTime::currentDateTime();
+    QDateTime sunSet = QDateTime::currentDateTime();
+    QDateTime moonRise = QDateTime::currentDateTime();
+    QDateTime moonSet = QDateTime::currentDateTime();
+    double moonPhase;
+};
 /**
  * @short The Sunrise class contains the information of sunrise/set on a day and
  * more
@@ -51,7 +64,8 @@ public:
             QPair<QDateTime, double> solarNoon,
             double moonphase);
     Sunrise();
-    ~Sunrise();
+    Sunrise(const Sunrise &other);
+    Sunrise &operator=(const Sunrise &other);
     /**
      * construct from json
      */
@@ -84,6 +98,6 @@ public:
     void setMoonPhase(double moonPhase);
 
 private:
-    SunrisePrivate *d;
+    std::unique_ptr<SunrisePrivate> d;
 };
 }
