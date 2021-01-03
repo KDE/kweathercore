@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -26,24 +26,24 @@ class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
     Q_OBJECT
 public:
     /**
-     * @brief value pointer to the shared weather data
+     * value pointer to the shared weather data
      * the pointer is nullptr until finished() raised
      * @return
      */
     QExplicitlySharedDataPointer<WeatherForecast> value() const;
     /**
-     * @brief isFinished if the call has finished
+     * isFinished if the call has finished
      * @return
      */
     bool isFinished() const;
 
 Q_SIGNALS:
     /**
-     * @brief signals the call has finished
+     * signals the call has finished
      */
     void finished();
     /**
-     * @brief indicate there is a network error
+     * indicate there is a network error
      */
     void networkError();
 

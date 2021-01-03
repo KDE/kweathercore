@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -102,7 +102,7 @@ const QDateTime &HourlyWeatherForecast::date() const
 {
     return d->date;
 }
-void HourlyWeatherForecast::setDate(QDateTime date)
+void HourlyWeatherForecast::setDate(const QDateTime &date)
 {
     d->date = std::move(date);
 }
@@ -110,33 +110,35 @@ const QString &HourlyWeatherForecast::weatherDescription() const
 {
     return d->weatherDescription;
 }
-void HourlyWeatherForecast::setWeatherDescription(QString weatherDescription)
+void HourlyWeatherForecast::setWeatherDescription(
+    const QString &weatherDescription)
 {
-    d->weatherDescription = std::move(weatherDescription);
+    d->weatherDescription = weatherDescription;
 }
 const QString &HourlyWeatherForecast::weatherIcon() const
 {
     return d->weatherIcon;
 }
-void HourlyWeatherForecast::setWeatherIcon(QString weatherIcon)
+void HourlyWeatherForecast::setWeatherIcon(const QString &weatherIcon)
 {
-    d->weatherIcon = std::move(weatherIcon);
+    d->weatherIcon = weatherIcon;
 }
 const QString &HourlyWeatherForecast::neutralWeatherIcon() const
 {
     return d->neutralWeatherIcon;
 }
-void HourlyWeatherForecast::setNeutralWeatherIcon(QString neutralWeatherIcon)
+void HourlyWeatherForecast::setNeutralWeatherIcon(
+    const QString &neutralWeatherIcon)
 {
-    d->neutralWeatherIcon = std::move(neutralWeatherIcon);
+    d->neutralWeatherIcon = neutralWeatherIcon;
 }
 const QString &HourlyWeatherForecast::symbolCode() const
 {
     return d->symbolCode;
 }
-void HourlyWeatherForecast::setSymbolCode(QString symbolCode)
+void HourlyWeatherForecast::setSymbolCode(const QString &symbolCode)
 {
-    d->symbolCode = std::move(symbolCode);
+    d->symbolCode = symbolCode;
 }
 double HourlyWeatherForecast::temperature() const
 {
@@ -184,7 +186,7 @@ void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
 {
     d->windDirection = windDirection;
 }
-void HourlyWeatherForecast::setWindDirectionStr(QString windDirection)
+void HourlyWeatherForecast::setWindDirectionStr(const QString &windDirection)
 {
     if (windDirection == QStringLiteral("E"))
         setWindDirection(WindDirection::E);

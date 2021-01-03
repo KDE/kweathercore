@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -26,7 +26,7 @@ class KWEATHERCORE_EXPORT GeoTimezone : public QObject
     Q_OBJECT
 public:
     /**
-     * @brief GeoTimezone
+     * GeoTimezone
      * @param latitude latitude for the request location
      * @param longitude longitude for the request location
      */
@@ -34,12 +34,12 @@ public:
 
 Q_SIGNALS:
     /**
-     * @brief finished emit when the timezone has been obtained
+     * finished emit when the timezone has been obtained
      * @param timezone IANA timezone string
      */
     void finished(const QString &timezone);
     /**
-     * @brief networkError encounted network error
+     * networkError encounted network error
      */
     void networkErrorOccured();
 

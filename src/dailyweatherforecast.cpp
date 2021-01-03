@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -127,17 +127,17 @@ void DailyWeatherForecast::setPressure(double pressure)
 {
     d->pressure = pressure;
 }
-void DailyWeatherForecast::setWeatherIcon(QString icon)
+void DailyWeatherForecast::setWeatherIcon(const QString &icon)
 {
-    d->weatherIcon = std::move(icon);
+    d->weatherIcon = icon;
 }
-void DailyWeatherForecast::setWeatherDescription(QString description)
+void DailyWeatherForecast::setWeatherDescription(const QString &description)
 {
     d->weatherDescription = std::move(description);
 }
-void DailyWeatherForecast::setDate(QDate date)
+void DailyWeatherForecast::setDate(const QDate &date)
 {
-    d->date = std::move(date);
+    d->date = date;
 }
 void DailyWeatherForecast::setJsDate(const QDateTime &date)
 {

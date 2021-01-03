@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -24,16 +24,16 @@ class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
 {
 public:
     /**
-     * @brief construct an empty object
+     * construct an empty object
      */
     WeatherForecast();
     ~WeatherForecast();
     /**
-     * @brief convert to QJsonObject
+     * convert to QJsonObject
      */
     QJsonObject toJson() const;
     /**
-     * @brief construct from json
+     * construct from json
      */
     static QExplicitlySharedDataPointer<WeatherForecast>
     fromJson(QJsonObject obj);
@@ -49,12 +49,12 @@ public:
      */
     const QDateTime &createdTime() const;
     /**
-     * @brief IANA Time Zone ID
+     * IANA Time Zone ID
      * @return
      */
     const QString &timezone() const;
     /**
-     * @brief setCoordinate
+     * setCoordinate
      */
     void setCoordinate(double latitude, double longitude);
     /**
@@ -65,28 +65,28 @@ public:
     setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
-     * @brief the vector should be sorted
+     * the vector should be sorted
      */
     void setSunriseForecast(const std::vector<Sunrise> &sunrise);
     /**
-     * @brief overloaded version
+     * overloaded version
      */
     void setSunriseForecast(std::vector<Sunrise> &&sunrise);
 
     /**
-     * @brief merge DailyWeatherForecast
+     * merge DailyWeatherForecast
      */
     WeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     /**
-     * @brief overloaded version
+     * overloaded version
      */
     WeatherForecast &operator+=(DailyWeatherForecast &&forecast);
     /**
-     * @brief merge HourlyWeatherForecast, new day is created when required
+     * merge HourlyWeatherForecast, new day is created when required
      */
     WeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
     /**
-     * @brief overloaded version
+     * overloaded version
      */
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 

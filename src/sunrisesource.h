@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -26,7 +26,7 @@ class KWEATHERCORE_EXPORT SunriseSource : public QObject
     Q_OBJECT
 public:
     /**
-     * @brief SunriseSource
+     * SunriseSource
      * @param offset from UTC, in seconds
      * @param sunrise for caching purpose
      */
@@ -36,15 +36,15 @@ public:
                   const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(),
                   QObject *parent = nullptr);
     /**
-     * @brief start downloading data
+     * start downloading data
      */
     void requestData();
     /**
-     * @brief change the offset in case of daylight time changing and something
+     * change the offset in case of daylight time changing and something
      */
     void setOffset(int offset);
     /**
-     * @brief get the value
+     * get the value
      * @return
      */
     const std::vector<Sunrise> &value() const
@@ -53,11 +53,11 @@ public:
     };
 Q_SIGNALS:
     /**
-     * @brief network error
+     * network error
      */
     void networkError();
     /**
-     * @brief query finished
+     * query finished
      */
     void finished();
 private Q_SLOTS:

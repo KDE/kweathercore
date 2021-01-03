@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -56,31 +56,31 @@ class KWEATHERCORE_EXPORT LocationQuery : public QObject
     Q_OBJECT
 public:
     /**
-     * @brief LocationQuery
+     * LocationQuery
      */
     LocationQuery(QObject *parent = nullptr);
     /**
-     * @brief query query locations by name
+     * query query locations by name
      * @param name name of location, not necessary in English
      * @param number max numbers of query returned, the actual size could be
      * less than @param number
      */
     void query(QString name, int number = 30);
     /**
-     * @brief locate current location
+     * locate current location
      */
     void locate();
 Q_SIGNALS:
     /**
-     * @brief the name search has completed
+     * the name search has completed
      */
     void queryFinished(std::vector<LocationQueryResult> result);
     /**
-     * @brief current location has been determined
+     * current location has been determined
      */
     void located(const LocationQueryResult &result);
     /**
-     * @brief a error has encounted during query, network error or no result
+     * a error has encounted during query, network error or no result
      * found
      */
     void queryError();

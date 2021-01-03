@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -41,7 +41,7 @@ public:
     // for QMetaType
     LocationQueryResult();
     /**
-     * @brief LocationQueryResult construct location result with given data
+     * LocationQueryResult construct location result with given data
      * @param latitude latitude
      * @param longitude longitude
      * @param toponymName toponym name of location, detailed
@@ -63,23 +63,23 @@ public:
 
     double longitude() const;
     /**
-     * @brief toponym name of location, detailed
+     * toponym name of location, detailed
      */
     const QString &toponymName() const;
     /**
-     * @brief display name, short
+     * display name, short
      */
     const QString &name() const;
     /**
-     * @brief country code, follow no standard but should be unique
+     * country code, follow no standard but should be unique
      */
     const QString &countryCode() const;
     /**
-     * @brief country name
+     * country name
      */
     const QString &countryName() const;
     /**
-     * @brief internal unique id
+     * internal unique id
      */
     const QString &geonameId() const;
 

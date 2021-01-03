@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -25,7 +25,7 @@ class KWEATHERCORE_EXPORT Sunrise
 {
 public:
     /**
-     * @brief Sunrise construct Sunrise with given data, all QDateTime are in
+     * Sunrise construct Sunrise with given data, all QDateTime are in
      * location's timezone
      * @param sunRise sun rise time
      * @param sunSet sun set time
@@ -53,11 +53,11 @@ public:
     Sunrise();
     ~Sunrise();
     /**
-     * @brief construct from json
+     * construct from json
      */
     static Sunrise fromJson(QJsonObject obj);
     /**
-     * @brief convert to json
+     * convert to json
      */
     QJsonObject toJson();
     QDateTime highMoonTime() const;

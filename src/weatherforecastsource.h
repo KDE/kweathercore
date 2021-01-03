@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+ * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
@@ -28,7 +28,7 @@ class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 public:
     WeatherForecastSource(QObject *parent = nullptr);
     /**
-     * @brief requestData
+     * requestData
      * @param latitude
      * @param longitude
      * @param timezone
@@ -43,7 +43,7 @@ public:
                 const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
 
     /**
-     * @brief requestData
+     * requestData
      * @param result
      * @return it is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak
