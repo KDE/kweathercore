@@ -7,27 +7,6 @@
 #include "sunrise.h"
 namespace KWeatherCore
 {
-Sunrise::Sunrise(QDateTime sunRise,
-                 QDateTime sunSet,
-                 QDateTime moonRise,
-                 QDateTime moonSet,
-                 QPair<QDateTime, double> highMoon,
-                 QPair<QDateTime, double> lowMoon,
-                 QPair<QDateTime, double> solarMidnight,
-                 QPair<QDateTime, double> solarNoon,
-                 double moonphase)
-    : d(new SunrisePrivate)
-{
-    d->sunRise = std::move(sunRise);
-    d->sunSet = std::move(sunSet);
-    d->moonRise = std::move(moonRise);
-    d->moonSet = std::move(moonSet);
-    d->highMoon = std::move(highMoon);
-    d->lowMoon = std::move(lowMoon);
-    d->solarMidnight = std::move(solarMidnight);
-    d->solarNoon = std::move(solarNoon);
-    d->moonPhase = moonphase;
-}
 Sunrise::Sunrise()
     : d(new SunrisePrivate)
 {

@@ -8,7 +8,15 @@
 void SunriseTest::testJson()
 {
     auto date = QDateTime::currentDateTime();
-    d1 = Sunrise(date, date.addSecs(3600 * 12), date.addSecs(3600 * 13), date.addSecs(3600 * 23), {date, 10}, {date, 10}, {date, 10}, {date, 10}, 0.5);
+    d1.setHighMoon({date, 0.1});
+    d1.setLowMoon({date, 0.1});
+    d1.setMoonPhase(0.5);
+    d1.setMoonRise(date);
+    d1.setMoonSet(date);
+    d1.setSolarMidnight({date, 0.6});
+    d1.setSolarNoon({date, 0.5});
+    d1.setSunRise(date);
+    d1.setSunSet(date);
     d2 = Sunrise::fromJson(d1.toJson());
 
     QCOMPARE(d2.highMoon(), d1.highMoon());
@@ -19,7 +27,9 @@ void SunriseTest::testJson()
     QCOMPARE(std::abs(d2.moonRise().secsTo(d1.moonRise())) < 1, true);
     QCOMPARE(std::abs(d2.moonSet().secsTo(d1.moonSet())) < 1, true);
     QCOMPARE(d2.solarMidnight(), d1.solarMidnight());
-    QCOMPARE(std::abs(d2.solarMidnightTime().secsTo(d1.solarMidnightTime())) < 1, true);
+    QCOMPARE(std::abs(d2.solarMidnightTime().secsTo(d1.solarMidnightTime())) <
+                 1,
+             true);
     QCOMPARE(d2.solarNoon(), d2.solarNoon());
     QCOMPARE(std::abs(d2.solarNoonTime().secsTo(d1.solarNoonTime())) < 1, true);
 }

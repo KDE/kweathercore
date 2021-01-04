@@ -16,8 +16,7 @@ void DailyForecastTest::testNull()
 
 void DailyForecastTest::testHourlyMerge()
 {
-    for (int i = 0; i < 24; ++i)
-    {
+    for (int i = 0; i < 24; ++i) {
         HourlyWeatherForecast h;
         h.setDate(QDateTime::currentDateTime().addSecs(i * 3600));
         h.setWeatherDescription(QStringLiteral("sunny"));
@@ -42,7 +41,8 @@ void DailyForecastTest::testDailyMerge()
     for (auto h : vec)
         d2 += h;
 
-    QCOMPARE(d2.hourlyWeatherForecast().size(), d1.hourlyWeatherForecast().size());
+    QCOMPARE(d2.hourlyWeatherForecast().size(),
+             d1.hourlyWeatherForecast().size());
 }
 void DailyForecastTest::testJson()
 {
@@ -53,7 +53,9 @@ void DailyForecastTest::testJson()
 void DailyForecastTest::testSunrise()
 {
     auto date = QDateTime::currentDateTime();
-    d2.setSunrise(Sunrise(date, {}, {}, {}, {}, {}, {}, {}, {}));
+    Sunrise s;
+    s.setSunRise(date);
+    d2.setSunrise(s);
     QCOMPARE(d2.sunrise().sunRise(), date);
 }
 QTEST_MAIN(DailyForecastTest)

@@ -5,12 +5,12 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include <memory>
 #include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
 #include <QPair>
 #include <kweathercore/kweathercore_export.h>
+#include <memory>
 namespace KWeatherCore
 {
 class SunrisePrivate
@@ -37,32 +37,6 @@ public:
 class KWEATHERCORE_EXPORT Sunrise
 {
 public:
-    /**
-     * Sunrise construct Sunrise with given data, all QDateTime are in
-     * location's timezone
-     * @param sunRise sun rise time
-     * @param sunSet sun set time
-     * @param moonRise moon rise time
-     * @param moonSet moon set time
-     * @param highMoon high moon time and elevation
-     * @param lowMoon low moon time time and elevation
-     * @param solarMidnight solar midnight time and elevation
-     * @param solarNoon solar noon time and elevation
-     * @param moonphase time and value
-     *        0..25: "waxing crescent";
-     *        25..50: "waxing gibbous";
-     *        50..75: "waning gibbous";
-     *        75..100: "waning crescent";
-     */
-    Sunrise(QDateTime sunRise,
-            QDateTime sunSet,
-            QDateTime moonRise,
-            QDateTime moonSet,
-            QPair<QDateTime, double> highMoon,
-            QPair<QDateTime, double> lowMoon,
-            QPair<QDateTime, double> solarMidnight,
-            QPair<QDateTime, double> solarNoon,
-            double moonphase);
     Sunrise();
     Sunrise(const Sunrise &other);
     Sunrise &operator=(const Sunrise &other);
@@ -87,14 +61,46 @@ public:
     const QDateTime &moonRise() const;
     const QDateTime &moonSet() const;
     double moonPhase() const;
+    /**
+     * set high moon time and elevation
+     */
     void setHighMoon(const QPair<QDateTime, double> &highMoon);
+    /**
+     * set solar midnight time and elevation
+     */
     void setSolarMidnight(const QPair<QDateTime, double> &solarMidnight);
+    /**
+     * set solar noon time and elevation
+     */
     void setSolarNoon(const QPair<QDateTime, double> &solarNoon);
+    /**
+     * set low moon time time and elevation
+     */
     void setLowMoon(const QPair<QDateTime, double> &lowMoon);
+    /**
+     * sun rise time
+     */
     void setSunRise(const QDateTime &sunRise);
+    /**
+     * set sun set time
+     */
     void setSunSet(const QDateTime &sunSet);
+    /**
+     * set moon rise time
+     */
     void setMoonRise(const QDateTime &moonRise);
+    /**
+     * set moon set time
+     */
     void setMoonSet(const QDateTime &moonSet);
+    /**
+     * set moon phase
+     * @param moonPhase
+     *        0..25: "waxing crescent";
+     *        25..50: "waxing gibbous";
+     *        50..75: "waning gibbous";
+     *        75..100: "waning crescent";
+     */
     void setMoonPhase(double moonPhase);
 
 private:
