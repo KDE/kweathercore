@@ -6,11 +6,11 @@
  */
 
 #pragma once
-#include <memory>
 #include <QDateTime>
 #include <QJsonObject>
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
+#include <memory>
 namespace KWeatherCore
 {
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
@@ -64,7 +64,7 @@ public:
     /**
      * HourlyWeatherForecast construct a null forecast
      */
-    HourlyWeatherForecast();
+    explicit HourlyWeatherForecast(const QDateTime &date);
     HourlyWeatherForecast(const HourlyWeatherForecast &other);
     /**
      * convert this to QJsonObject
@@ -187,6 +187,7 @@ public:
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
     HourlyWeatherForecast &operator=(const HourlyWeatherForecast &other);
+
 private:
     std::unique_ptr<HourlyWeatherForecastPrivate> d;
 };

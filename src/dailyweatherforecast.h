@@ -7,16 +7,16 @@
 #pragma once
 #include "hourlyweatherforecast.h"
 #include "sunrise.h"
-#include <memory>
 #include <QDate>
 #include <QJsonObject>
 #include <kweathercore/kweathercore_export.h>
+#include <memory>
 namespace KWeatherCore
 {
 class DailyWeatherForecastPrivate
 {
 public:
-    bool isNull = true;
+    bool isValid = true;
 
     double maxTemp = std::numeric_limits<double>::lowest();
     double minTemp = std::numeric_limits<double>::max();
@@ -44,7 +44,7 @@ public:
 class KWEATHERCORE_EXPORT DailyWeatherForecast
 {
     Q_GADGET
-    Q_PROPERTY(bool null READ isNull)
+    Q_PROPERTY(bool valid READ isValid)
     Q_PROPERTY(qreal maxTemp READ maxTemp WRITE setMaxTemp)
     Q_PROPERTY(qreal minTemp READ minTemp WRITE setMinTemp)
     Q_PROPERTY(qreal precipitation READ precipitation WRITE setPrecipitation)
@@ -54,12 +54,13 @@ class KWEATHERCORE_EXPORT DailyWeatherForecast
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
     Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE
                    setWeatherDescription)
-    Q_PROPERTY(QDateTime date READ date WRITE setDate)
+    Q_PROPERTY(QDateTime date READ dateTime WRITE setDate)
 public:
     /**
-     * Creates a null DailyWeatherForecast.
+     * Creates a invalid DailyWeatherForecast.
      */
     DailyWeatherForecast();
+    explicit DailyWeatherForecast(const QDate &date);
     DailyWeatherForecast(const DailyWeatherForecast &other);
     /**
      * Return a QJsonObject that can be converted back with
@@ -75,7 +76,7 @@ public:
      * this value won't change once the class is created with the exceptions of
      * Day/Hour merge
      */
-    bool isNull() const;
+    bool isValid() const;
     /**
      * set the maximum temperature of the day
      * @param maxTemp maximum temperature of the day, in celsius
@@ -170,6 +171,7 @@ public:
      * @return date, date can be invalid if constructed without data
      */
     const QDate &date() const;
+    QDateTime dateTime() const;
     /**
      * return sunrise data
      * @return sunrise data
@@ -214,7 +216,7 @@ public:
     DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
     /**
      * append hourly forecast, you can append valid hourly forecast into
-     * a null daily forecast, daily forecast becomes valid afterwards
+     * a invalid daily forecast, daily forecast becomes valid afterwards
      * @param forecast make sure it's on the same day
      * @return result DailyWeatherForecast
      */
@@ -233,6 +235,7 @@ public:
     bool operator<(const DailyWeatherForecast &forecast) const;
 
     DailyWeatherForecast &operator=(const DailyWeatherForecast &other);
+
 private:
     std::unique_ptr<DailyWeatherForecastPrivate> d;
 };

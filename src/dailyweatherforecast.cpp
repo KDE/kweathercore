@@ -14,6 +14,12 @@ DailyWeatherForecast::DailyWeatherForecast()
     : d(new DailyWeatherForecastPrivate)
 {
 }
+DailyWeatherForecast::DailyWeatherForecast(const QDate &date)
+    : d(new DailyWeatherForecastPrivate)
+{
+    d->date = date;
+    d->isValid = false;
+}
 DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other)
     : d(new DailyWeatherForecastPrivate)
 {
@@ -41,7 +47,8 @@ QJsonObject DailyWeatherForecast::toJson()
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
 {
-    DailyWeatherForecast ret;
+    DailyWeatherForecast ret(
+        QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
     ret.setMaxTemp(obj[QStringLiteral("maxTemp")].toDouble());
     ret.setMinTemp(obj[QStringLiteral("minTemp")].toDouble());
     ret.setPrecipitation(obj[QStringLiteral("precipitation")].toDouble());
@@ -49,8 +56,8 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     ret.setHumidity(obj[QStringLiteral("humidity")].toDouble());
     ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
     ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
-    ret.setWeatherDescription(obj[QStringLiteral("weatherDescription")].toString());
-    ret.setDate(QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    ret.setWeatherDescription(
+        obj[QStringLiteral("weatherDescription")].toString());
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
@@ -60,9 +67,9 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     ret.setHourlyWeatherForecast(hourlyVec);
     return ret;
 }
-bool DailyWeatherForecast::isNull() const
+bool DailyWeatherForecast::isValid() const
 {
-    return d->isNull;
+    return d->isValid;
 }
 void DailyWeatherForecast::setMaxTemp(double maxTemp)
 {
@@ -140,7 +147,7 @@ const QDate &DailyWeatherForecast::date() const
 {
     return d->date;
 }
-QDateTime DailyWeatherForecast::date() const
+QDateTime DailyWeatherForecast::dateTime() const
 {
     return d->date.startOfDay();
 }
@@ -174,7 +181,7 @@ DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
         setDate(forecast.date());
         setWeatherDescription(forecast.weatherDescription());
         setWeatherIcon(forecast.weatherIcon());
-        d->isNull = false;
+        d->isValid = false;
     }
 
     if (*this == forecast) {
@@ -198,11 +205,11 @@ DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 DailyWeatherForecast &
 DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
-    if (isNull()) {
+    if (isValid()) {
         setDate(forecast.date().date());
         setWeatherDescription(forecast.weatherDescription());
         setWeatherIcon(forecast.weatherIcon());
-        d->isNull = false;
+        d->isValid = false;
     }
     if (date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
@@ -234,7 +241,8 @@ bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
     return date() < forecast.date();
 }
-DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
+DailyWeatherForecast &
+DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
 {
     *d = *other.d;
     return *this;
