@@ -36,6 +36,21 @@ public:
  */
 class KWEATHERCORE_EXPORT Sunrise
 {
+    Q_GADGET
+    Q_PROPERTY(QDateTime highMoonTime READ highMoonTime)
+    Q_PROPERTY(QDateTime lowMoonTime READ lowMoonTime)
+    Q_PROPERTY(QDateTime solarMidnightTime READ solarMidnightTime)
+    Q_PROPERTY(QDateTime solarNoonTime READ solarNoonTime)
+    Q_PROPERTY(QDateTime sunRise READ sunRise WRITE setSunRise)
+    Q_PROPERTY(QDateTime sunSet READ sunSet WRITE setSunSet)
+    Q_PROPERTY(QDateTime moonRise READ moonRise WRITE setMoonRise)
+    Q_PROPERTY(QDateTime moonSet READ moonSet WRITE setMoonSet)
+    Q_PROPERTY(qreal moonPhase READ moonPhase WRITE setMoonPhase)
+    Q_PROPERTY(qreal highMoon READ highMoon WRITE setHighMoon)
+    Q_PROPERTY(qreal lowMoon READ lowMoon WRITE setLowMoon)
+    Q_PROPERTY(qreal solarNoon READ solarNoon WRITE setSolarNoon)
+    Q_PROPERTY(qreal solarMidnight READ solarMidnight WRITE setSolarMidnight)
+
 public:
     Sunrise();
     Sunrise(const Sunrise &other);
