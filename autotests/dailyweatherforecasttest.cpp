@@ -11,14 +11,13 @@ using namespace KWeatherCore;
 
 void DailyForecastTest::testNull()
 {
-    QCOMPARE(d1.isNull(), true);
+    QCOMPARE(d1.isValid(), true);
 }
 
 void DailyForecastTest::testHourlyMerge()
 {
     for (int i = 0; i < 24; ++i) {
-        HourlyWeatherForecast h;
-        h.setDate(QDateTime::currentDateTime().addSecs(i * 3600));
+        HourlyWeatherForecast h(QDateTime::currentDateTime().addSecs(i * 3600));
         h.setWeatherDescription(QStringLiteral("sunny"));
         h.setWeatherIcon(QStringLiteral("sunny"));
         h.setTemperature(25);
@@ -31,14 +30,14 @@ void DailyForecastTest::testHourlyMerge()
 
         d1 += h;
     }
-    QCOMPARE(d1.isNull(), false);
+    QCOMPARE(d1.isValid(), false);
 
     QCOMPARE(d1.hourlyWeatherForecast().size(), 24);
 }
 void DailyForecastTest::testDailyMerge()
 {
     const auto &vec = d1.hourlyWeatherForecast();
-    for (auto h : vec)
+    for (auto &h : vec)
         d2 += h;
 
     QCOMPARE(d2.hourlyWeatherForecast().size(),

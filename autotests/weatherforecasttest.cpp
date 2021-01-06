@@ -10,8 +10,7 @@ void WeatherForecastTest::testHourlyMerge()
 {
     auto date = QDateTime::currentDateTime();
     for (int i = 0; i < 100; ++i) {
-        HourlyWeatherForecast f;
-        f.setDate(date.addSecs(i * 3600));
+        HourlyWeatherForecast f(date.addSecs(i * 3600));
         d1 += f;
     }
 
@@ -22,8 +21,7 @@ void WeatherForecastTest::testDailyMerge()
 {
     auto date = QDate::currentDate();
     std::vector<DailyWeatherForecast> vec;
-    for(int i = 0; i < 3 ;i++)
-    {
+    for (int i = 0; i < 3; i++) {
         DailyWeatherForecast d;
         d.setDate(date.addDays(i));
         vec.push_back(d);

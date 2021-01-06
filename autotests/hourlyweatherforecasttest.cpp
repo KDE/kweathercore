@@ -7,7 +7,7 @@
 
 void HourlyForecastTest::testJson()
 {
-    d1.setDate(QDateTime::currentDateTime());
+    HourlyWeatherForecast d1(QDateTime::currentDateTime());
 
     auto d2 = HourlyWeatherForecast::fromJson(d1.toJson());
 

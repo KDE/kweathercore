@@ -12,7 +12,4 @@ class HourlyForecastTest : public QObject
     Q_OBJECT
 private Q_SLOTS:
     void testJson();
-
-private:
-    HourlyWeatherForecast d1;
 };
