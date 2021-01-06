@@ -46,10 +46,10 @@ class KWEATHERCORE_EXPORT Sunrise
     Q_PROPERTY(QDateTime moonRise READ moonRise WRITE setMoonRise)
     Q_PROPERTY(QDateTime moonSet READ moonSet WRITE setMoonSet)
     Q_PROPERTY(qreal moonPhase READ moonPhase WRITE setMoonPhase)
-    Q_PROPERTY(qreal highMoon READ highMoon WRITE setHighMoon)
-    Q_PROPERTY(qreal lowMoon READ lowMoon WRITE setLowMoon)
-    Q_PROPERTY(qreal solarNoon READ solarNoon WRITE setSolarNoon)
-    Q_PROPERTY(qreal solarMidnight READ solarMidnight WRITE setSolarMidnight)
+    Q_PROPERTY(qreal highMoon READ highMoon)
+    Q_PROPERTY(qreal lowMoon READ lowMoon)
+    Q_PROPERTY(qreal solarNoon READ solarNoon)
+    Q_PROPERTY(qreal solarMidnight READ solarMidnight)
 
 public:
     Sunrise();
