@@ -54,7 +54,7 @@ class KWEATHERCORE_EXPORT DailyWeatherForecast
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
     Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE
                    setWeatherDescription)
-    Q_PROPERTY(QDateTime date READ jsDate WRITE setJsDate)
+    Q_PROPERTY(QDateTime date READ date WRITE setDate)
 public:
     /**
      * Creates a null DailyWeatherForecast.
@@ -121,7 +121,7 @@ public:
      * @param date
      */
     void setDate(const QDate &date);
-    KWEATHERCORE_NO_EXPORT void setJsDate(const QDateTime &date);
+    void setDate(const QDateTime &date);
     /**
      * return maximum temperature
      * @return maximum temperature, this value is initialized to the smallest
@@ -170,7 +170,6 @@ public:
      * @return date, date can be invalid if constructed without data
      */
     const QDate &date() const;
-    KWEATHERCORE_NO_EXPORT QDateTime jsDate() const;
     /**
      * return sunrise data
      * @return sunrise data

@@ -33,7 +33,7 @@ QJsonObject DailyWeatherForecast::toJson()
     obj[QStringLiteral("weatherIcon")] = weatherIcon();
     obj[QStringLiteral("weatherDescription")] = weatherDescription();
     obj[QStringLiteral("date")] = date().toString(Qt::ISODate);
-    for (auto h : hourlyWeatherForecast()) {
+    for (const auto &h : hourlyWeatherForecast()) {
         hourlyArray.append(h.toJson());
     }
     obj[QStringLiteral("hourly")] = hourlyArray;
@@ -100,7 +100,7 @@ void DailyWeatherForecast::setDate(const QDate &date)
 {
     d->date = date;
 }
-void DailyWeatherForecast::setJsDate(const QDateTime &date)
+void DailyWeatherForecast::setDate(const QDateTime &date)
 {
     d->date = date.date();
 }
@@ -140,7 +140,7 @@ const QDate &DailyWeatherForecast::date() const
 {
     return d->date;
 }
-QDateTime DailyWeatherForecast::jsDate() const
+QDateTime DailyWeatherForecast::date() const
 {
     return d->date.startOfDay();
 }
