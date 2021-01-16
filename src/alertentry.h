@@ -9,6 +9,7 @@
 #include <QString>
 #include <memory>
 #include <vector>
+#include <tuple>
 namespace KWeatherCore
 {
 enum class MsgType { Alert, Update, Cancel, Ack, Error };
@@ -30,7 +31,7 @@ public:
     QDateTime expireTime;
     MsgType msgType;
     Urgency urgency;
-    std::vector<float> area;
+    std::vector<std::tuple<float, float>> area;
 };
 class AlertEntry
 {
@@ -52,7 +53,7 @@ public:
     const QDateTime &expireTime() const;
     MsgType msgType() const;
     Urgency urgency() const;
-    const std::vector<float> &area() const;
+    const std::vector<std::tuple<float, float>> &area() const;
     void setTitle(const QString &title);
     void setSummary(const QString &summary);
     void setEvent(const QString &event);
@@ -60,8 +61,8 @@ public:
     void setExpireTime(const QDateTime &time);
     void setMsgType(MsgType type);
     void setUrgency(Urgency urgency);
-    void setArea(const std::vector<float> &area);
-    void setArea(std::vector<float> &&area);
+    void setArea(const std::vector<std::tuple<float, float>> &area);
+    void setArea(std::vector<std::tuple<float, float>> &&area);
     AlertEntry &operator=(const AlertEntry &other);
 
 private:

@@ -43,7 +43,7 @@ Urgency AlertEntry::urgency() const
 {
     return d->urgency;
 }
-const std::vector<float> &AlertEntry::area() const
+const std::vector<std::tuple<float, float>> &AlertEntry::area() const
 {
     return d->area;
 }
@@ -75,11 +75,11 @@ void AlertEntry::setUrgency(Urgency urgency)
 {
     d->urgency = urgency;
 }
-void AlertEntry::setArea(const std::vector<float> &area)
+void AlertEntry::setArea(const std::vector<std::tuple<float, float>> &area)
 {
     d->area = area;
 }
-void AlertEntry::setArea(std::vector<float> &&area)
+void AlertEntry::setArea(std::vector<std::tuple<float, float>> &&area)
 {
     d->area = std::move(area);
 }
