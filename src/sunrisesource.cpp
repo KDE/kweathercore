@@ -203,13 +203,16 @@ void SunriseSource::setOffset(int offset)
 void SunriseSource::popDay()
 {
     auto today = QDateTime::currentDateTime();
-    for (auto day : m_sunriseVec) {
+    auto popIndex = 0;
+    for (const auto &day : qAsConst(m_sunriseVec)) {
         if (day.sunRise().daysTo(today) > 0) {
-            m_sunriseVec.erase(m_sunriseVec.begin());
+            popIndex++;
         } else {
             // since vector is always sorted
             break;
         }
     }
+
+    m_sunriseVec.erase(m_sunriseVec.begin(), m_sunriseVec.begin() + popIndex);
 }
 }
