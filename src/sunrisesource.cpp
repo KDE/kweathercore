@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "sunrisesource.h"
+#include "kweathercore_p.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -78,6 +79,12 @@ void SunriseSource::requestData()
 
     url.setQuery(query);
     QNetworkRequest req(url);
+
+    // see §Identification on https://api.met.no/conditions_service.html
+    req.setHeader(QNetworkRequest::UserAgentHeader,
+                  QString(QStringLiteral("KWeatherCore/") +
+                          VERSION_NUMBER +
+                          QStringLiteral(" kde-frameworks-devel@kde.org")));
 
     m_manager->get(req);
 }

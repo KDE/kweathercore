@@ -57,9 +57,9 @@ WeatherForecastSourcePrivate::requestData(double latitude,
 
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore") + QLatin1Char('/') +
-                          VERSION_NUMBER + QLatin1Char(' ') +
-                          QStringLiteral("kde-frameworks-devel@kde.org")));
+                  QString(QStringLiteral("KWeatherCore/") +
+                          VERSION_NUMBER +
+                          QStringLiteral(" kde-frameworks-devel@kde.org")));
 
     auto reply = manager->get(req);
     return new PendingWeatherForecast(
