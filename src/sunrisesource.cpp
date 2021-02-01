@@ -213,7 +213,6 @@ void SunriseSource::popDay()
         }
     }
 
-    if(popIndex)
-        m_sunriseVec.erase(m_sunriseVec.begin(), m_sunriseVec.begin() + popIndex);
+    m_sunriseVec.erase(m_sunriseVec.begin(), m_sunriseVec.begin() + popIndex);
 }
 }

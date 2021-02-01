@@ -43,7 +43,8 @@ WeatherForecast::fromJson(QJsonObject obj)
 {
     auto w = QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast);
     std::vector<DailyWeatherForecast> dayVec;
-    for (auto d : obj[QStringLiteral("day")].toArray()) {
+    const auto &array = obj[QStringLiteral("day")].toArray();
+    for (const auto &d : array) {
         dayVec.push_back(DailyWeatherForecast::fromJson(d.toObject()));
     }
     w->setDailyWeatherForecast(dayVec);

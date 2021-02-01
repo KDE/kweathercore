@@ -45,9 +45,9 @@ WeatherForecastSourcePrivate::requestData(double latitude,
         "https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"),
-                       QString::number(latitude, 'g', 2));
+                       toFixedString(latitude));
     query.addQueryItem(QStringLiteral("lon"),
-                       QString::number(longitude, 'g', 2));
+                       toFixedString(longitude));
 
     url.setQuery(query);
 

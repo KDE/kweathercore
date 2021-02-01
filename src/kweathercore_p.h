@@ -5,12 +5,19 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+#include <iomanip>
+#include <sstream>
 #include <KLocalizedString>
 #include <QHash>
 #include <QString>
 namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
+static const auto toFixedString = [](double num){
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(2) << num;
+    return QString::fromStdString(oss.str());
+};
 // rank weather (for what best describes the day overall)
 static const QHash<QString, int> rank = { // only need neutral icons
     {QStringLiteral("weather-none-available"), -1},
