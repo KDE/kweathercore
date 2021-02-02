@@ -135,16 +135,22 @@ public:
      * scoped enum
      */
     WindDirection windDirection() const;
-    KWEATHERCORE_NO_EXPORT QString windDirectionStr() const;
+    /**
+     * WindDirection in string. eg. NW
+     */
+    QString windDirectionStr() const;
     /**
      * set wind direction
      */
     void setWindDirection(WindDirection windDirection);
     /**
+     * set wind direction, QString version
+     */
+    void
+    setWindDirectionStr(const QString &windDirection);
+    /**
      * wind speed in km/h
      */
-    KWEATHERCORE_NO_EXPORT void
-    setWindDirectionStr(const QString &windDirection);
     double windSpeed() const;
     /**
      * set wind speed in km/h
