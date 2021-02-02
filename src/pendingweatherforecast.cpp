@@ -92,7 +92,7 @@ void PendingWeatherForecastPrivate::parseSunriseResults()
     hasSunrise = true;
 
     // if this arrived later than forecast
-    if (hourlyForecast.size() > 0)
+    if (!hourlyForecast.empty())
         applySunriseToForecast();
 }
 void PendingWeatherForecastPrivate::parseWeatherForecastResults(
@@ -117,9 +117,8 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(
                 prop[QStringLiteral("timeseries")].toArray();
 
             // loop over all forecast data
-            for (QJsonValueRef ref : timeseries) {
-                QJsonObject refObj = ref.toObject();
-                parseOneElement(refObj, hourlyForecast);
+            for (const auto &ref : qAsConst(timeseries)) {
+                parseOneElement(ref.toObject(), hourlyForecast);
             }
         }
     }
