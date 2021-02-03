@@ -14,24 +14,6 @@
 namespace KWeatherCore
 {
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
-class HourlyWeatherForecastPrivate
-{
-public:
-    QDateTime date = QDateTime::currentDateTime();
-    QString weatherDescription = QStringLiteral("Unknown");
-    QString weatherIcon = QStringLiteral("weather-none-available");
-    // weather icon without time of day
-    QString neutralWeatherIcon = QStringLiteral("weather-none-available");
-    QString symbolCode;
-    double temperature = 0; // celsius
-    double pressure = 0; // hPa
-    WindDirection windDirection = WindDirection::E;
-    double windSpeed = 0; // m/s
-    double humidity = 0; // %
-    double fog = 0; // %
-    double uvIndex = 0; // 0-1
-    double precipitationAmount = 0; // mm
-};
 /**
  * @short Class represents weatherforecast in a hour
  *
@@ -66,6 +48,9 @@ public:
      */
     explicit HourlyWeatherForecast(const QDateTime &date);
     HourlyWeatherForecast(const HourlyWeatherForecast &other);
+    HourlyWeatherForecast(HourlyWeatherForecast &&other);
+    ~HourlyWeatherForecast();
+
     /**
      * convert this to QJsonObject
      */
@@ -146,8 +131,7 @@ public:
     /**
      * set wind direction, QString version
      */
-    void
-    setWindDirectionStr(const QString &windDirection);
+    void setWindDirectionStr(const QString &windDirection);
     /**
      * wind speed in km/h
      */
@@ -193,8 +177,10 @@ public:
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
     HourlyWeatherForecast &operator=(const HourlyWeatherForecast &other);
+    HourlyWeatherForecast &operator=(HourlyWeatherForecast &&other);
 
 private:
+    class HourlyWeatherForecastPrivate;
     std::unique_ptr<HourlyWeatherForecastPrivate> d;
 };
 }

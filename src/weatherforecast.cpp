@@ -8,7 +8,7 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
-class WeatherForecastPrivate
+class WeatherForecast::WeatherForecastPrivate
 {
 public:
     std::vector<DailyWeatherForecast> dailyWeatherForecast;
@@ -21,9 +21,18 @@ WeatherForecast::WeatherForecast()
     : d(new WeatherForecastPrivate)
 {
 }
-WeatherForecast::~WeatherForecast()
+WeatherForecast::WeatherForecast(const WeatherForecast &other)
+    : QSharedData(QSharedData())
+    , d(new WeatherForecastPrivate)
 {
-    delete d;
+    *d = *other.d;
+}
+WeatherForecast::WeatherForecast(WeatherForecast &&other) = default;
+WeatherForecast::~WeatherForecast() = default;
+WeatherForecast &WeatherForecast::operator=(const WeatherForecast &other)
+{
+    *d = *other.d;
+    return *this;
 }
 QJsonObject WeatherForecast::toJson() const
 {

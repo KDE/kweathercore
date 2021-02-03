@@ -10,6 +10,29 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
+class DailyWeatherForecast::DailyWeatherForecastPrivate
+{
+public:
+    bool isValid = true;
+
+    double maxTemp = std::numeric_limits<double>::lowest();
+    double minTemp = std::numeric_limits<double>::max();
+    double precipitation = 0; // mm
+    double uvIndex = 0; // 0-1
+    double humidity = 0; // %
+    double pressure = 0; // hPa
+    QString weatherIcon = QStringLiteral("weather-none-available");
+    QString weatherDescription = QStringLiteral("Unknown");
+    QDate date;
+
+    Sunrise sunrise;
+    std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
+};
+DailyWeatherForecast::~DailyWeatherForecast() = default;
+DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) =
+    default;
+DailyWeatherForecast &
+DailyWeatherForecast::operator=(DailyWeatherForecast &&other) = default;
 DailyWeatherForecast::DailyWeatherForecast()
     : d(new DailyWeatherForecastPrivate)
 {

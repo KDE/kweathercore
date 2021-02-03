@@ -7,6 +7,19 @@
 #include "sunrise.h"
 namespace KWeatherCore
 {
+class Sunrise::SunrisePrivate
+{
+public:
+    QPair<QDateTime, double> highMoon;
+    QPair<QDateTime, double> solarMidnight;
+    QPair<QDateTime, double> solarNoon;
+    QPair<QDateTime, double> lowMoon;
+    QDateTime sunRise = QDateTime::currentDateTime();
+    QDateTime sunSet = QDateTime::currentDateTime();
+    QDateTime moonRise = QDateTime::currentDateTime();
+    QDateTime moonSet = QDateTime::currentDateTime();
+    double moonPhase;
+};
 Sunrise::Sunrise()
     : d(new SunrisePrivate)
 {
@@ -16,11 +29,14 @@ Sunrise::Sunrise(const Sunrise &other)
 {
     *d = *other.d;
 }
+Sunrise::Sunrise(Sunrise &&other) = default;
+Sunrise::~Sunrise() = default;
 Sunrise &Sunrise::operator=(const Sunrise &other)
 {
     *d = *other.d;
     return *this;
 }
+Sunrise &Sunrise::operator=(Sunrise &&other) = default;
 Sunrise Sunrise::fromJson(QJsonObject obj)
 {
     Sunrise s;

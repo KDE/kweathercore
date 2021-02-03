@@ -13,19 +13,6 @@
 #include <memory>
 namespace KWeatherCore
 {
-class SunrisePrivate
-{
-public:
-    QPair<QDateTime, double> highMoon;
-    QPair<QDateTime, double> solarMidnight;
-    QPair<QDateTime, double> solarNoon;
-    QPair<QDateTime, double> lowMoon;
-    QDateTime sunRise = QDateTime::currentDateTime();
-    QDateTime sunSet = QDateTime::currentDateTime();
-    QDateTime moonRise = QDateTime::currentDateTime();
-    QDateTime moonSet = QDateTime::currentDateTime();
-    double moonPhase;
-};
 /**
  * @short The Sunrise class contains the information of sunrise/set on a day and
  * more
@@ -54,7 +41,10 @@ class KWEATHERCORE_EXPORT Sunrise
 public:
     Sunrise();
     Sunrise(const Sunrise &other);
+    Sunrise(Sunrise &&other);
+    ~Sunrise();
     Sunrise &operator=(const Sunrise &other);
+    Sunrise &operator=(Sunrise &&other);
     /**
      * construct from json
      */
@@ -119,6 +109,7 @@ public:
     void setMoonPhase(double moonPhase);
 
 private:
+    class SunrisePrivate;
     std::unique_ptr<SunrisePrivate> d;
 };
 }

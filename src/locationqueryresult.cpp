@@ -8,10 +8,17 @@
 #include <memory>
 namespace KWeatherCore
 {
+class LocationQueryResult::LocationQueryResultPrivate
+{
+public:
+    double latitude, longitude;
+    QString toponymName, name, countryCode, countryName, geonameId;
+};
 LocationQueryResult::LocationQueryResult()
     : d(new LocationQueryResultPrivate())
 {
 }
+LocationQueryResult::LocationQueryResult(LocationQueryResult &&other) = default;
 LocationQueryResult::LocationQueryResult(double latitude,
                                          double longitude,
                                          QString toponymName,
@@ -34,12 +41,15 @@ LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
 {
     *d = *other.d;
 }
+LocationQueryResult::~LocationQueryResult() = default;
 LocationQueryResult &
 LocationQueryResult::operator=(const LocationQueryResult &other)
 {
     *d = *other.d;
     return *this;
 }
+LocationQueryResult &
+LocationQueryResult::operator=(LocationQueryResult &&other) = default;
 double LocationQueryResult::latitude() const
 {
     return d->latitude;

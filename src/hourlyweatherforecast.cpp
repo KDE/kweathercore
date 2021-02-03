@@ -7,16 +7,39 @@
 #include "hourlyweatherforecast.h"
 namespace KWeatherCore
 {
+class HourlyWeatherForecast::HourlyWeatherForecastPrivate
+{
+public:
+    QDateTime date = QDateTime::currentDateTime();
+    QString weatherDescription = QStringLiteral("Unknown");
+    QString weatherIcon = QStringLiteral("weather-none-available");
+    // weather icon without time of day
+    QString neutralWeatherIcon = QStringLiteral("weather-none-available");
+    QString symbolCode;
+    double temperature = 0; // celsius
+    double pressure = 0; // hPa
+    WindDirection windDirection = WindDirection::E;
+    double windSpeed = 0; // m/s
+    double humidity = 0; // %
+    double fog = 0; // %
+    double uvIndex = 0; // 0-1
+    double precipitationAmount = 0; // mm
+};
 HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
     : d(new HourlyWeatherForecastPrivate)
 {
     d->date = date;
 }
+HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) =
+    default;
+HourlyWeatherForecast::~HourlyWeatherForecast() = default;
 HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other)
     : d(new HourlyWeatherForecastPrivate)
 {
     *d = *other.d;
 }
+HourlyWeatherForecast &
+HourlyWeatherForecast::operator=(HourlyWeatherForecast &&other) = default;
 QJsonObject HourlyWeatherForecast::toJson() const
 {
     QJsonObject obj;

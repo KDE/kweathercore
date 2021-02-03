@@ -23,7 +23,7 @@ public:
     void requestUpdate();
     void query(QString name, int number);
 Q_SIGNALS:
-    void located(const LocationQueryResult &);
+    void located(const KWeatherCore::LocationQueryResult &);
     void queryFinished(std::vector<LocationQueryResult> result);
     void queryError();
 private Q_SLOTS:

@@ -13,25 +13,6 @@
 #include <memory>
 namespace KWeatherCore
 {
-class DailyWeatherForecastPrivate
-{
-public:
-    bool isValid = true;
-
-    double maxTemp = std::numeric_limits<double>::lowest();
-    double minTemp = std::numeric_limits<double>::max();
-    double precipitation = 0; // mm
-    double uvIndex = 0; // 0-1
-    double humidity = 0; // %
-    double pressure = 0; // hPa
-    QString weatherIcon = QStringLiteral("weather-none-available");
-    QString weatherDescription = QStringLiteral("Unknown");
-    QDate date;
-
-    Sunrise sunrise;
-    std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
-};
-
 /**
  * @short Class represents weatherforecast in a day
  *
@@ -62,6 +43,8 @@ public:
     DailyWeatherForecast();
     explicit DailyWeatherForecast(const QDate &date);
     DailyWeatherForecast(const DailyWeatherForecast &other);
+    ~DailyWeatherForecast();
+    DailyWeatherForecast(DailyWeatherForecast &&other);
     /**
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
@@ -235,8 +218,10 @@ public:
     bool operator<(const DailyWeatherForecast &forecast) const;
 
     DailyWeatherForecast &operator=(const DailyWeatherForecast &other);
+    DailyWeatherForecast &operator=(DailyWeatherForecast &&other);
 
 private:
+    class DailyWeatherForecastPrivate;
     std::unique_ptr<DailyWeatherForecastPrivate> d;
 };
 }

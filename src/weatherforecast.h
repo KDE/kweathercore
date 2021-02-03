@@ -11,7 +11,6 @@
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
 {
-class WeatherForecastPrivate;
 /**
  * @short The WeatherForecast class contains the weather information of one
  * location for days
@@ -27,7 +26,10 @@ public:
      * construct an empty object
      */
     WeatherForecast();
+    WeatherForecast(const WeatherForecast &other);
+    WeatherForecast(WeatherForecast &&other);
     ~WeatherForecast();
+    WeatherForecast &operator=(const WeatherForecast &other);
     /**
      * convert to QJsonObject
      */
@@ -91,6 +93,7 @@ public:
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 
 private:
-    WeatherForecastPrivate *d;
+    class WeatherForecastPrivate;
+    std::unique_ptr<WeatherForecastPrivate> d;
 };
 }

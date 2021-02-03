@@ -8,16 +8,10 @@
 #pragma once
 #include <QMetaType>
 #include <QString>
-#include <memory>
 #include <kweathercore/kweathercore_export.h>
+#include <memory>
 namespace KWeatherCore
 {
-class LocationQueryResultPrivate
-{
-public:
-    double latitude, longitude;
-    QString toponymName, name, countryCode, countryName, geonameId;
-};
 /**
  * @short Class represents location query result
  *
@@ -58,7 +52,10 @@ public:
                         QString countryName = QString(),
                         QString geonameId = QString());
     LocationQueryResult(const LocationQueryResult &other);
-    LocationQueryResult &operator=(const LocationQueryResult &);
+    LocationQueryResult(LocationQueryResult &&other);
+    ~LocationQueryResult();
+    LocationQueryResult &operator=(const LocationQueryResult &other);
+    LocationQueryResult &operator=(LocationQueryResult &&other);
     double latitude() const;
 
     double longitude() const;
@@ -84,6 +81,7 @@ public:
     const QString &geonameId() const;
 
 private:
+    class LocationQueryResultPrivate;
     std::unique_ptr<LocationQueryResultPrivate> d;
 };
 }
