@@ -15,20 +15,20 @@
 namespace KWeatherCore {
 
     AbstractCAPProvider::AbstractCAPProvider(QObject *parent)
-            : networkAccessManager(new QNetworkAccessManager(parent)) {
-        connect(networkAccessManager, &QNetworkAccessManager::finished, this, &AbstractCAPProvider::replyFinished);
+            : m_manager(new QNetworkAccessManager(parent)) {
+        connect(m_manager, &QNetworkAccessManager::finished, this, &AbstractCAPProvider::replyFinished);
     }
 
     AbstractCAPProvider::AbstractCAPProvider(QObject *parent, QString countryCode)
-            : networkAccessManager(new QNetworkAccessManager(parent)),
-              country(std::move(countryCode)) {
-        connect(networkAccessManager, &QNetworkAccessManager::finished, this, &AbstractCAPProvider::replyFinished);
+            : m_manager(new QNetworkAccessManager(parent)),
+              m_country(std::move(countryCode)) {
+        connect(m_manager, &QNetworkAccessManager::finished, this, &AbstractCAPProvider::replyFinished);
 
-        auto url = capUrls[country];
+        auto url = capUrls[m_country];
         if(url.isEmpty()) {
             qDebug() << "Country unsupported";
         }
-        auto urlParams = capParams[country];
+        auto urlParams = capParams[m_country];
         for (auto &param : urlParams) {
             // TODO: temporary code.
             if(param == QStringLiteral("county")) {
@@ -38,13 +38,13 @@ namespace KWeatherCore {
             }
         }
 
-        networkRequest = new QNetworkRequest(url);
-        networkRequest->setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
-        networkRequest->setHeader(QNetworkRequest::UserAgentHeader,
-                      QString(QStringLiteral("KWeatherCore/") +
+        m_networkRequest = new QNetworkRequest(url);
+        m_networkRequest->setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+        m_networkRequest->setHeader(QNetworkRequest::UserAgentHeader,
+                                    QString(QStringLiteral("KWeatherCore/") +
                               VERSION_NUMBER +
                               QStringLiteral(" kde-frameworks-devel@kde.org")));
-        networkReply = networkAccessManager->get(*networkRequest);
+        m_networkReply = m_manager->get(*m_networkRequest);
     }
 
     void AbstractCAPProvider::replyFinished(QNetworkReply *reply) {

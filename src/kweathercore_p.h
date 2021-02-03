@@ -172,14 +172,15 @@ static const QMap<QString, ResolvedWeatherDesc> apiDescMap = {
     {QStringLiteral("heavyrain_night"), ResolvedWeatherDesc(QStringLiteral("weather-showers-night"), i18n("Heavy Rain"))},
 };
 
-// URLs for CAP alerts for different countries
+// URLs for CAP alerts for different countries.
+// Country codes according to https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
 static const QMap<QString, QUrl> capUrls = {
-        {QStringLiteral("NO"), QUrl(QStringLiteral("https://api.met.no/weatherapi/metalerts/1.1/"))}
+        {QStringLiteral("NOR"), QUrl(QStringLiteral("https://api.met.no/weatherapi/metalerts/1.1/"))}
 };
 
 // Parameters supported by different CAP providers. Key is the country shorthand
 static const QMap<QString, QVector<QString>> capParams = {
-        {QStringLiteral("NO"),
+        {QStringLiteral("NOR"),
             {
                 QStringLiteral("county"),
                 QStringLiteral("cap"),

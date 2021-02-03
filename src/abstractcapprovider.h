@@ -12,7 +12,6 @@ class QNetworkReply;
 
 namespace KWeatherCore {
     class AbstractCAPProvider : public QObject {
-    private:
         Q_OBJECT
 
     public:
@@ -24,10 +23,10 @@ namespace KWeatherCore {
         void replyFinished(QNetworkReply *reply);
 
     private:
-        QNetworkAccessManager *networkAccessManager;
-        QNetworkRequest *networkRequest;
-        QNetworkReply *networkReply;
-        const QString country;    // Short hand of a country name. Ex- NO for Norway
+        QNetworkAccessManager *m_manager;
+        QNetworkRequest *m_networkRequest;
+        QNetworkReply *m_networkReply;
+        const QString m_country;    // Short hand of a m_country name. Ex- NO for Norway
 
     };
 
