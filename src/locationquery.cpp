@@ -64,14 +64,8 @@ void LocationQueryPrivate::requestUpdate()
 }
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
-    auto roundCoordinate = [](QString coordinate) -> QString {
-        auto pointPos = coordinate.indexOf(QLatin1Char('.'));
-        coordinate.truncate(pointPos + 3);
-        return coordinate;
-    };
-    auto lat = roundCoordinate(QString::number(update.coordinate().latitude()));
-    auto lon =
-        roundCoordinate(QString::number(update.coordinate().longitude()));
+    auto lat = toFixedString(update.coordinate().latitude());
+    auto lon = toFixedString(update.coordinate().longitude());
     QUrl url(QStringLiteral("http://api.geonames.org/findNearbyJSON"));
     QUrlQuery urlQuery;
 
@@ -155,10 +149,10 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
         qWarning("API calls reached daily limit");
         return;
     }
-    QJsonArray geonames = root.value(QStringLiteral("geonames")).toArray();
+    auto geonames = root.value(QStringLiteral("geonames")).toArray();
     // add query results
-    for (QJsonValueRef resRef : geonames) {
-        QJsonObject res = resRef.toObject();
+    for (const auto &resRef : qAsConst(geonames)) {
+        auto res = resRef.toObject();
         auto result = LocationQueryResult(
             res.value(QStringLiteral("lat")).toString().toFloat(),
             res.value(QStringLiteral("lng")).toString().toFloat(),

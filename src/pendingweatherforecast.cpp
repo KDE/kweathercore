@@ -166,10 +166,6 @@ void PendingWeatherForecastPrivate::parseOneElement(
         !data.contains(QStringLiteral("next_1_hours")))
         return;
 
-    // correct date to corresponding timezone of location if possible
-    QDateTime date = QDateTime::fromString(
-        obj.value(QStringLiteral("time")).toString(), Qt::ISODate);
-
     // get symbolCode and precipitation amount
     QString symbolCode;
     double precipitationAmount = 0;
