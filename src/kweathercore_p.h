@@ -10,6 +10,8 @@
 #include <KLocalizedString>
 #include <QHash>
 #include <QString>
+#include <QUrl>
+
 namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
@@ -168,5 +170,28 @@ static const QMap<QString, ResolvedWeatherDesc> apiDescMap = {
     {QStringLiteral("heavyrain_neutral"), ResolvedWeatherDesc(QStringLiteral("weather-showers"), i18n("Heavy Rain"))},
     {QStringLiteral("heavyrain_day"), ResolvedWeatherDesc(QStringLiteral("weather-showers-day"), i18n("Heavy Rain"))},
     {QStringLiteral("heavyrain_night"), ResolvedWeatherDesc(QStringLiteral("weather-showers-night"), i18n("Heavy Rain"))},
+};
+
+// URLs for CAP alerts for different countries
+static const QMap<QString, QUrl> capUrls = {
+        {QStringLiteral("NO"), QUrl(QStringLiteral("https://api.met.no/weatherapi/metalerts/1.1/"))}
+};
+
+// Parameters supported by different CAP providers. Key is the country shorthand
+static const QMap<QString, QVector<QString>> capParams = {
+        {QStringLiteral("NO"),
+            {
+                QStringLiteral("county"),
+                QStringLiteral("cap"),
+                QStringLiteral("lang"),
+                QStringLiteral("event"),
+                QStringLiteral("incidentName"),
+                QStringLiteral("geographicDomain"),
+                QStringLiteral("municipality"),
+                QStringLiteral("lat"),
+                QStringLiteral("long"),
+                QStringLiteral("show"),
+            }
+        }
 };
 }

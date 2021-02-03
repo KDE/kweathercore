@@ -10,7 +10,7 @@ set(kweathercore_LIB_SRCS
     sunrise.cpp
     sunrisesource.cpp
     alertentry.cpp
-)
+        abstractcapprovider.cpp abstractcapprovider.h)
 
 
 add_library(KF5KWeatherCore ${kweathercore_LIB_SRCS})
