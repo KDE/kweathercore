@@ -12,6 +12,8 @@
 #include <tuple>
 namespace KWeatherCore
 {
+// code name (FIPS6, UGC...)/code value (002050, AKZ155)
+using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 class AlertEntry
 {
     Q_GADGET
@@ -25,12 +27,27 @@ class AlertEntry
 public:
     enum class MsgType { Alert, Update, Cancel, Ack, Error };
     enum class Urgency {
-        DefaultUrgency = -1,
-        LowUrgency = 10,
-        NormalUrgency = 50,
-        HighUrgency = 70,
-        CriticalUrgency = 90
+        Immediate,
+        Expected,
+        Future,
+        Past,
+        Unknown
     };
+    enum class Severity {
+        Extreme,
+        Severe,
+        Moderate,
+        Minor,
+        Unknown
+    };
+    enum class Certainty {
+        Observed,
+        Likely,
+        Possible,
+        Unlikely,
+        Unknown
+    };
+
     AlertEntry();
     AlertEntry(const AlertEntry &other);
     AlertEntry(AlertEntry &&other);
@@ -38,20 +55,28 @@ public:
     const QString &title() const;
     const QString &summary() const;
     const QString &event() const;
+    const QStringList &areaNames() const;
+    const AreaCodeVec &areaCodes() const;
     const QDateTime &effectiveTime() const;
     const QDateTime &expireTime() const;
     MsgType msgType() const;
     Urgency urgency() const;
-    const std::vector<std::pair<float, float>> &area() const;
+    Severity severity() const;
+    Certainty certainty() const;
+    const std::vector<std::pair<float, float>> &polygon() const;
     void setTitle(const QString &title);
     void setSummary(const QString &summary);
     void setEvent(const QString &event);
+    void setAreaNames(const QStringList &areas);
+    void setAreaCodes(const AreaCodeVec &areaCodes);
     void setEffectiveTime(const QDateTime &time);
     void setExpireTime(const QDateTime &time);
     void setMsgType(MsgType type);
     void setUrgency(Urgency urgency);
-    void setArea(const std::vector<std::pair<float, float>> &area);
-    void setArea(std::vector<std::pair<float, float>> &&area);
+    void setSeverity(Severity severity);
+    void setCertainty(Certainty certainty);
+    void setPolygon(const std::vector<std::pair<float, float>> &area);
+    void setPolygon(std::vector<std::pair<float, float>> &&area);
     AlertEntry &operator=(const AlertEntry &other);
     AlertEntry &operator=(AlertEntry &&other);
 

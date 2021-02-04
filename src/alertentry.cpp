@@ -12,11 +12,15 @@ public:
     QString title;
     QString summary;
     QString event;
+    QStringList areaNames;
     QDateTime effectiveTime;
     QDateTime expireTime;
     MsgType msgType;
     Urgency urgency;
-    std::vector<std::pair<float, float>> area;
+    Severity severity;
+    Certainty certainty;
+    AreaCodeVec areaCodes;
+    std::vector<std::pair<float, float>> polygon;
 };
 AlertEntry::AlertEntry()
     : d(new AlertEntryPrivate())
@@ -42,6 +46,14 @@ const QString &AlertEntry::event() const
 {
     return d->event;
 }
+const QStringList &AlertEntry::areaNames() const
+{
+    return d->areaNames;
+}
+const AreaCodeVec &AlertEntry::areaCodes() const
+{
+    return d->areaCodes;
+}
 const QDateTime &AlertEntry::effectiveTime() const
 {
     return d->effectiveTime;
@@ -58,9 +70,17 @@ AlertEntry::Urgency AlertEntry::urgency() const
 {
     return d->urgency;
 }
-const std::vector<std::pair<float, float>> &AlertEntry::area() const
+AlertEntry::Severity AlertEntry::severity() const
 {
-    return d->area;
+    return d->severity;
+}
+AlertEntry::Certainty AlertEntry::certainty() const
+{
+    return d->certainty;
+}
+const std::vector<std::pair<float, float>> &AlertEntry::polygon() const
+{
+    return d->polygon;
 }
 void AlertEntry::setTitle(const QString &title)
 {
@@ -73,6 +93,14 @@ void AlertEntry::setSummary(const QString &summary)
 void AlertEntry::setEvent(const QString &event)
 {
     d->event = event;
+}
+void AlertEntry::setAreaNames(const QStringList &areas)
+{
+    d->areaNames = areas;
+}
+void AlertEntry::setAreaCodes(const AreaCodeVec &areaCodes)
+{
+    d->areaCodes = areaCodes;
 }
 void AlertEntry::setEffectiveTime(const QDateTime &time)
 {
@@ -90,13 +118,21 @@ void AlertEntry::setUrgency(Urgency urgency)
 {
     d->urgency = urgency;
 }
-void AlertEntry::setArea(const std::vector<std::pair<float, float>> &area)
+void AlertEntry::setSeverity(Severity severity)
 {
-    d->area = area;
+    d->severity = severity;
 }
-void AlertEntry::setArea(std::vector<std::pair<float, float>> &&area)
+void AlertEntry::setCertainty(Certainty certainty)
 {
-    d->area = std::move(area);
+    d->certainty = certainty;
+}
+void AlertEntry::setPolygon(const std::vector<std::pair<float, float>> &polygon)
+{
+    d->polygon = polygon;
+}
+void AlertEntry::setPolygon(std::vector<std::pair<float, float>> &&polygon)
+{
+    d->polygon = std::move(polygon);
 }
 AlertEntry &AlertEntry::operator=(const AlertEntry &other)
 {
