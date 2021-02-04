@@ -6,6 +6,18 @@
 #include "alertentry.h"
 namespace KWeatherCore
 {
+class AlertEntry::AlertEntryPrivate
+{
+public:
+    QString title;
+    QString summary;
+    QString event;
+    QDateTime effectiveTime;
+    QDateTime expireTime;
+    MsgType msgType;
+    Urgency urgency;
+    std::vector<std::pair<float, float>> area;
+};
 AlertEntry::AlertEntry()
     : d(new AlertEntryPrivate())
 {
@@ -15,6 +27,9 @@ AlertEntry::AlertEntry(const AlertEntry &other)
 {
     *d = *other.d;
 }
+AlertEntry::AlertEntry(AlertEntry &&other) = default;
+AlertEntry::~AlertEntry() = default;
+AlertEntry &AlertEntry::operator=(AlertEntry &&other) = default;
 const QString &AlertEntry::title() const
 {
     return d->title;
@@ -35,15 +50,15 @@ const QDateTime &AlertEntry::expireTime() const
 {
     return d->expireTime;
 }
-MsgType AlertEntry::msgType() const
+AlertEntry::MsgType AlertEntry::msgType() const
 {
     return d->msgType;
 }
-Urgency AlertEntry::urgency() const
+AlertEntry::Urgency AlertEntry::urgency() const
 {
     return d->urgency;
 }
-const std::vector<std::tuple<float, float>> &AlertEntry::area() const
+const std::vector<std::pair<float, float>> &AlertEntry::area() const
 {
     return d->area;
 }
@@ -75,11 +90,11 @@ void AlertEntry::setUrgency(Urgency urgency)
 {
     d->urgency = urgency;
 }
-void AlertEntry::setArea(const std::vector<std::tuple<float, float>> &area)
+void AlertEntry::setArea(const std::vector<std::pair<float, float>> &area)
 {
     d->area = area;
 }
-void AlertEntry::setArea(std::vector<std::tuple<float, float>> &&area)
+void AlertEntry::setArea(std::vector<std::pair<float, float>> &&area)
 {
     d->area = std::move(area);
 }
