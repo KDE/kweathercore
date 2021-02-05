@@ -12,7 +12,7 @@
 #include <QString>
 #include <QUrl>
 
-#include "alertentry.h"
+#include "alertinfo.h"
 namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
@@ -21,45 +21,45 @@ static const auto toFixedString = [](double num) {
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
 };
-static const auto severityToString = [](AlertEntry::Severity severity) {
+static const auto severityToString = [](AlertInfo::Severity severity) {
     switch (severity) {
-        case AlertEntry::Severity::Extreme:
+        case AlertInfo::Severity::Extreme:
             return i18n("Extreme");
-        case AlertEntry::Severity::Severe:
+        case AlertInfo::Severity::Severe:
             return i18n("Severe");
-        case AlertEntry::Severity::Moderate:
+        case AlertInfo::Severity::Moderate:
             return i18n("Moderate");
-        case AlertEntry::Severity::Minor:
+        case AlertInfo::Severity::Minor:
             return i18n("Minor");
-        case AlertEntry::Severity::Unknown:
+        case AlertInfo::Severity::Unknown:
             return i18n("Unknown");
     }
 };
-static const auto urgencyToString = [](AlertEntry::Urgency urgency) {
+static const auto urgencyToString = [](AlertInfo::Urgency urgency) {
     switch (urgency) {
-        case AlertEntry::Urgency::Immediate:
+        case AlertInfo::Urgency::Immediate:
             return i18n("Immediate");
-        case AlertEntry::Urgency::Expected:
+        case AlertInfo::Urgency::Expected:
             return i18n("Expected");
-        case AlertEntry::Urgency::Future:
+        case AlertInfo::Urgency::Future:
             return i18n("Future");
-        case AlertEntry::Urgency::Past:
+        case AlertInfo::Urgency::Past:
             return i18n("Past");
-        case AlertEntry::Urgency::Unknown:
+        case AlertInfo::Urgency::Unknown:
             return i18n("Unknown");
     }
 };
-static const auto certaintyToString = [](AlertEntry::Certainty certainty) {
+static const auto certaintyToString = [](AlertInfo::Certainty certainty) {
     switch (certainty) {
-        case AlertEntry::Certainty::Observed:
+        case AlertInfo::Certainty::Observed:
             return i18n("Observed");
-        case AlertEntry::Certainty::Likely:
+        case AlertInfo::Certainty::Likely:
             return i18n("Likely");
-        case AlertEntry::Certainty::Possible:
+        case AlertInfo::Certainty::Possible:
             return i18n("Possible");
-        case AlertEntry::Certainty::Unlikely:
+        case AlertInfo::Certainty::Unlikely:
             return i18n("Unlikely");
-        case AlertEntry::Certainty::Unknown:
+        case AlertInfo::Certainty::Unknown:
             return i18n("Unknown");
     }
 };
