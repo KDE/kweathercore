@@ -22,46 +22,64 @@ static const auto toFixedString = [](double num) {
     return QString::fromStdString(oss.str());
 };
 static const auto severityToString = [](AlertInfo::Severity severity) {
+    QString res;
     switch (severity) {
         case AlertInfo::Severity::Extreme:
-            return i18n("Extreme");
+            res = i18n("Extreme");
+            break;
         case AlertInfo::Severity::Severe:
-            return i18n("Severe");
+            res  = i18n("Severe");
+            break;
         case AlertInfo::Severity::Moderate:
-            return i18n("Moderate");
+            res = i18n("Moderate");
+            break;
         case AlertInfo::Severity::Minor:
-            return i18n("Minor");
+            res = i18n("Minor");
+            break;
         case AlertInfo::Severity::Unknown:
-            return i18n("Unknown");
+            res = i18n("Unknown");
     }
+    return res;
 };
 static const auto urgencyToString = [](AlertInfo::Urgency urgency) {
+    QString res;
     switch (urgency) {
         case AlertInfo::Urgency::Immediate:
-            return i18n("Immediate");
+             res = i18n("Immediate");
+             break;
         case AlertInfo::Urgency::Expected:
-            return i18n("Expected");
+            res = i18n("Expected");
+            break;
         case AlertInfo::Urgency::Future:
-            return i18n("Future");
+            res = i18n("Future");
+            break;
         case AlertInfo::Urgency::Past:
-            return i18n("Past");
+            res = i18n("Past");
+            break;
         case AlertInfo::Urgency::Unknown:
-            return i18n("Unknown");
+            res = i18n("Unknown");
     }
+    return res;
 };
 static const auto certaintyToString = [](AlertInfo::Certainty certainty) {
+    QString res;
     switch (certainty) {
         case AlertInfo::Certainty::Observed:
-            return i18n("Observed");
+            res = i18n("Observed");
+            break;
         case AlertInfo::Certainty::Likely:
-            return i18n("Likely");
+            res = i18n("Likely");
+            break;
         case AlertInfo::Certainty::Possible:
-            return i18n("Possible");
+            res = i18n("Possible");
+            break;
         case AlertInfo::Certainty::Unlikely:
-            return i18n("Unlikely");
+            res = i18n("Unlikely");
+            break;
         case AlertInfo::Certainty::Unknown:
-            return i18n("Unknown");
+            res = i18n("Unknown");
     }
+    return res;
 };
 // rank weather (for what best describes the day overall)
 static const QHash<QString, int> rank = { // only need neutral icons
