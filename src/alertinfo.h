@@ -18,8 +18,8 @@ using Parameter = std::vector<std::pair<QString, QString>>;
 class AlertInfo
 {
     Q_GADGET
-    Q_PROPERTY(QString title READ title WRITE setTitle)
-    Q_PROPERTY(QString summary READ summary WRITE setSummary)
+    Q_PROPERTY(QString headline READ headline WRITE setHeadline)
+    Q_PROPERTY(QString description READ description WRITE setDescription)
     Q_PROPERTY(QString event READ event WRITE setEvent)
     Q_PROPERTY(
         QDateTime effectiveTime READ effectiveTime WRITE setEffectiveTime)
