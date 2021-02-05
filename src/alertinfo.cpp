@@ -34,9 +34,9 @@ AlertInfo::AlertInfo(const AlertInfo &other)
 {
     *d = *other.d;
 }
-AlertInfo::AlertInfo(AlertInfo &&other) = default;
+AlertInfo::AlertInfo(AlertInfo &&other)  noexcept = default;
 AlertInfo::~AlertInfo() = default;
-AlertInfo &AlertInfo::operator=(AlertInfo &&other) = default;
+AlertInfo &AlertInfo::operator=(AlertInfo &&other)  noexcept = default;
 
 const QString &AlertInfo::event() const
 {

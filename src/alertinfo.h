@@ -64,7 +64,7 @@ public:
 
     AlertInfo();
     AlertInfo(const AlertInfo &other);
-    AlertInfo(AlertInfo &&other);
+    AlertInfo(AlertInfo &&other) noexcept ;
     ~AlertInfo();
     const QString &event() const;
     const QStringList &areaNames() const;
@@ -98,7 +98,7 @@ public:
     void setPolygon(const std::vector<std::pair<float, float>> &area);
     void setPolygon(std::vector<std::pair<float, float>> &&area);
     AlertInfo &operator=(const AlertInfo &other);
-    AlertInfo &operator=(AlertInfo &&other);
+    AlertInfo &operator=(AlertInfo &&other) noexcept ;
 
 private:
     class AlertInfoPrivate;
