@@ -19,7 +19,7 @@ class AlertFeedEntry : public QObject
     Q_PROPERTY(QString summary READ summary)
     Q_PROPERTY(QString area READ area)
     Q_PROPERTY(QString urgency READ urgency)
-    Q_PROPERTY(QString severity READ sevirity)
+    Q_PROPERTY(QString severity READ severity)
     Q_PROPERTY(QString certainty READ certainty)
     Q_PROPERTY(QDateTime date READ date)
 public:
