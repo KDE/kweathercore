@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "alertentry.h"
+#include "alertinfo.h"
 #include <QObject>
 #include <memory>
 namespace KWeatherCore
@@ -38,9 +38,9 @@ public:
     void setTitle(const QString &title);
     void setSummary(const QString &summary);
     void setArea(const QString &area);
-    void setUrgency(AlertEntry::Urgency urgency);
-    void setCertainty(AlertEntry::Certainty certainty);
-    void setSeverity(AlertEntry::Severity severity);
+    void setUrgency(AlertInfo::Urgency urgency);
+    void setCertainty(AlertInfo::Certainty certainty);
+    void setSeverity(AlertInfo::Severity severity);
     void setDate(const QDateTime &date);
     void setUrl(const QUrl &url);
     void setAreaCodes(const AreaCodeVec &areaCodes);

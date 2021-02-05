@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2021 Han Young <hanyoung@protonmail.com>
- *
+ * SPDX-FileCopyrightText: 2021 Anjani Kumar <anjanik012@gmail.com>
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
@@ -14,7 +14,8 @@ namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
-class AlertEntry
+using Parameter = std::vector<std::pair<QString, QString>>;
+class AlertInfo
 {
     Q_GADGET
     Q_PROPERTY(QString title READ title WRITE setTitle)
@@ -25,7 +26,20 @@ class AlertEntry
     Q_PROPERTY(QDateTime expireTime READ expireTime WRITE setExpireTime)
 
 public:
-    enum class MsgType { Alert, Update, Cancel, Ack, Error };
+    enum class Category {
+        Geo,
+        Met,
+        Safety,
+        Security,
+        Rescue,
+        Fire,
+        Health,
+        Env,
+        Transport,
+        Infra,
+        CBRNE,
+        Other
+    };
     enum class Urgency {
         Immediate,
         Expected,
@@ -48,40 +62,46 @@ public:
         Unknown
     };
 
-    AlertEntry();
-    AlertEntry(const AlertEntry &other);
-    AlertEntry(AlertEntry &&other);
-    ~AlertEntry();
-    const QString &title() const;
-    const QString &summary() const;
+    AlertInfo();
+    AlertInfo(const AlertInfo &other);
+    AlertInfo(AlertInfo &&other);
+    ~AlertInfo();
     const QString &event() const;
     const QStringList &areaNames() const;
     const AreaCodeVec &areaCodes() const;
     const QDateTime &effectiveTime() const;
     const QDateTime &expireTime() const;
-    MsgType msgType() const;
+    const QString &headline() const;
+    const QString &description() const;
+    const QString &instruction() const;
+    Category category() const;
     Urgency urgency() const;
     Severity severity() const;
     Certainty certainty() const;
+    const Parameter &parameter() const;
+    const QString &areaDesc() const;
     const std::vector<std::pair<float, float>> &polygon() const;
-    void setTitle(const QString &title);
-    void setSummary(const QString &summary);
+    void setHeadline(const QString &headline);
+    void setDescription(const QString &description);
+    void setInstruction(const QString &instruction);
+    void setCategory(const Category &category);
     void setEvent(const QString &event);
     void setAreaNames(const QStringList &areas);
     void setAreaCodes(const AreaCodeVec &areaCodes);
     void setEffectiveTime(const QDateTime &time);
     void setExpireTime(const QDateTime &time);
-    void setMsgType(MsgType type);
     void setUrgency(Urgency urgency);
     void setSeverity(Severity severity);
     void setCertainty(Certainty certainty);
+    void setParameter(const Parameter &parameter);
+    void setAreaDesc(const QString &areaDesc);
     void setPolygon(const std::vector<std::pair<float, float>> &area);
     void setPolygon(std::vector<std::pair<float, float>> &&area);
-    AlertEntry &operator=(const AlertEntry &other);
-    AlertEntry &operator=(AlertEntry &&other);
+    AlertInfo &operator=(const AlertInfo &other);
+    AlertInfo &operator=(AlertInfo &&other);
 
 private:
-    class AlertEntryPrivate;
-    std::unique_ptr<AlertEntryPrivate> d;
+    class AlertInfoPrivate;
+    std::unique_ptr<AlertInfoPrivate> d;
 };
 }

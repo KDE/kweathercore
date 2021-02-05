@@ -9,7 +9,7 @@ set(kweathercore_LIB_SRCS
     pendingweatherforecast.cpp
     sunrise.cpp
     sunrisesource.cpp
-    alertentry.cpp
+    alertinfo.cpp
     abstractcapprovider.cpp
     alertfeedentry.cpp)
 
