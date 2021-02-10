@@ -18,18 +18,17 @@ public:
     MsgType msgType;
     Scope scope;
     QString note;
+    std::vector<AlertInfo> infoVec;
 };
 
 AlertEntry::AlertEntry()
-    : d(new AlertEntryPrivate()),
-      m_infoVec()
+    : d(new AlertEntryPrivate())
 {
 }
 AlertEntry::AlertEntry(const AlertEntry &other)
     : d(new AlertEntryPrivate())
 {
     *d = *other.d;
-    m_infoVec = other.m_infoVec;
 }
 AlertEntry::AlertEntry(AlertEntry &&other) = default;
 AlertEntry::~AlertEntry() = default;
@@ -64,7 +63,7 @@ const QString &AlertEntry::note() const
 }
 const std::vector<AlertInfo> &AlertEntry::infoVec() const
 {
-    return m_infoVec;
+    return d->infoVec;
 }
 void AlertEntry::setIdentifier(const QString &identifier)
 {
@@ -94,8 +93,16 @@ void AlertEntry::setNote(const QString &note)
 {
     d->note = note;
 }
+void AlertEntry::setInfoVec(const std::vector<AlertInfo> &infoVec)
+{
+    d->infoVec = infoVec;
+}
+void AlertEntry::setInfoVec(std::vector<AlertInfo> &&infoVec)
+{
+    d->infoVec = std::move(infoVec);
+}
 void AlertEntry::addInfo(const AlertInfo &alertInfo)
 {
-    m_infoVec.push_back(alertInfo);
+    d->infoVec.push_back(alertInfo);
 }
 }
