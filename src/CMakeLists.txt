@@ -11,7 +11,8 @@ set(kweathercore_LIB_SRCS
     sunrisesource.cpp
     alertinfo.cpp
     abstractcapprovider.cpp
-    alertfeedentry.cpp)
+    alertfeedentry.cpp
+    alertentry.cpp)
 
 
 add_library(KF5KWeatherCore ${kweathercore_LIB_SRCS})
@@ -46,6 +47,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     WeatherForecastSource
     GeoTimezone
     AlertInfo
+    AlertEntry
 
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS
