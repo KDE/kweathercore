@@ -16,6 +16,10 @@ class AlertInfo;
 class AlertEntry
 {
     Q_GADGET
+    Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)
+    Q_PROPERTY(QString sender READ sender WRITE setSender)
+    Q_PROPERTY(QDateTime sentTime READ sentTime WRITE setSentTime)
+    Q_PROPERTY(QString note READ note WRITE setNote)
 public:
     enum class Status {
         Actual,
@@ -57,11 +61,12 @@ public:
     void setMsgType(const MsgType &msgType);
     void setScope(const Scope &scope);
     void setNote(const QString &note);
+    void setInfoVec(const std::vector<AlertInfo> &infoVec);
+    void setInfoVec(std::vector<AlertInfo> &&infoVec);
     void addInfo(const AlertInfo &alertInfo);
 
 private:
     class AlertEntryPrivate;
     std::unique_ptr<AlertEntryPrivate> d;
-    std::vector<AlertInfo> m_infoVec;
 };
 }
