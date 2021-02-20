@@ -80,12 +80,12 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 
 void PendingWeatherForecastPrivate::getSunrise(int offset)
 {
-    m_sunriseSource->setOffset(offset);
-    m_sunriseSource->requestData();
     connect(m_sunriseSource,
             &SunriseSource::finished,
             this,
             &PendingWeatherForecastPrivate::parseSunriseResults);
+    m_sunriseSource->setOffset(offset);
+    m_sunriseSource->requestData();
 }
 void PendingWeatherForecastPrivate::parseSunriseResults()
 {
