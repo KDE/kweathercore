@@ -52,7 +52,7 @@ public:
     /**
      * convert to json
      */
-    QJsonObject toJson();
+    QJsonObject toJson() const;
     QDateTime highMoonTime() const;
     double highMoon() const;
     QDateTime lowMoonTime() const;

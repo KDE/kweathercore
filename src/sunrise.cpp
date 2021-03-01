@@ -67,7 +67,7 @@ Sunrise Sunrise::fromJson(QJsonObject obj)
         obj[QStringLiteral("moonrise")].toString(), Qt::ISODate));
     return s;
 }
-QJsonObject Sunrise::toJson()
+QJsonObject Sunrise::toJson() const
 {
     QJsonObject obj;
     obj[QStringLiteral("sunrise")] = sunRise().toString(Qt::ISODate);

@@ -66,6 +66,7 @@ QJsonObject DailyWeatherForecast::toJson()
         hourlyArray.append(h.toJson());
     }
     obj[QStringLiteral("hourly")] = hourlyArray;
+    obj[QStringLiteral("sunrise")] = sunrise().toJson();
     return obj;
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
@@ -81,6 +82,7 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
     ret.setWeatherDescription(
         obj[QStringLiteral("weatherDescription")].toString());
+    ret.setSunrise(Sunrise::fromJson(obj[QStringLiteral("sunrise")].toObject()));
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
