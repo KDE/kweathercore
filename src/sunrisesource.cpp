@@ -12,18 +12,19 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrlQuery>
+#include <QTimeZone>
 
 namespace KWeatherCore
 {
 SunriseSource::SunriseSource(double latitude,
                              double longitude,
-                             int offset,
+                             const QString &timezone,
                              const std::vector<Sunrise> &sunrise,
                              QObject *parent)
     : QObject(parent)
     , m_latitude(latitude)
     , m_longitude(longitude)
-    , m_offset(offset)
+    , m_timezone(timezone)
     , m_sunriseVec(sunrise)
     , m_manager(new QNetworkAccessManager(this))
 {
@@ -42,6 +43,8 @@ void SunriseSource::requestData()
         Q_EMIT finished();
         return;
     }
+
+    auto m_offset = QDateTime::currentDateTime().toTimeZone(QTimeZone(m_timezone.toUtf8())).offsetFromUtc();
 
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/sunrise/2.0/.json"));
     QUrlQuery query;
@@ -97,6 +100,8 @@ void SunriseSource::parseResults(QNetworkReply *reply)
         return;
     }
 
+    auto timezone = QTimeZone(m_timezone.toUtf8());
+
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     QJsonArray array = doc[QStringLiteral("location")]
                            .toObject()[QStringLiteral("time")]
@@ -113,28 +118,27 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
-        sr.setSunRise(
-            QDateTime::fromString(array.at(i)
-                                      .toObject()[QStringLiteral("sunrise")]
-                                      .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
+        sr.setSunRise(QDateTime::fromString(array.at(i)
+                                            .toObject()[QStringLiteral("sunrise")]
+                                            .toObject()[QStringLiteral("time")]
+                                            .toString()
+                                            .left(19),
+                                        QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
         sr.setMoonSet(
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("moonset")]
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
         sr.setMoonRise(
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("moonrise")]
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")));
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
         sr.setSolarMidnight(QPair<QDateTime, double>(
             QDateTime::fromString(
                 array.at(i)
@@ -142,7 +146,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                     .toObject()[QStringLiteral("time")]
                     .toString()
                     .left(19),
-                QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+                QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
             array.at(i)
                 .toObject()[QStringLiteral("solarmidnight")]
                 .toObject()[QStringLiteral("elevation")]
@@ -154,7 +158,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
             array.at(i)
                 .toObject()[QStringLiteral("solarnoon")]
                 .toObject()[QStringLiteral("elevation")]
@@ -166,7 +170,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
             array.at(i)
                 .toObject()[QStringLiteral("high_moon")]
                 .toObject()[QStringLiteral("elevation")]
@@ -178,7 +182,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
                                       .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")),
+                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
             array.at(i)
                 .toObject()[QStringLiteral("low_moon")]
                 .toObject()[QStringLiteral("elevation")]
@@ -190,14 +194,14 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                             .toString()
                             .toDouble());
 
-        m_sunriseVec.push_back(sr);
+        m_sunriseVec.emplace_back(std::move(sr));
     }
 
     Q_EMIT finished();
 }
-void SunriseSource::setOffset(int offset)
+void SunriseSource::setTimezone(const QString &timezone)
 {
-    m_offset = offset;
+    m_timezone = timezone;
 }
 
 void SunriseSource::popDay()
@@ -214,5 +218,10 @@ void SunriseSource::popDay()
     }
 
     m_sunriseVec.erase(m_sunriseVec.begin(), m_sunriseVec.begin() + popIndex);
+}
+
+const std::vector<Sunrise> &SunriseSource::value() const
+{
+    return m_sunriseVec;
 }
 }

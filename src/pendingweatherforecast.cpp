@@ -30,6 +30,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
           QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
+    , m_timezone(timezone)
 {
     connect(this, &PendingWeatherForecastPrivate::finished, [this] {
         this->isFinished = true;
@@ -48,16 +49,15 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
         });
     }
 
-    m_sunriseSource = new SunriseSource(latitude, longitude, 0, sunrise, this);
+    m_sunriseSource = new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
     } else {
         hasTimezone = true;
         forecast->setTimezone(timezone);
-        getSunrise(QDateTime::currentDateTime()
-                       .toTimeZone(QTimeZone(timezone.toUtf8()))
-                       .offsetFromUtc());
+        m_timezone = timezone;
+        getSunrise();
     }
 }
 void PendingWeatherForecastPrivate::getTimezone(double latitude,
@@ -73,18 +73,17 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 {
     hasTimezone = true;
     forecast->setTimezone(result);
-    getSunrise(QDateTime::currentDateTime()
-                   .toTimeZone(QTimeZone(result.toUtf8()))
-                   .offsetFromUtc());
+    m_timezone = result;
+    getSunrise();
 }
 
-void PendingWeatherForecastPrivate::getSunrise(int offset)
+void PendingWeatherForecastPrivate::getSunrise()
 {
     connect(m_sunriseSource,
             &SunriseSource::finished,
             this,
             &PendingWeatherForecastPrivate::parseSunriseResults);
-    m_sunriseSource->setOffset(offset);
+    m_sunriseSource->setTimezone(m_timezone);
     m_sunriseSource->requestData();
 }
 void PendingWeatherForecastPrivate::parseSunriseResults()

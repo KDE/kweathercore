@@ -108,11 +108,8 @@ void WeatherForecast::setSunriseForecast(const std::vector<Sunrise> &sunrise)
     for (auto &day : d->dailyWeatherForecast) {
         if (i >= range)
             break;
-        // if on the same day, add sunrise to day
-        if (day.date().daysTo(sunrise.at(i).sunRise().date()) == 0) {
-            day.setSunrise(sunrise.at(i));
-            ++i;
-        }
+        day.setSunrise(sunrise.at(i));
+        ++i;
     }
 }
 void WeatherForecast::setSunriseForecast(std::vector<Sunrise> &&sunrise)

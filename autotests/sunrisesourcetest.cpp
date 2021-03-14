@@ -8,7 +8,7 @@
 void SunriseSourceTest::initTestCase()
 {
     // Hangzhou, which has static offset from UTC so we can hardcode it here
-    d = new SunriseSource(30.29, 120.16, 3600 * 8);
+    d = new SunriseSource(30.29, 120.16, QStringLiteral("Asia/Shanghai"));
     finished_spy = new QSignalSpy(d, &SunriseSource::finished);
     networkError_spy = new QSignalSpy(d, &SunriseSource::networkError);
 

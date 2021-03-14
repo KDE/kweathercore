@@ -18,7 +18,6 @@ public:
                                   const std::vector<Sunrise> &sunrise,
                                   PendingWeatherForecast *parent = nullptr);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
-    QString timezone;
     bool isFinished = false;
 
 Q_SIGNALS:
@@ -33,7 +32,7 @@ private:
     void parseOneElement(const QJsonObject &obj,
                          std::vector<HourlyWeatherForecast> &hourlyForecast);
     void getTimezone(double latitude, double longitude);
-    void getSunrise(int offset);
+    void getSunrise();
     void applySunriseToForecast();
 
     bool hasTimezone = false;

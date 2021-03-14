@@ -27,12 +27,12 @@ class KWEATHERCORE_EXPORT SunriseSource : public QObject
 public:
     /**
      * SunriseSource
-     * @param offset from UTC, in seconds
+     * @param timezone timezone ID
      * @param sunrise for caching purpose
      */
     SunriseSource(double latitude,
                   double longitude,
-                  int offset,
+                  const QString &timezone = QString(),
                   const std::vector<Sunrise> &sunrise = std::vector<Sunrise>(),
                   QObject *parent = nullptr);
     /**
@@ -40,17 +40,14 @@ public:
      */
     void requestData();
     /**
-     * change the offset in case of daylight time changing and something
+     * change the timezone
      */
-    void setOffset(int offset);
+    void setTimezone(const QString &timezone);
     /**
      * get the value
      * @return
      */
-    const std::vector<Sunrise> &value() const
-    {
-        return m_sunriseVec;
-    };
+    const std::vector<Sunrise> &value() const;
 Q_SIGNALS:
     /**
      * network error
@@ -65,7 +62,7 @@ private Q_SLOTS:
 
 private:
     double m_latitude, m_longitude;
-    int m_offset;
+    QString m_timezone;
     std::vector<Sunrise> m_sunriseVec;
     QNetworkAccessManager *m_manager = nullptr;
 
