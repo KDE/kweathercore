@@ -4,22 +4,31 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+#include "alertfeedentry.h"
+#include "alertinfo.h"
 #include <QJsonDocument>
 #include <QXmlStreamReader>
 #include <memory>
-#include "alertfeedentry.h"
-namespace KWeatherCore {
+namespace KWeatherCore
+{
 class FeedParser : public QObject
 {
     Q_OBJECT
 public:
     FeedParser(const QJsonDocument &configFile, QObject *parent = nullptr);
     void setConfig(const QJsonDocument &configFile);
-    std::unique_ptr<std::vector<AlertFeedEntry>> parse(const QByteArray &data) const;
+    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>
+    parse(const QByteArray &data) const;
 
 private:
-    AlertFeedEntry parseOneEntry(QXmlStreamReader &reader) const;
-
+    std::unique_ptr<AlertFeedEntry>
+    parseOneEntry(QXmlStreamReader &reader) const;
+    static AlertInfo::Urgency urgencyStrToEnum(const QString &str);
+    static AlertInfo::Severity severityStrToEnum(const QString &str);
+    static AlertInfo::Certainty certaintyStrToEnum(const QString &str);
+    QUrl parseCapElement(QXmlStreamReader &reader) const;
+    void parsePolygonElement(QXmlStreamReader &reader,
+                             AlertFeedEntry &entry) const;
     QUrl m_url;
     QString m_entryMarker;
     QString m_titleMarker;
