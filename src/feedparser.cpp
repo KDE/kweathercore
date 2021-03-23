@@ -68,7 +68,18 @@ void FeedParser::setConfig(const QJsonDocument &configFile)
         m_dateMarker.clear();
     }
 }
+std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>
+FeedParser::parse(const QByteArray &data) const
+{
+    QXmlStreamReader reader(data);
+    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> result(
+        new std::vector<std::unique_ptr<AlertFeedEntry>>());
+    while (!reader.isEndDocument()) {
+        result->push_back(parseOneEntry(reader));
+    }
 
+    return result;
+}
 std::unique_ptr<AlertFeedEntry>
 FeedParser::parseOneEntry(QXmlStreamReader &reader) const
 {
