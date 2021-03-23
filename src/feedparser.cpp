@@ -74,7 +74,8 @@ FeedParser::parse(const QByteArray &data) const
     QXmlStreamReader reader(data);
     std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> result(
         new std::vector<std::unique_ptr<AlertFeedEntry>>());
-    while (!reader.isEndDocument()) {
+
+    while (!reader.atEnd()) {
         result->push_back(parseOneEntry(reader));
     }
 
