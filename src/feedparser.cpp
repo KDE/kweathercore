@@ -5,6 +5,7 @@
  */
 #include "feedparser.h"
 #include <QJsonObject>
+#include <QDateTime>
 namespace KWeatherCore
 {
 FeedParser::FeedParser(const QJsonDocument &configFile, QObject *parent)
@@ -109,6 +110,13 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
         } else if (m_hasArea && reader.name() == m_UGCMarker) {
             areaCodes.push_back(
                 {QStringLiteral("UGC"), reader.readElementText()});
+        } else if (m_hasDate){
+            if(m_dateFormat == "ISO-8601"){
+            entry->setDate(QDateTime::fromString(reader.readElementText(),
+            Qt::ISODate);)} else {
+            entry->setDate(QDateTime::fromString(reader.readElementText(),
+            m_dateFormat);)  
+            }                         
         }
         // TODO: parse date element
     }
