@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "feedparser.h"
-#include <QJsonObject>
 #include <QDateTime>
+#include <QJsonObject>
 namespace KWeatherCore
 {
 FeedParser::FeedParser(const QJsonDocument &configFile, QObject *parent)
@@ -110,15 +110,15 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
         } else if (m_hasArea && reader.name() == m_UGCMarker) {
             areaCodes.push_back(
                 {QStringLiteral("UGC"), reader.readElementText()});
-        } else if (m_hasDate){
-            if(m_dateFormat == "ISO-8601"){
-            entry->setDate(QDateTime::fromString(reader.readElementText(),
-            Qt::ISODate);)} else {
-            entry->setDate(QDateTime::fromString(reader.readElementText(),
-            m_dateFormat);)  
-            }                         
+        } else if (m_hasDate && reader.name() == m_dateMarker) {
+            if (m_dateFormat == QStringLiteral("ISO-8601")) {
+                entry->setDate(QDateTime::fromString(reader.readElementText(),
+                                                     Qt::ISODate))
+            } else {
+                entry->setDate(QDateTime::fromString(reader.readElementText(),
+                                                     m_dateFormat))
+            }
         }
-        // TODO: parse date element
     }
 
     entry->setAreaCodes(areaCodes);
