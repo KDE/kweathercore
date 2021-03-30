@@ -113,10 +113,10 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
         } else if (m_hasDate && reader.name() == m_dateMarker) {
             if (m_dateFormat == QStringLiteral("ISO-8601")) {
                 entry->setDate(QDateTime::fromString(reader.readElementText(),
-                                                     Qt::ISODate))
+                                                     Qt::ISODate));
             } else {
                 entry->setDate(QDateTime::fromString(reader.readElementText(),
-                                                     m_dateFormat))
+                                                     m_dateFormat));
             }
         }
     }
