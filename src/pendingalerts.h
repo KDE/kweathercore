@@ -6,13 +6,14 @@
 #include "feedparser.h"
 #include <QJsonDocument>
 #include <QObject>
+#include "kweathercore/kweathercore_export.h"
 class QNetworkReply;
 namespace KWeatherCore
 {
 class PendingAlertsPrivate;
 using AlertEntries =
     std::shared_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>;
-class PendingAlerts : public QObject
+class KWEATHERCORE_EXPORT PendingAlerts : public QObject
 {
     Q_OBJECT
 public:

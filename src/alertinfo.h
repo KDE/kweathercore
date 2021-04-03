@@ -10,12 +10,13 @@
 #include <memory>
 #include <vector>
 #include <tuple>
+#include "kweathercore/kweathercore_export.h"
 namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Parameter = std::vector<std::pair<QString, QString>>;
-class AlertInfo
+class KWEATHERCORE_EXPORT AlertInfo
 {
     Q_GADGET
     Q_PROPERTY(QString headline READ headline WRITE setHeadline)

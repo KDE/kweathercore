@@ -8,12 +8,12 @@
 #include <QDateTime>
 #include <vector>
 #include <memory>
-
+#include "kweathercore/kweathercore_export.h"
 namespace KWeatherCore
 {
 class AlertInfo;
 
-class AlertEntry
+class KWEATHERCORE_EXPORT AlertEntry
 {
     Q_GADGET
     Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)

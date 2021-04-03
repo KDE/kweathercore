@@ -6,10 +6,11 @@
 #pragma once
 #include "feedparser.h"
 #include <QObject>
+#include "kweathercore/kweathercore_export.h"
 namespace KWeatherCore
 {
 class PendingAlerts;
-class AlertManager : public QObject
+class KWEATHERCORE_EXPORT AlertManager : public QObject
 {
     Q_OBJECT
 public:

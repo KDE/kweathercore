@@ -51,6 +51,8 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     GeoTimezone
     AlertInfo
     AlertEntry
+    AlertFeedEntry
+    PendingAlerts
 
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS

@@ -7,12 +7,13 @@
 #include "alertinfo.h"
 #include <QObject>
 #include <memory>
+#include "kweathercore/kweathercore_export.h"
 namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Polygon = std::vector<std::pair<float, float>>;
-class AlertFeedEntry : public QObject
+class KWEATHERCORE_EXPORT AlertFeedEntry : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString title READ title)
