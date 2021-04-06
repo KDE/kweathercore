@@ -126,6 +126,11 @@ void AlertInfo::setAreaCodes(const AreaCodeVec &areaCodes)
 {
     d->areaCodes = areaCodes;
 }
+void AlertInfo::addAreaCode(std::pair<QString, QString>& areaCode)
+{
+    d->areaCodes.push_back(areaCode);
+}
+
 void AlertInfo::setEffectiveTime(const QDateTime &time)
 {
     d->effectiveTime = time;
@@ -150,6 +155,11 @@ void AlertInfo::setParameter(const Parameter &parameter)
 {
     d->parameter = parameter;
 }
+void AlertInfo::addParameter(std::pair<QString, QString> &p)
+{
+    d->parameter.push_back(p);
+}
+
 void AlertInfo::setAreaDesc(const QString &areaDesc)
 {
     d->areaDesc = areaDesc;

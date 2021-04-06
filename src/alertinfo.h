@@ -82,6 +82,7 @@ public:
     const Parameter &parameter() const;
     const QString &areaDesc() const;
     const std::vector<std::pair<float, float>> &polygon() const;
+    const AreaCodeVec &areaCodeVec() const;
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
@@ -89,12 +90,14 @@ public:
     void setEvent(const QString &event);
     void setAreaNames(const QStringList &areas);
     void setAreaCodes(const AreaCodeVec &areaCodes);
+    void addAreaCode(std::pair<QString, QString> &areaCode);
     void setEffectiveTime(const QDateTime &time);
     void setExpireTime(const QDateTime &time);
     void setUrgency(Urgency urgency);
     void setSeverity(Severity severity);
     void setCertainty(Certainty certainty);
     void setParameter(const Parameter &parameter);
+    void addParameter(std::pair<QString, QString> &);
     void setAreaDesc(const QString &areaDesc);
     void setPolygon(const std::vector<std::pair<float, float>> &area);
     void setPolygon(std::vector<std::pair<float, float>> &&area);
