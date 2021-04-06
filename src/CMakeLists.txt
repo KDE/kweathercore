@@ -15,7 +15,8 @@ set(kweathercore_LIB_SRCS
     alertentry.cpp
     alertmanager.cpp
     feedparser.cpp
-    pendingalerts.cpp)
+    pendingalerts.cpp
+    capparser.cpp)
 
 
 add_library(KF5KWeatherCore ${kweathercore_LIB_SRCS})
