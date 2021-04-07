@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QXmlStreamReader>
+#include <QMap>
 
 #include <memory>
 #include <unordered_map>
@@ -17,18 +18,18 @@ namespace KWeatherCore
 {
 class CAPParser
 {
-    Q_GADGET
+    Q_OBJECT
 public:
-    explicit CAPParser(const QByteArray &data, QObject *parent = nullptr);
+    explicit CAPParser(const QByteArray &data = {});
     std::unique_ptr<AlertEntry> parse();
+
 private:
     AlertInfo parseInfo();
     AlertInfo::Urgency getUrgency(const QString &);
     AlertInfo::Severity getSeverity(const QString &);
     AlertInfo::Certainty getCertainity(const QString &);
     QXmlStreamReader m_xml;
-    enum class Tags
-    {
+    enum class Tags {
         ALERT,
         IDENTIFIER,
         SENDER,
@@ -39,21 +40,18 @@ private:
         NOTE,
         INFO
     };
-    QMap<QString, Tags> tags =
-    {
+    QMap<QString, Tags> tags = {
         {QStringLiteral("alert"), Tags::ALERT},
         {QStringLiteral("identifier"), Tags::IDENTIFIER},
         {QStringLiteral("sender"), Tags::SENDER},
         {QStringLiteral("sent"), Tags::SENT_TIME},
-        {QStringLiteral("msgType"),Tags::MSG_TYPE},
-        {QStringLiteral("status"),Tags::STATUS},
-        {QStringLiteral("scope"),Tags::SCOPE},
-        {QStringLiteral("note"),Tags::NOTE},
-        {QStringLiteral("info"),Tags::INFO}
-    };
+        {QStringLiteral("msgType"), Tags::MSG_TYPE},
+        {QStringLiteral("status"), Tags::STATUS},
+        {QStringLiteral("scope"), Tags::SCOPE},
+        {QStringLiteral("note"), Tags::NOTE},
+        {QStringLiteral("info"), Tags::INFO}};
 
-    enum class InfoTags
-    {
+    enum class InfoTags {
         HEADLINE,
         DESCRIPTION,
         EVENT,
@@ -69,8 +67,7 @@ private:
         AREA,
     };
 
-    QMap<QString, InfoTags> infoTags =
-    {
+    QMap<QString, InfoTags> infoTags = {
         {QStringLiteral("category"), InfoTags::CATEGORY},
         {QStringLiteral("event"), InfoTags::EVENT},
         {QStringLiteral("urgency"), InfoTags::URGENCY},
@@ -83,7 +80,5 @@ private:
         {QStringLiteral("instruction"), InfoTags::INSTRUCTION},
         {QStringLiteral("event"), InfoTags::EVENT},
     };
-
-
 };
 }
