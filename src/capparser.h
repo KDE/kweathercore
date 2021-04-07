@@ -12,7 +12,6 @@
 #include <QMap>
 
 #include <memory>
-#include <unordered_map>
 
 namespace KWeatherCore
 {
