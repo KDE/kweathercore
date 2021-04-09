@@ -18,6 +18,7 @@ CAPParser::CAPParser(const QByteArray &data)
         while (m_xml.readNextStartElement()) {
             if (m_xml.name() == QStringLiteral("alert")) {
                 flag = true;
+                qDebug() << "valid cap file";
                 break;
             }
         }
@@ -113,9 +114,10 @@ AlertInfo CAPParser::parseInfo()
     AlertInfo info;
 
     if (m_xml.name() == QStringLiteral("info")) {
-        while (
-            !(m_xml.isEndElement() && m_xml.name() == QStringLiteral("info"))) {
-            if (m_xml.isStartElement()) {
+        while (!m_xml.atEnd() && !(m_xml.isEndElement() && m_xml.name() == QStringLiteral("info"))) {
+            m_xml.readNext();
+            if (m_xml.isStartElement() && infoTags.count(m_xml.name().toString())) {
+                qDebug() << m_xml.name();
                 switch (infoTags[m_xml.name().toString()]) {
                 case InfoTags::CATEGORY: {
                     auto s = m_xml.readElementText();
@@ -186,8 +188,10 @@ AlertInfo CAPParser::parseInfo()
                     break;
                 }
                 }
+            } else {
+                if (m_xml.isStartElement())
+                    qWarning() << "unlnown element: " << m_xml.name();
             }
-            m_xml.readNext();
         }
     }
     return info;

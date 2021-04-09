@@ -54,6 +54,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     AlertEntry
     AlertFeedEntry
     PendingAlerts
+    CapParser
 
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS

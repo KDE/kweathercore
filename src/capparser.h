@@ -6,16 +6,17 @@
 #pragma once
 #include "alertentry.h"
 #include "alertinfo.h"
+#include "kweathercore/kweathercore_export.h"
 
 #include <QObject>
 #include <QXmlStreamReader>
-#include <QMap>
+#include <QHash>
 
 #include <memory>
 
 namespace KWeatherCore
 {
-class CAPParser
+class KWEATHERCORE_EXPORT CAPParser
 {
     Q_GADGET
 public:
@@ -39,7 +40,7 @@ private:
         NOTE,
         INFO
     };
-    QMap<QString, Tags> tags = {
+    inline const static QHash<QString, Tags> tags {
         {QStringLiteral("alert"), Tags::ALERT},
         {QStringLiteral("identifier"), Tags::IDENTIFIER},
         {QStringLiteral("sender"), Tags::SENDER},
@@ -65,7 +66,7 @@ private:
         AREA,
     };
 
-    QMap<QString, InfoTags> infoTags = {
+    inline const static QHash<QString, InfoTags> infoTags = {
         {QStringLiteral("category"), InfoTags::CATEGORY},
         {QStringLiteral("event"), InfoTags::EVENT},
         {QStringLiteral("urgency"), InfoTags::URGENCY},
@@ -76,7 +77,6 @@ private:
         {QStringLiteral("headline"), InfoTags::HEADLINE},
         {QStringLiteral("description"), InfoTags::DESCRIPTION},
         {QStringLiteral("instruction"), InfoTags::INSTRUCTION},
-        {QStringLiteral("event"), InfoTags::EVENT},
     };
 };
 }
