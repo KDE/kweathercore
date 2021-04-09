@@ -17,7 +17,7 @@ namespace KWeatherCore
 {
 class CAPParser
 {
-    Q_OBJECT
+    Q_GADGET
 public:
     explicit CAPParser(const QByteArray &data = {});
     std::unique_ptr<AlertEntry> parse();
