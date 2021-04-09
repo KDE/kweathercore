@@ -193,7 +193,7 @@ AlertInfo CAPParser::parseInfo()
     return info;
 }
 
-AlertInfo::Urgency getUrgency(const QString &s)
+AlertInfo::Urgency CAPParser::getUrgency(const QString &s)
 {
     if (s == QStringLiteral("Expected"))
         return AlertInfo::Urgency::Expected;
@@ -207,7 +207,7 @@ AlertInfo::Urgency getUrgency(const QString &s)
         return AlertInfo::Urgency::Unknown;
 }
 
-AlertInfo::Severity getSeverity(const QString &s)
+AlertInfo::Severity CAPParser::getSeverity(const QString &s)
 {
     if (s == QStringLiteral("Extreme"))
         return AlertInfo::Severity::Extreme;
@@ -221,7 +221,7 @@ AlertInfo::Severity getSeverity(const QString &s)
         return AlertInfo::Severity::Unknown;
 }
 
-AlertInfo::Certainty getCertainity(const QString &s)
+AlertInfo::Certainty CAPParser::getCertainity(const QString &s)
 {
     if (s == QStringLiteral("Observed"))
         return AlertInfo::Certainty::Observed;
