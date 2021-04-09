@@ -116,7 +116,6 @@ AlertInfo CAPParser::parseInfo()
         while (
             !(m_xml.isEndElement() && m_xml.name() == QStringLiteral("info"))) {
             if (m_xml.isStartElement()) {
-                // FIXME: handle AREA_NAMES
                 switch (infoTags[m_xml.name().toString()]) {
                 case InfoTags::CATEGORY: {
                     auto s = m_xml.readElementText();
@@ -150,6 +149,9 @@ AlertInfo CAPParser::parseInfo()
                     break;
                 case InfoTags::DESCRIPTION:
                     info.setDescription(m_xml.readElementText());
+                    break;
+                case InfoTags::INSTRUCTION:
+                    info.setInstruction(m_xml.readElementText());
                     break;
                 case InfoTags::PARAMETER: {
                     std::pair<QString, QString> p;

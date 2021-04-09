@@ -54,7 +54,6 @@ private:
         HEADLINE,
         DESCRIPTION,
         EVENT,
-        AREA_NAMES,
         EFFECTIVE_TIME,
         EXPIRE_TIME,
         CATEGORY,

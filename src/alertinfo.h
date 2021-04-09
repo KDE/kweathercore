@@ -68,7 +68,6 @@ public:
     AlertInfo(AlertInfo &&other);
     ~AlertInfo();
     const QString &event() const;
-    const QStringList &areaNames() const;
     const AreaCodeVec &areaCodes() const;
     const QDateTime &effectiveTime() const;
     const QDateTime &expireTime() const;
@@ -88,7 +87,6 @@ public:
     void setInstruction(const QString &instruction);
     void setCategory(const Category &category);
     void setEvent(const QString &event);
-    void setAreaNames(const QStringList &areas);
     void setAreaCodes(const AreaCodeVec &areaCodes);
     void addAreaCode(std::pair<QString, QString> &areaCode);
     void setEffectiveTime(const QDateTime &time);

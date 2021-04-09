@@ -12,7 +12,6 @@ public:
     QString headline;
     QString description;
     QString event;
-    QStringList areaNames;
     QDateTime effectiveTime;
     QDateTime expireTime;
     Category category;
@@ -41,10 +40,6 @@ AlertInfo &AlertInfo::operator=(AlertInfo &&other) = default;
 const QString &AlertInfo::event() const
 {
     return d->event;
-}
-const QStringList &AlertInfo::areaNames() const
-{
-    return d->areaNames;
 }
 const AreaCodeVec &AlertInfo::areaCodes() const
 {
@@ -117,10 +112,6 @@ void AlertInfo::setCategory(const Category &category)
 void AlertInfo::setEvent(const QString &event)
 {
     d->event = event;
-}
-void AlertInfo::setAreaNames(const QStringList &areas)
-{
-    d->areaNames = areas;
 }
 void AlertInfo::setAreaCodes(const AreaCodeVec &areaCodes)
 {
