@@ -28,9 +28,9 @@ void AlertManager::loadConfigs()
 {
     QString config =
         QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
-    QDir dir(config + "/kweathercore");
+    QDir dir(config + QStringLiteral("/kweathercore"));
     if (dir.exists()) {
-        QDirIterator it(config + "kweathercore");
+        QDirIterator it(config + QStringLiteral("kweathercore"));
         while (it.hasNext()) {
             QFile file(it.next());
             if ((it.fileName()).right(4) == QStringLiteral("json")) {
