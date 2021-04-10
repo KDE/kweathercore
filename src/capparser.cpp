@@ -4,6 +4,7 @@
  */
 
 #include "capparser.h"
+#include "kweathercore_p.h"
 #include <QDateTime>
 #include <QDebug>
 #include <KLocalizedString>
@@ -182,6 +183,9 @@ AlertInfo CAPParser::parseInfo()
                             if (m_xml.name() == QStringLiteral("value"))
                                 p.second = m_xml.readElementText();
                             info.addAreaCode(p);
+                        } else if (m_xml.name() == QStringLiteral("polygon") &&
+                                   !m_xml.isEndElement()) {
+                            info.addPolygon(stringToPolygon(m_xml.readElementText()));
                         }
                         m_xml.readNext();
                     }

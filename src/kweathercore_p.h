@@ -16,6 +16,17 @@
 namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
+using Polygon = std::vector<std::pair<float, float>>;
+static auto stringToPolygon = [](const QString &str) -> Polygon {
+    Polygon res;
+    const auto pairList = str.split(QLatin1Char(' '));
+    for (auto &pair : pairList) {
+        auto coordinate = pair.split(QLatin1Char(','));
+        res.push_back(
+            {coordinate.front().toFloat(), coordinate.back().toFloat()});
+    }
+    return res;
+};
 static const auto toFixedString = [](double num) {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(2) << num;

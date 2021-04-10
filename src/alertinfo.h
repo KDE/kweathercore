@@ -63,7 +63,7 @@ public:
     Certainty certainty() const;
     const Parameter &parameter() const;
     const QString &areaDesc() const;
-    const std::vector<std::pair<float, float>> &polygon() const;
+    const std::vector<std::vector<std::pair<float, float>>> &polygon() const;
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
@@ -80,8 +80,10 @@ public:
     void setParameter(const Parameter &parameter);
     void addParameter(std::pair<QString, QString> &);
     void setAreaDesc(const QString &areaDesc);
-    void setPolygon(const std::vector<std::pair<float, float>> &area);
-    void setPolygon(std::vector<std::pair<float, float>> &&area);
+    void setPolygon(const std::vector<std::vector<std::pair<float, float>>> &area);
+    void setPolygon(std::vector<std::vector<std::pair<float, float>>> &&area);
+    void addPolygon(const std::vector<std::pair<float, float>> &area);
+    void addPolygon(std::vector<std::pair<float, float>> &&area);
     AlertInfo &operator=(const AlertInfo &other);
     AlertInfo &operator=(AlertInfo &&other);
 

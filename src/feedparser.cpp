@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "feedparser.h"
+#include "kweathercore_p.h"
 #include <QDateTime>
 #include <QJsonObject>
 namespace KWeatherCore
@@ -178,17 +179,6 @@ QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 void FeedParser::parsePolygonElement(QXmlStreamReader &reader,
                                      AlertFeedEntry &entry) const
 {
-    using Polygon = std::vector<std::pair<float, float>>;
-    static auto stringToPolygon = [](const QString &str) -> Polygon {
-        Polygon res;
-        const auto pairList = str.split(QLatin1Char(' '));
-        for (auto &pair : pairList) {
-            auto coordinate = pair.split(QLatin1Char(','));
-            res.push_back(
-                {coordinate.front().toFloat(), coordinate.back().toFloat()});
-        }
-        return res;
-    };
     if (reader.name() == m_polygonMarker) {
         entry.setPolygon(stringToPolygon(reader.readElementText()));
     }

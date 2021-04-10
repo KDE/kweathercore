@@ -23,7 +23,7 @@ public:
     Parameter parameter;
     QString areaDesc;
     AreaCodeVec areaCodes;
-    std::vector<std::pair<float, float>> polygon;
+    std::vector<std::vector<std::pair<float, float>>> polygon;
 };
 AlertInfo::AlertInfo()
     : d(new AlertInfoPrivate())
@@ -94,7 +94,7 @@ const QString &AlertInfo::areaDesc() const
 {
     return d->areaDesc;
 }
-const std::vector<std::pair<float, float>> &AlertInfo::polygon() const
+const std::vector<std::vector<std::pair<float, float>>> &AlertInfo::polygon() const
 {
     return d->polygon;
 }
@@ -164,13 +164,21 @@ void AlertInfo::setAreaDesc(const QString &areaDesc)
 {
     d->areaDesc = areaDesc;
 }
-void AlertInfo::setPolygon(const std::vector<std::pair<float, float>> &polygon)
+void AlertInfo::setPolygon(const std::vector<std::vector<std::pair<float, float>>> &polygon)
 {
     d->polygon = polygon;
 }
-void AlertInfo::setPolygon(std::vector<std::pair<float, float>> &&polygon)
+void AlertInfo::setPolygon(std::vector<std::vector<std::pair<float, float>>> &&polygon)
 {
     d->polygon = std::move(polygon);
+}
+void AlertInfo::addPolygon(const std::vector<std::pair<float, float>> &area)
+{
+    d->polygon.push_back(area);
+}
+void AlertInfo::addPolygon(std::vector<std::pair<float, float>> &&area)
+{
+    d->polygon.emplace_back(area);
 }
 AlertInfo &AlertInfo::operator=(const AlertInfo &other)
 {
