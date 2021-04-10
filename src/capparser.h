@@ -73,10 +73,11 @@ private:
         {QStringLiteral("severity"), InfoTags::SEVERITY},
         {QStringLiteral("certainity"), InfoTags::CERTAINITY},
         {QStringLiteral("effective"), InfoTags::EFFECTIVE_TIME},
-        {QStringLiteral("expire"), InfoTags::EXPIRE_TIME},
+        {QStringLiteral("expires"), InfoTags::EXPIRE_TIME},
         {QStringLiteral("headline"), InfoTags::HEADLINE},
         {QStringLiteral("description"), InfoTags::DESCRIPTION},
         {QStringLiteral("instruction"), InfoTags::INSTRUCTION},
+        {QStringLiteral("area"), InfoTags::AREA}
     };
 };
 }
