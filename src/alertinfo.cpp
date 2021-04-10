@@ -17,7 +17,7 @@ public:
     QDateTime effectiveTime;
     QDateTime onsetTime;
     QDateTime expireTime;
-    Category category;
+    Category category = Category::Unknown;
     QString instruction;
     Urgency urgency;
     Severity severity;
@@ -128,9 +128,13 @@ void AlertInfo::setLanguage(const QString &language)
 {
     d->language = language;
 }
-void AlertInfo::setCategory(const Category &category)
+void AlertInfo::setCategory(Category category)
 {
     d->category = category;
+}
+void AlertInfo::addCategory(Category category)
+{
+    d->category |= category;
 }
 void AlertInfo::setEvent(const QString &event)
 {

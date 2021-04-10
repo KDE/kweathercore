@@ -85,5 +85,21 @@ private:
         {QStringLiteral("senderName"), InfoTags::SENDERNAME},
         {QStringLiteral("language"), InfoTags::LANGUAGE}
     };
+
+    // constexpr hashmap when?
+    inline const static QHash<QString, AlertInfo::Category> categoryMap = {
+        {QStringLiteral("Geo"), AlertInfo::Category::Geo},
+        {QStringLiteral("Met"), AlertInfo::Category::Met},
+        {QStringLiteral("Safety"), AlertInfo::Category::Safety},
+        {QStringLiteral("Security"), AlertInfo::Category::Security},
+        {QStringLiteral("Rescue"), AlertInfo::Category::Rescue},
+        {QStringLiteral("Fire"), AlertInfo::Category::Fire},
+        {QStringLiteral("Health"), AlertInfo::Category::Health},
+        {QStringLiteral("Env"), AlertInfo::Category::Env},
+        {QStringLiteral("Transport"), AlertInfo::Category::Transport},
+        {QStringLiteral("Infra"), AlertInfo::Category::Infra},
+        {QStringLiteral("CBRNE"), AlertInfo::Category::CBRNE},
+        {QStringLiteral("Other"), AlertInfo::Category::Other}
+    };
 };
 }

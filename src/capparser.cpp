@@ -122,9 +122,8 @@ AlertInfo CAPParser::parseInfo()
                 switch (infoTags[m_xml.name().toString()]) {
                 case InfoTags::CATEGORY: {
                     auto s = m_xml.readElementText();
-                    // Supporting only Meteorological sources for now.
-                    if (s == QStringLiteral("Met"))
-                        info.setCategory(AlertInfo::Category::Met);
+                    if (categoryMap.count(s))
+                        info.addCategory(categoryMap[s]);
                     break;
                 }
                 case InfoTags::EVENT:

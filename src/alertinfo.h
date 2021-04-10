@@ -28,18 +28,19 @@ class KWEATHERCORE_EXPORT AlertInfo
 
 public:
     enum class Category {
-        Geo,
-        Met,
-        Safety,
-        Security,
-        Rescue,
-        Fire,
-        Health,
-        Env,
-        Transport,
-        Infra,
-        CBRNE,
-        Other
+        Unknown = 0,
+        Geo = 0b1,
+        Met = 0b10,
+        Safety = 0b100,
+        Security = 0b1000,
+        Rescue = 0b10000,
+        Fire = 0b100000,
+        Health = 0b1000000,
+        Env = 0b10000000,
+        Transport = 0b100000000,
+        Infra = 0b1000000000,
+        CBRNE = 0b10000000000,
+        Other = 0b100000000000
     };
     enum class Urgency { Immediate, Expected, Future, Past, Unknown };
     enum class Severity { Extreme, Severe, Moderate, Minor, Unknown };
@@ -71,7 +72,8 @@ public:
     void setInstruction(const QString &instruction);
     void setSender(const QString &sender);
     void setLanguage(const QString &language);
-    void setCategory(const Category &category);
+    void setCategory(Category category);
+    void addCategory(Category category);
     void setEvent(const QString &event);
     void setAreaCodes(const AreaCodeVec &areaCodes);
     void addAreaCode(std::pair<QString, QString> &areaCode);
@@ -95,4 +97,19 @@ private:
     class AlertInfoPrivate;
     std::unique_ptr<AlertInfoPrivate> d;
 };
+using Category = KWeatherCore::AlertInfo::Category;
+inline Category operator|(Category a, Category b)
+{
+    return static_cast<Category>(static_cast<int>(a) | static_cast<int>(b));
+}
+
+inline Category operator&(Category a, Category b)
+{
+    return static_cast<Category>(static_cast<int>(a) & static_cast<int>(b));
+}
+
+inline Category& operator|=(Category& a, Category b)
+{
+    return a = a | b;
+}
 }
