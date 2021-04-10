@@ -81,7 +81,6 @@ public:
     const Parameter &parameter() const;
     const QString &areaDesc() const;
     const std::vector<std::pair<float, float>> &polygon() const;
-    const AreaCodeVec &areaCodeVec() const;
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
