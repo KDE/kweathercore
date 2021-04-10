@@ -64,6 +64,7 @@ private:
         CERTAINITY,
         PARAMETER,
         AREA,
+        SENDERNAME
     };
 
     inline const static QHash<QString, InfoTags> infoTags = {
@@ -71,13 +72,14 @@ private:
         {QStringLiteral("event"), InfoTags::EVENT},
         {QStringLiteral("urgency"), InfoTags::URGENCY},
         {QStringLiteral("severity"), InfoTags::SEVERITY},
-        {QStringLiteral("certainity"), InfoTags::CERTAINITY},
+        {QStringLiteral("certainty"), InfoTags::CERTAINITY},
         {QStringLiteral("effective"), InfoTags::EFFECTIVE_TIME},
         {QStringLiteral("expires"), InfoTags::EXPIRE_TIME},
         {QStringLiteral("headline"), InfoTags::HEADLINE},
         {QStringLiteral("description"), InfoTags::DESCRIPTION},
         {QStringLiteral("instruction"), InfoTags::INSTRUCTION},
-        {QStringLiteral("area"), InfoTags::AREA}
+        {QStringLiteral("area"), InfoTags::AREA},
+        {QStringLiteral("senderName"), InfoTags::SENDERNAME}
     };
 };
 }

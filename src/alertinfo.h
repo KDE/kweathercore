@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+#include "kweathercore/kweathercore_export.h"
 #include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <memory>
-#include <vector>
 #include <tuple>
-#include "kweathercore/kweathercore_export.h"
+#include <vector>
 namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
@@ -41,27 +41,9 @@ public:
         CBRNE,
         Other
     };
-    enum class Urgency {
-        Immediate,
-        Expected,
-        Future,
-        Past,
-        Unknown
-    };
-    enum class Severity {
-        Extreme,
-        Severe,
-        Moderate,
-        Minor,
-        Unknown
-    };
-    enum class Certainty {
-        Observed,
-        Likely,
-        Possible,
-        Unlikely,
-        Unknown
-    };
+    enum class Urgency { Immediate, Expected, Future, Past, Unknown };
+    enum class Severity { Extreme, Severe, Moderate, Minor, Unknown };
+    enum class Certainty { Observed, Likely, Possible, Unlikely, Unknown };
 
     AlertInfo();
     AlertInfo(const AlertInfo &other);
@@ -74,6 +56,7 @@ public:
     const QString &headline() const;
     const QString &description() const;
     const QString &instruction() const;
+    const QString &sender() const;
     Category category() const;
     Urgency urgency() const;
     Severity severity() const;
@@ -84,6 +67,7 @@ public:
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
+    void setSender(const QString &sender);
     void setCategory(const Category &category);
     void setEvent(const QString &event);
     void setAreaCodes(const AreaCodeVec &areaCodes);

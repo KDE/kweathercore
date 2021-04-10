@@ -187,6 +187,10 @@ AlertInfo CAPParser::parseInfo()
                     }
                     break;
                 }
+                case InfoTags::SENDERNAME: {
+                    info.setSender(m_xml.readElementText());
+                    break;
+                }
                 }
             } else {
                 if (m_xml.isStartElement())

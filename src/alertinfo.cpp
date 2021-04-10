@@ -12,6 +12,7 @@ public:
     QString headline;
     QString description;
     QString event;
+    QString sender;
     QDateTime effectiveTime;
     QDateTime expireTime;
     Category category;
@@ -69,6 +70,10 @@ const QString &AlertInfo::instruction() const
 {
     return d->instruction;
 }
+const QString &AlertInfo::sender() const
+{
+    return d->sender;
+}
 AlertInfo::Urgency AlertInfo::urgency() const
 {
     return d->urgency;
@@ -105,6 +110,10 @@ void AlertInfo::setInstruction(const QString &instruction)
 {
     d->instruction = instruction;
 }
+void AlertInfo::setSender(const QString &sender)
+{
+    d->sender = sender;
+}
 void AlertInfo::setCategory(const Category &category)
 {
     d->category = category;
@@ -117,7 +126,7 @@ void AlertInfo::setAreaCodes(const AreaCodeVec &areaCodes)
 {
     d->areaCodes = areaCodes;
 }
-void AlertInfo::addAreaCode(std::pair<QString, QString>& areaCode)
+void AlertInfo::addAreaCode(std::pair<QString, QString> &areaCode)
 {
     d->areaCodes.push_back(areaCode);
 }
