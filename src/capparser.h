@@ -56,6 +56,7 @@ private:
         DESCRIPTION,
         EVENT,
         EFFECTIVE_TIME,
+        ONSET_TIME,
         EXPIRE_TIME,
         CATEGORY,
         INSTRUCTION,
@@ -64,7 +65,8 @@ private:
         CERTAINITY,
         PARAMETER,
         AREA,
-        SENDERNAME
+        SENDERNAME,
+        LANGUAGE
     };
 
     inline const static QHash<QString, InfoTags> infoTags = {
@@ -74,12 +76,14 @@ private:
         {QStringLiteral("severity"), InfoTags::SEVERITY},
         {QStringLiteral("certainty"), InfoTags::CERTAINITY},
         {QStringLiteral("effective"), InfoTags::EFFECTIVE_TIME},
+        {QStringLiteral("onset"), InfoTags::ONSET_TIME},
         {QStringLiteral("expires"), InfoTags::EXPIRE_TIME},
         {QStringLiteral("headline"), InfoTags::HEADLINE},
         {QStringLiteral("description"), InfoTags::DESCRIPTION},
         {QStringLiteral("instruction"), InfoTags::INSTRUCTION},
         {QStringLiteral("area"), InfoTags::AREA},
-        {QStringLiteral("senderName"), InfoTags::SENDERNAME}
+        {QStringLiteral("senderName"), InfoTags::SENDERNAME},
+        {QStringLiteral("language"), InfoTags::LANGUAGE}
     };
 };
 }

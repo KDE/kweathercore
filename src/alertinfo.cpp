@@ -13,7 +13,9 @@ public:
     QString description;
     QString event;
     QString sender;
+    QString language = QStringLiteral("en-US"); // default value according to CAP specification
     QDateTime effectiveTime;
+    QDateTime onsetTime;
     QDateTime expireTime;
     Category category;
     QString instruction;
@@ -50,6 +52,10 @@ const QDateTime &AlertInfo::effectiveTime() const
 {
     return d->effectiveTime;
 }
+const QDateTime &AlertInfo::onsetTime() const
+{
+    return d->onsetTime;
+}
 const QDateTime &AlertInfo::expireTime() const
 {
     return d->expireTime;
@@ -73,6 +79,10 @@ const QString &AlertInfo::instruction() const
 const QString &AlertInfo::sender() const
 {
     return d->sender;
+}
+const QString &AlertInfo::language() const
+{
+    return d->language;
 }
 AlertInfo::Urgency AlertInfo::urgency() const
 {
@@ -114,6 +124,10 @@ void AlertInfo::setSender(const QString &sender)
 {
     d->sender = sender;
 }
+void AlertInfo::setLanguage(const QString &language)
+{
+    d->language = language;
+}
 void AlertInfo::setCategory(const Category &category)
 {
     d->category = category;
@@ -134,6 +148,10 @@ void AlertInfo::addAreaCode(std::pair<QString, QString> &areaCode)
 void AlertInfo::setEffectiveTime(const QDateTime &time)
 {
     d->effectiveTime = time;
+}
+void AlertInfo::setOnsetTime(const QDateTime &time)
+{
+    d->onsetTime = time;
 }
 void AlertInfo::setExpireTime(const QDateTime &time)
 {

@@ -143,6 +143,10 @@ AlertInfo CAPParser::parseInfo()
                     info.setEffectiveTime(QDateTime::fromString(
                         m_xml.readElementText(), Qt::ISODate));
                     break;
+                case InfoTags::ONSET_TIME:
+                    info.setOnsetTime(QDateTime::fromString(
+                        m_xml.readElementText(), Qt::ISODate));
+                    break;
                 case InfoTags::EXPIRE_TIME:
                     info.setExpireTime(QDateTime::fromString(
                         m_xml.readElementText(), Qt::ISODate));
@@ -195,6 +199,9 @@ AlertInfo CAPParser::parseInfo()
                     info.setSender(m_xml.readElementText());
                     break;
                 }
+                case InfoTags::LANGUAGE:
+                    info.setLanguage(m_xml.readElementText());
+                    break;
                 }
             } else {
                 if (m_xml.isStartElement())

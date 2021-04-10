@@ -52,11 +52,13 @@ public:
     const QString &event() const;
     const AreaCodeVec &areaCodes() const;
     const QDateTime &effectiveTime() const;
+    const QDateTime &onsetTime() const;
     const QDateTime &expireTime() const;
     const QString &headline() const;
     const QString &description() const;
     const QString &instruction() const;
     const QString &sender() const;
+    const QString &language() const;
     Category category() const;
     Urgency urgency() const;
     Severity severity() const;
@@ -68,11 +70,13 @@ public:
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
     void setSender(const QString &sender);
+    void setLanguage(const QString &language);
     void setCategory(const Category &category);
     void setEvent(const QString &event);
     void setAreaCodes(const AreaCodeVec &areaCodes);
     void addAreaCode(std::pair<QString, QString> &areaCode);
     void setEffectiveTime(const QDateTime &time);
+    void setOnsetTime(const QDateTime &time);
     void setExpireTime(const QDateTime &time);
     void setUrgency(Urgency urgency);
     void setSeverity(Severity severity);
