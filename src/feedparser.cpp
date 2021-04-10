@@ -125,45 +125,6 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
     entry->setAreaCodes(areaCodes);
     return entry;
 }
-AlertInfo::Urgency FeedParser::urgencyStrToEnum(const QString &str)
-{
-    if (str == QStringLiteral("Immediate"))
-        return AlertInfo::Urgency::Immediate;
-    else if (str == QStringLiteral("Expected"))
-        return AlertInfo::Urgency::Expected;
-    else if (str == QStringLiteral("Future"))
-        return AlertInfo::Urgency::Future;
-    else if (str == QStringLiteral("Past"))
-        return AlertInfo::Urgency::Past;
-    else
-        return AlertInfo::Urgency::Unknown;
-}
-AlertInfo::Severity FeedParser::severityStrToEnum(const QString &str)
-{
-    if (str == QStringLiteral("Extreme"))
-        return AlertInfo::Severity::Extreme;
-    else if (str == QStringLiteral("Severe"))
-        return AlertInfo::Severity::Severe;
-    else if (str == QStringLiteral("Moderate"))
-        return AlertInfo::Severity::Moderate;
-    else if (str == QStringLiteral("Minor"))
-        return AlertInfo::Severity::Minor;
-    else
-        return AlertInfo::Severity::Unknown;
-}
-AlertInfo::Certainty FeedParser::certaintyStrToEnum(const QString &str)
-{
-    if (str == QStringLiteral("Observed"))
-        return AlertInfo::Certainty::Observed;
-    else if (str == QStringLiteral("Likely"))
-        return AlertInfo::Certainty::Likely;
-    else if (str == QStringLiteral("Possible"))
-        return AlertInfo::Certainty::Possible;
-    else if (str == QStringLiteral("Unlikely"))
-        return AlertInfo::Certainty::Unlikely;
-    else
-        return AlertInfo::Certainty::Unknown;
-}
 QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 {
     Q_ASSERT(m_hasCap && reader.isStartElement() &&

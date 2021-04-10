@@ -23,9 +23,6 @@ public:
 private:
     std::unique_ptr<AlertFeedEntry>
     parseOneEntry(QXmlStreamReader &reader) const;
-    static AlertInfo::Urgency urgencyStrToEnum(const QString &str);
-    static AlertInfo::Severity severityStrToEnum(const QString &str);
-    static AlertInfo::Certainty certaintyStrToEnum(const QString &str);
     QUrl parseCapElement(QXmlStreamReader &reader) const;
     void parsePolygonElement(QXmlStreamReader &reader,
                              AlertFeedEntry &entry) const;

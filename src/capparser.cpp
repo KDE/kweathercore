@@ -130,13 +130,13 @@ AlertInfo CAPParser::parseInfo()
                     info.setEvent(m_xml.readElementText());
                     break;
                 case InfoTags::URGENCY:
-                    info.setUrgency(getUrgency(m_xml.readElementText()));
+                    info.setUrgency(urgencyStrToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::SEVERITY:
-                    info.setSeverity(getSeverity(m_xml.readElementText()));
+                    info.setSeverity(severityStrToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::CERTAINITY:
-                    info.setCertainty(getCertainity(m_xml.readElementText()));
+                    info.setCertainty(certaintyStrToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::EFFECTIVE_TIME:
                     info.setEffectiveTime(QDateTime::fromString(
@@ -210,47 +210,4 @@ AlertInfo CAPParser::parseInfo()
     }
     return info;
 }
-
-AlertInfo::Urgency CAPParser::getUrgency(const QString &s)
-{
-    if (s == QStringLiteral("Expected"))
-        return AlertInfo::Urgency::Expected;
-    else if (s == QStringLiteral("Immediate"))
-        return AlertInfo::Urgency::Immediate;
-    else if (s == QStringLiteral("Future"))
-        return AlertInfo::Urgency::Future;
-    else if (s == QStringLiteral("Past"))
-        return AlertInfo::Urgency::Past;
-    else
-        return AlertInfo::Urgency::Unknown;
-}
-
-AlertInfo::Severity CAPParser::getSeverity(const QString &s)
-{
-    if (s == QStringLiteral("Extreme"))
-        return AlertInfo::Severity::Extreme;
-    else if (s == QStringLiteral("Severe"))
-        return AlertInfo::Severity::Severe;
-    else if (s == QStringLiteral("Moderate"))
-        return AlertInfo::Severity::Moderate;
-    else if (s == QStringLiteral("Minor"))
-        return AlertInfo::Severity::Minor;
-    else
-        return AlertInfo::Severity::Unknown;
-}
-
-AlertInfo::Certainty CAPParser::getCertainity(const QString &s)
-{
-    if (s == QStringLiteral("Observed"))
-        return AlertInfo::Certainty::Observed;
-    else if (s == QStringLiteral("Likely"))
-        return AlertInfo::Certainty::Likely;
-    else if (s == QStringLiteral("Possible"))
-        return AlertInfo::Certainty::Possible;
-    else if (s == QStringLiteral("Unlikely"))
-        return AlertInfo::Certainty::Unlikely;
-    else
-        return AlertInfo::Certainty::Unknown;
-}
-
 }

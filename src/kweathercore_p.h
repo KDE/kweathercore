@@ -17,7 +17,7 @@ namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
 using Polygon = std::vector<std::pair<float, float>>;
-static auto stringToPolygon = [](const QString &str) -> Polygon {
+static constexpr auto stringToPolygon = [](const QString &str) -> Polygon {
     Polygon res;
     const auto pairList = str.split(QLatin1Char(' '));
     for (auto &pair : pairList) {
@@ -27,12 +27,48 @@ static auto stringToPolygon = [](const QString &str) -> Polygon {
     }
     return res;
 };
-static const auto toFixedString = [](double num) {
+static constexpr auto toFixedString = [](double num) {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
 };
-static const auto severityToString = [](AlertInfo::Severity severity) {
+static constexpr auto urgencyStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Immediate"))
+        return AlertInfo::Urgency::Immediate;
+    else if (str == QStringLiteral("Expected"))
+        return AlertInfo::Urgency::Expected;
+    else if (str == QStringLiteral("Future"))
+        return AlertInfo::Urgency::Future;
+    else if (str == QStringLiteral("Past"))
+        return AlertInfo::Urgency::Past;
+    else
+        return AlertInfo::Urgency::Unknown;
+};
+static constexpr auto severityStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Extreme"))
+        return AlertInfo::Severity::Extreme;
+    else if (str == QStringLiteral("Severe"))
+        return AlertInfo::Severity::Severe;
+    else if (str == QStringLiteral("Moderate"))
+        return AlertInfo::Severity::Moderate;
+    else if (str == QStringLiteral("Minor"))
+        return AlertInfo::Severity::Minor;
+    else
+        return AlertInfo::Severity::Unknown;
+};
+static constexpr auto certaintyStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Observed"))
+        return AlertInfo::Certainty::Observed;
+    else if (str == QStringLiteral("Likely"))
+        return AlertInfo::Certainty::Likely;
+    else if (str == QStringLiteral("Possible"))
+        return AlertInfo::Certainty::Possible;
+    else if (str == QStringLiteral("Unlikely"))
+        return AlertInfo::Certainty::Unlikely;
+    else
+        return AlertInfo::Certainty::Unknown;
+};
+static constexpr auto severityToString = [](AlertInfo::Severity severity) {
     QString res;
     switch (severity) {
         case AlertInfo::Severity::Extreme:
@@ -52,7 +88,7 @@ static const auto severityToString = [](AlertInfo::Severity severity) {
     }
     return res;
 };
-static const auto urgencyToString = [](AlertInfo::Urgency urgency) {
+static constexpr auto urgencyToString = [](AlertInfo::Urgency urgency) {
     QString res;
     switch (urgency) {
         case AlertInfo::Urgency::Immediate:
@@ -72,7 +108,7 @@ static const auto urgencyToString = [](AlertInfo::Urgency urgency) {
     }
     return res;
 };
-static const auto certaintyToString = [](AlertInfo::Certainty certainty) {
+static constexpr auto certaintyToString = [](AlertInfo::Certainty certainty) {
     QString res;
     switch (certainty) {
         case AlertInfo::Certainty::Observed:

@@ -25,9 +25,6 @@ public:
 
 private:
     AlertInfo parseInfo();
-    AlertInfo::Urgency getUrgency(const QString &);
-    AlertInfo::Severity getSeverity(const QString &);
-    AlertInfo::Certainty getCertainity(const QString &);
     QXmlStreamReader m_xml;
     enum class Tags {
         ALERT,
