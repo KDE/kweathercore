@@ -5,6 +5,7 @@
  */
 #pragma once
 #include "alertinfo.h"
+#include "pendingcap.h"
 #include <QObject>
 #include <memory>
 #include "kweathercore/kweathercore_export.h"
@@ -32,7 +33,7 @@ public:
     QString severity() const;
     QString certainty() const;
     const QDateTime &date() const;
-    const QUrl &CAPUrl() const;
+    PendingCAP *CAP() const;
     const AreaCodeVec &areaCodes() const;
     const Polygon &polygon() const;
 

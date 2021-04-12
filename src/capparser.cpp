@@ -28,7 +28,11 @@ CAPParser::CAPParser(const QByteArray &data)
         }
     }
 }
-
+void CAPParser::setData(const QByteArray &data)
+{
+    m_xml.clear();
+    m_xml.addData(data);
+}
 std::unique_ptr<AlertEntry> CAPParser::parse()
 {
     auto entry = std::make_unique<AlertEntry>();

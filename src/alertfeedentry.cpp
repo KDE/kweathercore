@@ -6,6 +6,7 @@
 #include "alertfeedentry.h"
 #include "kweathercore_p.h"
 #include <QUrl>
+#include <QNetworkAccessManager>
 namespace KWeatherCore
 {
 class AlertFeedEntry::AlertFeedEntryPrivate : public QObject
@@ -61,9 +62,11 @@ const QDateTime &AlertFeedEntry::date() const
 {
     return d->date;
 }
-const QUrl &AlertFeedEntry::CAPUrl() const
+PendingCAP *AlertFeedEntry::CAP() const
 {
-    return d->CAPUrl;
+    QNetworkAccessManager manager;
+    auto reply = manager.get(QNetworkRequest(d->CAPUrl));
+    return new PendingCAP(reply);
 }
 const AreaCodeVec &AlertFeedEntry::areaCodes() const
 {

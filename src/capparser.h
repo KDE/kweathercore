@@ -6,7 +6,6 @@
 #pragma once
 #include "alertentry.h"
 #include "alertinfo.h"
-#include "kweathercore/kweathercore_export.h"
 
 #include <QObject>
 #include <QXmlStreamReader>
@@ -16,11 +15,11 @@
 
 namespace KWeatherCore
 {
-class KWEATHERCORE_EXPORT CAPParser
+class CAPParser
 {
-    Q_GADGET
 public:
     explicit CAPParser(const QByteArray &data = {});
+    void setData(const QByteArray &data);
     std::unique_ptr<AlertEntry> parse();
 
 private:
