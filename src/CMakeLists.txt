@@ -10,7 +10,6 @@ set(kweathercore_LIB_SRCS
     sunrise.cpp
     sunrisesource.cpp
     alertinfo.cpp
-    abstractcapprovider.cpp
     alertfeedentry.cpp
     alertentry.cpp
     alertmanager.cpp
