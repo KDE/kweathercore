@@ -112,7 +112,8 @@ public:
     void setInfoVec(std::vector<AlertInfo> &&infoVec);
     void addInfo(const AlertInfo &alertInfo);
     void addInfo(AlertInfo &&alertInfo);
-
+    AlertEntry &operator=(const AlertEntry &other);
+    AlertEntry &operator=(AlertEntry &&other);
 private:
     class AlertEntryPrivate;
     std::unique_ptr<AlertEntryPrivate> d;

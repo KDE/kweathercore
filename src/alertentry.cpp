@@ -22,17 +22,21 @@ public:
 };
 
 AlertEntry::AlertEntry()
-    : d(new AlertEntryPrivate())
+    : d(std::make_unique<AlertEntryPrivate>())
 {
 }
 AlertEntry::AlertEntry(const AlertEntry &other)
-    : d(new AlertEntryPrivate())
+    : d(std::make_unique<AlertEntryPrivate>(*other.d))
 {
-    *d = *other.d;
 }
 AlertEntry::AlertEntry(AlertEntry &&other) = default;
 AlertEntry::~AlertEntry() = default;
-
+AlertEntry &AlertEntry::operator=(const AlertEntry &other)
+{
+    *this->d = *other.d;
+    return *this;
+}
+AlertEntry &AlertEntry::operator=(AlertEntry &&other) = default;
 const QString &AlertEntry::identifier() const
 {
     return d->identifier;
