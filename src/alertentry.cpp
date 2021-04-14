@@ -14,9 +14,9 @@ public:
     QString identifier;
     QString sender;
     QDateTime sentTime;
-    Status status;
-    MsgType msgType;
-    Scope scope;
+    Status status = Status::Unknown;
+    MsgType msgType = MsgType::Unknown;
+    Scope scope = Scope::Unknown;
     QString note;
     std::vector<AlertInfo> infoVec;
 };
@@ -77,15 +77,15 @@ void AlertEntry::setSentTime(const QDateTime &dateTime)
 {
     d->sentTime = dateTime;
 }
-void AlertEntry::setStatus(const Status &status)
+void AlertEntry::setStatus(Status status)
 {
     d->status = status;
 }
-void AlertEntry::setMsgType(const MsgType &msgType)
+void AlertEntry::setMsgType(MsgType msgType)
 {
     d->msgType = msgType;
 }
-void AlertEntry::setScope(const Scope &scope)
+void AlertEntry::setScope(Scope scope)
 {
     d->scope = scope;
 }
@@ -104,5 +104,9 @@ void AlertEntry::setInfoVec(std::vector<AlertInfo> &&infoVec)
 void AlertEntry::addInfo(const AlertInfo &alertInfo)
 {
     d->infoVec.push_back(alertInfo);
+}
+void AlertEntry::addInfo(AlertInfo &&alertInfo)
+{
+    d->infoVec.emplace_back(alertInfo);
 }
 }
