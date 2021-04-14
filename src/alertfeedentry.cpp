@@ -9,31 +9,31 @@
 #include <QNetworkAccessManager>
 namespace KWeatherCore
 {
-class AlertFeedEntry::AlertFeedEntryPrivate : public QObject
+class AlertFeedEntry::AlertFeedEntryPrivate
 {
-    Q_OBJECT
 public:
-    AlertFeedEntryPrivate(QObject *parent)
-        : QObject(parent)
-    {
-    }
     QString title;
     QString summary;
     QString area;
-    AlertInfo::Urgency urgency;
-    AlertInfo::Severity severity;
-    AlertInfo::Certainty certainty;
+    AlertInfo::Urgency urgency = AlertInfo::Urgency::Unknown;
+    AlertInfo::Severity severity = AlertInfo::Severity::Unknown;
+    AlertInfo::Certainty certainty = AlertInfo::Certainty::Unknown;
     QDateTime date;
     QUrl CAPUrl;
     AreaCodeVec areaCodes;
     Polygon polygon;
 };
 
-AlertFeedEntry::AlertFeedEntry(QObject *parent)
-    : QObject(parent)
-    , d(new AlertFeedEntryPrivate(this))
+AlertFeedEntry::AlertFeedEntry()
+    : d(std::make_unique<AlertFeedEntryPrivate>())
 {
 }
+AlertFeedEntry::AlertFeedEntry(const AlertFeedEntry &other)
+    : d(std::make_unique<AlertFeedEntryPrivate>(*other.d))
+{
+}
+AlertFeedEntry::AlertFeedEntry(AlertFeedEntry &&other) = default;
+AlertFeedEntry::~AlertFeedEntry() = default;
 const QString &AlertFeedEntry::title() const
 {
     return d->title;
@@ -125,5 +125,10 @@ void AlertFeedEntry::setPolygon(Polygon &&polygon)
 {
     d->polygon = std::move(polygon);
 }
+AlertFeedEntry &AlertFeedEntry::operator=(const AlertFeedEntry &other)
+{
+    *this->d = *other.d;
+    return *this;
 }
-#include "alertfeedentry.moc"
+AlertFeedEntry &AlertFeedEntry::operator=(AlertFeedEntry &&other) = default;
+}
