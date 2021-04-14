@@ -16,6 +16,14 @@ namespace KWeatherCore
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Parameter = std::vector<std::pair<QString, QString>>;
+/**
+ * @short Class represents single CAP
+ *
+ * This class contains the parsed CAP FEED entry
+ *
+ * @author Han Young <hanyoung@protonmail.com>
+ * @author Anjani Kumar <anjanik012@gmail.com>
+ */
 class KWEATHERCORE_EXPORT AlertInfo
 {
     Q_GADGET
@@ -46,26 +54,91 @@ public:
     enum class Severity { Extreme, Severe, Moderate, Minor, Unknown };
     enum class Certainty { Observed, Likely, Possible, Unlikely, Unknown };
 
+    /**
+     * default constructor
+     */
     AlertInfo();
     AlertInfo(const AlertInfo &other);
     AlertInfo(AlertInfo &&other);
     ~AlertInfo();
+    /**
+     * The text denoting the type of the subject
+     * event of the alert message
+     */
     const QString &event() const;
+    /**
+     * areaCodes
+     * @return pairs of QString, the first one is code type,
+     * ie. {"UGC", "AKZ017 AKZ020 AKZ021 AKZ022 AKZ023"}
+     */
     const AreaCodeVec &areaCodes() const;
+    /**
+     * The effective time of the information of the alert message
+     */
     const QDateTime &effectiveTime() const;
+    /**
+     * The onset time of the information of the alert message
+     */
     const QDateTime &onsetTime() const;
+    /**
+     * The expire time of the information of the alert message
+     */
     const QDateTime &expireTime() const;
+    /**
+     * The text headline of the alert message
+     */
     const QString &headline() const;
+    /**
+     * The description of the alert message
+     */
     const QString &description() const;
+    /**
+     * The instruction of the alert message
+     */
     const QString &instruction() const;
+    /**
+     * The sender of the alert message
+     */
     const QString &sender() const;
+    /**
+     * The code denoting the language of the info
+     * default to "en-US"
+     * @return Natural language identifier per [RFC 3066].
+     */
     const QString &language() const;
+    /**
+     * The category of the alert message
+     * @return default to Unknown, value is bit or-ed
+     */
     Category category() const;
+    /**
+     * The urgency of the alert message
+     * @return default to Unknown
+     */
     Urgency urgency() const;
+    /**
+     * The severity of the alert message
+     * @return default to Unknown
+     */
     Severity severity() const;
+    /**
+     * The certainty of the alert message
+     * @return default to Unknown
+     */
     Certainty certainty() const;
+    /**
+     * The Parameter of the alert message
+     * refer to CAP protocol v1.2
+     */
     const Parameter &parameter() const;
+    /**
+     * Text describe the area of the alert message
+     */
     const QString &areaDesc() const;
+    /**
+     * area polygon
+     * @return latitude longitude pairs
+     */
     const std::vector<std::vector<std::pair<float, float>>> &polygon() const;
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);

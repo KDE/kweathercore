@@ -19,22 +19,21 @@ public:
     QDateTime expireTime;
     Category category = Category::Unknown;
     QString instruction;
-    Urgency urgency;
-    Severity severity;
-    Certainty certainty;
+    Urgency urgency = Urgency::Unknown;
+    Severity severity = Severity::Unknown;
+    Certainty certainty = Certainty::Unknown;
     Parameter parameter;
     QString areaDesc;
     AreaCodeVec areaCodes;
     std::vector<std::vector<std::pair<float, float>>> polygon;
 };
 AlertInfo::AlertInfo()
-    : d(new AlertInfoPrivate())
+    : d(std::make_unique<AlertInfoPrivate>())
 {
 }
 AlertInfo::AlertInfo(const AlertInfo &other)
-    : d(new AlertInfoPrivate())
+    : d(std::make_unique<AlertInfoPrivate>(*other.d))
 {
-    *d = *other.d;
 }
 AlertInfo::AlertInfo(AlertInfo &&other) = default;
 AlertInfo::~AlertInfo() = default;
