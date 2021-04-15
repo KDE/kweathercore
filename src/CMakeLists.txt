@@ -53,6 +53,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     AlertInfo
     AlertEntry
     AlertFeedEntry
+    AlertManager
     PendingAlerts
     PendingCAP
 
