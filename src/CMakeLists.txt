@@ -9,7 +9,14 @@ set(kweathercore_LIB_SRCS
     pendingweatherforecast.cpp
     sunrise.cpp
     sunrisesource.cpp
-)
+    alertinfo.cpp
+    alertfeedentry.cpp
+    alertentry.cpp
+    alertmanager.cpp
+    feedparser.cpp
+    pendingalerts.cpp
+    pendingcap.cpp
+    capparser.cpp)
 
 
 add_library(KF5KWeatherCore ${kweathercore_LIB_SRCS})
@@ -43,6 +50,12 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     WeatherForecast
     WeatherForecastSource
     GeoTimezone
+    AlertInfo
+    AlertEntry
+    AlertFeedEntry
+    AlertManager
+    PendingAlerts
+    PendingCAP
 
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS

@@ -10,13 +10,123 @@
 #include <KLocalizedString>
 #include <QHash>
 #include <QString>
+#include <QUrl>
+
+#include "alertinfo.h"
 namespace KWeatherCore
 {
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
-static const auto toFixedString = [](double num){
+using Polygon = std::vector<std::pair<float, float>>;
+static constexpr auto stringToPolygon = [](const QString &str) -> Polygon {
+    Polygon res;
+    const auto pairList = str.split(QLatin1Char(' '));
+    for (auto &pair : pairList) {
+        auto coordinate = pair.split(QLatin1Char(','));
+        res.push_back(
+            {coordinate.front().toFloat(), coordinate.back().toFloat()});
+    }
+    return res;
+};
+static constexpr auto toFixedString = [](double num) {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
+};
+static constexpr auto urgencyStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Immediate"))
+        return AlertInfo::Urgency::Immediate;
+    else if (str == QStringLiteral("Expected"))
+        return AlertInfo::Urgency::Expected;
+    else if (str == QStringLiteral("Future"))
+        return AlertInfo::Urgency::Future;
+    else if (str == QStringLiteral("Past"))
+        return AlertInfo::Urgency::Past;
+    else
+        return AlertInfo::Urgency::Unknown;
+};
+static constexpr auto severityStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Extreme"))
+        return AlertInfo::Severity::Extreme;
+    else if (str == QStringLiteral("Severe"))
+        return AlertInfo::Severity::Severe;
+    else if (str == QStringLiteral("Moderate"))
+        return AlertInfo::Severity::Moderate;
+    else if (str == QStringLiteral("Minor"))
+        return AlertInfo::Severity::Minor;
+    else
+        return AlertInfo::Severity::Unknown;
+};
+static constexpr auto certaintyStrToEnum = [](const QString &str) {
+    if (str == QStringLiteral("Observed"))
+        return AlertInfo::Certainty::Observed;
+    else if (str == QStringLiteral("Likely"))
+        return AlertInfo::Certainty::Likely;
+    else if (str == QStringLiteral("Possible"))
+        return AlertInfo::Certainty::Possible;
+    else if (str == QStringLiteral("Unlikely"))
+        return AlertInfo::Certainty::Unlikely;
+    else
+        return AlertInfo::Certainty::Unknown;
+};
+static constexpr auto severityToString = [](AlertInfo::Severity severity) {
+    QString res;
+    switch (severity) {
+        case AlertInfo::Severity::Extreme:
+            res = i18n("Extreme");
+            break;
+        case AlertInfo::Severity::Severe:
+            res  = i18n("Severe");
+            break;
+        case AlertInfo::Severity::Moderate:
+            res = i18n("Moderate");
+            break;
+        case AlertInfo::Severity::Minor:
+            res = i18n("Minor");
+            break;
+        case AlertInfo::Severity::Unknown:
+            res = i18n("Unknown");
+    }
+    return res;
+};
+static constexpr auto urgencyToString = [](AlertInfo::Urgency urgency) {
+    QString res;
+    switch (urgency) {
+        case AlertInfo::Urgency::Immediate:
+             res = i18n("Immediate");
+             break;
+        case AlertInfo::Urgency::Expected:
+            res = i18n("Expected");
+            break;
+        case AlertInfo::Urgency::Future:
+            res = i18n("Future");
+            break;
+        case AlertInfo::Urgency::Past:
+            res = i18n("Past");
+            break;
+        case AlertInfo::Urgency::Unknown:
+            res = i18n("Unknown");
+    }
+    return res;
+};
+static constexpr auto certaintyToString = [](AlertInfo::Certainty certainty) {
+    QString res;
+    switch (certainty) {
+        case AlertInfo::Certainty::Observed:
+            res = i18n("Observed");
+            break;
+        case AlertInfo::Certainty::Likely:
+            res = i18n("Likely");
+            break;
+        case AlertInfo::Certainty::Possible:
+            res = i18n("Possible");
+            break;
+        case AlertInfo::Certainty::Unlikely:
+            res = i18n("Unlikely");
+            break;
+        case AlertInfo::Certainty::Unknown:
+            res = i18n("Unknown");
+    }
+    return res;
 };
 // rank weather (for what best describes the day overall)
 static const QHash<QString, int> rank = { // only need neutral icons
@@ -168,5 +278,29 @@ static const QMap<QString, ResolvedWeatherDesc> apiDescMap = {
     {QStringLiteral("heavyrain_neutral"), ResolvedWeatherDesc(QStringLiteral("weather-showers"), i18n("Heavy Rain"))},
     {QStringLiteral("heavyrain_day"), ResolvedWeatherDesc(QStringLiteral("weather-showers-day"), i18n("Heavy Rain"))},
     {QStringLiteral("heavyrain_night"), ResolvedWeatherDesc(QStringLiteral("weather-showers-night"), i18n("Heavy Rain"))},
+};
+
+// URLs for CAP alerts for different countries.
+// Country codes according to https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
+static const QMap<QString, QUrl> capUrls = {
+        {QStringLiteral("NOR"), QUrl(QStringLiteral("https://api.met.no/weatherapi/metalerts/1.1/"))}
+};
+
+// Parameters supported by different CAP providers. Key is the country shorthand
+static const QMap<QString, QVector<QString>> capParams = {
+        {QStringLiteral("NOR"),
+            {
+                QStringLiteral("county"),
+                QStringLiteral("cap"),
+                QStringLiteral("lang"),
+                QStringLiteral("event"),
+                QStringLiteral("incidentName"),
+                QStringLiteral("geographicDomain"),
+                QStringLiteral("municipality"),
+                QStringLiteral("lat"),
+                QStringLiteral("long"),
+                QStringLiteral("show"),
+            }
+        }
 };
 }

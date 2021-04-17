@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
-set(KF5_VERSION "0.1.1") # handled by release scripts
+set(KF5_VERSION "0.2.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.75.0") # handled by release scripts
 project(KWeatherCore VERSION ${KF5_VERSION})
+
+set(CMAKE_CXX_STANDARD 17)
 
 include(FeatureSummary)
 find_package(ECM ${KF5_DEP_VERSION}  NO_MODULE)
