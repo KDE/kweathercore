@@ -4,12 +4,10 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "feedparser.h"
 #include "kweathercore/kweathercore_export.h"
-#include <QHash>
 #include <QList>
-#include <QNetworkAccessManager>
 #include <QObject>
+#include <memory>
 class QNetworkAccessManager;
 namespace KWeatherCore
 {
@@ -22,31 +20,33 @@ class PendingAlerts;
  *
  * @author Nikunj Goyal <nikunjgoyal31@gmail.com>
  */
-class KWEATHERCORE_EXPORT AlertManager : public QObject
+class KWEATHERCORE_EXPORT AlertManager
 {
-    Q_OBJECT
 public:
     /** inst
      * return a pointer to the global instance
-     * @return 
+     * @return
      */
     static AlertManager *inst();
+    ~AlertManager();
+    AlertManager(const AlertManager &other);
     /** availableCountries
-     * @return names of all available countries supported 
-     */    
+     * @return names of all available countries supported
+     */
     QList<QString> availableCountries() const;
     /** getAlerts
      *  @param country country for which alerts have to be received
      *  @return it is the client's responsibility to delete the
      *  PendingAlerts afterhand to avoid memory leak
-     */    
-    PendingAlerts *
-    getAlerts(const QString &country) const; 
-                                             
+     */
+    PendingAlerts *getAlerts(const QString &country) const;
+    AlertManager &operator=(const AlertManager &other);
+    AlertManager &operator=(AlertManager &&other);
+
 private:
     AlertManager();
-    QNetworkAccessManager *m_manager = nullptr;
-    QHash<QString, std::pair<QString, QString>> m_hash;
-    void loadConfigs(); 
+    class AlertManagerPrivate;
+    std::unique_ptr<AlertManagerPrivate> d;
+    void loadConfigs();
 };
 }

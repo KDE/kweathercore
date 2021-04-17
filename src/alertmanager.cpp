@@ -10,18 +10,55 @@
 #include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QStandardPaths>
 #include <QUrl>
 namespace KWeatherCore
 {
+class AlertManager::AlertManagerPrivate
+{
+public:
+    AlertManagerPrivate();
+    AlertManagerPrivate(const AlertManagerPrivate &other);
+    ~AlertManagerPrivate();
+    AlertManagerPrivate &operator=(const AlertManagerPrivate &other);
+    QNetworkAccessManager *manager = nullptr;
+    QHash<QString, std::pair<QString, QString>> hash;
+};
+AlertManager::AlertManagerPrivate::AlertManagerPrivate()
+    : manager(new QNetworkAccessManager())
+{
+}
+AlertManager::AlertManagerPrivate::~AlertManagerPrivate()
+{
+    if (manager)
+        manager->deleteLater();
+}
+AlertManager::AlertManagerPrivate::AlertManagerPrivate(
+    const AlertManagerPrivate &other)
+    : manager(new QNetworkAccessManager())
+{
+    hash = other.hash;
+}
+AlertManager::AlertManagerPrivate &
+AlertManager::AlertManagerPrivate::operator=(const AlertManagerPrivate &other)
+{
+    hash = other.hash;
+    return *this;
+}
+AlertManager::~AlertManager() = default;
+AlertManager::AlertManager(const AlertManager &other)
+    : d(std::make_unique<AlertManagerPrivate>(*other.d))
+{
+}
 AlertManager *AlertManager::inst()
 {
     static AlertManager singleton;
     return &singleton;
 }
 AlertManager::AlertManager()
-    : m_manager(new QNetworkAccessManager(this))
+    : d(std::make_unique<AlertManagerPrivate>())
 {
 }
 void AlertManager::loadConfigs()
@@ -37,7 +74,7 @@ void AlertManager::loadConfigs()
                 file.open(QIODevice::ReadOnly | QIODevice::Text);
                 auto config = QJsonDocument::fromJson(file.readAll()).object();
                 QJsonValue key = config.value(QStringLiteral("country"));
-                m_hash[key.toString()] = std::make_pair(
+                d->hash[key.toString()] = std::make_pair(
                     it.filePath(), config[QStringLiteral("url")].toString());
             }
         }
@@ -45,16 +82,16 @@ void AlertManager::loadConfigs()
 }
 QList<QString> AlertManager::availableCountries() const
 {
-    return m_hash.keys();
+    return d->hash.keys();
 }
 PendingAlerts *AlertManager::getAlerts(const QString &country) const
 {
-    QFile file(m_hash.value(country).first);
+    QFile file(d->hash.value(country).first);
     file.open(QIODevice::ReadOnly);
     QByteArray val = file.readAll();
     QJsonDocument config = QJsonDocument::fromJson(val);
-    QUrl url(((m_hash.value(country)).second));
-    auto reply = m_manager->get(QNetworkRequest(url));
+    QUrl url(((d->hash.value(country)).second));
+    auto reply = d->manager->get(QNetworkRequest(url));
     return new PendingAlerts(config, reply);
 }
 }
