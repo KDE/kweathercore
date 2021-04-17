@@ -52,6 +52,12 @@ AlertManager::AlertManager(const AlertManager &other)
     : d(std::make_unique<AlertManagerPrivate>(*other.d))
 {
 }
+AlertManager &AlertManager::operator=(const AlertManager &other)
+{
+    *d = *other.d;
+    return *this;
+}
+AlertManager &AlertManager::operator=(AlertManager &&other) = default;
 AlertManager *AlertManager::inst()
 {
     static AlertManager singleton;
