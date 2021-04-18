@@ -26,7 +26,7 @@ public:
     double precipitationAmount = 0; // mm
 };
 HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
-    : d(new HourlyWeatherForecastPrivate)
+    : d(std::make_unique<HourlyWeatherForecastPrivate>())
 {
     d->date = date;
 }
@@ -34,7 +34,7 @@ HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) =
     default;
 HourlyWeatherForecast::~HourlyWeatherForecast() = default;
 HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other)
-    : d(new HourlyWeatherForecastPrivate)
+    : d(std::make_unique<HourlyWeatherForecastPrivate>())
 {
     *d = *other.d;
 }

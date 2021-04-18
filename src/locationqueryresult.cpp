@@ -15,7 +15,7 @@ public:
     QString toponymName, name, countryCode, countryName, geonameId;
 };
 LocationQueryResult::LocationQueryResult()
-    : d(new LocationQueryResultPrivate())
+    : d(std::make_unique<LocationQueryResultPrivate>())
 {
 }
 LocationQueryResult::LocationQueryResult(LocationQueryResult &&other) = default;
@@ -26,7 +26,7 @@ LocationQueryResult::LocationQueryResult(double latitude,
                                          QString countryCode,
                                          QString countryName,
                                          QString geonameId)
-    : d(new LocationQueryResultPrivate())
+    : d(std::make_unique<LocationQueryResultPrivate>())
 {
     d->latitude = latitude;
     d->longitude = longitude;
@@ -37,7 +37,7 @@ LocationQueryResult::LocationQueryResult(double latitude,
     d->geonameId = std::move(geonameId);
 }
 LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
-    : d(new LocationQueryResultPrivate())
+    : d(std::make_unique<LocationQueryResultPrivate>())
 {
     *d = *other.d;
 }

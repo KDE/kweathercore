@@ -34,17 +34,17 @@ DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) =
 DailyWeatherForecast &
 DailyWeatherForecast::operator=(DailyWeatherForecast &&other) = default;
 DailyWeatherForecast::DailyWeatherForecast()
-    : d(new DailyWeatherForecastPrivate)
+    : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
 }
 DailyWeatherForecast::DailyWeatherForecast(const QDate &date)
-    : d(new DailyWeatherForecastPrivate)
+    : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
     d->date = date;
     d->isValid = false;
 }
 DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other)
-    : d(new DailyWeatherForecastPrivate)
+    : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
     *d = *other.d;
 }

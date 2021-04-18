@@ -21,11 +21,11 @@ public:
     double moonPhase;
 };
 Sunrise::Sunrise()
-    : d(new SunrisePrivate)
+    : d(std::make_unique<SunrisePrivate>())
 {
 }
 Sunrise::Sunrise(const Sunrise &other)
-    : d(new SunrisePrivate)
+    : d(std::make_unique<SunrisePrivate>())
 {
     *d = *other.d;
 }

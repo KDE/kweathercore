@@ -18,12 +18,12 @@ public:
 };
 
 WeatherForecast::WeatherForecast()
-    : d(new WeatherForecastPrivate)
+    : d(std::make_unique<WeatherForecastPrivate>())
 {
 }
 WeatherForecast::WeatherForecast(const WeatherForecast &other)
     : QSharedData(QSharedData())
-    , d(new WeatherForecastPrivate)
+    , d(std::make_unique<WeatherForecastPrivate>())
 {
     *d = *other.d;
 }
