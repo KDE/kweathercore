@@ -17,6 +17,8 @@ public:
                                   QNetworkReply *reply,
                                   const std::vector<Sunrise> &sunrise,
                                   PendingWeatherForecast *parent = nullptr);
+    PendingWeatherForecastPrivate(
+        QExplicitlySharedDataPointer<WeatherForecast> data);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
     bool isFinished = false;
 

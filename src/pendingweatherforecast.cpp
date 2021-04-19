@@ -10,11 +10,14 @@
 #include "pendingweatherforecast_p.h"
 #include "sunrisesource.h"
 #include <KLocalizedString>
+#include <QDir>
 #include <QExplicitlySharedDataPointer>
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkReply>
+#include <QStandardPaths>
 #include <QTimeZone>
 namespace KWeatherCore
 {
@@ -49,7 +52,8 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
         });
     }
 
-    m_sunriseSource = new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
+    m_sunriseSource =
+        new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
@@ -59,6 +63,12 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
         m_timezone = timezone;
         getSunrise();
     }
+}
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
+    QExplicitlySharedDataPointer<WeatherForecast> data)
+    : forecast(data)
+    , isFinished(true)
+{
 }
 void PendingWeatherForecastPrivate::getTimezone(double latitude,
                                                 double longitude)
@@ -261,6 +271,20 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     }
     forecast->setSunriseForecast(m_sunriseSource->value());
     Q_EMIT finished();
+
+    // save to cache
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+             QStringLiteral("/cache/") + toFixedString(m_latitude) +
+             QStringLiteral("/") + toFixedString(m_longitude));
+    dir.mkpath(QStringLiteral("."));
+
+    QFile file(dir.path() + QStringLiteral("/cache.json"));
+
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(
+            QJsonDocument(forecast->toJson()).toJson(QJsonDocument::Compact));
+    } else
+        qWarning() << "write to cache failed";
 }
 
 PendingWeatherForecast::PendingWeatherForecast(
@@ -275,6 +299,11 @@ PendingWeatherForecast::PendingWeatherForecast(
                                           reply,
                                           sunrise,
                                           this))
+{
+}
+PendingWeatherForecast::PendingWeatherForecast(
+    QExplicitlySharedDataPointer<WeatherForecast> data)
+    : d(new PendingWeatherForecastPrivate(data))
 {
 }
 bool PendingWeatherForecast::isFinished() const

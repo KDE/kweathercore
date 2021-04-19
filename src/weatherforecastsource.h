@@ -36,7 +36,7 @@ public:
      * @return it is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak
      */
-    PendingWeatherForecast *
+    std::pair<PendingWeatherForecast *, bool>
     requestData(double latitude,
                 double longitude,
                 QString timezone = QString(),
@@ -48,7 +48,7 @@ public:
      * @return it is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak
      */
-    PendingWeatherForecast *
+    std::pair<PendingWeatherForecast *, bool>
     requestData(const KWeatherCore::LocationQueryResult &result);
 
 private:
