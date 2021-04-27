@@ -17,6 +17,7 @@
 #include <QNetworkReply>
 #include <QStandardPaths>
 #include <QUrlQuery>
+#include <algorithm>
 namespace KWeatherCore
 {
 class WeatherForecastSourcePrivate : public QObject
@@ -24,11 +25,7 @@ class WeatherForecastSourcePrivate : public QObject
     Q_OBJECT
 public:
     WeatherForecastSourcePrivate(QObject *parent = nullptr);
-    std::pair<PendingWeatherForecast *, bool>
-    requestData(double latitude,
-                double longitude,
-                QString timezone = QString(),
-                const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+    PendingWeatherForecast *requestData(double latitude, double longitude);
 
 private:
     QNetworkAccessManager *manager = nullptr;
@@ -38,26 +35,42 @@ WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
 {
     manager = new QNetworkAccessManager(this);
 }
-std::pair<PendingWeatherForecast *, bool>
-WeatherForecastSourcePrivate::requestData(double latitude,
-                                          double longitude,
-                                          QString timezone,
-                                          const std::vector<Sunrise> &sunrise)
+PendingWeatherForecast *
+WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
 {
     QFile cache(
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
         QStringLiteral("/cache/") + toFixedString(latitude) +
         QStringLiteral("/") + toFixedString(longitude) +
         QStringLiteral("/cache.json"));
-
+    std::vector<Sunrise> sunriseCache;
+    QString timezone;
     // valid cache
     if (cache.exists() && cache.open(QIODevice::ReadOnly)) {
         auto weatherforecast = WeatherForecast::fromJson(
             QJsonDocument::fromJson(cache.readAll()).object());
-
+        timezone = weatherforecast->timezone();
         if (weatherforecast->createdTime().secsTo(
                 QDateTime::currentDateTime()) <= 3600)
-            return {new PendingWeatherForecast(weatherforecast), true};
+            return new PendingWeatherForecast(weatherforecast);
+        else {
+            const auto &days = weatherforecast->dailyWeatherForecast();
+            auto it = std::lower_bound(
+                days.begin(),
+                days.end(),
+                QDate::currentDate(),
+                [](const DailyWeatherForecast &day, const QDate &date) {
+                    return day.date() < date;
+                });
+
+            auto size = std::distance(it, days.end());
+            if (size) {
+                sunriseCache.reserve(size);
+                while (it != days.end()) {
+                    sunriseCache.push_back(it->sunrise());
+                }
+            }
+        }
     }
 
     // query weather api
@@ -79,9 +92,8 @@ WeatherForecastSourcePrivate::requestData(double latitude,
                           QStringLiteral(" kde-frameworks-devel@kde.org")));
 
     auto reply = manager->get(req);
-    return {new PendingWeatherForecast(
-                latitude, longitude, reply, timezone, sunrise),
-            false};
+    return new PendingWeatherForecast(
+        latitude, longitude, reply, timezone, sunriseCache);
 }
 WeatherForecastSource::WeatherForecastSource(QObject *parent)
     : QObject(parent)
@@ -92,15 +104,12 @@ WeatherForecastSource::WeatherForecastSource(QObject *parent)
         QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
         QStringLiteral("/cache/"));
 }
-std::pair<PendingWeatherForecast *, bool>
-WeatherForecastSource::requestData(double latitude,
-                                   double longitude,
-                                   QString timezone,
-                                   const std::vector<Sunrise> &sunrise)
+PendingWeatherForecast *WeatherForecastSource::requestData(double latitude,
+                                                           double longitude)
 {
-    return d->requestData(latitude, longitude, std::move(timezone), sunrise);
+    return d->requestData(latitude, longitude);
 }
-std::pair<PendingWeatherForecast *, bool> WeatherForecastSource::requestData(
+PendingWeatherForecast *WeatherForecastSource::requestData(
     const KWeatherCore::LocationQueryResult &result)
 {
     return requestData(result.latitude(), result.longitude());
