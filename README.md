@@ -28,5 +28,5 @@ Features:
 ## Links
 
 - Mailing list: <https://mail.kde.org/mailman/listinfo/kde-devel>
-- IRC channel: #kde-devel on Freenode
+- IRC channel: #kde-devel on Libera Chat
 - Git repository: <https://invent.kde.org/libraries/kweathercore/>
