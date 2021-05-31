@@ -48,8 +48,8 @@ void SunriseSource::requestData()
 
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/sunrise/2.0/.json"));
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), QString::number(m_latitude));
-    query.addQueryItem(QStringLiteral("lon"), QString::number(m_longitude));
+    query.addQueryItem(QStringLiteral("lat"), toFixedString(m_latitude));
+    query.addQueryItem(QStringLiteral("lon"), toFixedString(m_longitude));
     // if we already have data, request data beyond the last day
     query.addQueryItem(
         QStringLiteral("date"),
