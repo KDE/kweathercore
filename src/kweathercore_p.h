@@ -11,6 +11,8 @@
 #include <QHash>
 #include <QString>
 #include <QUrl>
+#include <QDir>
+#include <QStandardPaths>
 
 #include "alertinfo.h"
 namespace KWeatherCore
@@ -32,6 +34,24 @@ static constexpr auto toFixedString = [](double num) {
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
 };
+QDir getCacheDirectory(double latitude, double longitude)
+{
+#ifdef __ANDROID__
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+             QStringLiteral("/cache/") + toFixedString(latitude) +
+             QStringLiteral("/") + toFixedString(longitude));
+    if (!dir.exists())
+        dir.mkpath(QStringLiteral("."));
+    return dir;
+#endif
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)
+             + QStringLiteral("/kweather/cache/")
+             + toFixedString(latitude)
+             + QStringLiteral("/") + toFixedString(longitude));
+    if (!dir.exists())
+        dir.mkpath(QStringLiteral("."));
+    return dir;
+}
 static constexpr auto urgencyStrToEnum = [](const QString &str) {
     if (str == QStringLiteral("Immediate"))
         return AlertInfo::Urgency::Immediate;

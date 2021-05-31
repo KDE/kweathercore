@@ -38,11 +38,7 @@ WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
 PendingWeatherForecast *
 WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
 {
-    QFile cache(
-        QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-        QStringLiteral("/cache/") + toFixedString(latitude) +
-        QStringLiteral("/") + toFixedString(longitude) +
-        QStringLiteral("/cache.json"));
+    QFile cache(getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
     std::vector<Sunrise> sunriseCache;
     QString timezone;
     // valid cache
@@ -99,10 +95,6 @@ WeatherForecastSource::WeatherForecastSource(QObject *parent)
     : QObject(parent)
     , d(new WeatherForecastSourcePrivate(this))
 {
-    // create cache location if it does not exist, and load cache
-    QDir().mkpath(
-        QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-        QStringLiteral("/cache/"));
 }
 PendingWeatherForecast *WeatherForecastSource::requestData(double latitude,
                                                            double longitude)

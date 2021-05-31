@@ -273,12 +273,8 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     Q_EMIT finished();
 
     // save to cache
-    QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-             QStringLiteral("/cache/") + toFixedString(m_latitude) +
-             QStringLiteral("/") + toFixedString(m_longitude));
-    dir.mkpath(QStringLiteral("."));
 
-    QFile file(dir.path() + QStringLiteral("/cache.json"));
+    QFile file(getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
         file.write(
