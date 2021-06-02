@@ -93,6 +93,7 @@ public:
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 
 private:
+    void setCreatedTime(const QDateTime &date);
     class WeatherForecastPrivate;
     std::unique_ptr<WeatherForecastPrivate> d;
 };

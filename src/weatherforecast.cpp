@@ -45,6 +45,7 @@ QJsonObject WeatherForecast::toJson() const
     obj[QStringLiteral("lat")] = latitude();
     obj[QStringLiteral("lon")] = longitude();
     obj[QStringLiteral("timezone")] = timezone();
+    obj[QStringLiteral("createdTime")] = createdTime().toString(Qt::ISODate);
     return obj;
 }
 QExplicitlySharedDataPointer<WeatherForecast>
@@ -60,6 +61,7 @@ WeatherForecast::fromJson(QJsonObject obj)
     w->setCoordinate(obj[QStringLiteral("lat")].toDouble(),
                      obj[QStringLiteral("lon")].toDouble());
     w->setTimezone(obj[QStringLiteral("timezone")].toString());
+    w->setCreatedTime(QDateTime::fromString(obj[QStringLiteral("createdTime")].toString(), Qt::ISODate));
     return w;
 }
 const std::vector<DailyWeatherForecast> &
@@ -188,5 +190,8 @@ WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
     d->dailyWeatherForecast.push_back(std::move(newDay));
     return *this;
 }
-
+void WeatherForecast::setCreatedTime(const QDateTime &date)
+{
+    d->createdTime = date;
+}
 }
