@@ -34,7 +34,7 @@ static constexpr auto toFixedString = [](double num) {
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
 };
-QDir getCacheDirectory(double latitude, double longitude)
+inline QDir getCacheDirectory(double latitude, double longitude)
 {
 #ifdef __ANDROID__
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
