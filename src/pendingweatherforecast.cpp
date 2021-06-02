@@ -52,6 +52,8 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
         });
     }
 
+    forecast->setCoordinate(latitude, longitude);
+
     m_sunriseSource =
         new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
