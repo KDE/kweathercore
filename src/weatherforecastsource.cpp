@@ -64,6 +64,7 @@ WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
                 sunriseCache.reserve(size);
                 while (it != days.end()) {
                     sunriseCache.push_back(it->sunrise());
+                    it++;
                 }
             }
         }
