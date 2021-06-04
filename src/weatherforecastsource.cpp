@@ -13,7 +13,6 @@
 #include <QDir>
 #include <QFile>
 #include <QJsonDocument>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QStandardPaths>
 #include <QUrlQuery>
@@ -28,12 +27,10 @@ public:
     PendingWeatherForecast *requestData(double latitude, double longitude);
 
 private:
-    QNetworkAccessManager *manager = nullptr;
 };
 WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
     : QObject(parent)
 {
-    manager = new QNetworkAccessManager(this);
 }
 PendingWeatherForecast *
 WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
@@ -79,18 +76,8 @@ WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
 
     url.setQuery(query);
 
-    QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
-                     QNetworkRequest::NoLessSafeRedirectPolicy);
-
-    // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER +
-                          QStringLiteral(" kde-frameworks-devel@kde.org")));
-
-    auto reply = manager->get(req);
     return new PendingWeatherForecast(
-        latitude, longitude, reply, timezone, sunriseCache);
+        latitude, longitude, url, timezone, sunriseCache);
 }
 WeatherForecastSource::WeatherForecastSource(QObject *parent)
     : QObject(parent)

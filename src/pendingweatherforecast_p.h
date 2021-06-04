@@ -1,6 +1,7 @@
 #pragma once
 #include "weatherforecast.h"
 #include <QObject>
+#include <QNetworkAccessManager>
 class QNetworkReply;
 namespace KWeatherCore
 {
@@ -14,7 +15,7 @@ public:
     PendingWeatherForecastPrivate(double latitude,
                                   double longitude,
                                   const QString &timezone,
-                                  QNetworkReply *reply,
+                                  const QUrl &url,
                                   const std::vector<Sunrise> &sunrise,
                                   PendingWeatherForecast *parent = nullptr);
     PendingWeatherForecastPrivate(
@@ -47,5 +48,6 @@ private:
     SunriseSource *m_sunriseSource = nullptr;
 
     QDateTime m_expiresTime;
+    QNetworkAccessManager m_manager;
 };
 }

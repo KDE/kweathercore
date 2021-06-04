@@ -25,7 +25,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
     double latitude,
     double longitude,
     const QString &timezone,
-    QNetworkReply *reply,
+    const QUrl &url,
     const std::vector<Sunrise> &sunrise,
     PendingWeatherForecast *parent)
     : QObject(parent)
@@ -46,11 +46,17 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
             &PendingWeatherForecastPrivate::networkError,
             parent,
             &PendingWeatherForecast::networkError);
-    if (reply) {
-        connect(reply, &QNetworkReply::finished, [this, reply] {
-            this->parseWeatherForecastResults(reply);
-        });
-    }
+
+    QNetworkRequest req(url);
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                     QNetworkRequest::NoLessSafeRedirectPolicy);
+
+    // see §Identification on https://api.met.no/conditions_service.html
+    req.setHeader(QNetworkRequest::UserAgentHeader,
+                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER +
+                          QStringLiteral(" kde-frameworks-devel@kde.org")));
+    connect(&m_manager, &QNetworkAccessManager::finished, this, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
+    m_manager.get(req);
 
     forecast->setCoordinate(latitude, longitude);
 
@@ -288,13 +294,13 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 PendingWeatherForecast::PendingWeatherForecast(
     double latitude,
     double longitude,
-    QNetworkReply *reply,
+    const QUrl &url,
     const QString &timezone,
     const std::vector<Sunrise> &sunrise)
     : d(new PendingWeatherForecastPrivate(latitude,
                                           longitude,
                                           timezone,
-                                          reply,
+                                          url,
                                           sunrise,
                                           this))
 {
