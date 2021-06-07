@@ -116,37 +116,27 @@ void SunriseSource::parseResults(QNetworkReply *reply)
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("sunset")]
                                       .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
+                                      .toString(), Qt::ISODate));
         sr.setSunRise(QDateTime::fromString(array.at(i)
                                             .toObject()[QStringLiteral("sunrise")]
                                             .toObject()[QStringLiteral("time")]
-                                            .toString()
-                                            .left(19),
-                                        QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
+                                            .toString(), Qt::ISODate));
         sr.setMoonSet(
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("moonset")]
                                       .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
+                                      .toString(), Qt::ISODate));
         sr.setMoonRise(
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("moonrise")]
                                       .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone));
+                                      .toString(), Qt::ISODate));
         sr.setSolarMidnight(QPair<QDateTime, double>(
             QDateTime::fromString(
                 array.at(i)
                     .toObject()[QStringLiteral("solarmidnight")]
                     .toObject()[QStringLiteral("time")]
-                    .toString()
-                    .left(19),
-                QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
+                    .toString(), Qt::ISODate),
             array.at(i)
                 .toObject()[QStringLiteral("solarmidnight")]
                 .toObject()[QStringLiteral("elevation")]
@@ -157,8 +147,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                                       .toObject()[QStringLiteral("solarnoon")]
                                       .toObject()[QStringLiteral("time")]
                                       .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
+                                      .left(19), Qt::ISODate),
             array.at(i)
                 .toObject()[QStringLiteral("solarnoon")]
                 .toObject()[QStringLiteral("elevation")]
@@ -168,9 +157,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("high_moon")]
                                       .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
+                                      .toString(), Qt::ISODate),
             array.at(i)
                 .toObject()[QStringLiteral("high_moon")]
                 .toObject()[QStringLiteral("elevation")]
@@ -180,9 +167,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
             QDateTime::fromString(array.at(i)
                                       .toObject()[QStringLiteral("low_moon")]
                                       .toObject()[QStringLiteral("time")]
-                                      .toString()
-                                      .left(19),
-                                  QStringLiteral("yyyy-MM-ddThh:mm:ss")).toTimeZone(timezone),
+                                      .toString(), Qt::ISODate),
             array.at(i)
                 .toObject()[QStringLiteral("low_moon")]
                 .toObject()[QStringLiteral("elevation")]
