@@ -35,7 +35,7 @@ WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
 PendingWeatherForecast *
 WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
 {
-    QFile cache(getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
+    QFile cache(KWeatherCorePrivate::instance()->getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
     std::vector<Sunrise> sunriseCache;
     QString timezone;
     // valid cache
@@ -71,8 +71,8 @@ WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
     QUrl url(QStringLiteral(
         "https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), toFixedString(latitude));
-    query.addQueryItem(QStringLiteral("lon"), toFixedString(longitude));
+    query.addQueryItem(QStringLiteral("lat"), KWeatherCorePrivate::instance()->toFixedString(latitude));
+    query.addQueryItem(QStringLiteral("lon"), KWeatherCorePrivate::instance()->toFixedString(longitude));
 
     url.setQuery(query);
 

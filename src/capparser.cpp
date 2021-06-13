@@ -135,13 +135,13 @@ AlertInfo CAPParser::parseInfo()
                     info.setEvent(m_xml.readElementText());
                     break;
                 case InfoTags::URGENCY:
-                    info.setUrgency(urgencyStrToEnum(m_xml.readElementText()));
+                    info.setUrgency(KWeatherCorePrivate::instance()->urgencyStringToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::SEVERITY:
-                    info.setSeverity(severityStrToEnum(m_xml.readElementText()));
+                    info.setSeverity(KWeatherCorePrivate::instance()->severityStringToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::CERTAINITY:
-                    info.setCertainty(certaintyStrToEnum(m_xml.readElementText()));
+                    info.setCertainty(KWeatherCorePrivate::instance()->certaintyStringToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::EFFECTIVE_TIME:
                     info.setEffectiveTime(QDateTime::fromString(
@@ -193,7 +193,7 @@ AlertInfo CAPParser::parseInfo()
                             info.addAreaCode(p);
                         } else if (m_xml.name() == QStringLiteral("polygon") &&
                                    !m_xml.isEndElement()) {
-                            info.addPolygon(stringToPolygon(m_xml.readElementText()));
+                            info.addPolygon(KWeatherCorePrivate::instance()->stringToPolygon(m_xml.readElementText()));
                         }
                         m_xml.readNext();
                     }

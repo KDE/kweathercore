@@ -6,6 +6,7 @@ set(kweathercore_LIB_SRCS
     hourlyweatherforecast.cpp
     dailyweatherforecast.cpp
     geotimezone.cpp
+    kweathercore.cpp
     pendingweatherforecast.cpp
     sunrise.cpp
     sunrisesource.cpp

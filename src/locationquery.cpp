@@ -64,8 +64,8 @@ void LocationQueryPrivate::requestUpdate()
 }
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
-    auto lat = toFixedString(update.coordinate().latitude());
-    auto lon = toFixedString(update.coordinate().longitude());
+    auto lat = KWeatherCorePrivate::instance()->toFixedString(update.coordinate().latitude());
+    auto lon = KWeatherCorePrivate::instance()->toFixedString(update.coordinate().longitude());
     QUrl url(QStringLiteral("http://api.geonames.org/findNearbyJSON"));
     QUrlQuery urlQuery;
 
