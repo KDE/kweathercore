@@ -38,9 +38,6 @@ struct ResolvedWeatherDesc {
 
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
 
-class KWeatherCorePrivate;
-static KWeatherCorePrivate *s_kweathercoreprivate = nullptr;
-
 class KWeatherCorePrivate : public QObject
 {
     Q_OBJECT
@@ -50,10 +47,11 @@ public:
     
     static KWeatherCorePrivate *instance()
     {
-        if (!s_kweathercoreprivate) {
-            s_kweathercoreprivate = new KWeatherCorePrivate();
+        static KWeatherCorePrivate *singleton = nullptr;
+        if (!singleton) {
+            singleton = new KWeatherCorePrivate();
         }
-        return s_kweathercoreprivate;
+        return singleton;
     }
     
     Polygon stringToPolygon(const QString &str);
