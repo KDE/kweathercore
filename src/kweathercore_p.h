@@ -45,15 +45,6 @@ class KWeatherCorePrivate : public QObject
 public:
     KWeatherCorePrivate(QObject *parent = nullptr);
     
-    static KWeatherCorePrivate *instance()
-    {
-        static KWeatherCorePrivate *singleton = nullptr;
-        if (!singleton) {
-            singleton = new KWeatherCorePrivate();
-        }
-        return singleton;
-    }
-    
     Polygon stringToPolygon(const QString &str);
     QString toFixedString(double num);
     QDir getCacheDirectory(double latitude, double longitude);
@@ -234,4 +225,11 @@ public:
         {QStringLiteral("heavyrain_night"), ResolvedWeatherDesc(QStringLiteral("weather-showers-night"), i18n("Heavy Rain"))},
     };
 };
+
+static KWeatherCorePrivate *self()
+{
+    static KWeatherCorePrivate singleton;
+    return &singleton;
+}
+
 }

@@ -216,7 +216,7 @@ void PendingWeatherForecastPrivate::parseOneElement(
     HourlyWeatherForecast hourForecast(QDateTime::fromString(
         obj.value(QStringLiteral("time")).toString(), Qt::ISODate));
     hourForecast.setNeutralWeatherIcon(
-        KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
+        self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
     hourForecast.setTemperature(
         instant[QStringLiteral("air_temperature")].toDouble());
     hourForecast.setPressure(
@@ -255,13 +255,13 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     };
 
     auto getSymbolCodeDescription = [](bool isDay, const QString &symbolCode) {
-        return isDay ? KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).desc
-                     : KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).desc;
+        return isDay ? self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).desc
+                     : self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).desc;
     };
 
     auto getSymbolCodeIcon = [](bool isDay, const QString &symbolCode) {
-        return isDay ? KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).icon
-                     : KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).icon;
+        return isDay ? self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).icon
+                     : self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).icon;
     };
 
     // ******* code ******** //
@@ -282,7 +282,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
     // save to cache
 
-    QFile file(KWeatherCorePrivate::instance()->getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
+    QFile file(self()->getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
         file.write(

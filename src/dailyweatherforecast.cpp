@@ -239,10 +239,10 @@ DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
     
     if (date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
-        if (KWeatherCorePrivate::instance()->weatherIconPriorityRank(forecast.neutralWeatherIcon()) >= 
-            KWeatherCorePrivate::instance()->weatherIconPriorityRank(weatherIcon())) {
+        if (self()->weatherIconPriorityRank(forecast.neutralWeatherIcon()) >= 
+            self()->weatherIconPriorityRank(weatherIcon())) {
             setWeatherDescription(
-                KWeatherCorePrivate::instance()->resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral"))
+                self()->resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral"))
                     .desc);
             setWeatherIcon(forecast.neutralWeatherIcon());
         }
