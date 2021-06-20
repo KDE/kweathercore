@@ -34,14 +34,14 @@ QString KWeatherCorePrivate::toFixedString(double num) {
 
 QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 {
-#ifdef __ANDROID__
+#ifdef Q_OS_ANDROID
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
              QStringLiteral("/cache/") + toFixedString(latitude) +
              QStringLiteral("/") + toFixedString(longitude));
     if (!dir.exists())
         dir.mkpath(QStringLiteral("."));
     return dir;
-#endif
+#else
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)
              + QStringLiteral("/kweather/cache/")
              + toFixedString(latitude)
@@ -49,6 +49,7 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
     if (!dir.exists())
         dir.mkpath(QStringLiteral("."));
     return dir;
+#endif
 }
 
 AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str) 
