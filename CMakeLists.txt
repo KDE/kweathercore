@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(KF5_VERSION "0.3.0") # handled by release scripts
+set(KF5_VERSION "0.4.0") # handled by release scripts
 set(KF5_DEP_VERSION "5.75.0") # handled by release scripts
 project(KWeatherCore VERSION ${KF5_VERSION})
 
