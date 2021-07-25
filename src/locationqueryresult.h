@@ -10,6 +10,7 @@
 #include <QString>
 #include <kweathercore/kweathercore_export.h>
 #include <memory>
+#include <optional>
 namespace KWeatherCore
 {
 /**
@@ -43,6 +44,7 @@ public:
      * @param countryCode country code, follow no standard but should be unique
      * @param countryName country name
      * @param geonameId internal unique id
+     * @param subdivision state, province, or other country subdivision, Follows ISO 3166-2
      */
     LocationQueryResult(double latitude,
                         double longitude,
@@ -50,7 +52,8 @@ public:
                         QString name = QString(),
                         QString countryCode = QString(),
                         QString countryName = QString(),
-                        QString geonameId = QString());
+                        QString geonameId = QString(),
+                        std::optional<QString> subdivision = std::nullopt);
     LocationQueryResult(const LocationQueryResult &other);
     LocationQueryResult(LocationQueryResult &&other);
     ~LocationQueryResult();
@@ -79,6 +82,11 @@ public:
      * internal unique id
      */
     const QString &geonameId() const;
+
+    /**
+     * Country subdivision such as state, province, etc. Follows ISO 3166-2
+     */
+    const std::optional<QString> &subdivision() const;
 
 private:
     class LocationQueryResultPrivate;

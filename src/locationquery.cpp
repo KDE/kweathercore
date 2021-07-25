@@ -13,6 +13,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrlQuery>
+#include <optional>
 namespace KWeatherCore
 {
 class LocationQueryPrivate : public QObject
@@ -127,6 +128,14 @@ void LocationQuery::locate()
 {
     d->requestUpdate();
 }
+static std::optional<QString> findSubdivision(const QJsonObject &json) {
+    const auto adminCodeIter = json.constFind(QStringLiteral("adminCodes1"));
+    if(adminCodeIter == json.constEnd()) {
+        return std::nullopt;
+    } else {
+        return (*adminCodeIter).toObject().value(QStringLiteral("ISO3166_2")).toString();
+    }
+}
 void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
 {
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
@@ -160,7 +169,9 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
             res.value(QStringLiteral("name")).toString(),
             res.value(QStringLiteral("countryCode")).toString(),
             res.value(QStringLiteral("countryName")).toString(),
-            QString::number(res.value(QStringLiteral("geonameId")).toInt()));
+            QString::number(res.value(QStringLiteral("geonameId")).toInt()),
+            findSubdivision(res)
+        );
         retVec.push_back(result);
     }
 

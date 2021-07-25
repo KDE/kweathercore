@@ -6,6 +6,7 @@
  */
 #include "locationqueryresult.h"
 #include <memory>
+#include <optional>
 namespace KWeatherCore
 {
 class LocationQueryResult::LocationQueryResultPrivate
@@ -13,6 +14,7 @@ class LocationQueryResult::LocationQueryResultPrivate
 public:
     double latitude, longitude;
     QString toponymName, name, countryCode, countryName, geonameId;
+    std::optional<QString> subdivision;
 };
 LocationQueryResult::LocationQueryResult()
     : d(std::make_unique<LocationQueryResultPrivate>())
@@ -25,7 +27,8 @@ LocationQueryResult::LocationQueryResult(double latitude,
                                          QString name,
                                          QString countryCode,
                                          QString countryName,
-                                         QString geonameId)
+                                         QString geonameId,
+                                         std::optional<QString> subdivision)
     : d(std::make_unique<LocationQueryResultPrivate>())
 {
     d->latitude = latitude;
@@ -35,6 +38,7 @@ LocationQueryResult::LocationQueryResult(double latitude,
     d->countryCode = std::move(countryCode);
     d->countryName = std::move(countryName);
     d->geonameId = std::move(geonameId);
+    d->subdivision = std::move(subdivision);
 }
 LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
     : d(std::make_unique<LocationQueryResultPrivate>())
@@ -77,5 +81,9 @@ const QString &LocationQueryResult::countryName() const
 const QString &LocationQueryResult::geonameId() const
 {
     return d->geonameId;
+}
+const std::optional<QString> &LocationQueryResult::subdivision() const
+{
+    return d->subdivision;
 }
 }
