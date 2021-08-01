@@ -11,7 +11,6 @@
 #include "sunrisesource.h"
 #include <KLocalizedString>
 #include <QDir>
-#include <QExplicitlySharedDataPointer>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -28,7 +27,6 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude,
                                                              const std::vector<Sunrise> &sunrise,
                                                              PendingWeatherForecast *parent)
     : QObject(parent)
-    , forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
     , m_timezone(timezone)
@@ -48,7 +46,7 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude,
     connect(&m_manager, &QNetworkAccessManager::finished, this, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
     m_manager.get(req);
 
-    forecast->setCoordinate(latitude, longitude);
+    forecast.setCoordinate(latitude, longitude);
 
     m_sunriseSource = new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
@@ -56,12 +54,12 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude,
         getTimezone(latitude, longitude);
     } else {
         hasTimezone = true;
-        forecast->setTimezone(timezone);
+        forecast.setTimezone(timezone);
         m_timezone = timezone;
         getSunrise();
     }
 }
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(QExplicitlySharedDataPointer<WeatherForecast> data)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(WeatherForecast data)
     : forecast(data)
     , isFinished(true)
 {
@@ -74,7 +72,7 @@ void PendingWeatherForecastPrivate::getTimezone(double latitude, double longitud
 void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 {
     hasTimezone = true;
-    forecast->setTimezone(result);
+    forecast.setTimezone(result);
     m_timezone = result;
     getSunrise();
 }
@@ -220,9 +218,9 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         isDay = isDayTime(hourForecast.date(), m_sunriseSource->value());
         hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
-        *forecast += std::move(hourForecast);
+        forecast += std::move(hourForecast);
     }
-    forecast->setSunriseForecast(m_sunriseSource->value());
+    forecast.setSunriseForecast(m_sunriseSource->value());
     Q_EMIT finished();
 
     // save to cache
@@ -230,7 +228,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     QFile file(self()->getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
-        file.write(QJsonDocument(forecast->toJson()).toJson(QJsonDocument::Compact));
+        file.write(QJsonDocument(forecast.toJson()).toJson(QJsonDocument::Compact));
     } else
         qWarning() << "write to cache failed";
 }
@@ -239,7 +237,7 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude
     : d(new PendingWeatherForecastPrivate(latitude, longitude, timezone, url, sunrise, this))
 {
 }
-PendingWeatherForecast::PendingWeatherForecast(QExplicitlySharedDataPointer<WeatherForecast> data)
+PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data)
     : d(new PendingWeatherForecastPrivate(data))
 {
 }
@@ -248,7 +246,7 @@ bool PendingWeatherForecast::isFinished() const
     return d->isFinished;
 }
 
-QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() const
+WeatherForecast PendingWeatherForecast::value() const
 {
     return d->forecast;
 }

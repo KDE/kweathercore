@@ -39,6 +39,6 @@ void WeatherForecastTest::testCreatedTime()
 void WeatherForecastTest::testJson()
 {
     auto d2 = WeatherForecast::fromJson(d1.toJson());
-    QCOMPARE(d2->toJson(), d1.toJson());
+    QCOMPARE(d2.toJson(), d1.toJson());
 }
 QTEST_MAIN(WeatherForecastTest)

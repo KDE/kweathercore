@@ -6,7 +6,6 @@
  */
 #pragma once
 #include "weatherforecast.h"
-#include <QExplicitlySharedDataPointer>
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
 
@@ -30,7 +29,7 @@ public:
      * the pointer is nullptr until finished() raised
      * @return
      */
-    QExplicitlySharedDataPointer<WeatherForecast> value() const;
+    WeatherForecast value() const;
     /**
      * isFinished if the call has finished
      * @return
@@ -54,7 +53,7 @@ protected:
                                     const QUrl &url,
                                     const QString &timezone = QString(),
                                     const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
-    explicit PendingWeatherForecast(QExplicitlySharedDataPointer<WeatherForecast> data);
+    explicit PendingWeatherForecast(WeatherForecast data);
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;

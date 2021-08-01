@@ -18,7 +18,7 @@ void PendingWeatherForecastTest::testFetch()
     auto ret = finished_spy->wait(30000);
 
     if (ret) {
-        QVERIFY(p->value()->dailyWeatherForecast().size() > 0);
+        QVERIFY(p->value().dailyWeatherForecast().size() > 0);
     } else {
         QVERIFY(networkError_spy->size() > 0);
     }

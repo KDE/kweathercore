@@ -8,7 +8,7 @@
 #include <QJsonArray>
 namespace KWeatherCore
 {
-class WeatherForecast::WeatherForecastPrivate
+class WeatherForecast::WeatherForecastPrivate : public QSharedData
 {
 public:
     std::vector<DailyWeatherForecast> dailyWeatherForecast;
@@ -18,22 +18,28 @@ public:
 };
 
 WeatherForecast::WeatherForecast()
-    : d(std::make_unique<WeatherForecastPrivate>())
+    : d(new WeatherForecastPrivate)
 {
 }
+
 WeatherForecast::WeatherForecast(const WeatherForecast &other)
-    : QSharedData(QSharedData())
-    , d(std::make_unique<WeatherForecastPrivate>())
+    : d(other.d)
 {
-    *d = *other.d;
 }
-WeatherForecast::WeatherForecast(WeatherForecast &&other) = default;
-WeatherForecast::~WeatherForecast() = default;
+
 WeatherForecast &WeatherForecast::operator=(const WeatherForecast &other)
 {
-    *d = *other.d;
+    if (this != &other) {
+        d = other.d;
+    }
+
     return *this;
 }
+
+WeatherForecast::~WeatherForecast()
+{
+}
+
 QJsonObject WeatherForecast::toJson() const
 {
     QJsonObject obj;
@@ -48,18 +54,19 @@ QJsonObject WeatherForecast::toJson() const
     obj[QStringLiteral("createdTime")] = createdTime().toString(Qt::ISODate);
     return obj;
 }
-QExplicitlySharedDataPointer<WeatherForecast> WeatherForecast::fromJson(QJsonObject obj)
+
+WeatherForecast WeatherForecast::fromJson(QJsonObject obj)
 {
-    auto w = QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast);
+    WeatherForecast w;
     std::vector<DailyWeatherForecast> dayVec;
     const auto &array = obj[QStringLiteral("day")].toArray();
     for (const auto &d : array) {
         dayVec.push_back(DailyWeatherForecast::fromJson(d.toObject()));
     }
-    w->setDailyWeatherForecast(dayVec);
-    w->setCoordinate(obj[QStringLiteral("lat")].toDouble(), obj[QStringLiteral("lon")].toDouble());
-    w->setTimezone(obj[QStringLiteral("timezone")].toString());
-    w->setCreatedTime(QDateTime::fromString(obj[QStringLiteral("createdTime")].toString(), Qt::ISODate));
+    w.setDailyWeatherForecast(dayVec);
+    w.setCoordinate(obj[QStringLiteral("lat")].toDouble(), obj[QStringLiteral("lon")].toDouble());
+    w.setTimezone(obj[QStringLiteral("timezone")].toString());
+    w.setCreatedTime(QDateTime::fromString(obj[QStringLiteral("createdTime")].toString(), Qt::ISODate));
     return w;
 }
 const std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const

@@ -19,7 +19,8 @@ namespace KWeatherCore
  *
  * @author Han Young <hanyoung@protonmail.com>
  */
-class KWEATHERCORE_EXPORT WeatherForecast : public QSharedData
+
+class KWEATHERCORE_EXPORT WeatherForecast
 {
 public:
     /**
@@ -27,9 +28,8 @@ public:
      */
     WeatherForecast();
     WeatherForecast(const WeatherForecast &other);
-    WeatherForecast(WeatherForecast &&other);
-    ~WeatherForecast();
     WeatherForecast &operator=(const WeatherForecast &other);
+    ~WeatherForecast();
     /**
      * convert to QJsonObject
      */
@@ -37,7 +37,7 @@ public:
     /**
      * construct from json
      */
-    static QExplicitlySharedDataPointer<WeatherForecast> fromJson(QJsonObject obj);
+    static WeatherForecast fromJson(QJsonObject obj);
     /**
      * @return daily weather forecast
      */
@@ -93,6 +93,6 @@ public:
 private:
     void setCreatedTime(const QDateTime &date);
     class WeatherForecastPrivate;
-    std::unique_ptr<WeatherForecastPrivate> d;
+    QSharedDataPointer<WeatherForecastPrivate> d;
 };
 }

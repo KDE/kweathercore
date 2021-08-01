@@ -18,8 +18,8 @@ public:
                                   const QUrl &url,
                                   const std::vector<Sunrise> &sunrise,
                                   PendingWeatherForecast *parent = nullptr);
-    PendingWeatherForecastPrivate(QExplicitlySharedDataPointer<WeatherForecast> data);
-    QExplicitlySharedDataPointer<WeatherForecast> forecast;
+    PendingWeatherForecastPrivate(WeatherForecast data);
+    WeatherForecast forecast;
     bool isFinished = false;
 
 Q_SIGNALS:
