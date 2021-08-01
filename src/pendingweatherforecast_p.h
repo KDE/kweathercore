@@ -1,7 +1,7 @@
 #pragma once
 #include "weatherforecast.h"
-#include <QObject>
 #include <QNetworkAccessManager>
+#include <QObject>
 class QNetworkReply;
 namespace KWeatherCore
 {
@@ -18,8 +18,7 @@ public:
                                   const QUrl &url,
                                   const std::vector<Sunrise> &sunrise,
                                   PendingWeatherForecast *parent = nullptr);
-    PendingWeatherForecastPrivate(
-        QExplicitlySharedDataPointer<WeatherForecast> data);
+    PendingWeatherForecastPrivate(QExplicitlySharedDataPointer<WeatherForecast> data);
     QExplicitlySharedDataPointer<WeatherForecast> forecast;
     bool isFinished = false;
 
@@ -32,8 +31,7 @@ private Q_SLOTS:
     void parseTimezoneResult(const QString &timezone);
 
 private:
-    void parseOneElement(const QJsonObject &obj,
-                         std::vector<HourlyWeatherForecast> &hourlyForecast);
+    void parseOneElement(const QJsonObject &obj, std::vector<HourlyWeatherForecast> &hourlyForecast);
     void getTimezone(double latitude, double longitude);
     void getSunrise();
     void applySunriseToForecast();

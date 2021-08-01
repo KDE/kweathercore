@@ -21,16 +21,14 @@
 #include <QTimeZone>
 namespace KWeatherCore
 {
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
-    double latitude,
-    double longitude,
-    const QString &timezone,
-    const QUrl &url,
-    const std::vector<Sunrise> &sunrise,
-    PendingWeatherForecast *parent)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude,
+                                                             double longitude,
+                                                             const QString &timezone,
+                                                             const QUrl &url,
+                                                             const std::vector<Sunrise> &sunrise,
+                                                             PendingWeatherForecast *parent)
     : QObject(parent)
-    , forecast(
-          QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
+    , forecast(QExplicitlySharedDataPointer<WeatherForecast>(new WeatherForecast))
     , m_latitude(latitude)
     , m_longitude(longitude)
     , m_timezone(timezone)
@@ -38,30 +36,21 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
     connect(this, &PendingWeatherForecastPrivate::finished, [this] {
         this->isFinished = true;
     });
-    connect(this,
-            &PendingWeatherForecastPrivate::finished,
-            parent,
-            &PendingWeatherForecast::finished);
-    connect(this,
-            &PendingWeatherForecastPrivate::networkError,
-            parent,
-            &PendingWeatherForecast::networkError);
+    connect(this, &PendingWeatherForecastPrivate::finished, parent, &PendingWeatherForecast::finished);
+    connect(this, &PendingWeatherForecastPrivate::networkError, parent, &PendingWeatherForecast::networkError);
 
     QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
-                     QNetworkRequest::NoLessSafeRedirectPolicy);
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER +
-                          QStringLiteral(" kde-frameworks-devel@kde.org")));
+                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
     connect(&m_manager, &QNetworkAccessManager::finished, this, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
     m_manager.get(req);
 
     forecast->setCoordinate(latitude, longitude);
 
-    m_sunriseSource =
-        new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
+    m_sunriseSource = new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
         hasTimezone = false;
         getTimezone(latitude, longitude);
@@ -72,20 +61,15 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
         getSunrise();
     }
 }
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(
-    QExplicitlySharedDataPointer<WeatherForecast> data)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(QExplicitlySharedDataPointer<WeatherForecast> data)
     : forecast(data)
     , isFinished(true)
 {
 }
-void PendingWeatherForecastPrivate::getTimezone(double latitude,
-                                                double longitude)
+void PendingWeatherForecastPrivate::getTimezone(double latitude, double longitude)
 {
     auto timezoneSource = new GeoTimezone(latitude, longitude, this);
-    connect(timezoneSource,
-            &GeoTimezone::finished,
-            this,
-            &PendingWeatherForecastPrivate::parseTimezoneResult);
+    connect(timezoneSource, &GeoTimezone::finished, this, &PendingWeatherForecastPrivate::parseTimezoneResult);
 }
 void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 {
@@ -97,10 +81,7 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 
 void PendingWeatherForecastPrivate::getSunrise()
 {
-    connect(m_sunriseSource,
-            &SunriseSource::finished,
-            this,
-            &PendingWeatherForecastPrivate::parseSunriseResults);
+    connect(m_sunriseSource, &SunriseSource::finished, this, &PendingWeatherForecastPrivate::parseSunriseResults);
     m_sunriseSource->setTimezone(m_timezone);
     m_sunriseSource->requestData();
 }
@@ -112,13 +93,11 @@ void PendingWeatherForecastPrivate::parseSunriseResults()
     if (!hourlyForecast.empty())
         applySunriseToForecast();
 }
-void PendingWeatherForecastPrivate::parseWeatherForecastResults(
-    QNetworkReply *reply)
+void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
-        qWarning() << "network error when fetching forecast:"
-                   << reply->errorString();
+        qWarning() << "network error when fetching forecast:" << reply->errorString();
         Q_EMIT networkError();
         return;
     }
@@ -130,8 +109,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(
         QJsonObject prop = obj[QStringLiteral("properties")].toObject();
 
         if (prop.contains(QStringLiteral("timeseries"))) {
-            QJsonArray timeseries =
-                prop[QStringLiteral("timeseries")].toArray();
+            QJsonArray timeseries = prop[QStringLiteral("timeseries")].toArray();
 
             // loop over all forecast data
             for (const auto &ref : qAsConst(timeseries)) {
@@ -145,9 +123,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(
     // Q_EMIT finished();
 }
 
-void PendingWeatherForecastPrivate::parseOneElement(
-    const QJsonObject &obj,
-    std::vector<HourlyWeatherForecast> &hourlyForecast)
+void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std::vector<HourlyWeatherForecast> &hourlyForecast)
 {
     /*~~~~~~~~~~ lambda ~~~~~~~~~~~*/
 
@@ -174,13 +150,9 @@ void PendingWeatherForecastPrivate::parseOneElement(
 
     /*================== actual code ======================*/
 
-    QJsonObject data = obj[QStringLiteral("data")].toObject(),
-                instant = data[QStringLiteral("instant")]
-                              .toObject()[QStringLiteral("details")]
-                              .toObject();
+    QJsonObject data = obj[QStringLiteral("data")].toObject(), instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
     // ignore last forecast, which does not have enough data
-    if (!data.contains(QStringLiteral("next_6_hours")) &&
-        !data.contains(QStringLiteral("next_1_hours")))
+    if (!data.contains(QStringLiteral("next_6_hours")) && !data.contains(QStringLiteral("next_1_hours")))
         return;
 
     // get symbolCode and precipitation amount
@@ -189,47 +161,26 @@ void PendingWeatherForecastPrivate::parseOneElement(
     // some fields contain only "next_1_hours", and others may contain only
     // "next_6_hours"
     if (data.contains(QStringLiteral("next_1_hours"))) {
-        QJsonObject nextOneHours =
-            data[QStringLiteral("next_1_hours")].toObject();
-        symbolCode = nextOneHours[QStringLiteral("summary")]
-                         .toObject()[QStringLiteral("symbol_code")]
-                         .toString(QStringLiteral("unknown"));
-        precipitationAmount =
-            nextOneHours[QStringLiteral("details")]
-                .toObject()[QStringLiteral("precipitation_amount")]
-                .toDouble();
+        QJsonObject nextOneHours = data[QStringLiteral("next_1_hours")].toObject();
+        symbolCode = nextOneHours[QStringLiteral("summary")].toObject()[QStringLiteral("symbol_code")].toString(QStringLiteral("unknown"));
+        precipitationAmount = nextOneHours[QStringLiteral("details")].toObject()[QStringLiteral("precipitation_amount")].toDouble();
     } else {
-        QJsonObject nextSixHours =
-            data[QStringLiteral("next_6_hours")].toObject();
-        symbolCode = nextSixHours[QStringLiteral("summary")]
-                         .toObject()[QStringLiteral("symbol_code")]
-                         .toString(QStringLiteral("unknown"));
-        precipitationAmount =
-            nextSixHours[QStringLiteral("details")]
-                .toObject()[QStringLiteral("precipitation_amount")]
-                .toDouble();
+        QJsonObject nextSixHours = data[QStringLiteral("next_6_hours")].toObject();
+        symbolCode = nextSixHours[QStringLiteral("summary")].toObject()[QStringLiteral("symbol_code")].toString(QStringLiteral("unknown"));
+        precipitationAmount = nextSixHours[QStringLiteral("details")].toObject()[QStringLiteral("precipitation_amount")].toDouble();
     }
 
-    symbolCode = symbolCode.split(QLatin1Char(
-        '_'))[0]; // trim _[day/night] from end -
-                  // https://api.met.no/weatherapi/weathericon/2.0/legends
-    HourlyWeatherForecast hourForecast(QDateTime::fromString(
-        obj.value(QStringLiteral("time")).toString(), Qt::ISODate));
-    hourForecast.setNeutralWeatherIcon(
-        self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
-    hourForecast.setTemperature(
-        instant[QStringLiteral("air_temperature")].toDouble());
-    hourForecast.setPressure(
-        instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
-    hourForecast.setWindDirection(
-        getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()));
+    symbolCode = symbolCode.split(QLatin1Char('_'))[0]; // trim _[day/night] from end -
+                                                        // https://api.met.no/weatherapi/weathericon/2.0/legends
+    HourlyWeatherForecast hourForecast(QDateTime::fromString(obj.value(QStringLiteral("time")).toString(), Qt::ISODate));
+    hourForecast.setNeutralWeatherIcon(self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
+    hourForecast.setTemperature(instant[QStringLiteral("air_temperature")].toDouble());
+    hourForecast.setPressure(instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
+    hourForecast.setWindDirection(getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()));
     hourForecast.setWindSpeed(instant[QStringLiteral("wind_speed")].toDouble());
-    hourForecast.setHumidity(
-        instant[QStringLiteral("relative_humidity")].toDouble());
-    hourForecast.setFog(
-        instant[QStringLiteral("fog_area_fraction")].toDouble());
-    hourForecast.setUvIndex(
-        instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble());
+    hourForecast.setHumidity(instant[QStringLiteral("relative_humidity")].toDouble());
+    hourForecast.setFog(instant[QStringLiteral("fog_area_fraction")].toDouble());
+    hourForecast.setUvIndex(instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble());
     hourForecast.setPrecipitationAmount(precipitationAmount);
     hourForecast.setSymbolCode(symbolCode);
     hourlyForecast.push_back(std::move(hourForecast));
@@ -238,15 +189,12 @@ void PendingWeatherForecastPrivate::parseOneElement(
 void PendingWeatherForecastPrivate::applySunriseToForecast()
 {
     // ************* Lambda *************** //
-    auto isDayTime = [](const QDateTime &date,
-                        const std::vector<Sunrise> &sunrise) {
+    auto isDayTime = [](const QDateTime &date, const std::vector<Sunrise> &sunrise) {
         for (auto &sr : sunrise) {
             // if on the same day
-            if (sr.sunRise().date().daysTo(date.date()) == 0 &&
-                sr.sunRise().date().day() == date.date().day()) {
+            if (sr.sunRise().date().daysTo(date.date()) == 0 && sr.sunRise().date().day() == date.date().day()) {
                 // 30 min threshold
-                return sr.sunRise().addSecs(-1800) <= date &&
-                    sr.sunSet().addSecs(1800) >= date;
+                return sr.sunRise().addSecs(-1800) <= date && sr.sunSet().addSecs(1800) >= date;
             }
         }
 
@@ -266,15 +214,12 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
     // ******* code ******** //
     for (auto &hourForecast : hourlyForecast) {
-        hourForecast.setDate(
-            hourForecast.date().toTimeZone(QTimeZone(m_timezone.toUtf8())));
+        hourForecast.setDate(hourForecast.date().toTimeZone(QTimeZone(m_timezone.toUtf8())));
 
         bool isDay;
         isDay = isDayTime(hourForecast.date(), m_sunriseSource->value());
-        hourForecast.setWeatherIcon(getSymbolCodeIcon(
-            isDay, hourForecast.symbolCode())); // set day/night icon
-        hourForecast.setWeatherDescription(
-            getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
+        hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
+        hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
         *forecast += std::move(hourForecast);
     }
     forecast->setSunriseForecast(m_sunriseSource->value());
@@ -285,28 +230,16 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     QFile file(self()->getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
-        file.write(
-            QJsonDocument(forecast->toJson()).toJson(QJsonDocument::Compact));
+        file.write(QJsonDocument(forecast->toJson()).toJson(QJsonDocument::Compact));
     } else
         qWarning() << "write to cache failed";
 }
 
-PendingWeatherForecast::PendingWeatherForecast(
-    double latitude,
-    double longitude,
-    const QUrl &url,
-    const QString &timezone,
-    const std::vector<Sunrise> &sunrise)
-    : d(new PendingWeatherForecastPrivate(latitude,
-                                          longitude,
-                                          timezone,
-                                          url,
-                                          sunrise,
-                                          this))
+PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QUrl &url, const QString &timezone, const std::vector<Sunrise> &sunrise)
+    : d(new PendingWeatherForecastPrivate(latitude, longitude, timezone, url, sunrise, this))
 {
 }
-PendingWeatherForecast::PendingWeatherForecast(
-    QExplicitlySharedDataPointer<WeatherForecast> data)
+PendingWeatherForecast::PendingWeatherForecast(QExplicitlySharedDataPointer<WeatherForecast> data)
     : d(new PendingWeatherForecastPrivate(data))
 {
 }
@@ -315,8 +248,7 @@ bool PendingWeatherForecast::isFinished() const
     return d->isFinished;
 }
 
-QExplicitlySharedDataPointer<WeatherForecast>
-PendingWeatherForecast::value() const
+QExplicitlySharedDataPointer<WeatherForecast> PendingWeatherForecast::value() const
 {
     return d->forecast;
 }

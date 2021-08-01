@@ -70,12 +70,10 @@ void FeedParser::setConfig(const QJsonDocument &configFile)
         m_dateMarker.clear();
     }
 }
-std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>
-FeedParser::parse(const QByteArray &data) const
+std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> FeedParser::parse(const QByteArray &data) const
 {
     QXmlStreamReader reader(data);
-    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> result(
-        new std::vector<std::unique_ptr<AlertFeedEntry>>());
+    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> result(new std::vector<std::unique_ptr<AlertFeedEntry>>());
 
     while (!reader.atEnd()) {
         result->push_back(parseOneEntry(reader));
@@ -83,8 +81,7 @@ FeedParser::parse(const QByteArray &data) const
 
     return result;
 }
-std::unique_ptr<AlertFeedEntry>
-FeedParser::parseOneEntry(QXmlStreamReader &reader) const
+std::unique_ptr<AlertFeedEntry> FeedParser::parseOneEntry(QXmlStreamReader &reader) const
 {
     std::unique_ptr<AlertFeedEntry> entry(new AlertFeedEntry);
     std::vector<std::pair<QString, QString>> areaCodes;
@@ -106,18 +103,14 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
         } else if (m_hasArea && reader.name() == m_polygonMarker) {
             parsePolygonElement(reader, *entry);
         } else if (m_hasArea && reader.name() == m_FIPS6Marker) {
-            areaCodes.push_back(
-                {QStringLiteral("FIPS6"), reader.readElementText()});
+            areaCodes.push_back({QStringLiteral("FIPS6"), reader.readElementText()});
         } else if (m_hasArea && reader.name() == m_UGCMarker) {
-            areaCodes.push_back(
-                {QStringLiteral("UGC"), reader.readElementText()});
+            areaCodes.push_back({QStringLiteral("UGC"), reader.readElementText()});
         } else if (m_hasDate && reader.name() == m_dateMarker) {
             if (m_dateFormat == QStringLiteral("ISO-8601")) {
-                entry->setDate(QDateTime::fromString(reader.readElementText(),
-                                                     Qt::ISODate));
+                entry->setDate(QDateTime::fromString(reader.readElementText(), Qt::ISODate));
             } else {
-                entry->setDate(QDateTime::fromString(reader.readElementText(),
-                                                     m_dateFormat));
+                entry->setDate(QDateTime::fromString(reader.readElementText(), m_dateFormat));
             }
         }
     }
@@ -127,8 +120,7 @@ FeedParser::parseOneEntry(QXmlStreamReader &reader) const
 }
 QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 {
-    Q_ASSERT(m_hasCap && reader.isStartElement() &&
-             reader.name() == m_capLinkElementMarker);
+    Q_ASSERT(m_hasCap && reader.isStartElement() && reader.name() == m_capLinkElementMarker);
 
     if (m_capValueType == QStringLiteral("attribute")) {
         return QUrl(reader.attributes().value(m_capValueMarker).toString());
@@ -137,8 +129,7 @@ QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
     else
         return QUrl();
 }
-void FeedParser::parsePolygonElement(QXmlStreamReader &reader,
-                                     AlertFeedEntry &entry) const
+void FeedParser::parsePolygonElement(QXmlStreamReader &reader, AlertFeedEntry &entry) const
 {
     if (reader.name() == m_polygonMarker) {
         entry.setPolygon(self()->stringToPolygon(reader.readElementText()));

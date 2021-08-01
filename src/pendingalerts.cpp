@@ -11,9 +11,7 @@ class PendingAlertsPrivate : public QObject
 {
     Q_OBJECT
 public:
-    PendingAlertsPrivate(const QJsonDocument &config,
-                         QNetworkReply *reply = nullptr,
-                         QObject *parent = nullptr);
+    PendingAlertsPrivate(const QJsonDocument &config, QNetworkReply *reply = nullptr, QObject *parent = nullptr);
     AlertEntries alertEntries;
     bool isFinished = false;
 Q_SIGNALS:
@@ -24,9 +22,7 @@ private:
     void parseAlerts(QNetworkReply *reply);
     FeedParser *parser = nullptr;
 };
-PendingAlertsPrivate::PendingAlertsPrivate(const QJsonDocument &config,
-                                           QNetworkReply *reply,
-                                           QObject *parent)
+PendingAlertsPrivate::PendingAlertsPrivate(const QJsonDocument &config, QNetworkReply *reply, QObject *parent)
     : QObject(parent)
     , parser(new FeedParser(config, this))
 {
@@ -39,8 +35,7 @@ void PendingAlertsPrivate::parseAlerts(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
-        qWarning() << "network error when fetching alerts:"
-                   << reply->errorString();
+        qWarning() << "network error when fetching alerts:" << reply->errorString();
         Q_EMIT networkError();
         return;
     }
@@ -52,10 +47,7 @@ PendingAlerts::PendingAlerts(const QJsonDocument &config, QNetworkReply *reply)
     : d(new PendingAlertsPrivate(config, reply, this))
 {
     connect(d, &PendingAlertsPrivate::finished, this, &PendingAlerts::finished);
-    connect(d,
-            &PendingAlertsPrivate::networkError,
-            this,
-            &PendingAlerts::networkError);
+    connect(d, &PendingAlertsPrivate::networkError, this, &PendingAlerts::networkError);
 }
 bool PendingAlerts::isFinished() const
 {

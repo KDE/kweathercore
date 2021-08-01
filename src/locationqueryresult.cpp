@@ -46,14 +46,12 @@ LocationQueryResult::LocationQueryResult(const LocationQueryResult &other)
     *d = *other.d;
 }
 LocationQueryResult::~LocationQueryResult() = default;
-LocationQueryResult &
-LocationQueryResult::operator=(const LocationQueryResult &other)
+LocationQueryResult &LocationQueryResult::operator=(const LocationQueryResult &other)
 {
     *d = *other.d;
     return *this;
 }
-LocationQueryResult &
-LocationQueryResult::operator=(LocationQueryResult &&other) = default;
+LocationQueryResult &LocationQueryResult::operator=(LocationQueryResult &&other) = default;
 double LocationQueryResult::latitude() const
 {
     return d->latitude;

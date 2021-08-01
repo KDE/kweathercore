@@ -30,8 +30,7 @@ class KWEATHERCORE_EXPORT AlertInfo
     Q_PROPERTY(QString headline READ headline WRITE setHeadline)
     Q_PROPERTY(QString description READ description WRITE setDescription)
     Q_PROPERTY(QString event READ event WRITE setEvent)
-    Q_PROPERTY(
-        QDateTime effectiveTime READ effectiveTime WRITE setEffectiveTime)
+    Q_PROPERTY(QDateTime effectiveTime READ effectiveTime WRITE setEffectiveTime)
     Q_PROPERTY(QDateTime expireTime READ expireTime WRITE setExpireTime)
 
 public:
@@ -181,7 +180,7 @@ inline Category operator&(Category a, Category b)
     return static_cast<Category>(static_cast<int>(a) & static_cast<int>(b));
 }
 
-inline Category& operator|=(Category& a, Category b)
+inline Category &operator|=(Category &a, Category b)
 {
     return a = a | b;
 }

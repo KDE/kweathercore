@@ -15,7 +15,7 @@ private Q_SLOTS:
     void testTimezone();
 
 private:
-    GeoTimezone d {50, 50};
-    QSignalSpy finished_spy {&d, &GeoTimezone::finished};
-    QSignalSpy networkError_spy {&d, &GeoTimezone::networkErrorOccured};
+    GeoTimezone d{50, 50};
+    QSignalSpy finished_spy{&d, &GeoTimezone::finished};
+    QSignalSpy networkError_spy{&d, &GeoTimezone::networkErrorOccured};
 };

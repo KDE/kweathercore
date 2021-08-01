@@ -9,24 +9,24 @@
 
 namespace KWeatherCore
 {
-
-KWeatherCorePrivate::KWeatherCorePrivate(QObject *parent) : QObject(parent) 
+KWeatherCorePrivate::KWeatherCorePrivate(QObject *parent)
+    : QObject(parent)
 {
 }
 
-Polygon KWeatherCorePrivate::stringToPolygon(const QString &str) 
+Polygon KWeatherCorePrivate::stringToPolygon(const QString &str)
 {
     Polygon res;
     const auto pairList = str.split(QLatin1Char(' '));
     for (auto &pair : pairList) {
         auto coordinate = pair.split(QLatin1Char(','));
-        res.push_back(
-            {coordinate.front().toFloat(), coordinate.back().toFloat()});
+        res.push_back({coordinate.front().toFloat(), coordinate.back().toFloat()});
     }
     return res;
 }
 
-QString KWeatherCorePrivate::toFixedString(double num) {
+QString KWeatherCorePrivate::toFixedString(double num)
+{
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(2) << num;
     return QString::fromStdString(oss.str());
@@ -35,16 +35,13 @@ QString KWeatherCorePrivate::toFixedString(double num) {
 QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 {
 #ifdef Q_OS_ANDROID
-    QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-             QStringLiteral("/cache/") + toFixedString(latitude) +
-             QStringLiteral("/") + toFixedString(longitude));
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QStringLiteral("/cache/") + toFixedString(latitude) + QStringLiteral("/")
+             + toFixedString(longitude));
     if (!dir.exists())
         dir.mkpath(QStringLiteral("."));
     return dir;
 #else
-    QDir dir(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)
-             + QStringLiteral("/kweather/cache/")
-             + toFixedString(latitude)
+    QDir dir(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QStringLiteral("/kweather/cache/") + toFixedString(latitude)
              + QStringLiteral("/") + toFixedString(longitude));
     if (!dir.exists())
         dir.mkpath(QStringLiteral("."));
@@ -52,7 +49,7 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 #endif
 }
 
-AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str) 
+AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Immediate"))
         return AlertInfo::Urgency::Immediate;
@@ -66,7 +63,7 @@ AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
         return AlertInfo::Urgency::Unknown;
 }
 
-AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str) 
+AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Extreme"))
         return AlertInfo::Severity::Extreme;
@@ -80,7 +77,7 @@ AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str
         return AlertInfo::Severity::Unknown;
 }
 
-AlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str) 
+AlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Observed"))
         return AlertInfo::Certainty::Observed;
@@ -98,64 +95,64 @@ QString KWeatherCorePrivate::urgencyToString(AlertInfo::Urgency urgency)
 {
     QString res;
     switch (urgency) {
-        case AlertInfo::Urgency::Immediate:
-             res = i18n("Immediate");
-             break;
-        case AlertInfo::Urgency::Expected:
-            res = i18n("Expected");
-            break;
-        case AlertInfo::Urgency::Future:
-            res = i18n("Future");
-            break;
-        case AlertInfo::Urgency::Past:
-            res = i18n("Past");
-            break;
-        case AlertInfo::Urgency::Unknown:
-            res = i18n("Unknown");
+    case AlertInfo::Urgency::Immediate:
+        res = i18n("Immediate");
+        break;
+    case AlertInfo::Urgency::Expected:
+        res = i18n("Expected");
+        break;
+    case AlertInfo::Urgency::Future:
+        res = i18n("Future");
+        break;
+    case AlertInfo::Urgency::Past:
+        res = i18n("Past");
+        break;
+    case AlertInfo::Urgency::Unknown:
+        res = i18n("Unknown");
     }
     return res;
 }
 
-QString KWeatherCorePrivate::severityToString(AlertInfo::Severity severity) 
+QString KWeatherCorePrivate::severityToString(AlertInfo::Severity severity)
 {
     QString res;
     switch (severity) {
-        case AlertInfo::Severity::Extreme:
-            res = i18n("Extreme");
-            break;
-        case AlertInfo::Severity::Severe:
-            res  = i18n("Severe");
-            break;
-        case AlertInfo::Severity::Moderate:
-            res = i18n("Moderate");
-            break;
-        case AlertInfo::Severity::Minor:
-            res = i18n("Minor");
-            break;
-        case AlertInfo::Severity::Unknown:
-            res = i18n("Unknown");
+    case AlertInfo::Severity::Extreme:
+        res = i18n("Extreme");
+        break;
+    case AlertInfo::Severity::Severe:
+        res = i18n("Severe");
+        break;
+    case AlertInfo::Severity::Moderate:
+        res = i18n("Moderate");
+        break;
+    case AlertInfo::Severity::Minor:
+        res = i18n("Minor");
+        break;
+    case AlertInfo::Severity::Unknown:
+        res = i18n("Unknown");
     }
     return res;
 }
 
-QString KWeatherCorePrivate::certaintyToString(AlertInfo::Certainty certainty) 
+QString KWeatherCorePrivate::certaintyToString(AlertInfo::Certainty certainty)
 {
     QString res;
     switch (certainty) {
-        case AlertInfo::Certainty::Observed:
-            res = i18n("Observed");
-            break;
-        case AlertInfo::Certainty::Likely:
-            res = i18n("Likely");
-            break;
-        case AlertInfo::Certainty::Possible:
-            res = i18n("Possible");
-            break;
-        case AlertInfo::Certainty::Unlikely:
-            res = i18n("Unlikely");
-            break;
-        case AlertInfo::Certainty::Unknown:
-            res = i18n("Unknown");
+    case AlertInfo::Certainty::Observed:
+        res = i18n("Observed");
+        break;
+    case AlertInfo::Certainty::Likely:
+        res = i18n("Likely");
+        break;
+    case AlertInfo::Certainty::Possible:
+        res = i18n("Possible");
+        break;
+    case AlertInfo::Certainty::Unlikely:
+        res = i18n("Unlikely");
+        break;
+    case AlertInfo::Certainty::Unknown:
+        res = i18n("Unknown");
     }
     return res;
 }
@@ -165,7 +162,7 @@ int KWeatherCorePrivate::weatherIconPriorityRank(const QString &icon)
     return WEATHER_ICON_PRIORITY_RANK[icon];
 }
 
-ResolvedWeatherDesc KWeatherCorePrivate::resolveAPIWeatherDesc(const QString &desc) 
+ResolvedWeatherDesc KWeatherCorePrivate::resolveAPIWeatherDesc(const QString &desc)
 {
     return WEATHER_API_DESC_MAP[desc];
 }

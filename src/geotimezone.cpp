@@ -27,9 +27,7 @@ private Q_SLOTS:
 private:
     QNetworkAccessManager *m_manager = nullptr;
 };
-GeoTimezonePrivate::GeoTimezonePrivate(double lat,
-                                       double lon,
-                                       GeoTimezone *parent)
+GeoTimezonePrivate::GeoTimezonePrivate(double lat, double lon, GeoTimezone *parent)
     : QObject(parent)
 {
     m_manager = new QNetworkAccessManager(this);
@@ -42,21 +40,13 @@ GeoTimezonePrivate::GeoTimezonePrivate(double lat,
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(lat));
     query.addQueryItem(QStringLiteral("lng"), QString::number(lon));
-    query.addQueryItem(QStringLiteral("username"),
-                       QStringLiteral("kweatherdev"));
+    query.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(query);
     QNetworkRequest req(url);
 
-    connect(m_manager,
-            &QNetworkAccessManager::finished,
-            this,
-            &GeoTimezonePrivate::downloadFinished);
-    connect(
-        this, &GeoTimezonePrivate::finished, parent, &GeoTimezone::finished);
-    connect(this,
-            &GeoTimezonePrivate::networkErrorOccured,
-            parent,
-            &GeoTimezone::networkErrorOccured);
+    connect(m_manager, &QNetworkAccessManager::finished, this, &GeoTimezonePrivate::downloadFinished);
+    connect(this, &GeoTimezonePrivate::finished, parent, &GeoTimezone::finished);
+    connect(this, &GeoTimezonePrivate::networkErrorOccured, parent, &GeoTimezone::networkErrorOccured);
     m_manager->get(req);
 }
 GeoTimezone::GeoTimezone(double lat, double lon, QObject *parent)

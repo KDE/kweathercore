@@ -4,15 +4,14 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "feedparser.h"
+#include "kweathercore/kweathercore_export.h"
 #include <QJsonDocument>
 #include <QObject>
-#include "kweathercore/kweathercore_export.h"
 class QNetworkReply;
 namespace KWeatherCore
 {
 class PendingAlertsPrivate;
-using AlertEntries =
-    std::shared_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>;
+using AlertEntries = std::shared_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>;
 /**
  * @short The PendingAlerts class contains the reply to an asynchronous
  * CAP feed request.
@@ -48,8 +47,7 @@ Q_SIGNALS:
 
 protected:
     friend class AlertManager;
-    explicit PendingAlerts(const QJsonDocument &config,
-                           QNetworkReply *reply = nullptr);
+    explicit PendingAlerts(const QJsonDocument &config, QNetworkReply *reply = nullptr);
 
 private:
     PendingAlertsPrivate *d = nullptr;

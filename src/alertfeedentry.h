@@ -5,10 +5,10 @@
  */
 #pragma once
 #include "alertinfo.h"
+#include "kweathercore/kweathercore_export.h"
 #include "pendingcap.h"
 #include <QObject>
 #include <memory>
-#include "kweathercore/kweathercore_export.h"
 namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
@@ -108,6 +108,7 @@ public:
     void setPolygon(Polygon &&polygon);
     AlertFeedEntry &operator=(const AlertFeedEntry &other);
     AlertFeedEntry &operator=(AlertFeedEntry &&other);
+
 private:
     class AlertFeedEntryPrivate;
     std::unique_ptr<AlertFeedEntryPrivate> d;

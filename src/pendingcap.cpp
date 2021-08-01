@@ -6,7 +6,8 @@
 #include "pendingcap.h"
 #include "capparser.h"
 #include <QNetworkReply>
-namespace KWeatherCore {
+namespace KWeatherCore
+{
 class PendingCAPPrivate : public QObject
 {
     Q_OBJECT
@@ -17,6 +18,7 @@ public:
 Q_SIGNALS:
     void networkError();
     void finished();
+
 private:
     void parseCAP(QNetworkReply *reply);
 };
@@ -35,8 +37,7 @@ void PendingCAPPrivate::parseCAP(QNetworkReply *reply)
 {
     reply->deleteLater();
     if (reply->error()) {
-        qWarning() << "network error when fetching alerts:"
-                   << reply->errorString();
+        qWarning() << "network error when fetching alerts:" << reply->errorString();
         return;
     }
 

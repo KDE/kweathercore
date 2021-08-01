@@ -49,14 +49,12 @@ Q_SIGNALS:
 
 protected:
     friend class WeatherForecastSourcePrivate;
-    explicit PendingWeatherForecast(
-        double latitude,
-        double longitude,
-        const QUrl &url,
-        const QString &timezone = QString(),
-        const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
-    explicit PendingWeatherForecast(
-        QExplicitlySharedDataPointer<WeatherForecast> data);
+    explicit PendingWeatherForecast(double latitude,
+                                    double longitude,
+                                    const QUrl &url,
+                                    const QString &timezone = QString(),
+                                    const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+    explicit PendingWeatherForecast(QExplicitlySharedDataPointer<WeatherForecast> data);
 
 private:
     PendingWeatherForecastPrivate *d = nullptr;

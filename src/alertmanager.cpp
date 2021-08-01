@@ -35,14 +35,12 @@ AlertManager::AlertManagerPrivate::~AlertManagerPrivate()
     if (manager)
         manager->deleteLater();
 }
-AlertManager::AlertManagerPrivate::AlertManagerPrivate(
-    const AlertManagerPrivate &other)
+AlertManager::AlertManagerPrivate::AlertManagerPrivate(const AlertManagerPrivate &other)
     : manager(new QNetworkAccessManager())
 {
     hash = other.hash;
 }
-AlertManager::AlertManagerPrivate &
-AlertManager::AlertManagerPrivate::operator=(const AlertManagerPrivate &other)
+AlertManager::AlertManagerPrivate &AlertManager::AlertManagerPrivate::operator=(const AlertManagerPrivate &other)
 {
     hash = other.hash;
     return *this;
@@ -69,8 +67,7 @@ AlertManager::AlertManager()
 }
 void AlertManager::loadConfigs()
 {
-    QString config =
-        QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
+    QString config = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
     QDir dir(config + QStringLiteral("/kweathercore"));
     if (dir.exists()) {
         QDirIterator it(config + QStringLiteral("kweathercore"));
@@ -80,8 +77,7 @@ void AlertManager::loadConfigs()
                 file.open(QIODevice::ReadOnly | QIODevice::Text);
                 auto config = QJsonDocument::fromJson(file.readAll()).object();
                 QJsonValue key = config.value(QStringLiteral("country"));
-                d->hash[key.toString()] = std::make_pair(
-                    it.filePath(), config[QStringLiteral("url")].toString());
+                d->hash[key.toString()] = std::make_pair(it.filePath(), config[QStringLiteral("url")].toString());
             }
         }
     }

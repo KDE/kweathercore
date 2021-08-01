@@ -29,10 +29,8 @@ public:
     std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
 };
 DailyWeatherForecast::~DailyWeatherForecast() = default;
-DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) =
-    default;
-DailyWeatherForecast &
-DailyWeatherForecast::operator=(DailyWeatherForecast &&other) = default;
+DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) = default;
+DailyWeatherForecast &DailyWeatherForecast::operator=(DailyWeatherForecast &&other) = default;
 DailyWeatherForecast::DailyWeatherForecast()
     : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
@@ -71,8 +69,7 @@ QJsonObject DailyWeatherForecast::toJson()
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
 {
-    DailyWeatherForecast ret(
-        QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
+    DailyWeatherForecast ret(QDate::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
     ret.setMaxTemp(obj[QStringLiteral("maxTemp")].toDouble());
     ret.setMinTemp(obj[QStringLiteral("minTemp")].toDouble());
     ret.setPrecipitation(obj[QStringLiteral("precipitation")].toDouble());
@@ -80,14 +77,12 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     ret.setHumidity(obj[QStringLiteral("humidity")].toDouble());
     ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
     ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
-    ret.setWeatherDescription(
-        obj[QStringLiteral("weatherDescription")].toString());
+    ret.setWeatherDescription(obj[QStringLiteral("weatherDescription")].toString());
     ret.setSunrise(Sunrise::fromJson(obj[QStringLiteral("sunrise")].toObject()));
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
-        hourlyVec.push_back(
-            HourlyWeatherForecast::fromJson(array.at(i).toObject()));
+        hourlyVec.push_back(HourlyWeatherForecast::fromJson(array.at(i).toObject()));
     }
     ret.setHourlyWeatherForecast(hourlyVec);
     return ret;
@@ -180,8 +175,7 @@ const Sunrise &DailyWeatherForecast::sunrise() const
 {
     return d->sunrise;
 }
-const std::vector<HourlyWeatherForecast> &
-DailyWeatherForecast::hourlyWeatherForecast() const
+const std::vector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
     return d->hourlyWeatherForecast;
 }
@@ -189,18 +183,15 @@ void DailyWeatherForecast::setSunrise(Sunrise sunrise)
 {
     d->sunrise = std::move(sunrise);
 }
-void DailyWeatherForecast::setHourlyWeatherForecast(
-    const std::vector<HourlyWeatherForecast> &forecast)
+void DailyWeatherForecast::setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
 {
     d->hourlyWeatherForecast = forecast;
 }
-void DailyWeatherForecast::setHourlyWeatherForecast(
-    std::vector<HourlyWeatherForecast> &&forecast)
+void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast)
 {
     d->hourlyWeatherForecast = std::move(forecast);
 }
-DailyWeatherForecast &
-DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
+DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
 {
     if (date().isNull()) {
         setDate(forecast.date());
@@ -221,14 +212,12 @@ DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
     return *this;
 }
 
-DailyWeatherForecast &
-DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
+DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {
     return *this + forecast;
 }
 
-DailyWeatherForecast &
-DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
+DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
     if (isValid()) {
         setDate(forecast.date().date());
@@ -236,14 +225,11 @@ DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
         setWeatherIcon(forecast.weatherIcon());
         d->isValid = false;
     }
-    
+
     if (date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
-        if (self()->weatherIconPriorityRank(forecast.neutralWeatherIcon()) >= 
-            self()->weatherIconPriorityRank(weatherIcon())) {
-            setWeatherDescription(
-                self()->resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral"))
-                    .desc);
+        if (self()->weatherIconPriorityRank(forecast.neutralWeatherIcon()) >= self()->weatherIconPriorityRank(weatherIcon())) {
+            setWeatherDescription(self()->resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral")).desc);
             setWeatherIcon(forecast.neutralWeatherIcon());
         }
         setPrecipitation(precipitation() + forecast.precipitationAmount());
@@ -258,8 +244,7 @@ DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
     return *this;
 }
 
-bool DailyWeatherForecast::operator==(
-    const DailyWeatherForecast &forecast) const
+bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) const
 {
     return (date() == forecast.date());
 }
@@ -268,8 +253,7 @@ bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
     return date() < forecast.date();
 }
-DailyWeatherForecast &
-DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
+DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
 {
     *d = *other.d;
     return *this;

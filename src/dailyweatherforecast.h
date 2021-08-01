@@ -33,8 +33,7 @@ class KWEATHERCORE_EXPORT DailyWeatherForecast
     Q_PROPERTY(qreal humidity READ humidity WRITE setHumidity)
     Q_PROPERTY(qreal pressure READ pressure WRITE setPressure)
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
-    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE
-                   setWeatherDescription)
+    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
     Q_PROPERTY(QDateTime date READ dateTime WRITE setDate)
 public:
     /**
@@ -175,14 +174,12 @@ public:
      * set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day
      */
-    void setHourlyWeatherForecast(
-        const std::vector<HourlyWeatherForecast> &forecast);
+    void setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast);
     /**
      * overloaded version
      * @param forecast
      */
-    void
-    setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast);
+    void setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast);
 
     /**
      * merge two daily forecast, note the hourly forecast is unchanged

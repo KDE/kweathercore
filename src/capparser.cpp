@@ -6,9 +6,9 @@
 
 #include "capparser.h"
 #include "kweathercore_p.h"
+#include <KLocalizedString>
 #include <QDateTime>
 #include <QDebug>
-#include <KLocalizedString>
 
 namespace KWeatherCore
 {
@@ -46,8 +46,7 @@ std::unique_ptr<AlertEntry> CAPParser::parse()
             entry->setSender(m_xml.readElementText());
             break;
         case Tags::SENT_TIME:
-            entry->setSentTime(
-                QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
+            entry->setSentTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
             break;
         case Tags::STATUS: {
             AlertEntry::Status status;
@@ -144,16 +143,13 @@ AlertInfo CAPParser::parseInfo()
                     info.setCertainty(self()->certaintyStringToEnum(m_xml.readElementText()));
                     break;
                 case InfoTags::EFFECTIVE_TIME:
-                    info.setEffectiveTime(QDateTime::fromString(
-                        m_xml.readElementText(), Qt::ISODate));
+                    info.setEffectiveTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
                     break;
                 case InfoTags::ONSET_TIME:
-                    info.setOnsetTime(QDateTime::fromString(
-                        m_xml.readElementText(), Qt::ISODate));
+                    info.setOnsetTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
                     break;
                 case InfoTags::EXPIRE_TIME:
-                    info.setExpireTime(QDateTime::fromString(
-                        m_xml.readElementText(), Qt::ISODate));
+                    info.setExpireTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
                     break;
                 case InfoTags::HEADLINE:
                     info.setHeadline(m_xml.readElementText());
@@ -176,13 +172,10 @@ AlertInfo CAPParser::parseInfo()
                     break;
                 }
                 case InfoTags::AREA: {
-                    while (!(m_xml.isEndElement() &&
-                             m_xml.name() == QStringLiteral("area"))) {
-                        if (m_xml.name() == QStringLiteral("areaDesc") &&
-                            !m_xml.isEndElement())
+                    while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
+                        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement())
                             info.setAreaDesc(m_xml.readElementText());
-                        else if (m_xml.name() == QStringLiteral("geocode") &&
-                                 !m_xml.isEndElement()) {
+                        else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
                             std::pair<QString, QString> p;
                             m_xml.readNextStartElement();
                             if (m_xml.name() == QStringLiteral("valueName"))
@@ -191,8 +184,7 @@ AlertInfo CAPParser::parseInfo()
                             if (m_xml.name() == QStringLiteral("value"))
                                 p.second = m_xml.readElementText();
                             info.addAreaCode(p);
-                        } else if (m_xml.name() == QStringLiteral("polygon") &&
-                                   !m_xml.isEndElement()) {
+                        } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
                             info.addPolygon(self()->stringToPolygon(m_xml.readElementText()));
                         }
                         m_xml.readNext();

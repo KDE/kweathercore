@@ -27,9 +27,7 @@ void SunriseTest::testJson()
     QCOMPARE(std::abs(d2.moonRise().secsTo(d1.moonRise())) < 1, true);
     QCOMPARE(std::abs(d2.moonSet().secsTo(d1.moonSet())) < 1, true);
     QCOMPARE(d2.solarMidnight(), d1.solarMidnight());
-    QCOMPARE(std::abs(d2.solarMidnightTime().secsTo(d1.solarMidnightTime())) <
-                 1,
-             true);
+    QCOMPARE(std::abs(d2.solarMidnightTime().secsTo(d1.solarMidnightTime())) < 1, true);
     QCOMPARE(d2.solarNoon(), d2.solarNoon());
     QCOMPARE(std::abs(d2.solarNoonTime().secsTo(d1.solarNoonTime())) < 1, true);
 }

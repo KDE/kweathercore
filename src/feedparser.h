@@ -17,15 +17,12 @@ class FeedParser : public QObject
 public:
     FeedParser(const QJsonDocument &configFile, QObject *parent = nullptr);
     void setConfig(const QJsonDocument &configFile);
-    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>>
-    parse(const QByteArray &data) const;
+    std::unique_ptr<std::vector<std::unique_ptr<AlertFeedEntry>>> parse(const QByteArray &data) const;
 
 private:
-    std::unique_ptr<AlertFeedEntry>
-    parseOneEntry(QXmlStreamReader &reader) const;
+    std::unique_ptr<AlertFeedEntry> parseOneEntry(QXmlStreamReader &reader) const;
     QUrl parseCapElement(QXmlStreamReader &reader) const;
-    void parsePolygonElement(QXmlStreamReader &reader,
-                             AlertFeedEntry &entry) const;
+    void parsePolygonElement(QXmlStreamReader &reader, AlertFeedEntry &entry) const;
     QUrl m_url;
     QString m_entryMarker;
     QString m_titleMarker;

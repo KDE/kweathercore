@@ -4,12 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include <QObject>
-#include <memory>
 #include "alertentry.h"
 #include "kweathercore/kweathercore_export.h"
+#include <QObject>
+#include <memory>
 class QNetworkReply;
-namespace KWeatherCore {
+namespace KWeatherCore
+{
 class PendingCAPPrivate;
 /**
  * @short The PendingAlerts class contains the reply to an asynchronous
@@ -43,9 +44,11 @@ Q_SIGNALS:
      * indicate there is a network error
      */
     void networkError();
+
 protected:
     friend class AlertFeedEntry;
     explicit PendingCAP(QNetworkReply *reply = nullptr);
+
 private:
     PendingCAPPrivate *d = nullptr;
 };

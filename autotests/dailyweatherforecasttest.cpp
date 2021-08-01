@@ -40,8 +40,7 @@ void DailyForecastTest::testDailyMerge()
     for (auto &h : vec)
         d2 += h;
 
-    QCOMPARE(d2.hourlyWeatherForecast().size(),
-             d1.hourlyWeatherForecast().size());
+    QCOMPARE(d2.hourlyWeatherForecast().size(), d1.hourlyWeatherForecast().size());
 }
 void DailyForecastTest::testJson()
 {

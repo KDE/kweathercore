@@ -37,8 +37,7 @@ public:
     /**
      * construct from json
      */
-    static QExplicitlySharedDataPointer<WeatherForecast>
-    fromJson(QJsonObject obj);
+    static QExplicitlySharedDataPointer<WeatherForecast> fromJson(QJsonObject obj);
     /**
      * @return daily weather forecast
      */
@@ -63,8 +62,7 @@ public:
      * @param timezone valid IANA Time Zone ID
      */
     void setTimezone(QString timezone);
-    void
-    setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
+    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
      * the vector should be sorted

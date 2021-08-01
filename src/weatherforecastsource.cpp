@@ -32,29 +32,22 @@ WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
     : QObject(parent)
 {
 }
-PendingWeatherForecast *
-WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
+PendingWeatherForecast *WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
 {
     QFile cache(self()->getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
     std::vector<Sunrise> sunriseCache;
     QString timezone;
     // valid cache
     if (cache.exists() && cache.open(QIODevice::ReadOnly)) {
-        auto weatherforecast = WeatherForecast::fromJson(
-            QJsonDocument::fromJson(cache.readAll()).object());
+        auto weatherforecast = WeatherForecast::fromJson(QJsonDocument::fromJson(cache.readAll()).object());
         timezone = weatherforecast->timezone();
-        if (weatherforecast->createdTime().secsTo(
-                QDateTime::currentDateTime()) <= 3600)
+        if (weatherforecast->createdTime().secsTo(QDateTime::currentDateTime()) <= 3600)
             return new PendingWeatherForecast(weatherforecast);
         else {
             const auto &days = weatherforecast->dailyWeatherForecast();
-            auto it = std::lower_bound(
-                days.begin(),
-                days.end(),
-                QDate::currentDate(),
-                [](const DailyWeatherForecast &day, const QDate &date) {
-                    return day.date() < date;
-                });
+            auto it = std::lower_bound(days.begin(), days.end(), QDate::currentDate(), [](const DailyWeatherForecast &day, const QDate &date) {
+                return day.date() < date;
+            });
 
             auto size = std::distance(it, days.end());
             if (size) {
@@ -68,29 +61,25 @@ WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
     }
 
     // query weather api
-    QUrl url(QStringLiteral(
-        "https://api.met.no/weatherapi/locationforecast/2.0/complete"));
+    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), self()->toFixedString(latitude));
     query.addQueryItem(QStringLiteral("lon"), self()->toFixedString(longitude));
 
     url.setQuery(query);
 
-    return new PendingWeatherForecast(
-        latitude, longitude, url, timezone, sunriseCache);
+    return new PendingWeatherForecast(latitude, longitude, url, timezone, sunriseCache);
 }
 WeatherForecastSource::WeatherForecastSource(QObject *parent)
     : QObject(parent)
     , d(new WeatherForecastSourcePrivate(this))
 {
 }
-PendingWeatherForecast *WeatherForecastSource::requestData(double latitude,
-                                                           double longitude)
+PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude)
 {
     return d->requestData(latitude, longitude);
 }
-PendingWeatherForecast *WeatherForecastSource::requestData(
-    const KWeatherCore::LocationQueryResult &result)
+PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)
 {
     return requestData(result.latitude(), result.longitude());
 }

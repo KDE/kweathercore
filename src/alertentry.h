@@ -4,11 +4,11 @@
  */
 
 #pragma once
-#include <QObject>
-#include <QDateTime>
-#include <vector>
-#include <memory>
 #include "kweathercore/kweathercore_export.h"
+#include <QDateTime>
+#include <QObject>
+#include <memory>
+#include <vector>
 namespace KWeatherCore
 {
 class AlertInfo;
@@ -35,7 +35,7 @@ public:
         Exercise,
         System,
         Test,
-        Draft
+        Draft,
     };
     enum class MsgType {
         Unknown,
@@ -43,14 +43,15 @@ public:
         Update,
         Cancel,
         Ack,
-        Error
+        Error,
     };
     enum class Scope {
         Unknown,
         Public,
         Restricted,
-        Private
+        Private,
     };
+
     /**
      * Default constructor, Status, MsgType, Scope
      * are set to Unknown
@@ -114,6 +115,7 @@ public:
     void addInfo(AlertInfo &&alertInfo);
     AlertEntry &operator=(const AlertEntry &other);
     AlertEntry &operator=(AlertEntry &&other);
+
 private:
     class AlertEntryPrivate;
     std::unique_ptr<AlertEntryPrivate> d;

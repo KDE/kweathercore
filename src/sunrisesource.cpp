@@ -11,16 +11,12 @@
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QUrlQuery>
 #include <QTimeZone>
+#include <QUrlQuery>
 
 namespace KWeatherCore
 {
-SunriseSource::SunriseSource(double latitude,
-                             double longitude,
-                             const QString &timezone,
-                             const std::vector<Sunrise> &sunrise,
-                             QObject *parent)
+SunriseSource::SunriseSource(double latitude, double longitude, const QString &timezone, const std::vector<Sunrise> &sunrise, QObject *parent)
     : QObject(parent)
     , m_latitude(latitude)
     , m_longitude(longitude)
@@ -28,10 +24,7 @@ SunriseSource::SunriseSource(double latitude,
     , m_sunriseVec(sunrise)
     , m_manager(new QNetworkAccessManager(this))
 {
-    connect(m_manager,
-            &QNetworkAccessManager::finished,
-            this,
-            &SunriseSource::parseResults);
+    connect(m_manager, &QNetworkAccessManager::finished, this, &SunriseSource::parseResults);
 }
 void SunriseSource::requestData()
 {
@@ -51,17 +44,10 @@ void SunriseSource::requestData()
     query.addQueryItem(QStringLiteral("lat"), self()->toFixedString(m_latitude));
     query.addQueryItem(QStringLiteral("lon"), self()->toFixedString(m_longitude));
     // if we already have data, request data beyond the last day
-    query.addQueryItem(
-        QStringLiteral("date"),
-        !m_sunriseVec.size()
-            ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd"))
-            : QDate::currentDate()
-                  .addDays(m_sunriseVec.size())
-                  .toString(QStringLiteral("yyyy-MM-dd")));
-    query.addQueryItem(QStringLiteral("days"),
-                       !m_sunriseVec.size()
-                           ? QString::number(10)
-                           : QString::number(11 - m_sunriseVec.size()));
+    query.addQueryItem(QStringLiteral("date"),
+                       !m_sunriseVec.size() ? QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd"))
+                                            : QDate::currentDate().addDays(m_sunriseVec.size()).toString(QStringLiteral("yyyy-MM-dd")));
+    query.addQueryItem(QStringLiteral("days"), !m_sunriseVec.size() ? QString::number(10) : QString::number(11 - m_sunriseVec.size()));
 
     // calculate offset (form example: -04:00)
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
@@ -69,8 +55,7 @@ void SunriseSource::requestData()
     if (hour >= 10)
         offset.append(QString::number(hour) + QStringLiteral(":"));
     else {
-        offset.append(QStringLiteral("0") + QString::number(hour) +
-                      QStringLiteral(":"));
+        offset.append(QStringLiteral("0") + QString::number(hour) + QStringLiteral(":"));
     }
     int min = (std::abs(m_offset) - hour * 3600) / 60;
     if (min >= 10) {
@@ -85,9 +70,7 @@ void SunriseSource::requestData()
 
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") +
-                          VERSION_NUMBER +
-                          QStringLiteral(" kde-frameworks-devel@kde.org")));
+                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
 
     m_manager->get(req);
 }
@@ -103,14 +86,13 @@ void SunriseSource::parseResults(QNetworkReply *reply)
     auto timezone = QTimeZone(m_timezone.toUtf8());
 
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-    QJsonArray array = doc[QStringLiteral("location")]
-                           .toObject()[QStringLiteral("time")]
-                           .toArray();
+    QJsonArray array = doc[QStringLiteral("location")].toObject()[QStringLiteral("time")].toArray();
 
     m_sunriseVec.reserve(array.size());
 
     for (int i = 0; i <= array.count() - 2; i++) // we don't want last one
     {
+        // clang-format off
         Sunrise sr;
         sr.setSunSet(
             QDateTime::fromString(array.at(i)
@@ -178,6 +160,7 @@ void SunriseSource::parseResults(QNetworkReply *reply)
                             .toObject()[QStringLiteral("phase")]
                             .toString()
                             .toDouble());
+        // clang-format on
 
         m_sunriseVec.emplace_back(std::move(sr));
     }

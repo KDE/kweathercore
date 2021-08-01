@@ -43,20 +43,10 @@ LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
 {
     locationSource->stopUpdates();
 
-    connect(locationSource,
-            &QGeoPositionInfoSource::positionUpdated,
-            this,
-            &LocationQueryPrivate::positionUpdated);
-    connect(this,
-            &LocationQueryPrivate::queryFinished,
-            parent,
-            &LocationQuery::queryFinished);
-    connect(this,
-            &LocationQueryPrivate::queryError,
-            parent,
-            &LocationQuery::queryError);
-    connect(
-        this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
+    connect(locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQueryPrivate::positionUpdated);
+    connect(this, &LocationQueryPrivate::queryFinished, parent, &LocationQuery::queryFinished);
+    connect(this, &LocationQueryPrivate::queryError, parent, &LocationQuery::queryError);
+    connect(this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
 }
 
 void LocationQueryPrivate::requestUpdate()
@@ -72,8 +62,7 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 
     urlQuery.addQueryItem(QStringLiteral("lat"), lat);
     urlQuery.addQueryItem(QStringLiteral("lng"), lon);
-    urlQuery.addQueryItem(QStringLiteral("username"),
-                          QStringLiteral("kweatherdev"));
+    urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
 
     auto req = QNetworkRequest(url);
@@ -86,14 +75,13 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
         QJsonObject root = document.object();
         auto array = root[QStringLiteral("geonames")].toArray();
         if (array.size()) {
-            Q_EMIT this->located(LocationQueryResult(
-                update.coordinate().latitude(),
-                update.coordinate().longitude(),
-                array.at(0)[QStringLiteral("toponymName")].toString(),
-                array.at(0)[QStringLiteral("name")].toString(),
-                array.at(0)[QStringLiteral("countryCode")].toString(),
-                array.at(0)[QStringLiteral("countryName")].toString(),
-                QString::number(root[QStringLiteral("geonameId")].toInt())));
+            Q_EMIT this->located(LocationQueryResult(update.coordinate().latitude(),
+                                                     update.coordinate().longitude(),
+                                                     array.at(0)[QStringLiteral("toponymName")].toString(),
+                                                     array.at(0)[QStringLiteral("name")].toString(),
+                                                     array.at(0)[QStringLiteral("countryCode")].toString(),
+                                                     array.at(0)[QStringLiteral("countryName")].toString(),
+                                                     QString::number(root[QStringLiteral("geonameId")].toInt())));
         }
         reply->deleteLater();
     });
@@ -115,8 +103,7 @@ void LocationQueryPrivate::query(QString name, int number)
 
     urlQuery.addQueryItem(QStringLiteral("q"), name);
     urlQuery.addQueryItem(QStringLiteral("maxRows"), QString::number(number));
-    urlQuery.addQueryItem(QStringLiteral("username"),
-                          QStringLiteral("kweatherdev"));
+    urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
 
     auto reply = manager->get(QNetworkRequest(url));
@@ -128,9 +115,10 @@ void LocationQuery::locate()
 {
     d->requestUpdate();
 }
-static std::optional<QString> findSubdivision(const QJsonObject &json) {
+static std::optional<QString> findSubdivision(const QJsonObject &json)
+{
     const auto adminCodeIter = json.constFind(QStringLiteral("adminCodes1"));
-    if(adminCodeIter == json.constEnd()) {
+    if (adminCodeIter == json.constEnd()) {
         return std::nullopt;
     } else {
         return (*adminCodeIter).toObject().value(QStringLiteral("ISO3166_2")).toString();
@@ -151,9 +139,7 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
     std::vector<LocationQueryResult> retVec;
 
     // if our api calls reached daily limit
-    if (root[QStringLiteral("status")]
-            .toObject()[QStringLiteral("value")]
-            .toInt() == 18) {
+    if (root[QStringLiteral("status")].toObject()[QStringLiteral("value")].toInt() == 18) {
         Q_EMIT queryError();
         qWarning("API calls reached daily limit");
         return;
@@ -162,16 +148,14 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
     // add query results
     for (const auto &resRef : qAsConst(geonames)) {
         auto res = resRef.toObject();
-        auto result = LocationQueryResult(
-            res.value(QStringLiteral("lat")).toString().toFloat(),
-            res.value(QStringLiteral("lng")).toString().toFloat(),
-            res.value(QStringLiteral("toponymName")).toString(),
-            res.value(QStringLiteral("name")).toString(),
-            res.value(QStringLiteral("countryCode")).toString(),
-            res.value(QStringLiteral("countryName")).toString(),
-            QString::number(res.value(QStringLiteral("geonameId")).toInt()),
-            findSubdivision(res)
-        );
+        auto result = LocationQueryResult(res.value(QStringLiteral("lat")).toString().toFloat(),
+                                          res.value(QStringLiteral("lng")).toString().toFloat(),
+                                          res.value(QStringLiteral("toponymName")).toString(),
+                                          res.value(QStringLiteral("name")).toString(),
+                                          res.value(QStringLiteral("countryCode")).toString(),
+                                          res.value(QStringLiteral("countryName")).toString(),
+                                          QString::number(res.value(QStringLiteral("geonameId")).toInt()),
+                                          findSubdivision(res));
         retVec.push_back(result);
     }
 

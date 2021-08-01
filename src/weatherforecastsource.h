@@ -44,8 +44,7 @@ public:
      * PendingWeatherForecast afterhand to avoid memory leak.
      * Check isFinished() on the returned PendingWeatherForecast
      */
-    PendingWeatherForecast *
-    requestData(const KWeatherCore::LocationQueryResult &result);
+    PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 
 private:
     WeatherForecastSourcePrivate *d = nullptr;

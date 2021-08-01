@@ -5,8 +5,8 @@
  */
 #include "alertfeedentry.h"
 #include "kweathercore_p.h"
-#include <QUrl>
 #include <QNetworkAccessManager>
+#include <QUrl>
 namespace KWeatherCore
 {
 class AlertFeedEntry::AlertFeedEntryPrivate
