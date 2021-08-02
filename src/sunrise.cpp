@@ -5,9 +5,12 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "sunrise.h"
+
+#include <KLocalizedString>
+
 namespace KWeatherCore
 {
-class Sunrise::SunrisePrivate
+class Sunrise::SunrisePrivate : public QSharedData
 {
 public:
     QPair<QDateTime, double> highMoon;
@@ -21,22 +24,23 @@ public:
     double moonPhase;
 };
 Sunrise::Sunrise()
-    : d(std::make_unique<SunrisePrivate>())
+    : d(new SunrisePrivate)
 {
 }
 Sunrise::Sunrise(const Sunrise &other)
-    : d(std::make_unique<SunrisePrivate>())
+    : d(other.d)
 {
-    *d = *other.d;
 }
-Sunrise::Sunrise(Sunrise &&other) = default;
 Sunrise::~Sunrise() = default;
 Sunrise &Sunrise::operator=(const Sunrise &other)
 {
-    *d = *other.d;
+    if (this != &other) {
+        d = other.d;
+    }
+
     return *this;
 }
-Sunrise &Sunrise::operator=(Sunrise &&other) = default;
+
 Sunrise Sunrise::fromJson(QJsonObject obj)
 {
     Sunrise s;
@@ -162,4 +166,25 @@ void Sunrise::setMoonPhase(double moonPhase)
 {
     d->moonPhase = moonPhase;
 }
+QString Sunrise::moonPhaseString() const
+{
+    if (d->moonPhase <= 5) {
+        return i18n("New Moon");
+    } else if (d->moonPhase <= 25) {
+        return i18n("Waxing Crescent");
+    } else if (d->moonPhase <= 45) {
+        return i18n("Waxing Gibbous");
+    } else if (d->moonPhase <= 55) {
+        return i18n("Full Moon");
+    } else if (d->moonPhase <= 75) {
+        return i18n("Waning Gibbous");
+    } else if (d->moonPhase <= 95) {
+        return i18n("Waning Crescent");
+    } else {
+        return i18n("New Moon");
+    }
 }
+
+}
+
+Q_DECLARE_METATYPE(KWeatherCore::Sunrise)

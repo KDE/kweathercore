@@ -33,6 +33,7 @@ class KWEATHERCORE_EXPORT Sunrise
     Q_PROPERTY(QDateTime moonRise READ moonRise WRITE setMoonRise)
     Q_PROPERTY(QDateTime moonSet READ moonSet WRITE setMoonSet)
     Q_PROPERTY(qreal moonPhase READ moonPhase WRITE setMoonPhase)
+    Q_PROPERTY(QString moonPhaseString READ moonPhaseString)
     Q_PROPERTY(qreal highMoon READ highMoon)
     Q_PROPERTY(qreal lowMoon READ lowMoon)
     Q_PROPERTY(qreal solarNoon READ solarNoon)
@@ -41,10 +42,8 @@ class KWEATHERCORE_EXPORT Sunrise
 public:
     Sunrise();
     Sunrise(const Sunrise &other);
-    Sunrise(Sunrise &&other);
     ~Sunrise();
     Sunrise &operator=(const Sunrise &other);
-    Sunrise &operator=(Sunrise &&other);
     /**
      * construct from json
      */
@@ -108,8 +107,10 @@ public:
      */
     void setMoonPhase(double moonPhase);
 
+    QString moonPhaseString() const;
+
 private:
     class SunrisePrivate;
-    std::unique_ptr<SunrisePrivate> d;
+    QSharedDataPointer<SunrisePrivate> d;
 };
 }

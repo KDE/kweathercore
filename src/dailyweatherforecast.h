@@ -35,6 +35,7 @@ class KWEATHERCORE_EXPORT DailyWeatherForecast
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
     Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
     Q_PROPERTY(QDateTime date READ dateTime WRITE setDate)
+    Q_PROPERTY(KWeatherCore::Sunrise sunrise READ sunrise)
 public:
     /**
      * Creates a invalid DailyWeatherForecast.
