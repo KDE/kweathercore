@@ -42,6 +42,7 @@ public:
     /**
      * HourlyWeatherForecast construct a null forecast
      */
+    HourlyWeatherForecast();
     explicit HourlyWeatherForecast(const QDateTime &date);
     HourlyWeatherForecast(const HourlyWeatherForecast &other);
     HourlyWeatherForecast(HourlyWeatherForecast &&other);

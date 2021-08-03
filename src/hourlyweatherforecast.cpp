@@ -32,6 +32,12 @@ HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
 }
 HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) = default;
 HourlyWeatherForecast::~HourlyWeatherForecast() = default;
+
+HourlyWeatherForecast::HourlyWeatherForecast()
+    : d(std::make_unique<HourlyWeatherForecastPrivate>())
+{
+}
+
 HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other)
     : d(std::make_unique<HourlyWeatherForecastPrivate>())
 {
