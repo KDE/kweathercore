@@ -165,22 +165,23 @@ void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
 }
 void HourlyWeatherForecast::setWindDirectionStr(const QString &windDirection)
 {
-    if (windDirection == QStringLiteral("E"))
+    if (windDirection == QStringLiteral("E")) {
         setWindDirection(WindDirection::E);
-    else if (windDirection == QStringLiteral("N"))
+    } else if (windDirection == QStringLiteral("N")) {
         setWindDirection(WindDirection::N);
-    else if (windDirection == QStringLiteral("NE"))
+    } else if (windDirection == QStringLiteral("NE")) {
         setWindDirection(WindDirection::NE);
-    else if (windDirection == QStringLiteral("NW"))
+    } else if (windDirection == QStringLiteral("NW")) {
         setWindDirection(WindDirection::NW);
-    else if (windDirection == QStringLiteral("S"))
+    } else if (windDirection == QStringLiteral("S")) {
         setWindDirection(WindDirection::S);
-    else if (windDirection == QStringLiteral("SE"))
+    } else if (windDirection == QStringLiteral("SE")) {
         setWindDirection(WindDirection::SE);
-    else if (windDirection == QStringLiteral("SW"))
+    } else if (windDirection == QStringLiteral("SW")) {
         setWindDirection(WindDirection::SW);
-    else if (windDirection == QStringLiteral("W"))
+    } else if (windDirection == QStringLiteral("W")) {
         setWindDirection(WindDirection::W);
+    }
 }
 double HourlyWeatherForecast::windSpeed() const
 {

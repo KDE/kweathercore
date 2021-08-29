@@ -124,10 +124,11 @@ QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 
     if (m_capValueType == QStringLiteral("attribute")) {
         return QUrl(reader.attributes().value(m_capValueMarker).toString());
-    } else if (m_capValueType == QStringLiteral("text"))
+    } else if (m_capValueType == QStringLiteral("text")) {
         return QUrl(reader.readElementText());
-    else
+    } else {
         return QUrl();
+    }
 }
 void FeedParser::parsePolygonElement(QXmlStreamReader &reader, AlertFeedEntry &entry) const
 {

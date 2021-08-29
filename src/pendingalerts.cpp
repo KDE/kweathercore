@@ -26,10 +26,11 @@ PendingAlertsPrivate::PendingAlertsPrivate(const QJsonDocument &config, QNetwork
     : QObject(parent)
     , parser(new FeedParser(config, this))
 {
-    if (reply)
+    if (reply) {
         connect(reply, &QNetworkReply::finished, this, [this, reply] {
             this->parseAlerts(reply);
         });
+    }
 }
 void PendingAlertsPrivate::parseAlerts(QNetworkReply *reply)
 {

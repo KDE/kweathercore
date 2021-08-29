@@ -52,9 +52,9 @@ void SunriseSource::requestData()
     // calculate offset (form example: -04:00)
     QString offset = m_offset < 0 ? QStringLiteral("-") : QStringLiteral("+");
     int hour = std::abs(m_offset) / 3600;
-    if (hour >= 10)
+    if (hour >= 10) {
         offset.append(QString::number(hour) + QStringLiteral(":"));
-    else {
+    } else {
         offset.append(QStringLiteral("0") + QString::number(hour) + QStringLiteral(":"));
     }
     int min = (std::abs(m_offset) - hour * 3600) / 60;

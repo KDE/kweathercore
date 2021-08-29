@@ -43,52 +43,56 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 #else
     QDir dir(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QStringLiteral("/kweather/cache/") + toFixedString(latitude)
              + QStringLiteral("/") + toFixedString(longitude));
-    if (!dir.exists())
+    if (!dir.exists()) {
         dir.mkpath(QStringLiteral("."));
+    }
     return dir;
 #endif
 }
 
 AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Immediate"))
+    if (str == QStringLiteral("Immediate")) {
         return AlertInfo::Urgency::Immediate;
-    else if (str == QStringLiteral("Expected"))
+    } else if (str == QStringLiteral("Expected")) {
         return AlertInfo::Urgency::Expected;
-    else if (str == QStringLiteral("Future"))
+    } else if (str == QStringLiteral("Future")) {
         return AlertInfo::Urgency::Future;
-    else if (str == QStringLiteral("Past"))
+    } else if (str == QStringLiteral("Past")) {
         return AlertInfo::Urgency::Past;
-    else
+    } else {
         return AlertInfo::Urgency::Unknown;
+    }
 }
 
 AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Extreme"))
+    if (str == QStringLiteral("Extreme")) {
         return AlertInfo::Severity::Extreme;
-    else if (str == QStringLiteral("Severe"))
+    } else if (str == QStringLiteral("Severe")) {
         return AlertInfo::Severity::Severe;
-    else if (str == QStringLiteral("Moderate"))
+    } else if (str == QStringLiteral("Moderate")) {
         return AlertInfo::Severity::Moderate;
-    else if (str == QStringLiteral("Minor"))
+    } else if (str == QStringLiteral("Minor")) {
         return AlertInfo::Severity::Minor;
-    else
+    } else {
         return AlertInfo::Severity::Unknown;
+    }
 }
 
 AlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Observed"))
+    if (str == QStringLiteral("Observed")) {
         return AlertInfo::Certainty::Observed;
-    else if (str == QStringLiteral("Likely"))
+    } else if (str == QStringLiteral("Likely")) {
         return AlertInfo::Certainty::Likely;
-    else if (str == QStringLiteral("Possible"))
+    } else if (str == QStringLiteral("Possible")) {
         return AlertInfo::Certainty::Possible;
-    else if (str == QStringLiteral("Unlikely"))
+    } else if (str == QStringLiteral("Unlikely")) {
         return AlertInfo::Certainty::Unlikely;
-    else
+    } else {
         return AlertInfo::Certainty::Unknown;
+    }
 }
 
 QString KWeatherCorePrivate::urgencyToString(AlertInfo::Urgency urgency)

@@ -41,9 +41,9 @@ PendingWeatherForecast *WeatherForecastSourcePrivate::requestData(double latitud
     if (cache.exists() && cache.open(QIODevice::ReadOnly)) {
         auto weatherforecast = WeatherForecast::fromJson(QJsonDocument::fromJson(cache.readAll()).object());
         timezone = weatherforecast.timezone();
-        if (weatherforecast.createdTime().secsTo(QDateTime::currentDateTime()) <= 3600)
+        if (weatherforecast.createdTime().secsTo(QDateTime::currentDateTime()) <= 3600) {
             return new PendingWeatherForecast(weatherforecast);
-        else {
+        } else {
             const auto &days = weatherforecast.dailyWeatherForecast();
             auto it = std::lower_bound(days.begin(), days.end(), QDate::currentDate(), [](const DailyWeatherForecast &day, const QDate &date) {
                 return day.date() < date;

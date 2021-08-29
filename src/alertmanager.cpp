@@ -32,8 +32,9 @@ AlertManager::AlertManagerPrivate::AlertManagerPrivate()
 }
 AlertManager::AlertManagerPrivate::~AlertManagerPrivate()
 {
-    if (manager)
+    if (manager) {
         manager->deleteLater();
+    }
 }
 AlertManager::AlertManagerPrivate::AlertManagerPrivate(const AlertManagerPrivate &other)
     : manager(new QNetworkAccessManager())

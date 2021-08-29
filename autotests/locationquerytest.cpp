@@ -15,8 +15,9 @@ void LocationQueryTest::testLocate()
     auto ret = finished_spy->wait(30000);
 
     // if failed to located, abort
-    if (!ret)
+    if (!ret) {
         return;
+    }
 
     auto location = finished_spy->takeFirst().at(0).value<LocationQueryResult>();
     QVERIFY(!location.name().isEmpty());

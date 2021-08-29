@@ -51,50 +51,53 @@ std::unique_ptr<AlertEntry> CAPParser::parse()
         case Tags::STATUS: {
             AlertEntry::Status status;
             auto elementText = m_xml.readElementText();
-            if (elementText == QStringLiteral("Actual"))
+            if (elementText == QStringLiteral("Actual")) {
                 status = AlertEntry::Status::Actual;
-            else if (elementText == QStringLiteral("Excercise"))
+            } else if (elementText == QStringLiteral("Excercise")) {
                 status = AlertEntry::Status::Exercise;
-            else if (elementText == QStringLiteral("System"))
+            } else if (elementText == QStringLiteral("System")) {
                 status = AlertEntry::Status::System;
-            else if (elementText == QStringLiteral("Test"))
+            } else if (elementText == QStringLiteral("Test")) {
                 status = AlertEntry::Status::Test;
-            else if (elementText == QStringLiteral("Draft"))
+            } else if (elementText == QStringLiteral("Draft")) {
                 status = AlertEntry::Status::Draft;
-            else
+            } else {
                 qWarning() << "Unknown status field";
+            }
             entry->setStatus(status);
             break;
         }
         case Tags::MSG_TYPE: {
             AlertEntry::MsgType msgType;
             auto elementText = m_xml.readElementText();
-            if (elementText == QStringLiteral("Alert"))
+            if (elementText == QStringLiteral("Alert")) {
                 msgType = AlertEntry::MsgType::Alert;
-            else if (elementText == QStringLiteral("Update"))
+            } else if (elementText == QStringLiteral("Update")) {
                 msgType = AlertEntry::MsgType::Update;
-            else if (elementText == QStringLiteral("Cancel"))
+            } else if (elementText == QStringLiteral("Cancel")) {
                 msgType = AlertEntry::MsgType::Cancel;
-            else if (elementText == QStringLiteral("Ack"))
+            } else if (elementText == QStringLiteral("Ack")) {
                 msgType = AlertEntry::MsgType::Ack;
-            else if (elementText == QStringLiteral("Error"))
+            } else if (elementText == QStringLiteral("Error")) {
                 msgType = AlertEntry::MsgType::Error;
-            else
+            } else {
                 qWarning() << "Unknown msgType field";
+            }
             entry->setMsgType(msgType);
             break;
         }
         case Tags::SCOPE: {
             AlertEntry::Scope scope;
             auto elementText = m_xml.readElementText();
-            if (elementText == QStringLiteral("Public"))
+            if (elementText == QStringLiteral("Public")) {
                 scope = AlertEntry::Scope::Public;
-            else if (elementText == QStringLiteral("Private"))
+            } else if (elementText == QStringLiteral("Private")) {
                 scope = AlertEntry::Scope::Private;
-            else if (elementText == QStringLiteral("Restricted"))
+            } else if (elementText == QStringLiteral("Restricted")) {
                 scope = AlertEntry::Scope::Restricted;
-            else
+            } else {
                 qWarning() << "Unknown scope field";
+            }
 
             entry->setScope(scope);
             break;
@@ -126,8 +129,9 @@ AlertInfo CAPParser::parseInfo()
                 switch (infoTags[m_xml.name().toString()]) {
                 case InfoTags::CATEGORY: {
                     auto s = m_xml.readElementText();
-                    if (categoryMap.count(s))
+                    if (categoryMap.count(s)) {
                         info.addCategory(categoryMap[s]);
+                    }
                     break;
                 }
                 case InfoTags::EVENT:
@@ -163,26 +167,30 @@ AlertInfo CAPParser::parseInfo()
                 case InfoTags::PARAMETER: {
                     std::pair<QString, QString> p;
                     m_xml.readNextStartElement();
-                    if (m_xml.name() == QStringLiteral("valueName"))
+                    if (m_xml.name() == QStringLiteral("valueName")) {
                         p.first = m_xml.readElementText();
+                    }
                     m_xml.readNextStartElement();
-                    if (m_xml.name() == QStringLiteral("value"))
+                    if (m_xml.name() == QStringLiteral("value")) {
                         p.second = m_xml.readElementText();
+                    }
                     info.addParameter(p);
                     break;
                 }
                 case InfoTags::AREA: {
                     while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
-                        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement())
+                        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
                             info.setAreaDesc(m_xml.readElementText());
-                        else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
+                        } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
                             std::pair<QString, QString> p;
                             m_xml.readNextStartElement();
-                            if (m_xml.name() == QStringLiteral("valueName"))
+                            if (m_xml.name() == QStringLiteral("valueName")) {
                                 p.first = m_xml.readElementText();
+                            }
                             m_xml.readNextStartElement();
-                            if (m_xml.name() == QStringLiteral("value"))
+                            if (m_xml.name() == QStringLiteral("value")) {
                                 p.second = m_xml.readElementText();
+                            }
                             info.addAreaCode(p);
                         } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
                             info.addPolygon(self()->stringToPolygon(m_xml.readElementText()));
@@ -200,8 +208,9 @@ AlertInfo CAPParser::parseInfo()
                     break;
                 }
             } else {
-                if (m_xml.isStartElement())
+                if (m_xml.isStartElement()) {
                     qWarning() << "unlnown element: " << m_xml.name();
+                }
             }
         }
     }

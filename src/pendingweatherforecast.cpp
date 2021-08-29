@@ -88,8 +88,9 @@ void PendingWeatherForecastPrivate::parseSunriseResults()
     hasSunrise = true;
 
     // if this arrived later than forecast
-    if (!hourlyForecast.empty())
+    if (!hourlyForecast.empty()) {
         applySunriseToForecast();
+    }
 }
 void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *reply)
 {
@@ -116,8 +117,9 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
         }
     }
 
-    if (hasTimezone && hasSunrise)
+    if (hasTimezone && hasSunrise) {
         applySunriseToForecast();
+    }
     // Q_EMIT finished();
 }
 
@@ -151,8 +153,9 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
     QJsonObject data = obj[QStringLiteral("data")].toObject();
     QJsonObject instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
     // ignore last forecast, which does not have enough data
-    if (!data.contains(QStringLiteral("next_6_hours")) && !data.contains(QStringLiteral("next_1_hours")))
+    if (!data.contains(QStringLiteral("next_6_hours")) && !data.contains(QStringLiteral("next_1_hours"))) {
         return;
+    }
 
     // get symbolCode and precipitation amount
     QString symbolCode;
@@ -230,8 +233,9 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
     if (file.open(QIODevice::WriteOnly)) {
         file.write(QJsonDocument(forecast.toJson()).toJson(QJsonDocument::Compact));
-    } else
+    } else {
         qWarning() << "write to cache failed";
+    }
 }
 
 PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QUrl &url, const QString &timezone, const std::vector<Sunrise> &sunrise)

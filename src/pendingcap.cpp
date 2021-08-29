@@ -47,8 +47,9 @@ void PendingCAPPrivate::parseCAP(QNetworkReply *reply)
 }
 std::unique_ptr<AlertEntry> PendingCAP::value() const
 {
-    if (d->data.isEmpty())
+    if (d->data.isEmpty()) {
         return {};
+    }
 
     CAPParser parser(d->data);
     return parser.parse();

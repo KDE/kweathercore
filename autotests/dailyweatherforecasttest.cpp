@@ -37,8 +37,9 @@ void DailyForecastTest::testHourlyMerge()
 void DailyForecastTest::testDailyMerge()
 {
     const auto &vec = d1.hourlyWeatherForecast();
-    for (auto &h : vec)
+    for (auto &h : vec) {
         d2 += h;
+    }
 
     QCOMPARE(d2.hourlyWeatherForecast().size(), d1.hourlyWeatherForecast().size());
 }

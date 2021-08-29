@@ -10,9 +10,10 @@ void GeoTimezoneTest::testTimezone()
     // waiting for finished signal for 10 secs
     auto ret = finished_spy.wait(10000);
 
-    if (ret)
+    if (ret) {
         QCOMPARE(finished_spy.takeFirst().at(0).toString(), QStringLiteral("Asia/Oral"));
-    else
+    } else {
         QVERIFY(networkError_spy.size() > 0);
+    }
 }
 QTEST_MAIN(GeoTimezoneTest)
