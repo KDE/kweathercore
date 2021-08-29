@@ -148,7 +148,8 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
 
     /*================== actual code ======================*/
 
-    QJsonObject data = obj[QStringLiteral("data")].toObject(), instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
+    QJsonObject data = obj[QStringLiteral("data")].toObject();
+    QJsonObject instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
     // ignore last forecast, which does not have enough data
     if (!data.contains(QStringLiteral("next_6_hours")) && !data.contains(QStringLiteral("next_1_hours")))
         return;
