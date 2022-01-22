@@ -35,7 +35,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWEATHERCORE
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5KWeatherCoreConfigVersion.cmake"
                         SOVERSION 5)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
 find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
 
 
@@ -92,7 +92,7 @@ install(EXPORT KF5KWeatherCoreTargets
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kweathercore_version.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel
 )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
