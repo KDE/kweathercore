@@ -7,6 +7,10 @@
 
 #include "kweathercore_p.h"
 
+#include <KLazyLocalizedString>
+
+#include <cstring>
+
 namespace KWeatherCore
 {
 KWeatherCorePrivate::KWeatherCorePrivate(QObject *parent)
@@ -166,9 +170,157 @@ int KWeatherCorePrivate::weatherIconPriorityRank(const QString &icon)
     return WEATHER_ICON_PRIORITY_RANK[icon];
 }
 
+// https://api.met.no/weatherapi/weathericon/2.0/legends
+// ### needs to be alphabetically sorted by key!
+struct {
+    const char *key;
+    const char *icon;
+    const KLazyLocalizedString desc;
+} static constexpr const WEATHER_API_DESC_MAP[] = {
+    {"clearsky_day", "weather-clear", kli18n("Clear")},
+    {"clearsky_neutral", "weather-clear", kli18n("Clear")},
+    {"clearsky_night", "weather-clear-night", kli18n("Clear")},
+    {"cloudy_day", "weather-clouds", kli18n("Cloudy")},
+    {"cloudy_neutral", "weather-clouds", kli18n("Cloudy")},
+    {"cloudy_night", "weather-clouds-night", kli18n("Cloudy")},
+    {"fair_day", "weather-few-clouds", kli18n("Partly Sunny")},
+    {"fair_neutral", "weather-few-clouds", kli18n("Light Clouds")},
+    {"fair_night", "weather-few-clouds-night", kli18n("Light Clouds")},
+    {"fog_day", "weather-fog", kli18n("Fog")},
+    {"fog_neutral", "weather-fog", kli18n("Fog")},
+    {"fog_night", "weather-fog", kli18n("Fog")},
+
+    {"heavyrain_day", "weather-showers-day", kli18n("Heavy Rain")},
+    {"heavyrain_neutral", "weather-showers", kli18n("Heavy Rain")},
+    {"heavyrain_night", "weather-showers-night", kli18n("Heavy Rain")},
+    {"heavyrainandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"heavyrainandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"heavyrainandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"heavyrainshowers_day", "weather-showers-day", kli18n("Heavy Rain")},
+    {"heavyrainshowers_neutral", "weather-showers", kli18n("Heavy Rain")},
+    {"heavyrainshowers_night", "weather-showers-night", kli18n("Heavy Rain")},
+    {"heavyrainshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"heavyrainshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"heavyrainshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"heavysleet_day", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleet_neutral", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleet_night", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleetandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"heavysleetandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"heavysleetandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"heavysleetshowers_day", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleetshowers_neutral", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleetshowers_night", "weather-freezing-rain", kli18n("Heavy Sleet")},
+    {"heavysleetshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"heavysleetshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"heavysleetshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"heavysnow_day", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnow_neutral", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnow_night", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnowshowers_day", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnowshowers_neutral", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnowshowers_night", "weather-snow", kli18n("Heavy Snow")},
+    {"heavysnowshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"heavysnowshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"heavysnowshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"lightrain_day", "weather-showers-scattered-day", kli18n("Light Rain")},
+    {"lightrain_neutral", "weather-showers-scattered", kli18n("Light Rain")},
+    {"lightrain_night", "weather-showers-scattered-night", kli18n("Light Rain")},
+    {"lightrainandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightrainandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightrainandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"lightrainshowers_day", "weather-showers-scattered-day", kli18n("Light Rain")},
+    {"lightrainshowers_neutral", "weather-showers-scattered", kli18n("Light Rain")},
+    {"lightrainshowers_night", "weather-showers-scattered-night", kli18n("Light Rain")},
+    {"lightrainshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightrainshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightrainshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"lightsleet_day", "weather-showers-scattered-day", kli18n("Light Sleet")},
+    {"lightsleet_neutral", "weather-showers-scattered", kli18n("Light Sleet")},
+    {"lightsleet_night", "weather-showers-scattered-night", kli18n("Light Sleet")},
+    {"lightsleetandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightsleetandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightsleetandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"lightsleetshowers_day", "weather-showers-scattered-day", kli18n("Light Sleet")},
+    {"lightsleetshowers_neutral", "weather-showers-scattered", kli18n("Light Sleet")},
+    {"lightsleetshowers_night", "weather-showers-scattered-night", kli18n("Light Sleet")},
+
+    {"lightsnow_day", "weather-snow-scattered-day", kli18n("Light Snow")},
+    {"lightsnow_neutral", "weather-snow-scattered", kli18n("Light Snow")},
+    {"lightsnow_night", "weather-snow-scattered-night", kli18n("Light Snow")},
+    {"lightsnowandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightsnowandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightsnowandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"lightsnowshowers_day", "weather-snow-scattered-day", kli18n("Light Snow")},
+    {"lightsnowshowers_neutral", "weather-snow-scattered", kli18n("Light Snow")},
+    {"lightsnowshowers_night", "weather-snow-scattered-night", kli18n("Light Snow")},
+
+    {"lightssleetshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightssleetshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightssleetshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"lightssnowshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"lightssnowshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"lightssnowshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"partlycloudy_day", "weather-clouds", kli18n("Partly Cloudy")},
+    {"partlycloudy_neutral", "weather-clouds", kli18n("Partly Cloudy")},
+    {"partlycloudy_night", "weather-clouds-night", kli18n("Partly Cloudy")},
+
+    {"rain_day", "weather-showers-day", kli18n("Rain")},
+    {"rain_neutral", "weather-showers", kli18n("Rain")},
+    {"rain_night", "weather-showers-night", kli18n("Rain")},
+    {"rainandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"rainandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"rainandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"rainshowers_day", "weather-showers-day", kli18n("Rain")},
+    {"rainshowers_neutral", "weather-showers", kli18n("Rain")},
+    {"rainshowers_night", "weather-showers-night", kli18n("Rain")},
+    {"rainshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"rainshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"rainshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"sleet_day", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleet_neutral", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleet_night", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleetandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"sleetandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"sleetandthunder_night", "weather-storm-night", kli18n("Storm")},
+    {"sleetshowers_day", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleetshowers_neutral", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleetshowers_night", "weather-freezing-rain", kli18n("Sleet")},
+    {"sleetshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"sleetshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"sleetshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+
+    {"snow_day", "weather-snow", kli18n("Snow")},
+    {"snow_neutral", "weather-snow", kli18n("Snow")},
+    {"snow_night", "weather-snow", kli18n("Snow")},
+    {"snowandthunder_day", "weather-snow", kli18n("Snow")},
+    {"snowandthunder_neutral", "weather-snow", kli18n("Snow")},
+    {"snowandthunder_night", "weather-snow", kli18n("Snow")},
+    {"snowshowers_day", "weather-snow", kli18n("Snow")},
+    {"snowshowers_neutral", "weather-snow", kli18n("Snow")},
+    {"snowshowers_night", "weather-snow", kli18n("Snow")},
+    {"snowshowersandthunder_day", "weather-storm-day", kli18n("Storm")},
+    {"snowshowersandthunder_neutral", "weather-storm", kli18n("Storm")},
+    {"snowshowersandthunder_night", "weather-storm-night", kli18n("Storm")},
+};
+
 ResolvedWeatherDesc KWeatherCorePrivate::resolveAPIWeatherDesc(const QString &desc)
 {
-    return WEATHER_API_DESC_MAP[desc];
+    const auto key = desc.toUtf8();
+    const auto it = std::lower_bound(std::begin(WEATHER_API_DESC_MAP), std::end(WEATHER_API_DESC_MAP), key, [](const auto &lhs, const auto &rhs) {
+        return std::strcmp(lhs.key, rhs.constData()) < 0;
+    });
+    if (it != std::end(WEATHER_API_DESC_MAP) && std::strcmp((*it).key, key.constData()) == 0) {
+        return ResolvedWeatherDesc(QLatin1String((*it).icon), (*it).desc.toString());
+    }
+
+    return {};
 }
 
 }

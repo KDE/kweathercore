@@ -175,7 +175,7 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
     symbolCode = symbolCode.split(QLatin1Char('_'))[0]; // trim _[day/night] from end -
                                                         // https://api.met.no/weatherapi/weathericon/2.0/legends
     HourlyWeatherForecast hourForecast(QDateTime::fromString(obj.value(QStringLiteral("time")).toString(), Qt::ISODate));
-    hourForecast.setNeutralWeatherIcon(self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
+    hourForecast.setNeutralWeatherIcon(KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
     hourForecast.setTemperature(instant[QStringLiteral("air_temperature")].toDouble());
     hourForecast.setPressure(instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
     hourForecast.setWindDirection(getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()));
@@ -205,13 +205,13 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     };
 
     auto getSymbolCodeDescription = [](bool isDay, const QString &symbolCode) {
-        return isDay ? self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).desc
-                     : self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).desc;
+        return isDay ? KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).desc
+                     : KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).desc;
     };
 
     auto getSymbolCodeIcon = [](bool isDay, const QString &symbolCode) {
-        return isDay ? self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).icon
-                     : self()->resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).icon;
+        return isDay ? KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).icon
+                     : KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).icon;
     };
 
     // ******* code ******** //

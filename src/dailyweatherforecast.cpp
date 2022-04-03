@@ -229,7 +229,7 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
     if (date().daysTo(forecast.date().date()) == 0) {
         // set description and icon if it is higher ranked
         if (self()->weatherIconPriorityRank(forecast.neutralWeatherIcon()) >= self()->weatherIconPriorityRank(weatherIcon())) {
-            setWeatherDescription(self()->resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral")).desc);
+            setWeatherDescription(KWeatherCorePrivate::resolveAPIWeatherDesc(forecast.symbolCode() + QStringLiteral("_neutral")).desc);
             setWeatherIcon(forecast.neutralWeatherIcon());
         }
         setPrecipitation(precipitation() + forecast.precipitationAmount());
