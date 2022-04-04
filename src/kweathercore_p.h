@@ -55,26 +55,8 @@ public:
     QString severityToString(AlertInfo::Severity severity);
     QString certaintyToString(AlertInfo::Certainty certainty);
 
-    int weatherIconPriorityRank(const QString &icon);
+    static int weatherIconPriorityRank(const QString &icon);
     static ResolvedWeatherDesc resolveAPIWeatherDesc(const QString &desc);
-
-    // rank weather (for what best describes the day overall)
-    const QHash<QString, int> WEATHER_ICON_PRIORITY_RANK = {// only need neutral icons
-                                                            {QStringLiteral("weather-none-available"), -1},
-                                                            {QStringLiteral("weather-clear"), 0},
-                                                            {QStringLiteral("weather-few-clouds"), 1},
-                                                            {QStringLiteral("weather-clouds"), 2},
-                                                            {QStringLiteral("weather-fog"), 3},
-                                                            {QStringLiteral("weather-mist"), 3},
-                                                            {QStringLiteral("weather-showers-scattered"), 4},
-                                                            {QStringLiteral("weather-snow-scattered"), 4},
-                                                            {QStringLiteral("weather-showers"), 5},
-                                                            {QStringLiteral("weather-hail"), 5},
-                                                            {QStringLiteral("weather-snow"), 5},
-                                                            {QStringLiteral("weather-freezing-rain"), 6},
-                                                            {QStringLiteral("weather-freezing-storm"), 6},
-                                                            {QStringLiteral("weather-snow-rain"), 6},
-                                                            {QStringLiteral("weather-storm"), 7}};
 
     // Parameters supported by different CAP providers. Key is the country shorthand
     const QMap<QString, QVector<QString>> CAP_PARAMS = {{QStringLiteral("NOR"),

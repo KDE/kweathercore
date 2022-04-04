@@ -165,9 +165,40 @@ QString KWeatherCorePrivate::certaintyToString(AlertInfo::Certainty certainty)
     return res;
 }
 
+// rank weather (for what best describes the day overall)
+// only need neutral icons
+// ### needs to be alphabetically sorted by icon name!
+struct {
+    const char *iconName;
+    int rank;
+} static constexpr const WEATHER_ICON_PRIORITY_RANK[] = {
+    {"weather-clear", 0},
+    {"weather-clouds", 2},
+    {"weather-few-clouds", 1},
+    {"weather-fog", 3},
+    {"weather-freezing-rain", 6},
+    {"weather-freezing-storm", 6},
+    {"weather-hail", 5},
+    {"weather-mist", 3},
+    {"weather-none-available", -1},
+    {"weather-showers", 5},
+    {"weather-showers-scattered", 4},
+    {"weather-snow", 5},
+    {"weather-snow-rain", 6},
+    {"weather-snow-scattered", 4},
+    {"weather-storm", 7},
+};
+
 int KWeatherCorePrivate::weatherIconPriorityRank(const QString &icon)
 {
-    return WEATHER_ICON_PRIORITY_RANK[icon];
+    const auto it = std::lower_bound(std::begin(WEATHER_ICON_PRIORITY_RANK), std::end(WEATHER_ICON_PRIORITY_RANK), icon, [](const auto &lhs, const auto &rhs) {
+        return QLatin1String(lhs.iconName) < rhs;
+    });
+    if (it != std::end(WEATHER_ICON_PRIORITY_RANK) && QLatin1String((*it).iconName) == icon) {
+        return (*it).rank;
+    }
+
+    return 0;
 }
 
 // https://api.met.no/weatherapi/weathericon/2.0/legends
