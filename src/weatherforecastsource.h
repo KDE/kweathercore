@@ -5,15 +5,20 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "locationqueryresult.h"
+
 #include "pendingweatherforecast.h"
-#include "weatherforecast.h"
-#include <QObject>
 #include <kweathercore/kweathercore_export.h>
-class QNetworkReply;
+
+#include <QObject>
+
+#include <memory>
+
 namespace KWeatherCore
 {
+
+class LocationQueryResult;
 class WeatherForecastSourcePrivate;
+
 /**
  * @short The WeatherForecastSource class is intened for query weather
  * information about a location
@@ -26,7 +31,9 @@ class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 {
     Q_OBJECT
 public:
-    WeatherForecastSource(QObject *parent = nullptr);
+    explicit WeatherForecastSource(QObject *parent = nullptr);
+    ~WeatherForecastSource();
+
     /**
      * requestData
      * @param latitude
@@ -47,6 +54,6 @@ public:
     PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 
 private:
-    WeatherForecastSourcePrivate *d = nullptr;
+    std::unique_ptr<WeatherForecastSourcePrivate> d;
 };
 }

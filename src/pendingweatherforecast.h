@@ -47,7 +47,7 @@ Q_SIGNALS:
     void networkError();
 
 protected:
-    friend class WeatherForecastSourcePrivate;
+    friend class WeatherForecastSource;
     explicit PendingWeatherForecast(double latitude,
                                     double longitude,
                                     const QUrl &url,

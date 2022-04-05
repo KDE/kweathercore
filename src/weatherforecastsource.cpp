@@ -4,35 +4,35 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
+
 #include "weatherforecastsource.h"
-#include "geotimezone.h"
 #include "kweathercore_p.h"
-#include "pendingweatherforecast_p.h"
+#include "locationqueryresult.h"
 #include "weatherforecast.h"
-#include <QCoreApplication>
-#include <QDir>
+
 #include <QFile>
 #include <QJsonDocument>
-#include <QNetworkReply>
 #include <QStandardPaths>
 #include <QUrlQuery>
+
 #include <algorithm>
+
 namespace KWeatherCore
 {
-class WeatherForecastSourcePrivate : public QObject
+class WeatherForecastSourcePrivate
 {
-    Q_OBJECT
 public:
-    WeatherForecastSourcePrivate(QObject *parent = nullptr);
-    PendingWeatherForecast *requestData(double latitude, double longitude);
-
-private:
 };
-WeatherForecastSourcePrivate::WeatherForecastSourcePrivate(QObject *parent)
+
+WeatherForecastSource::WeatherForecastSource(QObject *parent)
     : QObject(parent)
+    , d(new WeatherForecastSourcePrivate)
 {
 }
-PendingWeatherForecast *WeatherForecastSourcePrivate::requestData(double latitude, double longitude)
+
+WeatherForecastSource::~WeatherForecastSource() = default;
+
+PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude)
 {
     QFile cache(self()->getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
     std::vector<Sunrise> sunriseCache;
@@ -70,18 +70,9 @@ PendingWeatherForecast *WeatherForecastSourcePrivate::requestData(double latitud
 
     return new PendingWeatherForecast(latitude, longitude, url, timezone, sunriseCache);
 }
-WeatherForecastSource::WeatherForecastSource(QObject *parent)
-    : QObject(parent)
-    , d(new WeatherForecastSourcePrivate(this))
-{
-}
-PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude)
-{
-    return d->requestData(latitude, longitude);
-}
+
 PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)
 {
     return requestData(result.latitude(), result.longitude());
 }
 }
-#include "weatherforecastsource.moc"
