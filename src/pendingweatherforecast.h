@@ -6,8 +6,11 @@
  */
 #pragma once
 #include "weatherforecast.h"
-#include <QObject>
 #include <kweathercore/kweathercore_export.h>
+
+#include <QObject>
+
+#include <memory>
 
 namespace KWeatherCore
 {
@@ -24,6 +27,8 @@ class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
 {
     Q_OBJECT
 public:
+    ~PendingWeatherForecast();
+
     /**
      * value pointer to the shared weather data
      * the pointer is nullptr until finished() raised
@@ -50,12 +55,11 @@ protected:
     friend class WeatherForecastSource;
     explicit PendingWeatherForecast(double latitude,
                                     double longitude,
-                                    const QUrl &url,
                                     const QString &timezone = QString(),
                                     const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
     explicit PendingWeatherForecast(WeatherForecast data);
 
 private:
-    PendingWeatherForecastPrivate *d = nullptr;
+    std::unique_ptr<PendingWeatherForecastPrivate> d;
 };
 }

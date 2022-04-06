@@ -13,7 +13,6 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QStandardPaths>
-#include <QUrlQuery>
 
 #include <algorithm>
 
@@ -60,15 +59,7 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
         }
     }
 
-    // query weather api
-    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
-    QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), self()->toFixedString(latitude));
-    query.addQueryItem(QStringLiteral("lon"), self()->toFixedString(longitude));
-
-    url.setQuery(query);
-
-    return new PendingWeatherForecast(latitude, longitude, url, timezone, sunriseCache);
+    return new PendingWeatherForecast(latitude, longitude, timezone, sunriseCache);
 }
 
 PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)

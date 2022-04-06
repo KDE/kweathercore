@@ -4,12 +4,13 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
+
 #include "pendingweatherforecast.h"
 #include "geotimezone.h"
 #include "kweathercore_p.h"
 #include "pendingweatherforecast_p.h"
 #include "sunrisesource.h"
-#include <KLocalizedString>
+
 #include <QDir>
 #include <QFile>
 #include <QJsonArray>
@@ -18,56 +19,22 @@
 #include <QNetworkReply>
 #include <QStandardPaths>
 #include <QTimeZone>
+#include <QUrlQuery>
+
 namespace KWeatherCore
 {
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(double latitude,
-                                                             double longitude,
-                                                             const QString &timezone,
-                                                             const QUrl &url,
-                                                             const std::vector<Sunrise> &sunrise,
-                                                             PendingWeatherForecast *parent)
-    : QObject(parent)
-    , m_latitude(latitude)
-    , m_longitude(longitude)
-    , m_timezone(timezone)
-{
-    connect(this, &PendingWeatherForecastPrivate::finished, [this] {
-        this->isFinished = true;
-    });
-    connect(this, &PendingWeatherForecastPrivate::finished, parent, &PendingWeatherForecast::finished);
-    connect(this, &PendingWeatherForecastPrivate::networkError, parent, &PendingWeatherForecast::networkError);
 
-    QNetworkRequest req(url);
-    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
-
-    // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
-    connect(&m_manager, &QNetworkAccessManager::finished, this, &PendingWeatherForecastPrivate::parseWeatherForecastResults);
-    m_manager.get(req);
-
-    forecast.setCoordinate(latitude, longitude);
-
-    m_sunriseSource = new SunriseSource(latitude, longitude, m_timezone, sunrise, this);
-    if (timezone.isEmpty()) {
-        hasTimezone = false;
-        getTimezone(latitude, longitude);
-    } else {
-        hasTimezone = true;
-        forecast.setTimezone(timezone);
-        m_timezone = timezone;
-        getSunrise();
-    }
-}
-PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(WeatherForecast data)
-    : forecast(data)
-    , isFinished(true)
+PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(PendingWeatherForecast *qq)
+    : q(qq)
 {
 }
+
 void PendingWeatherForecastPrivate::getTimezone(double latitude, double longitude)
 {
-    auto timezoneSource = new GeoTimezone(latitude, longitude, this);
-    connect(timezoneSource, &GeoTimezone::finished, this, &PendingWeatherForecastPrivate::parseTimezoneResult);
+    auto timezoneSource = new GeoTimezone(latitude, longitude, q);
+    QObject::connect(timezoneSource, &GeoTimezone::finished, q, [this](const QString &tz) {
+        parseTimezoneResult(tz);
+    });
 }
 void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 {
@@ -79,7 +46,9 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
 
 void PendingWeatherForecastPrivate::getSunrise()
 {
-    connect(m_sunriseSource, &SunriseSource::finished, this, &PendingWeatherForecastPrivate::parseSunriseResults);
+    QObject::connect(m_sunriseSource, &SunriseSource::finished, q, [this]() {
+        parseSunriseResults();
+    });
     m_sunriseSource->setTimezone(m_timezone);
     m_sunriseSource->requestData();
 }
@@ -97,7 +66,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
     reply->deleteLater();
     if (reply->error()) {
         qWarning() << "network error when fetching forecast:" << reply->errorString();
-        Q_EMIT networkError();
+        Q_EMIT q->networkError();
         return;
     }
 
@@ -225,7 +194,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         forecast += std::move(hourForecast);
     }
     forecast.setSunriseForecast(m_sunriseSource->value());
-    Q_EMIT finished();
+    Q_EMIT q->finished();
 
     // save to cache
 
@@ -238,14 +207,52 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     }
 }
 
-PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QUrl &url, const QString &timezone, const std::vector<Sunrise> &sunrise)
-    : d(new PendingWeatherForecastPrivate(latitude, longitude, timezone, url, sunrise, this))
+PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QString &timezone, const std::vector<Sunrise> &sunrise)
+    : d(new PendingWeatherForecastPrivate(this))
 {
+    connect(this, &PendingWeatherForecast::finished, this, [this] {
+        d->isFinished = true;
+    });
+
+    // query weather api
+    QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
+    QUrlQuery query;
+    query.addQueryItem(QStringLiteral("lat"), self()->toFixedString(latitude));
+    query.addQueryItem(QStringLiteral("lon"), self()->toFixedString(longitude));
+    url.setQuery(query);
+    QNetworkRequest req(url);
+    req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+
+    // see §Identification on https://api.met.no/conditions_service.html
+    req.setHeader(QNetworkRequest::UserAgentHeader,
+                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
+    connect(&d->m_manager, &QNetworkAccessManager::finished, this, [this](auto *reply) {
+        d->parseWeatherForecastResults(reply);
+    });
+    d->m_manager.get(req);
+
+    d->forecast.setCoordinate(latitude, longitude);
+
+    d->m_sunriseSource = new SunriseSource(latitude, longitude, d->m_timezone, sunrise, this);
+    if (timezone.isEmpty()) {
+        d->hasTimezone = false;
+        d->getTimezone(latitude, longitude);
+    } else {
+        d->hasTimezone = true;
+        d->forecast.setTimezone(timezone);
+        d->m_timezone = timezone;
+        d->getSunrise();
+    }
 }
 PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data)
-    : d(new PendingWeatherForecastPrivate(data))
+    : d(new PendingWeatherForecastPrivate(this))
 {
+    d->forecast = data;
+    d->isFinished = true;
 }
+
+PendingWeatherForecast::~PendingWeatherForecast() = default;
+
 bool PendingWeatherForecast::isFinished() const
 {
     return d->isFinished;
