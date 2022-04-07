@@ -91,11 +91,11 @@ std::unique_ptr<AlertFeedEntry> FeedParser::parseOneEntry(QXmlStreamReader &read
         } else if (reader.name() == m_summaryMarker) {
             entry->setSummary(reader.readElementText());
         } else if (reader.name() == m_urgencyMarker) {
-            entry->setUrgency(self()->urgencyStringToEnum(reader.readElementText()));
+            entry->setUrgency(KWeatherCorePrivate::urgencyStringToEnum(reader.readElementText()));
         } else if (reader.name() == m_severityMarker) {
-            entry->setSeverity(self()->severityStringToEnum(reader.readElementText()));
+            entry->setSeverity(KWeatherCorePrivate::severityStringToEnum(reader.readElementText()));
         } else if (reader.name() == m_certaintyMarker) {
-            entry->setCertainty(self()->certaintyStringToEnum(reader.readElementText()));
+            entry->setCertainty(KWeatherCorePrivate::certaintyStringToEnum(reader.readElementText()));
         } else if (m_hasCap && reader.name() == m_capLinkElementMarker) {
             entry->setUrl(parseCapElement(reader));
         } else if (m_hasArea && reader.name() == m_areaNameMarker) {
@@ -133,7 +133,7 @@ QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 void FeedParser::parsePolygonElement(QXmlStreamReader &reader, AlertFeedEntry &entry) const
 {
     if (reader.name() == m_polygonMarker) {
-        entry.setPolygon(self()->stringToPolygon(reader.readElementText()));
+        entry.setPolygon(KWeatherCorePrivate::stringToPolygon(reader.readElementText()));
     }
 }
 }

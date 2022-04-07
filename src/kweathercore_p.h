@@ -7,16 +7,10 @@
 
 #pragma once
 
-#include <iomanip>
-#include <sstream>
-
 #include <KLocalizedString>
 
 #include <QDir>
-#include <QHash>
-#include <QStandardPaths>
 #include <QString>
-#include <QUrl>
 
 #include "alertinfo.h"
 
@@ -37,51 +31,21 @@ struct ResolvedWeatherDesc {
 
 static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
 
-class KWeatherCorePrivate : public QObject
+class KWeatherCorePrivate
 {
-    Q_OBJECT
-
 public:
-    KWeatherCorePrivate(QObject *parent = nullptr);
+    static Polygon stringToPolygon(const QString &str);
+    static QString toFixedString(double num);
+    static QDir getCacheDirectory(double latitude, double longitude);
 
-    Polygon stringToPolygon(const QString &str);
-    QString toFixedString(double num);
-    QDir getCacheDirectory(double latitude, double longitude);
-
-    AlertInfo::Urgency urgencyStringToEnum(const QString &str);
-    AlertInfo::Severity severityStringToEnum(const QString &str);
-    AlertInfo::Certainty certaintyStringToEnum(const QString &str);
-    QString urgencyToString(AlertInfo::Urgency urgency);
-    QString severityToString(AlertInfo::Severity severity);
-    QString certaintyToString(AlertInfo::Certainty certainty);
+    static AlertInfo::Urgency urgencyStringToEnum(const QString &str);
+    static AlertInfo::Severity severityStringToEnum(const QString &str);
+    static AlertInfo::Certainty certaintyStringToEnum(const QString &str);
+    static QString urgencyToString(AlertInfo::Urgency urgency);
+    static QString severityToString(AlertInfo::Severity severity);
+    static QString certaintyToString(AlertInfo::Certainty certainty);
 
     static int weatherIconPriorityRank(const QString &icon);
     static ResolvedWeatherDesc resolveAPIWeatherDesc(const QString &desc);
-
-    // Parameters supported by different CAP providers. Key is the country shorthand
-    const QMap<QString, QVector<QString>> CAP_PARAMS = {{QStringLiteral("NOR"),
-                                                         {
-                                                             QStringLiteral("county"),
-                                                             QStringLiteral("cap"),
-                                                             QStringLiteral("lang"),
-                                                             QStringLiteral("event"),
-                                                             QStringLiteral("incidentName"),
-                                                             QStringLiteral("geographicDomain"),
-                                                             QStringLiteral("municipality"),
-                                                             QStringLiteral("lat"),
-                                                             QStringLiteral("long"),
-                                                             QStringLiteral("show"),
-                                                         }}};
-
-    // URLs for CAP alerts for different countries.
-    // Country codes according to https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
-    const QMap<QString, QUrl> CAP_URLS = {{QStringLiteral("NOR"), QUrl(QStringLiteral("https://api.met.no/weatherapi/metalerts/1.1/"))}};
 };
-
-static KWeatherCorePrivate *self()
-{
-    static KWeatherCorePrivate singleton;
-    return &singleton;
-}
-
 }

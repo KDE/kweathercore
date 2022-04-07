@@ -33,7 +33,7 @@ WeatherForecastSource::~WeatherForecastSource() = default;
 
 PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude)
 {
-    QFile cache(self()->getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
+    QFile cache(KWeatherCorePrivate::getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
     std::vector<Sunrise> sunriseCache;
     QString timezone;
     // valid cache

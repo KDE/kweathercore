@@ -9,15 +9,14 @@
 
 #include <KLazyLocalizedString>
 
+#include <QStandardPaths>
+
 #include <cstring>
+#include <iomanip>
+#include <sstream>
 
 namespace KWeatherCore
 {
-KWeatherCorePrivate::KWeatherCorePrivate(QObject *parent)
-    : QObject(parent)
-{
-}
-
 Polygon KWeatherCorePrivate::stringToPolygon(const QString &str)
 {
     Polygon res;

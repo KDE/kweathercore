@@ -198,7 +198,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
     // save to cache
 
-    QFile file(self()->getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
+    QFile file(KWeatherCorePrivate::getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
         file.write(QJsonDocument(forecast.toJson()).toJson(QJsonDocument::Compact));
@@ -217,8 +217,8 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude
     // query weather api
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("lat"), self()->toFixedString(latitude));
-    query.addQueryItem(QStringLiteral("lon"), self()->toFixedString(longitude));
+    query.addQueryItem(QStringLiteral("lat"), KWeatherCorePrivate::toFixedString(latitude));
+    query.addQueryItem(QStringLiteral("lon"), KWeatherCorePrivate::toFixedString(longitude));
     url.setQuery(query);
     QNetworkRequest req(url);
     req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
