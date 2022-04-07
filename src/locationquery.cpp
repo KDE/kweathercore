@@ -41,9 +41,11 @@ LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
     , manager(new QNetworkAccessManager(this))
     , locationSource(QGeoPositionInfoSource::createDefaultSource(this))
 {
-    locationSource->stopUpdates();
+    if (locationSource) {
+        locationSource->stopUpdates();
+        connect(locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQueryPrivate::positionUpdated);
+    }
 
-    connect(locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQueryPrivate::positionUpdated);
     connect(this, &LocationQueryPrivate::queryFinished, parent, &LocationQuery::queryFinished);
     connect(this, &LocationQueryPrivate::queryError, parent, &LocationQuery::queryError);
     connect(this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
@@ -51,7 +53,9 @@ LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
 
 void LocationQueryPrivate::requestUpdate()
 {
-    locationSource->requestUpdate();
+    if (locationSource) {
+        locationSource->requestUpdate();
+    }
 }
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
