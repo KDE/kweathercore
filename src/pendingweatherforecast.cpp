@@ -16,6 +16,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QStandardPaths>
 #include <QTimeZone>
@@ -207,9 +208,14 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
     }
 }
 
-PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QString &timezone, const std::vector<Sunrise> &sunrise)
+PendingWeatherForecast::PendingWeatherForecast(double latitude,
+                                               double longitude,
+                                               const QString &timezone,
+                                               const std::vector<Sunrise> &sunrise,
+                                               QNetworkAccessManager *nam)
     : d(new PendingWeatherForecastPrivate(this))
 {
+    d->m_manager = nam;
     connect(this, &PendingWeatherForecast::finished, this, [this] {
         d->isFinished = true;
     });
@@ -226,10 +232,10 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude
     // see §Identification on https://api.met.no/conditions_service.html
     req.setHeader(QNetworkRequest::UserAgentHeader,
                   QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
-    connect(&d->m_manager, &QNetworkAccessManager::finished, this, [this](auto *reply) {
+    auto reply = d->m_manager->get(req);
+    connect(reply, &QNetworkReply::finished, this, [reply, this]() {
         d->parseWeatherForecastResults(reply);
     });
-    d->m_manager.get(req);
 
     d->forecast.setCoordinate(latitude, longitude);
 

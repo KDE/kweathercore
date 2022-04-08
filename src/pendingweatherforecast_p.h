@@ -1,8 +1,9 @@
 #pragma once
 #include "weatherforecast.h"
-#include <QNetworkAccessManager>
 #include <QObject>
+
 class QNetworkReply;
+class QNetworkAccessManager;
 namespace KWeatherCore
 {
 class SunriseSource;
@@ -34,6 +35,6 @@ public:
     SunriseSource *m_sunriseSource = nullptr;
 
     QDateTime m_expiresTime;
-    QNetworkAccessManager m_manager;
+    QNetworkAccessManager *m_manager = nullptr;
 };
 }

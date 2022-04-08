@@ -12,6 +12,8 @@
 
 #include <memory>
 
+class QNetworkAccessManager;
+
 namespace KWeatherCore
 {
 class PendingWeatherForecastPrivate;
@@ -55,8 +57,9 @@ protected:
     friend class WeatherForecastSource;
     explicit PendingWeatherForecast(double latitude,
                                     double longitude,
-                                    const QString &timezone = QString(),
-                                    const std::vector<Sunrise> &sunrise = std::vector<Sunrise>());
+                                    const QString &timezone,
+                                    const std::vector<Sunrise> &sunrise,
+                                    QNetworkAccessManager *nam);
     explicit PendingWeatherForecast(WeatherForecast data);
 
 private:

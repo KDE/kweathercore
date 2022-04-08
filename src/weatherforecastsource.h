@@ -13,6 +13,8 @@
 
 #include <memory>
 
+class QNetworkAccessManager;
+
 namespace KWeatherCore
 {
 
@@ -20,7 +22,7 @@ class LocationQueryResult;
 class WeatherForecastSourcePrivate;
 
 /**
- * @short The WeatherForecastSource class is intened for query weather
+ * @short The WeatherForecastSource class is intended for query weather
  * information about a location
  *
  * @see WeatherForecast, PendingWeatherForecast
@@ -52,6 +54,12 @@ public:
      * Check isFinished() on the returned PendingWeatherForecast
      */
     PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
+
+    /** Set the network access manager to use for network operations.
+     *  If not set, an instance is created internally.
+     *  Ownership is not transferred.
+     */
+    void setNetworkAccessManager(QNetworkAccessManager *nam);
 
 private:
     std::unique_ptr<WeatherForecastSourcePrivate> d;

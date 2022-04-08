@@ -12,6 +12,7 @@
 
 #include <QFile>
 #include <QJsonDocument>
+#include <QNetworkAccessManager>
 #include <QStandardPaths>
 
 #include <algorithm>
@@ -21,6 +22,7 @@ namespace KWeatherCore
 class WeatherForecastSourcePrivate
 {
 public:
+    QNetworkAccessManager *m_nam = nullptr;
 };
 
 WeatherForecastSource::WeatherForecastSource(QObject *parent)
@@ -59,11 +61,32 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
         }
     }
 
-    return new PendingWeatherForecast(latitude, longitude, timezone, sunriseCache);
+    if (!d->m_nam) {
+        d->m_nam = new QNetworkAccessManager(this);
+        d->m_nam->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
+        d->m_nam->setStrictTransportSecurityEnabled(true);
+        d->m_nam->enableStrictTransportSecurityStore(true,
+                                                     QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)
+                                                         + QLatin1String("/org.kde.kweathercore/hsts/"));
+    }
+
+    return new PendingWeatherForecast(latitude, longitude, timezone, sunriseCache, d->m_nam);
 }
 
 PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)
 {
     return requestData(result.latitude(), result.longitude());
+}
+
+void WeatherForecastSource::setNetworkAccessManager(QNetworkAccessManager *nam)
+{
+    if (d->m_nam == nam) {
+        return;
+    }
+
+    if (d->m_nam->parent() == this) {
+        delete d->m_nam;
+    }
+    d->m_nam = nam;
 }
 }
