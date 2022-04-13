@@ -16,47 +16,31 @@
 #include <optional>
 namespace KWeatherCore
 {
-class LocationQueryPrivate : public QObject
+class LocationQueryPrivate
 {
-    Q_OBJECT
 public:
     LocationQueryPrivate(LocationQuery *parent);
-    void requestUpdate();
-    void query(QString name, int number);
-Q_SIGNALS:
-    void located(const KWeatherCore::LocationQueryResult &);
-    void queryFinished(std::vector<LocationQueryResult> result);
-    void queryError();
-private Q_SLOTS:
     void positionUpdated(const QGeoPositionInfo &update);
     void handleQueryResult(QNetworkReply *reply);
 
-private:
+    LocationQuery *q = nullptr;
     QNetworkAccessManager *manager = nullptr;
     QGeoPositionInfoSource *locationSource = nullptr;
 };
 
 LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
-    : QObject(parent)
-    , manager(new QNetworkAccessManager(this))
-    , locationSource(QGeoPositionInfoSource::createDefaultSource(this))
+    : q(parent)
+    , manager(new QNetworkAccessManager(q))
+    , locationSource(QGeoPositionInfoSource::createDefaultSource(q))
 {
     if (locationSource) {
         locationSource->stopUpdates();
-        connect(locationSource, &QGeoPositionInfoSource::positionUpdated, this, &LocationQueryPrivate::positionUpdated);
-    }
-
-    connect(this, &LocationQueryPrivate::queryFinished, parent, &LocationQuery::queryFinished);
-    connect(this, &LocationQueryPrivate::queryError, parent, &LocationQuery::queryError);
-    connect(this, &LocationQueryPrivate::located, parent, &LocationQuery::located);
-}
-
-void LocationQueryPrivate::requestUpdate()
-{
-    if (locationSource) {
-        locationSource->requestUpdate();
+        QObject::connect(locationSource, &QGeoPositionInfoSource::positionUpdated, q, [this](const auto &pos) {
+            positionUpdated(pos);
+        });
     }
 }
+
 void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
 {
     auto lat = KWeatherCorePrivate::toFixedString(update.coordinate().latitude());
@@ -74,18 +58,18 @@ void LocationQueryPrivate::positionUpdated(const QGeoPositionInfo &update)
     qWarning() << "lat: " << lat << "lon: " << lon;
     auto reply = manager->get(req);
 
-    connect(reply, &QNetworkReply::finished, [this, update, reply] {
+    QObject::connect(reply, &QNetworkReply::finished, [this, update, reply] {
         QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
         QJsonObject root = document.object();
         auto array = root[QStringLiteral("geonames")].toArray();
         if (array.size()) {
-            Q_EMIT this->located(LocationQueryResult(update.coordinate().latitude(),
-                                                     update.coordinate().longitude(),
-                                                     array.at(0)[QStringLiteral("toponymName")].toString(),
-                                                     array.at(0)[QStringLiteral("name")].toString(),
-                                                     array.at(0)[QStringLiteral("countryCode")].toString(),
-                                                     array.at(0)[QStringLiteral("countryName")].toString(),
-                                                     QString::number(root[QStringLiteral("geonameId")].toInt())));
+            Q_EMIT q->located(LocationQueryResult(update.coordinate().latitude(),
+                                                  update.coordinate().longitude(),
+                                                  array.at(0)[QStringLiteral("toponymName")].toString(),
+                                                  array.at(0)[QStringLiteral("name")].toString(),
+                                                  array.at(0)[QStringLiteral("countryCode")].toString(),
+                                                  array.at(0)[QStringLiteral("countryName")].toString(),
+                                                  QString::number(root[QStringLiteral("geonameId")].toInt())));
         }
         reply->deleteLater();
     });
@@ -97,11 +81,6 @@ LocationQuery::LocationQuery(QObject *parent)
 }
 void LocationQuery::query(QString name, int number)
 {
-    d->query(std::move(name), number);
-}
-
-void LocationQueryPrivate::query(QString name, int number)
-{
     QUrl url(QStringLiteral("http://api.geonames.org/searchJSON"));
     QUrlQuery urlQuery;
 
@@ -110,14 +89,16 @@ void LocationQueryPrivate::query(QString name, int number)
     urlQuery.addQueryItem(QStringLiteral("username"), QStringLiteral("kweatherdev"));
     url.setQuery(urlQuery);
 
-    auto reply = manager->get(QNetworkRequest(url));
-    connect(reply, &QNetworkReply::finished, [reply, this] {
-        this->handleQueryResult(reply);
+    auto reply = d->manager->get(QNetworkRequest(url));
+    QObject::connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        d->handleQueryResult(reply);
     });
 }
 void LocationQuery::locate()
 {
-    d->requestUpdate();
+    if (d->locationSource) {
+        d->locationSource->requestUpdate();
+    }
 }
 static std::optional<QString> findSubdivision(const QJsonObject &json)
 {
@@ -137,14 +118,14 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
     auto counts = root[QStringLiteral("totalResultsCount")].toInt();
     // if no result
     if (!counts) {
-        Q_EMIT queryError();
+        Q_EMIT q->queryError();
         return;
     }
     std::vector<LocationQueryResult> retVec;
 
     // if our api calls reached daily limit
     if (root[QStringLiteral("status")].toObject()[QStringLiteral("value")].toInt() == 18) {
-        Q_EMIT queryError();
+        Q_EMIT q->queryError();
         qWarning("API calls reached daily limit");
         return;
     }
@@ -163,8 +144,6 @@ void LocationQueryPrivate::handleQueryResult(QNetworkReply *reply)
         retVec.push_back(result);
     }
 
-    Q_EMIT queryFinished(retVec);
+    Q_EMIT q->queryFinished(retVec);
 }
 }
-
-#include "locationquery.moc"
