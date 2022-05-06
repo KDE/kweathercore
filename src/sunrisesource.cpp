@@ -6,6 +6,7 @@
  */
 #include "sunrisesource.h"
 #include "kweathercore_p.h"
+#include "kweathercore_version.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -69,8 +70,7 @@ void SunriseSource::requestData()
     QNetworkRequest req(url);
 
     // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
+    req.setHeader(QNetworkRequest::UserAgentHeader, QStringLiteral("KWeatherCore/" KWEATHERCORE_VERSION_STRING " kde-frameworks-devel@kde.org"));
 
     m_manager->get(req);
 }

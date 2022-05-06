@@ -29,8 +29,6 @@ struct ResolvedWeatherDesc {
     }
 };
 
-static const QString VERSION_NUMBER = QStringLiteral("0.1.0");
-
 class KWeatherCorePrivate
 {
 public:

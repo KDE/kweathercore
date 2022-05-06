@@ -8,6 +8,7 @@
 #include "pendingweatherforecast.h"
 #include "geotimezone.h"
 #include "kweathercore_p.h"
+#include "kweathercore_version.h"
 #include "pendingweatherforecast_p.h"
 #include "sunrisesource.h"
 
@@ -230,8 +231,7 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
     req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
 
     // see §Identification on https://api.met.no/conditions_service.html
-    req.setHeader(QNetworkRequest::UserAgentHeader,
-                  QString(QStringLiteral("KWeatherCore/") + VERSION_NUMBER + QStringLiteral(" kde-frameworks-devel@kde.org")));
+    req.setHeader(QNetworkRequest::UserAgentHeader, QStringLiteral("KWeatherCore/" KWEATHERCORE_VERSION_STRING " kde-frameworks-devel@kde.org"));
     auto reply = d->m_manager->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
         d->parseWeatherForecastResults(reply);
