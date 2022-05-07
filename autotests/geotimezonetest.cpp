@@ -5,8 +5,19 @@
  */
 #include "geotimezonetest.h"
 
+#include <kweathercore/geotimezone.h>
+
+#include <QNetworkAccessManager>
+
+using namespace KWeatherCore;
+
 void GeoTimezoneTest::testTimezone()
 {
+    QNetworkAccessManager nam;
+    GeoTimezone d{&nam, 50, 50};
+    QSignalSpy finished_spy{&d, &GeoTimezone::finished};
+    QSignalSpy networkError_spy{&d, &GeoTimezone::networkErrorOccured};
+
     // waiting for finished signal for 10 secs
     auto ret = finished_spy.wait(10000);
 

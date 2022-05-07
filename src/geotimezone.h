@@ -8,7 +8,6 @@
 #pragma once
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
-class QNetworkReply;
 class QNetworkAccessManager;
 namespace KWeatherCore
 {
@@ -30,7 +29,7 @@ public:
      * @param latitude latitude for the request location
      * @param longitude longitude for the request location
      */
-    GeoTimezone(double latitude, double longitude, QObject *parent = nullptr);
+    GeoTimezone(QNetworkAccessManager *nam, double latitude, double longitude, QObject *parent = nullptr);
 
 Q_SIGNALS:
     /**
