@@ -30,11 +30,6 @@ public:
      * @return
      */
     AlertEntries value() const;
-    /**
-     * isFinished if the call has finished
-     * @return
-     */
-    bool isFinished() const;
 Q_SIGNALS:
     /**
      * signals the call has finished

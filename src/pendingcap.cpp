@@ -13,7 +13,6 @@ class PendingCAPPrivate : public QObject
     Q_OBJECT
 public:
     PendingCAPPrivate(QNetworkReply *reply = nullptr, QObject *parent = nullptr);
-    bool isFinished = false;
     QByteArray data;
 Q_SIGNALS:
     void networkError();
@@ -42,7 +41,6 @@ void PendingCAPPrivate::parseCAP(QNetworkReply *reply)
     }
 
     data = reply->readAll();
-    isFinished = true;
     Q_EMIT finished();
 }
 std::unique_ptr<AlertEntry> PendingCAP::value() const
@@ -59,10 +57,6 @@ PendingCAP::PendingCAP(QNetworkReply *reply)
 {
     connect(d, &PendingCAPPrivate::finished, this, &PendingCAP::finished);
     connect(d, &PendingCAPPrivate::networkError, this, &PendingCAP::networkError);
-}
-bool PendingCAP::isFinished() const
-{
-    return d->isFinished;
 }
 }
 #include "pendingcap.moc"

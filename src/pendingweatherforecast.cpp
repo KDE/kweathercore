@@ -255,6 +255,7 @@ PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data)
 {
     d->forecast = data;
     d->isFinished = true;
+    QMetaObject::invokeMethod(this, &PendingWeatherForecast::finished, Qt::QueuedConnection);
 }
 
 PendingWeatherForecast::~PendingWeatherForecast() = default;

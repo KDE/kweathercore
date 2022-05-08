@@ -42,7 +42,6 @@ public:
      * @param longitude
      * @return it is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak.
-     * Check isFinished() on the returned PendingWeatherForecast
      */
     PendingWeatherForecast *requestData(double latitude, double longitude);
 
@@ -51,7 +50,6 @@ public:
      * @param result
      * @return it is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak.
-     * Check isFinished() on the returned PendingWeatherForecast
      */
     PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 

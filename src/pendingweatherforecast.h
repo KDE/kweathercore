@@ -39,9 +39,9 @@ public:
     WeatherForecast value() const;
     /**
      * isFinished if the call has finished
-     * @return
+     * @deprecated No longer needed, finished() is emitted in all cases now.
      */
-    bool isFinished() const;
+    [[deprecated("no longer needed")]] bool isFinished() const;
 
 Q_SIGNALS:
     /**

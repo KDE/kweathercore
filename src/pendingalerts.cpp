@@ -13,7 +13,6 @@ class PendingAlertsPrivate : public QObject
 public:
     PendingAlertsPrivate(const QJsonDocument &config, QNetworkReply *reply = nullptr, QObject *parent = nullptr);
     AlertEntries alertEntries;
-    bool isFinished = false;
 Q_SIGNALS:
     void networkError();
     void finished();
@@ -41,7 +40,6 @@ void PendingAlertsPrivate::parseAlerts(QNetworkReply *reply)
         return;
     }
     alertEntries = parser->parse(reply->readAll());
-    isFinished = true;
     Q_EMIT finished();
 }
 PendingAlerts::PendingAlerts(const QJsonDocument &config, QNetworkReply *reply)
@@ -49,10 +47,6 @@ PendingAlerts::PendingAlerts(const QJsonDocument &config, QNetworkReply *reply)
 {
     connect(d, &PendingAlertsPrivate::finished, this, &PendingAlerts::finished);
     connect(d, &PendingAlertsPrivate::networkError, this, &PendingAlerts::networkError);
-}
-bool PendingAlerts::isFinished() const
-{
-    return d->isFinished;
 }
 AlertEntries PendingAlerts::value() const
 {
