@@ -27,7 +27,6 @@ public:
     bool isFinished = false;
     bool hasTimezone = false;
     bool hasSunrise = false;
-    double m_latitude, m_longitude;
     QString m_timezone;
 
     std::vector<HourlyWeatherForecast> hourlyForecast; // tmp hourly vector

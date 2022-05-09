@@ -200,7 +200,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 
     // save to cache
 
-    QFile file(KWeatherCorePrivate::getCacheDirectory(m_latitude, m_longitude).path() + QStringLiteral("/cache.json"));
+    QFile file(KWeatherCorePrivate::getCacheDirectory(forecast.latitude(), forecast.longitude()).path() + QStringLiteral("/cache.json"));
 
     if (file.open(QIODevice::WriteOnly)) {
         file.write(QJsonDocument(forecast.toJson()).toJson(QJsonDocument::Compact));
