@@ -79,6 +79,9 @@ LocationQuery::LocationQuery(QObject *parent)
     , d(new LocationQueryPrivate(this))
 {
 }
+
+LocationQuery::~LocationQuery() = default;
+
 void LocationQuery::query(QString name, int number)
 {
     QUrl url(QStringLiteral("http://api.geonames.org/searchJSON"));

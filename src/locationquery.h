@@ -9,6 +9,7 @@
 #include "locationqueryresult.h"
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
+#include <memory>
 class QNetworkReply;
 namespace KWeatherCore
 {
@@ -59,6 +60,7 @@ public:
      * LocationQuery
      */
     LocationQuery(QObject *parent = nullptr);
+    ~LocationQuery();
     /**
      * query query locations by name
      * @param name name of location, not necessary in English
@@ -86,6 +88,6 @@ Q_SIGNALS:
     void queryError();
 
 private:
-    LocationQueryPrivate *d = nullptr;
+    std::unique_ptr<LocationQueryPrivate> d;
 };
 }
