@@ -43,8 +43,9 @@ Q_SIGNALS:
 protected:
     friend class AlertFeedEntry;
     explicit PendingCAP(QNetworkReply *reply = nullptr);
+    ~PendingCAP();
 
 private:
-    PendingCAPPrivate *d = nullptr;
+    std::unique_ptr<PendingCAPPrivate> d;
 };
 }

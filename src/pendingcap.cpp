@@ -8,41 +8,12 @@
 #include <QNetworkReply>
 namespace KWeatherCore
 {
-class PendingCAPPrivate : public QObject
+class PendingCAPPrivate
 {
-    Q_OBJECT
 public:
-    PendingCAPPrivate(QNetworkReply *reply = nullptr, QObject *parent = nullptr);
     QByteArray data;
-Q_SIGNALS:
-    void networkError();
-    void finished();
-
-private:
-    void parseCAP(QNetworkReply *reply);
 };
-PendingCAPPrivate::PendingCAPPrivate(QNetworkReply *reply, QObject *parent)
-    : QObject(parent)
-{
-    if (reply) {
-        connect(reply, &QNetworkReply::finished, this, [this, reply] {
-            this->parseCAP(reply);
-        });
-        connect(reply, &QNetworkReply::errorOccurred, this, &PendingCAPPrivate::networkError);
-    }
-}
 
-void PendingCAPPrivate::parseCAP(QNetworkReply *reply)
-{
-    reply->deleteLater();
-    if (reply->error()) {
-        qWarning() << "network error when fetching alerts:" << reply->errorString();
-        return;
-    }
-
-    data = reply->readAll();
-    Q_EMIT finished();
-}
 std::unique_ptr<AlertEntry> PendingCAP::value() const
 {
     if (d->data.isEmpty()) {
@@ -53,10 +24,22 @@ std::unique_ptr<AlertEntry> PendingCAP::value() const
     return parser.parse();
 }
 PendingCAP::PendingCAP(QNetworkReply *reply)
-    : d(new PendingCAPPrivate(reply, this))
+    : d(new PendingCAPPrivate)
 {
-    connect(d, &PendingCAPPrivate::finished, this, &PendingCAP::finished);
-    connect(d, &PendingCAPPrivate::networkError, this, &PendingCAP::networkError);
+    if (reply) {
+        connect(reply, &QNetworkReply::finished, this, [this, reply] {
+            reply->deleteLater();
+            if (reply->error()) {
+                qWarning() << "network error when fetching alerts:" << reply->errorString();
+                return;
+            }
+
+            d->data = reply->readAll();
+            Q_EMIT finished();
+        });
+        connect(reply, &QNetworkReply::errorOccurred, this, &PendingCAP::networkError);
+    }
 }
+
+PendingCAP::~PendingCAP() = default;
 }
-#include "pendingcap.moc"

@@ -5,8 +5,10 @@
  */
 #include "feedparser.h"
 #include "kweathercore/kweathercore_export.h"
-#include <QJsonDocument>
 #include <QObject>
+#include <memory>
+
+class QJsonDocument;
 class QNetworkReply;
 namespace KWeatherCore
 {
@@ -43,8 +45,9 @@ Q_SIGNALS:
 protected:
     friend class AlertManager;
     explicit PendingAlerts(const QJsonDocument &config, QNetworkReply *reply = nullptr);
+    ~PendingAlerts();
 
 private:
-    PendingAlertsPrivate *d = nullptr;
+    std::unique_ptr<PendingAlertsPrivate> d;
 };
 }
