@@ -20,6 +20,7 @@ public:
     void parseOneElement(const QJsonObject &obj, std::vector<HourlyWeatherForecast> &hourlyForecast);
     void getTimezone(double latitude, double longitude);
     void getSunrise();
+    bool isDayTime(const QDateTime &dt) const;
     void applySunriseToForecast();
 
     WeatherForecast forecast;

@@ -34,6 +34,7 @@ PRIVATE
     Qt${QT_MAJOR_VERSION}::Network
     Qt${QT_MAJOR_VERSION}::Positioning
     KF5::I18n
+    KF5::Holidays
 )
 
 set_target_properties(KF5KWeatherCore PROPERTIES VERSION ${KWEATHERCORE_VERSION_STRING}

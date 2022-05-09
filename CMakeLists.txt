@@ -36,7 +36,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWEATHERCORE
                         SOVERSION 5)
 
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
-find_package(KF5I18n ${KF5_DEP_VERSION} REQUIRED)
+find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS I18n Holidays)
 
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kweathercore5\")

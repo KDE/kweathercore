@@ -12,6 +12,8 @@
 #include "pendingweatherforecast_p.h"
 #include "sunrisesource.h"
 
+#include <KHolidays/SunRiseSet>
+
 #include <QDir>
 #include <QFile>
 #include <QJsonArray>
@@ -159,22 +161,20 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
     hourlyForecast.push_back(std::move(hourForecast));
 }
 
+bool PendingWeatherForecastPrivate::isDayTime(const QDateTime &dt) const
+{
+    const auto sunrise = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
+    auto sunset = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunset(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
+    if (sunset < sunrise) {
+        sunset = sunset.addDays(1);
+    }
+    // 30 min threshold
+    return sunrise.addSecs(-1800) <= dt && sunset.addSecs(1800) >= dt;
+}
+
 void PendingWeatherForecastPrivate::applySunriseToForecast()
 {
     // ************* Lambda *************** //
-    auto isDayTime = [](const QDateTime &date, const std::vector<Sunrise> &sunrise) {
-        for (auto &sr : sunrise) {
-            // if on the same day
-            if (sr.sunRise().date().daysTo(date.date()) == 0 && sr.sunRise().date().day() == date.date().day()) {
-                // 30 min threshold
-                return sr.sunRise().addSecs(-1800) <= date && sr.sunSet().addSecs(1800) >= date;
-            }
-        }
-
-        // not found
-        return date.time().hour() >= 6 && date.time().hour() <= 18;
-    };
-
     auto getSymbolCodeDescription = [](bool isDay, const QString &symbolCode) {
         return isDay ? KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_day")).desc
                      : KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_night")).desc;
@@ -190,7 +190,7 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         hourForecast.setDate(hourForecast.date().toTimeZone(QTimeZone(m_timezone.toUtf8())));
 
         bool isDay;
-        isDay = isDayTime(hourForecast.date(), m_sunriseSource->value());
+        isDay = isDayTime(hourForecast.date());
         hourForecast.setWeatherIcon(getSymbolCodeIcon(isDay, hourForecast.symbolCode())); // set day/night icon
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
         forecast += std::move(hourForecast);
