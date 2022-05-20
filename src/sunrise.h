@@ -20,8 +20,9 @@ namespace KWeatherCore
  * @see SunriseSource
  *
  * @author Han Young <hanyoung@protonmail.com>
+ * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
  */
-class KWEATHERCORE_EXPORT Sunrise
+class KWEATHERCORE_DEPRECATED_EXPORT Sunrise
 {
     Q_GADGET
     Q_PROPERTY(QDateTime highMoonTime READ highMoonTime)

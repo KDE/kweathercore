@@ -18,7 +18,7 @@ namespace KWeatherCore
  *
  * This is a class to hold general weather conditions, hourly forecast and
  * sunrise in a day All QDate/DateTime are on the location's timezone
- * @see HourlyForecast, Sunrise
+ * @see HourlyForecast
  *
  * @author Han Young <hanyoung@protonmail.com>
  */
@@ -158,8 +158,9 @@ public:
     /**
      * return sunrise data
      * @return sunrise data
+     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
      */
-    const Sunrise &sunrise() const;
+    KWEATHERCORE_DEPRECATED const Sunrise &sunrise() const;
     /**
      * returns all HourlyWeathreForecast belonged to this day
      * @return all HourlyWeathreForecast belonged to this day
@@ -169,8 +170,9 @@ public:
      * set sunrise
      * @param sunrise if this object and sunrise isn't on the same day, this
      * function does nothing
+     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
      */
-    void setSunrise(Sunrise sunrise);
+    KWEATHERCORE_DEPRECATED void setSunrise(Sunrise sunrise);
     /**
      * set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day

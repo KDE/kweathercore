@@ -66,12 +66,14 @@ public:
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
     /**
      * the vector should be sorted
+     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
      */
-    void setSunriseForecast(const std::vector<Sunrise> &sunrise);
+    KWEATHERCORE_DEPRECATED void setSunriseForecast(const std::vector<Sunrise> &sunrise);
     /**
      * overloaded version
+     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
      */
-    void setSunriseForecast(std::vector<Sunrise> &&sunrise);
+    KWEATHERCORE_DEPRECATED void setSunriseForecast(std::vector<Sunrise> &&sunrise);
 
     /**
      * merge DailyWeatherForecast

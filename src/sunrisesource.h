@@ -20,8 +20,9 @@ namespace KWeatherCore
  * @see Sunrise
  *
  * @author Han Young <hanyoung@protonmail.com>
+ * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
  */
-class KWEATHERCORE_EXPORT SunriseSource : public QObject
+class KWEATHERCORE_DEPRECATED_EXPORT SunriseSource : public QObject
 {
     Q_OBJECT
 public:
