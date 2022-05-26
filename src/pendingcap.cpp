@@ -5,10 +5,13 @@
  */
 #include "pendingcap.h"
 #include "capparser.h"
+#include "reply_p.h"
+
 #include <QNetworkReply>
+
 namespace KWeatherCore
 {
-class PendingCAPPrivate
+class PendingCAPPrivate : public ReplyPrivate
 {
 public:
     QByteArray data;
@@ -16,6 +19,7 @@ public:
 
 std::unique_ptr<AlertEntry> PendingCAP::value() const
 {
+    Q_D(const PendingCAP);
     if (d->data.isEmpty()) {
         return {};
     }
@@ -23,22 +27,20 @@ std::unique_ptr<AlertEntry> PendingCAP::value() const
     CAPParser parser(d->data);
     return parser.parse();
 }
-PendingCAP::PendingCAP(QNetworkReply *reply)
-    : d(new PendingCAPPrivate)
+PendingCAP::PendingCAP(QNetworkReply *reply, QObject *parent)
+    : Reply(new PendingCAPPrivate, parent)
 {
-    if (reply) {
-        connect(reply, &QNetworkReply::finished, this, [this, reply] {
-            reply->deleteLater();
-            if (reply->error()) {
-                qWarning() << "network error when fetching alerts:" << reply->errorString();
-                return;
-            }
-
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        Q_D(PendingCAP);
+        reply->deleteLater();
+        if (reply->error() != QNetworkReply::NoError) {
+            qWarning() << "network error when fetching alerts:" << reply->errorString();
+            d->setError(PendingCAP::NetworkError, reply->errorString());
+        } else {
             d->data = reply->readAll();
-            Q_EMIT finished();
-        });
-        connect(reply, &QNetworkReply::errorOccurred, this, &PendingCAP::networkError);
-    }
+        }
+        Q_EMIT finished();
+    });
 }
 
 PendingCAP::~PendingCAP() = default;
