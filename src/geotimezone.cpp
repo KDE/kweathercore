@@ -6,16 +6,26 @@
  */
 
 #include "geotimezone.h"
+#include "reply_p.h"
+
 #include <QJsonDocument>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QUrlQuery>
+
 namespace KWeatherCore
 {
-GeoTimezone::GeoTimezone(QNetworkAccessManager *nam, double lat, double lon, QObject *parent)
-    : QObject(parent)
+class GeoTimezonePrivate : public ReplyPrivate
 {
+public:
+    QString m_timezone;
+};
+
+GeoTimezone::GeoTimezone(QNetworkAccessManager *nam, double lat, double lon, QObject *parent)
+    : Reply(new GeoTimezonePrivate, parent)
+{
+    Q_D(GeoTimezone);
     QUrl url(QStringLiteral("http://api.geonames.org/timezoneJSON"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(lat));
@@ -26,19 +36,27 @@ GeoTimezone::GeoTimezone(QNetworkAccessManager *nam, double lat, double lon, QOb
     QNetworkRequest req(url);
     auto reply = nam->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        Q_D(GeoTimezone);
         reply->deleteLater();
-        if (reply->error()) {
-            Q_EMIT networkErrorOccured();
-            return;
+        if (reply->error() != QNetworkReply::NoError) {
+            d->setError(Reply::NetworkError, reply->errorString());
+        } else {
+            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+            // if our api calls reached daily limit
+            if (doc[QStringLiteral("status")][QStringLiteral("value")].toInt() == 18) {
+                d->setError(Reply::RateLimitExceeded);
+                qWarning() << "api calls reached daily limit";
+            } else {
+                d->m_timezone = doc[QStringLiteral("timezoneId")].toString();
+            }
         }
-
-        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-        // if our api calls reached daily limit
-        if (doc[QStringLiteral("status")][QStringLiteral("value")].toInt() == 18) {
-            qWarning() << "api calls reached daily limit";
-            return;
-        }
-        Q_EMIT finished(doc[QStringLiteral("timezoneId")].toString());
+        Q_EMIT finished();
     });
+}
+
+QString GeoTimezone::timezone() const
+{
+    Q_D(const GeoTimezone);
+    return d->m_timezone;
 }
 }

@@ -6,8 +6,9 @@
  */
 
 #pragma once
-#include <QObject>
-#include <kweathercore/kweathercore_export.h>
+
+#include "reply.h"
+
 class QNetworkAccessManager;
 namespace KWeatherCore
 {
@@ -20,7 +21,7 @@ class GeoTimezonePrivate;
  *
  * @author Han Young <hanyoung@protonmail.com>
  */
-class KWEATHERCORE_EXPORT GeoTimezone : public QObject
+class KWEATHERCORE_EXPORT GeoTimezone : public Reply
 {
     Q_OBJECT
 public:
@@ -31,18 +32,10 @@ public:
      */
     GeoTimezone(QNetworkAccessManager *nam, double latitude, double longitude, QObject *parent = nullptr);
 
-Q_SIGNALS:
-    /**
-     * finished emit when the timezone has been obtained
-     * @param timezone IANA timezone string
-     */
-    void finished(const QString &timezone);
-    /**
-     * networkError encounted network error
-     */
-    void networkErrorOccured();
+    /** The result IANA timezone string. */
+    QString timezone() const;
 
 private:
-    GeoTimezonePrivate *d;
+    Q_DECLARE_PRIVATE(GeoTimezone)
 };
 }

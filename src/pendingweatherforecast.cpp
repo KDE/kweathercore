@@ -36,8 +36,9 @@ PendingWeatherForecastPrivate::PendingWeatherForecastPrivate(PendingWeatherForec
 void PendingWeatherForecastPrivate::getTimezone(double latitude, double longitude)
 {
     auto timezoneSource = new GeoTimezone(m_manager, latitude, longitude, q);
-    QObject::connect(timezoneSource, &GeoTimezone::finished, q, [this](const QString &tz) {
-        parseTimezoneResult(tz);
+    QObject::connect(timezoneSource, &GeoTimezone::finished, q, [this, timezoneSource]() {
+        timezoneSource->deleteLater();
+        parseTimezoneResult(timezoneSource->timezone());
     });
 }
 void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
