@@ -17,7 +17,9 @@ set(kweathercore_LIB_SRCS
     feedparser.cpp
     pendingalerts.cpp
     pendingcap.cpp
-    capparser.cpp)
+    capparser.cpp
+    reply.cpp
+)
 
 
 add_library(KF5KWeatherCore ${kweathercore_LIB_SRCS})
@@ -60,6 +62,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     AlertManager
     PendingAlerts
     PendingCAP
+    Reply
 
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS
