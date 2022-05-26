@@ -1,6 +1,6 @@
 #pragma once
+#include "reply_p.h"
 #include "weatherforecast.h"
-#include <QObject>
 
 class QNetworkReply;
 class QNetworkAccessManager;
@@ -8,7 +8,7 @@ namespace KWeatherCore
 {
 class SunriseSource;
 class PendingWeatherForecast;
-class PendingWeatherForecastPrivate
+class PendingWeatherForecastPrivate : public ReplyPrivate
 {
 public:
     PendingWeatherForecastPrivate(PendingWeatherForecast *qq);

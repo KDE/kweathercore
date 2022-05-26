@@ -3,24 +3,33 @@
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
-#include "pendingweatherforecasttest.h"
 
-void PendingWeatherForecastTest::initTestCase()
+#include <kweathercore/weatherforecastsource.h>
+
+#include <QSignalSpy>
+#include <QTest>
+
+using namespace KWeatherCore;
+
+class PendingWeatherForecastTest : public QObject
 {
-    p = d.requestData(50, 50);
-
-    finished_spy = new QSignalSpy(p, &PendingWeatherForecast::finished);
-    networkError_spy = new QSignalSpy(p, &PendingWeatherForecast::networkError);
-}
-
-void PendingWeatherForecastTest::testFetch()
-{
-    auto ret = finished_spy->wait(30000);
-
-    if (ret) {
-        QVERIFY(p->value().dailyWeatherForecast().size() > 0);
-    } else {
-        QVERIFY(networkError_spy->size() > 0);
+    Q_OBJECT
+private Q_SLOTS:
+    void testFetch()
+    {
+        WeatherForecastSource d;
+        auto p = d.requestData(50, 50);
+        QSignalSpy finishedSpy(p, &PendingWeatherForecast::finished);
+        QVERIFY(finishedSpy.wait(30000));
+        if (p->error() == PendingWeatherForecast::NoError) {
+            QVERIFY(p->value().dailyWeatherForecast().size() > 0);
+        } else {
+            QVERIFY(!p->errorMessage().isEmpty());
+        }
+        delete p;
     }
-}
-QTEST_MAIN(PendingWeatherForecastTest)
+};
+
+QTEST_GUILESS_MAIN(PendingWeatherForecastTest)
+
+#include "pendingweatherforecasttest.moc"

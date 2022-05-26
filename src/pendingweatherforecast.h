@@ -5,12 +5,9 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+
+#include "reply.h"
 #include "weatherforecast.h"
-#include <kweathercore/kweathercore_export.h>
-
-#include <QObject>
-
-#include <memory>
 
 class QNetworkAccessManager;
 
@@ -25,7 +22,7 @@ class PendingWeatherForecastPrivate;
  *
  * @author Han Young <hanyoung@protonmail.com>
  */
-class KWEATHERCORE_EXPORT PendingWeatherForecast : public QObject
+class KWEATHERCORE_EXPORT PendingWeatherForecast : public Reply
 {
     Q_OBJECT
 public:
@@ -43,26 +40,15 @@ public:
      */
     [[deprecated("no longer needed")]] bool isFinished() const;
 
-Q_SIGNALS:
-    /**
-     * signals the call has finished
-     */
-    void finished();
-    /**
-     * indicate there is a network error
-     */
-    void networkError();
-
-protected:
+private:
     friend class WeatherForecastSource;
     explicit PendingWeatherForecast(double latitude,
                                     double longitude,
                                     const QString &timezone,
                                     const std::vector<Sunrise> &sunrise,
-                                    QNetworkAccessManager *nam);
-    explicit PendingWeatherForecast(WeatherForecast data);
-
-private:
-    std::unique_ptr<PendingWeatherForecastPrivate> d;
+                                    QNetworkAccessManager *nam,
+                                    QObject *parent = nullptr);
+    explicit PendingWeatherForecast(WeatherForecast data, QObject *parent = nullptr);
+    Q_DECLARE_PRIVATE(PendingWeatherForecast)
 };
 }

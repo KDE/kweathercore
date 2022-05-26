@@ -69,9 +69,10 @@ void PendingWeatherForecastPrivate::parseSunriseResults()
 void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *reply)
 {
     reply->deleteLater();
-    if (reply->error()) {
+    if (reply->error() != QNetworkReply::NoError) {
         qWarning() << "network error when fetching forecast:" << reply->errorString();
-        Q_EMIT q->networkError();
+        setError(PendingWeatherForecast::NetworkError, reply->errorString());
+        Q_EMIT q->finished();
         return;
     }
 
@@ -214,11 +215,14 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
                                                double longitude,
                                                const QString &timezone,
                                                const std::vector<Sunrise> &sunrise,
-                                               QNetworkAccessManager *nam)
-    : d(new PendingWeatherForecastPrivate(this))
+                                               QNetworkAccessManager *nam,
+                                               QObject *parent)
+    : Reply(new PendingWeatherForecastPrivate(this), parent)
 {
+    Q_D(PendingWeatherForecast);
     d->m_manager = nam;
     connect(this, &PendingWeatherForecast::finished, this, [this] {
+        Q_D(PendingWeatherForecast);
         d->isFinished = true;
     });
 
@@ -235,6 +239,7 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
     req.setHeader(QNetworkRequest::UserAgentHeader, QStringLiteral("KWeatherCore/" KWEATHERCORE_VERSION_STRING " kde-frameworks-devel@kde.org"));
     auto reply = d->m_manager->get(req);
     connect(reply, &QNetworkReply::finished, this, [reply, this]() {
+        Q_D(PendingWeatherForecast);
         d->parseWeatherForecastResults(reply);
     });
 
@@ -251,9 +256,10 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
         d->getSunrise();
     }
 }
-PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data)
-    : d(new PendingWeatherForecastPrivate(this))
+PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data, QObject *parent)
+    : Reply(new PendingWeatherForecastPrivate(this), parent)
 {
+    Q_D(PendingWeatherForecast);
     d->forecast = data;
     d->isFinished = true;
     QMetaObject::invokeMethod(this, &PendingWeatherForecast::finished, Qt::QueuedConnection);
@@ -263,11 +269,13 @@ PendingWeatherForecast::~PendingWeatherForecast() = default;
 
 bool PendingWeatherForecast::isFinished() const
 {
+    Q_D(const PendingWeatherForecast);
     return d->isFinished;
 }
 
 WeatherForecast PendingWeatherForecast::value() const
 {
+    Q_D(const PendingWeatherForecast);
     return d->forecast;
 }
 }
