@@ -1,5 +1,6 @@
 set(kweathercore_LIB_SRCS
     locationquery.cpp
+    locationqueryreply.cpp
     locationqueryresult.cpp
     weatherforecastsource.cpp
     weatherforecast.cpp
@@ -47,6 +48,7 @@ set_target_properties(KF5KWeatherCore PROPERTIES VERSION ${KWEATHERCORE_VERSION_
 ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     HEADER_NAMES
     LocationQuery
+    LocationQueryReply
     LocationQueryResult
     DailyWeatherForecast
     HourlyWeatherForecast

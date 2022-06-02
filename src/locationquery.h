@@ -13,6 +13,7 @@
 class QNetworkReply;
 namespace KWeatherCore
 {
+class LocationQueryReply;
 class LocationQueryPrivate;
 /**
  * @short Class locates current location and search locations by name
@@ -31,22 +32,26 @@ class LocationQueryPrivate;
  * LocationQuery m_locationSource;
  *
  * // find places called "Oslo"
- * m_locationSource.query("Oslo")
- * connect(m_locationSource, &LocationQuery::queryFinished,
- *      [](const std::vector<LocationQueryResult> &result)
+ * auto reply = m_locationSource.query("Oslo")
+ * connect(reply, &LocationQueryReply::finished, []()
  *          {
- *              for(auto location : result)
+ *              reply->deleteLater();
+ *              if (reply != LocationQueryReply::NoError) {
+ *                  qDebug() << "can't find this place";
+ *                  return;
+ *              }
+ *              for(auto location : reply->result())
  *              {
  *                  qDebug() << location.toponymName();
  *              }
  *          });
- * connect(m_locationSource, &LocationQuery::queryError,
- *      []{qDebug() << "can't find this place";});
  *
- * m_locationSource.locate();
- * connect(m_locationSource, &LocationQuery::located,
- *      [](const LocationQueryResult &result){qDebug() << "your coordinate: " <<
- * result.latitude() << ", " << longitude();}
+ * auto reply = m_locationSource.locate();
+ * connect(reply, &LocationQuery::finsihed, []() {
+ *    reply->deleteLater();
+ *    if (reply->error() == LocationQueryReply::NoError)
+ *      qDebug() << "your coordinate: " << reply->result.first().latitude() << ", " << reply->result().first().replylongitude();
+ * }
  * //...
  * @endcode
  *
@@ -67,25 +72,25 @@ public:
      * @param number max numbers of query returned, the actual size could be
      * less than @param number
      */
-    void query(QString name, int number = 30);
+    LocationQueryReply *query(const QString &name, int number = 30);
     /**
      * locate current location
      */
-    void locate();
+    LocationQueryReply *locate();
 Q_SIGNALS:
     /**
      * the name search has completed
      */
-    void queryFinished(std::vector<LocationQueryResult> result);
+    [[deprecated("use LocationQueryReply instead")]] void queryFinished(std::vector<LocationQueryResult> result);
     /**
      * current location has been determined
      */
-    void located(const LocationQueryResult &result);
+    [[deprecated("use LocationQueryReply instead")]] void located(const LocationQueryResult &result);
     /**
      * a error has encounted during query, network error or no result
      * found
      */
-    void queryError();
+    [[deprecated("use LocationQueryReply instead")]] void queryError();
 
 private:
     std::unique_ptr<LocationQueryPrivate> d;

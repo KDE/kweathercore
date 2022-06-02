@@ -31,6 +31,8 @@ public:
         NoError,
         NetworkError, ///< Network operation failed
         RateLimitExceeded, ///< Remote API rate limited exceeded
+        NotFound, ///< The queried information could not be found by the backend (e.g. unknown location).
+        NoService, ///< There is no service available for obtaining the requested information.
     };
 
     /** Error state of the job. */
