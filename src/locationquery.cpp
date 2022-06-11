@@ -9,13 +9,8 @@
 #include "locationqueryreply.h"
 
 #include <QGeoPositionInfoSource>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QUrlQuery>
-#include <optional>
+#include <QStandardPaths>
 
 namespace KWeatherCore
 {
@@ -24,6 +19,7 @@ class LocationQueryPrivate
 public:
     LocationQueryPrivate(LocationQuery *parent);
     void positionUpdated(const QGeoPositionInfo &update);
+    QNetworkAccessManager *networkAccessManager();
 
     LocationQuery *q = nullptr;
     QNetworkAccessManager *manager = nullptr;
@@ -32,12 +28,24 @@ public:
 
 LocationQueryPrivate::LocationQueryPrivate(LocationQuery *parent)
     : q(parent)
-    , manager(new QNetworkAccessManager(q))
     , locationSource(QGeoPositionInfoSource::createDefaultSource(q))
 {
     if (locationSource) {
         locationSource->stopUpdates();
     }
+}
+
+QNetworkAccessManager *LocationQueryPrivate::networkAccessManager()
+{
+    if (!manager) {
+        manager = new QNetworkAccessManager(q);
+        manager->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
+        manager->setStrictTransportSecurityEnabled(true);
+        manager->enableStrictTransportSecurityStore(true,
+                                                    QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)
+                                                        + QLatin1String("/org.kde.kweathercore/hsts/"));
+    }
+    return manager;
 }
 
 LocationQuery::LocationQuery(QObject *parent)
@@ -50,7 +58,7 @@ LocationQuery::~LocationQuery() = default;
 
 LocationQueryReply *LocationQuery::query(const QString &name, int number)
 {
-    auto reply = new LocationQueryReply(name, number, d->manager, this);
+    auto reply = new LocationQueryReply(name, number, d->networkAccessManager(), this);
     connect(reply, &LocationQueryReply::finished, this, [reply, this]() {
         reply->deleteLater();
         if (reply->error() != Reply::NoError) {
@@ -62,9 +70,10 @@ LocationQueryReply *LocationQuery::query(const QString &name, int number)
 
     return reply;
 }
+
 LocationQueryReply *LocationQuery::locate()
 {
-    auto reply = new LocationQueryReply(d->locationSource, d->manager, this);
+    auto reply = new LocationQueryReply(d->locationSource, d->networkAccessManager(), this);
     connect(reply, &LocationQueryReply::finished, this, [reply, this]() {
         reply->deleteLater();
         if (reply->error() == Reply::NoError && !reply->result().empty()) {
@@ -73,5 +82,17 @@ LocationQueryReply *LocationQuery::locate()
     });
 
     return reply;
+}
+
+void LocationQuery::setNetworkAccessManager(QNetworkAccessManager *nam)
+{
+    if (d->manager == nam) {
+        return;
+    }
+
+    if (d->manager->parent() == this) {
+        delete d->manager;
+    }
+    d->manager = nam;
 }
 }

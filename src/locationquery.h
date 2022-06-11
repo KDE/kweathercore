@@ -10,7 +10,9 @@
 #include <QObject>
 #include <kweathercore/kweathercore_export.h>
 #include <memory>
-class QNetworkReply;
+
+class QNetworkAccessManager;
+
 namespace KWeatherCore
 {
 class LocationQueryReply;
@@ -77,6 +79,13 @@ public:
      * locate current location
      */
     LocationQueryReply *locate();
+
+    /** Set the network access manager to use for network operations.
+     *  If not set, an instance is created internally.
+     *  Ownership is not transferred.
+     */
+    void setNetworkAccessManager(QNetworkAccessManager *nam);
+
 Q_SIGNALS:
     /**
      * the name search has completed
