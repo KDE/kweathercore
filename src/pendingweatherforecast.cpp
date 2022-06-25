@@ -165,11 +165,16 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
 
 bool PendingWeatherForecastPrivate::isDayTime(const QDateTime &dt) const
 {
-    const auto sunrise = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
+    auto sunrise = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
     auto sunset = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunset(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
-    if (sunset < sunrise) {
+
+    // sunset before sunrise means the sunset actually happens the next day
+    if (dt >= sunrise && sunset < sunrise) {
         sunset = sunset.addDays(1);
+    } else if (dt < sunrise && sunset < sunrise) {
+        sunrise = sunrise.addDays(-1);
     }
+
     // 30 min threshold
     return sunrise.addSecs(-1800) <= dt && sunset.addSecs(1800) >= dt;
 }
