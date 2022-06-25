@@ -7,6 +7,7 @@
 #include <kweathercore/weatherforecastsource.h>
 
 #include <QSignalSpy>
+#include <QStandardPaths>
 #include <QTest>
 
 using namespace KWeatherCore;
@@ -15,6 +16,11 @@ class PendingWeatherForecastTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
+    void initTestCase()
+    {
+        QStandardPaths::setTestModeEnabled(true);
+    }
+
     void testFetch()
     {
         WeatherForecastSource d;

@@ -8,6 +8,7 @@
 #include <kweathercore/locationqueryreply.h>
 
 #include <QSignalSpy>
+#include <QStandardPaths>
 #include <QTest>
 
 using namespace KWeatherCore;
@@ -16,6 +17,11 @@ class LocationQueryTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
+    void initTestCase()
+    {
+        QStandardPaths::setTestModeEnabled(true);
+    }
+
     void testLocate()
     {
         LocationQuery queryMgr;

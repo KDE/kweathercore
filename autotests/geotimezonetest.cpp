@@ -8,8 +8,14 @@
 #include <kweathercore/geotimezone.h>
 
 #include <QNetworkAccessManager>
+#include <QStandardPaths>
 
 using namespace KWeatherCore;
+
+void GeoTimezoneTest::initTestCase()
+{
+    QStandardPaths::setTestModeEnabled(true);
+}
 
 void GeoTimezoneTest::testTimezone()
 {
