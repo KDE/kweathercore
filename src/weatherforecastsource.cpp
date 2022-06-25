@@ -36,7 +36,6 @@ WeatherForecastSource::~WeatherForecastSource() = default;
 PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, double longitude)
 {
     QFile cache(KWeatherCorePrivate::getCacheDirectory(latitude, longitude).path() + QStringLiteral("/cache.json"));
-    std::vector<Sunrise> sunriseCache;
     QString timezone;
     // valid cache
     if (cache.exists() && cache.open(QIODevice::ReadOnly)) {
@@ -44,20 +43,6 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
         timezone = weatherforecast.timezone();
         if (weatherforecast.createdTime().secsTo(QDateTime::currentDateTime()) <= 3600) {
             return new PendingWeatherForecast(weatherforecast);
-        } else {
-            const auto &days = weatherforecast.dailyWeatherForecast();
-            auto it = std::lower_bound(days.begin(), days.end(), QDate::currentDate(), [](const DailyWeatherForecast &day, const QDate &date) {
-                return day.date() < date;
-            });
-
-            auto size = std::distance(it, days.end());
-            if (size) {
-                sunriseCache.reserve(size);
-                while (it != days.end()) {
-                    sunriseCache.push_back(it->sunrise());
-                    it++;
-                }
-            }
         }
     }
 
@@ -70,7 +55,7 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
                                                          + QLatin1String("/org.kde.kweathercore/hsts/"));
     }
 
-    return new PendingWeatherForecast(latitude, longitude, timezone, sunriseCache, d->m_nam);
+    return new PendingWeatherForecast(latitude, longitude, timezone, d->m_nam);
 }
 
 PendingWeatherForecast *WeatherForecastSource::requestData(const KWeatherCore::LocationQueryResult &result)

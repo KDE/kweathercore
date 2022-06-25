@@ -25,7 +25,6 @@ public:
     QString weatherDescription = QStringLiteral("Unknown");
     QDate date;
 
-    Sunrise sunrise;
     std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
 };
 DailyWeatherForecast::~DailyWeatherForecast() = default;
@@ -64,7 +63,6 @@ QJsonObject DailyWeatherForecast::toJson()
         hourlyArray.append(h.toJson());
     }
     obj[QStringLiteral("hourly")] = hourlyArray;
-    obj[QStringLiteral("sunrise")] = sunrise().toJson();
     return obj;
 }
 DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
@@ -78,7 +76,6 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(QJsonObject obj)
     ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
     ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
     ret.setWeatherDescription(obj[QStringLiteral("weatherDescription")].toString());
-    ret.setSunrise(Sunrise::fromJson(obj[QStringLiteral("sunrise")].toObject()));
     std::vector<HourlyWeatherForecast> hourlyVec;
     auto array = obj[QStringLiteral("hourly")].toArray();
     for (int i = 0; i < array.size(); i++) {
@@ -171,17 +168,9 @@ QDateTime DailyWeatherForecast::dateTime() const
 {
     return d->date.startOfDay();
 }
-const Sunrise &DailyWeatherForecast::sunrise() const
-{
-    return d->sunrise;
-}
 const std::vector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
     return d->hourlyWeatherForecast;
-}
-void DailyWeatherForecast::setSunrise(Sunrise sunrise)
-{
-    d->sunrise = std::move(sunrise);
 }
 void DailyWeatherForecast::setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
 {

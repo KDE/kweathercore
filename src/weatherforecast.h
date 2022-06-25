@@ -6,7 +6,6 @@
  */
 #pragma once
 #include "dailyweatherforecast.h"
-#include "sunrise.h"
 #include <QSharedData>
 #include <kweathercore/kweathercore_export.h>
 namespace KWeatherCore
@@ -64,16 +63,6 @@ public:
     void setTimezone(QString timezone);
     void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
-    /**
-     * the vector should be sorted
-     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
-     */
-    KWEATHERCORE_DEPRECATED void setSunriseForecast(const std::vector<Sunrise> &sunrise);
-    /**
-     * overloaded version
-     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
-     */
-    KWEATHERCORE_DEPRECATED void setSunriseForecast(std::vector<Sunrise> &&sunrise);
 
     /**
      * merge DailyWeatherForecast

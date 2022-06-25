@@ -45,7 +45,6 @@ private:
     explicit PendingWeatherForecast(double latitude,
                                     double longitude,
                                     const QString &timezone,
-                                    const std::vector<Sunrise> &sunrise,
                                     QNetworkAccessManager *nam,
                                     QObject *parent = nullptr);
     explicit PendingWeatherForecast(WeatherForecast data, QObject *parent = nullptr);

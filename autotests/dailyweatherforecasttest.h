@@ -19,7 +19,6 @@ private Q_SLOTS:
     void testHourlyMerge();
     void testDailyMerge();
     void testJson();
-    void testSunrise();
 
 private:
     DailyWeatherForecast d1;

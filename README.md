@@ -7,7 +7,6 @@ KWeatherCore provides you a highly abstracted library for things related to weat
 Features:
 * Get local weather forecast.
 * Get weather of a location by name or coordinate.
-* Get sunrise/set moonrise/set and many more informations about a location
 * Weather alerts of a country (ToDo)
 
 ### Usage Example
@@ -17,12 +16,11 @@ Features:
 ### Classes
 * [WeatherForecastSource](\ref WeatherForecastSource) Request weatherforecast by coordinates, everything will be fetched if not provided
 * [PendingWeatherForecast](\ref PendingWeatherForecast) Pending object for asynchronous data fetching
-* [SunriseSource](\ref SunriseSource) Fetch sunrise informations, used internally by [WeatherForecastSource](\ref WeatherForecastSource)
 * [LocationQuery](\ref LocationQuery) Query places by name or locate the current position
 * [GeoTimezone](\ref GeoTimezone) Class to obtain timezone via coordinate
 
 ## Services Used
-* [Norwegian Meteorological Institute](https://www.met.no/) WeatherForecast and Sunrise data
+* [Norwegian Meteorological Institute](https://www.met.no/) WeatherForecast
 * [Geonames.org](https://geonames.org) Location name search
 
 ## Links

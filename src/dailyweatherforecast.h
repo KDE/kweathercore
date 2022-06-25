@@ -6,7 +6,6 @@
  */
 #pragma once
 #include "hourlyweatherforecast.h"
-#include "sunrise.h"
 #include <QDate>
 #include <QJsonObject>
 #include <kweathercore/kweathercore_export.h>
@@ -16,8 +15,8 @@ namespace KWeatherCore
 /**
  * @short Class represents weatherforecast in a day
  *
- * This is a class to hold general weather conditions, hourly forecast and
- * sunrise in a day All QDate/DateTime are on the location's timezone
+ * This is a class to hold general weather conditions and hourly forecast
+ * in a day All QDate/DateTime are on the location's timezone
  * @see HourlyForecast
  *
  * @author Han Young <hanyoung@protonmail.com>
@@ -35,7 +34,6 @@ class KWEATHERCORE_EXPORT DailyWeatherForecast
     Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
     Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
     Q_PROPERTY(QDateTime date READ dateTime WRITE setDate)
-    Q_PROPERTY(KWeatherCore::Sunrise sunrise READ sunrise)
 public:
     /**
      * Creates a invalid DailyWeatherForecast.
@@ -156,23 +154,10 @@ public:
     const QDate &date() const;
     QDateTime dateTime() const;
     /**
-     * return sunrise data
-     * @return sunrise data
-     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
-     */
-    KWEATHERCORE_DEPRECATED const Sunrise &sunrise() const;
-    /**
      * returns all HourlyWeathreForecast belonged to this day
      * @return all HourlyWeathreForecast belonged to this day
      */
     const std::vector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
-    /**
-     * set sunrise
-     * @param sunrise if this object and sunrise isn't on the same day, this
-     * function does nothing
-     * @deprecated since 0.6 Use KHolidays::SunRiseSet and/or KHolidays::LunarPhase instead.
-     */
-    KWEATHERCORE_DEPRECATED void setSunrise(Sunrise sunrise);
     /**
      * set the hourly forecast of the day
      * @param forecast make sure they are sorted and on the same day

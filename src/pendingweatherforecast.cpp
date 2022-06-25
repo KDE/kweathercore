@@ -10,7 +10,6 @@
 #include "kweathercore_p.h"
 #include "kweathercore_version.h"
 #include "pendingweatherforecast_p.h"
-#include "sunrisesource.h"
 
 #include <KHolidays/SunRiseSet>
 
@@ -46,26 +45,11 @@ void PendingWeatherForecastPrivate::parseTimezoneResult(const QString &result)
     hasTimezone = true;
     forecast.setTimezone(result);
     m_timezone = result;
-    getSunrise();
-}
-
-void PendingWeatherForecastPrivate::getSunrise()
-{
-    QObject::connect(m_sunriseSource, &SunriseSource::finished, q, [this]() {
-        parseSunriseResults();
-    });
-    m_sunriseSource->setTimezone(m_timezone);
-    m_sunriseSource->requestData();
-}
-void PendingWeatherForecastPrivate::parseSunriseResults()
-{
-    hasSunrise = true;
-
-    // if this arrived later than forecast
     if (!hourlyForecast.empty()) {
         applySunriseToForecast();
     }
 }
+
 void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *reply)
 {
     reply->deleteLater();
@@ -92,7 +76,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
         }
     }
 
-    if (hasTimezone && hasSunrise) {
+    if (hasTimezone) {
         applySunriseToForecast();
     }
     // Q_EMIT finished();
@@ -202,7 +186,6 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
         hourForecast.setWeatherDescription(getSymbolCodeDescription(isDay, hourForecast.symbolCode()));
         forecast += std::move(hourForecast);
     }
-    forecast.setSunriseForecast(m_sunriseSource->value());
     Q_EMIT q->finished();
 
     // save to cache
@@ -219,7 +202,6 @@ void PendingWeatherForecastPrivate::applySunriseToForecast()
 PendingWeatherForecast::PendingWeatherForecast(double latitude,
                                                double longitude,
                                                const QString &timezone,
-                                               const std::vector<Sunrise> &sunrise,
                                                QNetworkAccessManager *nam,
                                                QObject *parent)
     : Reply(new PendingWeatherForecastPrivate(this), parent)
@@ -250,7 +232,6 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
 
     d->forecast.setCoordinate(latitude, longitude);
 
-    d->m_sunriseSource = new SunriseSource(latitude, longitude, d->m_timezone, sunrise, this);
     if (timezone.isEmpty()) {
         d->hasTimezone = false;
         d->getTimezone(latitude, longitude);
@@ -258,7 +239,6 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
         d->hasTimezone = true;
         d->forecast.setTimezone(timezone);
         d->m_timezone = timezone;
-        d->getSunrise();
     }
 }
 PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data, QObject *parent)

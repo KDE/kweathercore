@@ -5,7 +5,6 @@
  */
 #include "dailyweatherforecasttest.h"
 #include <kweathercore/hourlyweatherforecast.h>
-#include <kweathercore/sunrise.h>
 
 using namespace KWeatherCore;
 
@@ -48,13 +47,5 @@ void DailyForecastTest::testJson()
     auto d3 = DailyWeatherForecast::fromJson(d2.toJson());
 
     QCOMPARE(d3.toJson(), d2.toJson());
-}
-void DailyForecastTest::testSunrise()
-{
-    auto date = QDateTime::currentDateTime();
-    Sunrise s;
-    s.setSunRise(date);
-    d2.setSunrise(s);
-    QCOMPARE(d2.sunrise().sunRise(), date);
 }
 QTEST_MAIN(DailyForecastTest)

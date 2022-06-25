@@ -106,33 +106,6 @@ void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> 
 {
     d->dailyWeatherForecast = std::move(forecast);
 }
-void WeatherForecast::setSunriseForecast(const std::vector<Sunrise> &sunrise)
-{
-    int i = 0;
-    int range = sunrise.size();
-    for (auto &day : d->dailyWeatherForecast) {
-        if (i >= range) {
-            break;
-        }
-        day.setSunrise(sunrise.at(i));
-        ++i;
-    }
-}
-void WeatherForecast::setSunriseForecast(std::vector<Sunrise> &&sunrise)
-{
-    int i = 0;
-    int range = sunrise.size();
-    for (auto day : d->dailyWeatherForecast) {
-        if (i >= range) {
-            break;
-        }
-        // if on the same day, add sunrise to day
-        if (day.date().daysTo(sunrise.at(i).sunRise().date()) == 0) {
-            day.setSunrise(std::move(sunrise[i]));
-            ++i;
-        }
-    }
-}
 WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {

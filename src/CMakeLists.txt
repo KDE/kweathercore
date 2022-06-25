@@ -9,8 +9,6 @@ set(kweathercore_LIB_SRCS
     geotimezone.cpp
     kweathercore.cpp
     pendingweatherforecast.cpp
-    sunrise.cpp
-    sunrisesource.cpp
     alertinfo.cpp
     alertfeedentry.cpp
     alertentry.cpp
@@ -53,8 +51,6 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     DailyWeatherForecast
     HourlyWeatherForecast
     PendingWeatherForecast
-    Sunrise
-    SunriseSource
     WeatherForecast
     WeatherForecastSource
     GeoTimezone

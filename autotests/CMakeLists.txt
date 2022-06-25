@@ -10,8 +10,6 @@ ecm_add_tests(
     hourlyweatherforecasttest.cpp
     dailyweatherforecasttest.cpp
     weatherforecasttest.cpp
-    sunrisetest.cpp
-    sunrisesourcetest.cpp
     locationquerytest.cpp
     pendingweatherforecasttest.cpp
     LINK_LIBRARIES KF5::KWeatherCore Qt${QT_MAJOR_VERSION}::Test
