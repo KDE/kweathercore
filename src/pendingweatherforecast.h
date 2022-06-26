@@ -34,11 +34,6 @@ public:
      * @return
      */
     WeatherForecast value() const;
-    /**
-     * isFinished if the call has finished
-     * @deprecated No longer needed, finished() is emitted in all cases now.
-     */
-    [[deprecated("no longer needed")]] bool isFinished() const;
 
 private:
     friend class WeatherForecastSource;

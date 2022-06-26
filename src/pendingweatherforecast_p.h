@@ -22,7 +22,6 @@ public:
 
     WeatherForecast forecast;
     PendingWeatherForecast *q = nullptr;
-    bool isFinished = false;
     bool hasTimezone = false;
     QString m_timezone;
 

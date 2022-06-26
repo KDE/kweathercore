@@ -208,10 +208,6 @@ PendingWeatherForecast::PendingWeatherForecast(double latitude,
 {
     Q_D(PendingWeatherForecast);
     d->m_manager = nam;
-    connect(this, &PendingWeatherForecast::finished, this, [this] {
-        Q_D(PendingWeatherForecast);
-        d->isFinished = true;
-    });
 
     // query weather api
     QUrl url(QStringLiteral("https://api.met.no/weatherapi/locationforecast/2.0/complete"));
@@ -246,17 +242,10 @@ PendingWeatherForecast::PendingWeatherForecast(WeatherForecast data, QObject *pa
 {
     Q_D(PendingWeatherForecast);
     d->forecast = data;
-    d->isFinished = true;
     QMetaObject::invokeMethod(this, &PendingWeatherForecast::finished, Qt::QueuedConnection);
 }
 
 PendingWeatherForecast::~PendingWeatherForecast() = default;
-
-bool PendingWeatherForecast::isFinished() const
-{
-    Q_D(const PendingWeatherForecast);
-    return d->isFinished;
-}
 
 WeatherForecast PendingWeatherForecast::value() const
 {
