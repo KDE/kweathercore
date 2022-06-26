@@ -86,21 +86,6 @@ public:
      */
     void setNetworkAccessManager(QNetworkAccessManager *nam);
 
-Q_SIGNALS:
-    /**
-     * the name search has completed
-     */
-    [[deprecated("use LocationQueryReply instead")]] void queryFinished(std::vector<LocationQueryResult> result);
-    /**
-     * current location has been determined
-     */
-    [[deprecated("use LocationQueryReply instead")]] void located(const LocationQueryResult &result);
-    /**
-     * a error has encounted during query, network error or no result
-     * found
-     */
-    [[deprecated("use LocationQueryReply instead")]] void queryError();
-
 private:
     std::unique_ptr<LocationQueryPrivate> d;
 };

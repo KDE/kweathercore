@@ -58,30 +58,12 @@ LocationQuery::~LocationQuery() = default;
 
 LocationQueryReply *LocationQuery::query(const QString &name, int number)
 {
-    auto reply = new LocationQueryReply(name, number, d->networkAccessManager(), this);
-    connect(reply, &LocationQueryReply::finished, this, [reply, this]() {
-        reply->deleteLater();
-        if (reply->error() != Reply::NoError) {
-            Q_EMIT queryError();
-        } else {
-            Q_EMIT queryFinished(reply->result());
-        }
-    });
-
-    return reply;
+    return new LocationQueryReply(name, number, d->networkAccessManager(), this);
 }
 
 LocationQueryReply *LocationQuery::locate()
 {
-    auto reply = new LocationQueryReply(d->locationSource, d->networkAccessManager(), this);
-    connect(reply, &LocationQueryReply::finished, this, [reply, this]() {
-        reply->deleteLater();
-        if (reply->error() == Reply::NoError && !reply->result().empty()) {
-            Q_EMIT located(reply->result().front());
-        }
-    });
-
-    return reply;
+    return new LocationQueryReply(d->locationSource, d->networkAccessManager(), this);
 }
 
 void LocationQuery::setNetworkAccessManager(QNetworkAccessManager *nam)
