@@ -12,6 +12,7 @@
 #include "pendingweatherforecast_p.h"
 
 #include <KHolidays/SunRiseSet>
+#include <kholidays_version.h>
 
 #include <QDir>
 #include <QFile>
@@ -149,8 +150,18 @@ void PendingWeatherForecastPrivate::parseOneElement(const QJsonObject &obj, std:
 
 bool PendingWeatherForecastPrivate::isDayTime(const QDateTime &dt) const
 {
-    auto sunrise = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
-    auto sunset = QDateTime(dt.date(), KHolidays::SunRiseSet::utcSunset(dt.date(), forecast.latitude(), forecast.longitude()), Qt::UTC);
+    const auto sunriseTime = KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude());
+    const auto sunsetTime = KHolidays::SunRiseSet::utcSunset(dt.date(), forecast.latitude(), forecast.longitude());
+
+#if KHOLIDAYS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
+    // polar day/night: there is no sunrise/sunset
+    if (!sunriseTime.isValid() || !sunsetTime.isValid()) {
+        return KHolidays::SunRiseSet::isPolarDay(dt.date(), forecast.latitude());
+    }
+#endif
+
+    auto sunrise = QDateTime(dt.date(), sunriseTime, Qt::UTC);
+    auto sunset = QDateTime(dt.date(), sunsetTime, Qt::UTC);
 
     // sunset before sunrise means the sunset actually happens the next day
     if (dt >= sunrise && sunset < sunrise) {
