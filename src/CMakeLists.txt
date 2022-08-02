@@ -26,7 +26,7 @@ generate_export_header(KF5KWeatherCore BASE_NAME KWeatherCore EXPORT_FILE_NAME $
 add_library(KF5::KWeatherCore ALIAS KF5KWeatherCore)
 set(kweathercore_BUILD_INCLUDE_DIRS ${KWeatherCore_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(KF5KWeatherCore PUBLIC "$<BUILD_INTERFACE:${kweathercore_BUILD_INCLUDE_DIRS}>")
-target_include_directories(KF5KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore>")
+target_include_directories(KF5KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KWeatherCore>")
 
 target_link_libraries(KF5KWeatherCore
 PUBLIC
@@ -65,13 +65,13 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS
 )
-install(FILES ${KWeatherCore_CamelCase_HEADERS} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore/KWeatherCore COMPONENT Devel)
+install(FILES ${KWeatherCore_CamelCase_HEADERS} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KWeatherCore/KWeatherCore COMPONENT Devel)
 
-install(TARGETS KF5KWeatherCore EXPORT KF5KWeatherCoreTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5KWeatherCore EXPORT KF5KWeatherCoreTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/kweathercore/kweathercore_export.h
   ${KWeatherCore_HEADERS}
-  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore/kweathercore COMPONENT Devel
+  DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KWeatherCore/kweathercore COMPONENT Devel
 )
 
 if(BUILD_QCH)
@@ -103,7 +103,7 @@ ecm_generate_pri_file(
     BASE_NAME KWeatherCore
     LIB_NAME KF5KWeatherCore
     DEPS "core"
-    FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KWeatherCore
+    FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KWeatherCore
 )
 install(FILES ${PRI_FILENAME}
         DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
