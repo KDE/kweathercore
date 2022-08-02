@@ -1,0 +1,7 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: KWeatherCore
+Source: https://invent.kde.org/libraries/kweathercore
+
+Files: autotests/met.no/*
+Copyright: The Norwegian Meteorological institute
+License: CC-BY-4.0

@@ -7,6 +7,7 @@ include_directories("${CMAKE_CURRENT_BINARY_DIR}/../src")
 
 ecm_add_tests(
     capparsertest.cpp
+    metnoparsertest.cpp
     hourlyweatherforecasttest.cpp
     dailyweatherforecasttest.cpp
     weatherforecasttest.cpp

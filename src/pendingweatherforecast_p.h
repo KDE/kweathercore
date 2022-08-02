@@ -1,4 +1,5 @@
 #pragma once
+#include "metnoparser_p.h"
 #include "reply_p.h"
 #include "weatherforecast.h"
 
@@ -15,17 +16,13 @@ public:
     void parseWeatherForecastResults(QNetworkReply *ret);
     void parseTimezoneResult(const QString &timezone);
 
-    void parseOneElement(const QJsonObject &obj, std::vector<HourlyWeatherForecast> &hourlyForecast);
     void getTimezone(double latitude, double longitude);
     bool isDayTime(const QDateTime &dt) const;
-    void applySunriseToForecast();
 
-    WeatherForecast forecast;
+    MetNoParser parser;
     PendingWeatherForecast *q = nullptr;
     bool hasTimezone = false;
     QString m_timezone;
-
-    std::vector<HourlyWeatherForecast> hourlyForecast; // tmp hourly vector
 
     QDateTime m_expiresTime;
     QNetworkAccessManager *m_manager = nullptr;

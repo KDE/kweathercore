@@ -8,6 +8,7 @@ set(kweathercore_LIB_SRCS
     dailyweatherforecast.cpp
     geotimezone.cpp
     kweathercore.cpp
+    metnoparser.cpp
     pendingweatherforecast.cpp
     alertinfo.cpp
     alertfeedentry.cpp
