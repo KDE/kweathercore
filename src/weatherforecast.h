@@ -65,19 +65,7 @@ public:
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
 
     /**
-     * merge DailyWeatherForecast
-     */
-    WeatherForecast &operator+=(const DailyWeatherForecast &forecast);
-    /**
-     * overloaded version
-     */
-    WeatherForecast &operator+=(DailyWeatherForecast &&forecast);
-    /**
      * merge HourlyWeatherForecast, new day is created when required
-     */
-    WeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
-    /**
-     * overloaded version
      */
     WeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
 

@@ -106,53 +106,10 @@ void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> 
 {
     d->dailyWeatherForecast = std::move(forecast);
 }
-WeatherForecast &WeatherForecast::operator+=(const DailyWeatherForecast &forecast)
-{
-    for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
-        if (dailyWeatherForecast().at(i) == forecast) {
-            d->dailyWeatherForecast[i] += forecast;
-            return *this;
-        }
-    }
-
-    // if not find, append it at end
-    d->dailyWeatherForecast.push_back(forecast);
-    return *this;
-}
-WeatherForecast &WeatherForecast::operator+=(DailyWeatherForecast &&forecast)
-{
-    for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
-        if (dailyWeatherForecast().at(i) == forecast) {
-            d->dailyWeatherForecast[i] += forecast;
-            return *this;
-        }
-    }
-
-    // if not find, append it at end
-    d->dailyWeatherForecast.push_back(std::move(forecast));
-    return *this;
-}
-WeatherForecast &WeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
-{
-    for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
-        if (dailyWeatherForecast().at(i).date().isValid() && dailyWeatherForecast().at(i).date().daysTo(forecast.date().date()) == 0) {
-            d->dailyWeatherForecast[i] += forecast;
-            return *this;
-        } else {
-            break;
-        }
-    }
-
-    // if not find, append it at end
-    DailyWeatherForecast newDay;
-    newDay += forecast;
-    d->dailyWeatherForecast.push_back(std::move(newDay));
-    return *this;
-}
 WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
 {
     for (int i = dailyWeatherForecast().size() - 1; i >= 0; --i) {
-        if (dailyWeatherForecast().at(i).date().daysTo(forecast.date().date()) == 0) {
+        if (dailyWeatherForecast().at(i).date() == forecast.date().date()) {
             d->dailyWeatherForecast[i] += std::move(forecast);
             return *this;
         }

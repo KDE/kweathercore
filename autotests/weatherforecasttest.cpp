@@ -8,13 +8,13 @@
 #include <kweathercore/hourlyweatherforecast.h>
 void WeatherForecastTest::testHourlyMerge()
 {
-    auto date = QDateTime::currentDateTime();
+    auto date = QDateTime({2022, 8, 4}, {22, 0});
     for (int i = 0; i < 100; ++i) {
         HourlyWeatherForecast f(date.addSecs(i * 3600));
-        d1 += f;
+        d1 += std::move(f);
     }
 
-    QCOMPARE(d1.dailyWeatherForecast().size() > 0, true);
+    QCOMPARE(d1.dailyWeatherForecast().size(), 6);
 }
 
 void WeatherForecastTest::testDailyMerge()

@@ -170,19 +170,6 @@ public:
     void setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast);
 
     /**
-     * merge two daily forecast, note the hourly forecast is unchanged
-     * @param forecast make sure it is on the same day
-     * @return result DailyWeatherForecast
-     */
-    DailyWeatherForecast &operator+(const DailyWeatherForecast &forecast);
-    /**
-     * merge two daily forecast, note the hourly forecast is unchanged,
-     * daily forecast becomes valid afterwards
-     * @param forecast make sure it is on the same day
-     * @return result DailyWeatherForecast
-     */
-    DailyWeatherForecast &operator+=(const DailyWeatherForecast &forecast);
-    /**
      * append hourly forecast, you can append valid hourly forecast into
      * a invalid daily forecast, daily forecast becomes valid afterwards
      * @param forecast make sure it's on the same day

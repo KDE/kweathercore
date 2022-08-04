@@ -180,31 +180,6 @@ void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherFor
 {
     d->hourlyWeatherForecast = std::move(forecast);
 }
-DailyWeatherForecast &DailyWeatherForecast::operator+(const DailyWeatherForecast &forecast)
-{
-    if (date().isNull()) {
-        setDate(forecast.date());
-        setWeatherDescription(forecast.weatherDescription());
-        setWeatherIcon(forecast.weatherIcon());
-        d->isValid = false;
-    }
-
-    if (*this == forecast) {
-        setPrecipitation(precipitation() + forecast.precipitation());
-        setUvIndex(std::max(uvIndex(), forecast.uvIndex()));
-        setHumidity(std::max(humidity(), forecast.humidity()));
-        setPressure(std::max(pressure(), forecast.pressure()));
-        setMaxTemp(std::max(maxTemp(), forecast.maxTemp()));
-        setMinTemp(std::min(minTemp(), forecast.minTemp()));
-    }
-
-    return *this;
-}
-
-DailyWeatherForecast &DailyWeatherForecast::operator+=(const DailyWeatherForecast &forecast)
-{
-    return *this + forecast;
-}
 
 DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
 {
