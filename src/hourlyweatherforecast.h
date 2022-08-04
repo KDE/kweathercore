@@ -26,18 +26,18 @@ enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
 class KWEATHERCORE_EXPORT HourlyWeatherForecast
 {
     Q_GADGET
-    Q_PROPERTY(QDateTime date READ date WRITE setDate)
-    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
-    Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
-    Q_PROPERTY(QString neutralWeatherIcon READ neutralWeatherIcon WRITE setNeutralWeatherIcon)
-    Q_PROPERTY(QString windDirection READ windDirectionStr WRITE setWindDirectionStr)
-    Q_PROPERTY(qreal temperature READ temperature WRITE setTemperature)
-    Q_PROPERTY(qreal pressure READ pressure WRITE setPressure)
-    Q_PROPERTY(qreal windSpeed READ windSpeed WRITE setWindSpeed)
-    Q_PROPERTY(qreal humidity READ humidity WRITE setHumidity)
-    Q_PROPERTY(qreal fog READ fog WRITE setFog)
-    Q_PROPERTY(qreal uvIndex READ uvIndex WRITE setUvIndex)
-    Q_PROPERTY(qreal precipitationAmount READ precipitationAmount WRITE setPrecipitationAmount)
+    Q_PROPERTY(QDateTime date READ date)
+    Q_PROPERTY(QString weatherDescription READ weatherDescription)
+    Q_PROPERTY(QString weatherIcon READ weatherIcon)
+    Q_PROPERTY(QString neutralWeatherIcon READ neutralWeatherIcon)
+    Q_PROPERTY(QString windDirection READ windDirectionStr)
+    Q_PROPERTY(qreal temperature READ temperature)
+    Q_PROPERTY(qreal pressure READ pressure)
+    Q_PROPERTY(qreal windSpeed READ windSpeed)
+    Q_PROPERTY(qreal humidity READ humidity)
+    Q_PROPERTY(qreal fog READ fog)
+    Q_PROPERTY(qreal uvIndex READ uvIndex)
+    Q_PROPERTY(qreal precipitationAmount READ precipitationAmount)
 public:
     /**
      * HourlyWeatherForecast construct a null forecast
@@ -125,10 +125,6 @@ public:
      * set wind direction
      */
     void setWindDirection(WindDirection windDirection);
-    /**
-     * set wind direction, QString version
-     */
-    void setWindDirectionStr(const QString &windDirection);
     /**
      * wind speed in km/h
      */
