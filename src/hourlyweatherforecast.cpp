@@ -5,6 +5,9 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "hourlyweatherforecast.h"
+
+#include <cmath>
+
 namespace KWeatherCore
 {
 class HourlyWeatherForecast::HourlyWeatherForecastPrivate
@@ -18,7 +21,7 @@ public:
     QString symbolCode;
     double temperature = 0; // celsius
     double pressure = 0; // hPa
-    WindDirection windDirection = WindDirection::E;
+    double windDirection = NAN;
     double windSpeed = 0; // m/s
     double humidity = 0; // %
     double fog = 0; // %
@@ -53,7 +56,7 @@ QJsonObject HourlyWeatherForecast::toJson() const
     obj[QStringLiteral("neutralWeatherIcon")] = neutralWeatherIcon();
     obj[QStringLiteral("temperature")] = temperature();
     obj[QStringLiteral("pressure")] = pressure();
-    obj[QStringLiteral("windDirection")] = static_cast<int>(windDirection());
+    obj[QStringLiteral("windDirectionDegree")] = windDirectionDegree();
     obj[QStringLiteral("windSpeed")] = windSpeed();
     obj[QStringLiteral("humidity")] = humidity();
     obj[QStringLiteral("fog")] = fog();
@@ -69,7 +72,7 @@ HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
     ret.setNeutralWeatherIcon(obj[QStringLiteral("neutralWeatherIcon")].toString());
     ret.setTemperature(obj[QStringLiteral("temperature")].toDouble());
     ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
-    ret.setWindDirection(static_cast<WindDirection>(obj[QStringLiteral("windDirection")].toInt()));
+    ret.setWindDirectionDegree(obj[QStringLiteral("windDirectionDegree")].toDouble(NAN));
     ret.setWindSpeed(obj[QStringLiteral("windSpeed")].toDouble());
     ret.setHumidity(obj[QStringLiteral("humidity")].toDouble());
     ret.setFog(obj[QStringLiteral("fog")].toDouble());
@@ -133,36 +136,42 @@ void HourlyWeatherForecast::setPressure(double pressure)
 {
     d->pressure = pressure;
 }
-WindDirection HourlyWeatherForecast::windDirection() const
+
+double HourlyWeatherForecast::windDirectionDegree() const
 {
     return d->windDirection;
 }
-QString HourlyWeatherForecast::windDirectionStr() const
-{
-    switch (windDirection()) {
-    case WindDirection::E:
-        return QStringLiteral("E");
-    case WindDirection::N:
-        return QStringLiteral("N");
-    case WindDirection::NE:
-        return QStringLiteral("NE");
-    case WindDirection::NW:
-        return QStringLiteral("NW");
-    case WindDirection::S:
-        return QStringLiteral("S");
-    case WindDirection::SE:
-        return QStringLiteral("SE");
-    case WindDirection::SW:
-        return QStringLiteral("SW");
-    case WindDirection::W:
-        return QStringLiteral("W");
-    }
-    return QStringLiteral("E");
-}
-void HourlyWeatherForecast::setWindDirection(WindDirection windDirection)
+
+void HourlyWeatherForecast::setWindDirectionDegree(double windDirection)
 {
     d->windDirection = windDirection;
 }
+
+// sorted by degree for use with std::lower_bound
+struct {
+    float degree;
+    WindDirection direction;
+} static constexpr const cardinal_direction_map[] = {{22.5, WindDirection::N},
+                                                     {67.5, WindDirection::NE},
+                                                     {112.5, WindDirection::E},
+                                                     {157.5, WindDirection::SE},
+                                                     {202.5, WindDirection::S},
+                                                     {247.5, WindDirection::SW},
+                                                     {292.5, WindDirection::W},
+                                                     {337.5, WindDirection::NW},
+                                                     {360.0, WindDirection::N}};
+
+WindDirection HourlyWeatherForecast::windDirectionCardinal() const
+{
+    const auto it = std::lower_bound(std::begin(cardinal_direction_map), std::end(cardinal_direction_map), d->windDirection, [](const auto &entry, double deg) {
+        return entry.degree <= deg;
+    });
+    if (it != std::end(cardinal_direction_map)) {
+        return (*it).direction;
+    }
+    return {};
+}
+
 double HourlyWeatherForecast::windSpeed() const
 {
     return d->windSpeed;

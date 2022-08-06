@@ -21,7 +21,7 @@ void DailyForecastTest::testHourlyMerge()
         h.setWeatherIcon(QStringLiteral("sunny"));
         h.setTemperature(25);
         h.setPressure(100);
-        h.setWindDirection(WindDirection::E);
+        h.setWindDirectionDegree(90.0);
         h.setFog(0.2);
         h.setUvIndex(0.8);
         h.setWindSpeed(5);

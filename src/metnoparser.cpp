@@ -38,31 +38,6 @@ void MetNoParser::parseLocationForecast(const QByteArray &data)
 
 void MetNoParser::parseOneElement(const QJsonObject &obj)
 {
-    /*~~~~~~~~~~ lambda ~~~~~~~~~~~*/
-
-    auto getWindDeg = [](double deg) -> WindDirection {
-        if (deg < 22.5 || deg >= 337.5) {
-            return WindDirection::S; // from N
-        } else if (deg > 22.5 || deg <= 67.5) {
-            return WindDirection::SW; // from NE
-        } else if (deg > 67.5 || deg <= 112.5) {
-            return WindDirection::W; // from E
-        } else if (deg > 112.5 || deg <= 157.5) {
-            return WindDirection::NW; // from SE
-        } else if (deg > 157.5 || deg <= 202.5) {
-            return WindDirection::N; // from S
-        } else if (deg > 202.5 || deg <= 247.5) {
-            return WindDirection::NE; // from SW
-        } else if (deg > 247.5 || deg <= 292.5) {
-            return WindDirection::E; // from W
-        } else if (deg > 292.5 || deg <= 337.5) {
-            return WindDirection::SE; // from NW
-        }
-        return WindDirection::N;
-    };
-
-    /*================== actual code ======================*/
-
     QJsonObject data = obj[QStringLiteral("data")].toObject();
     QJsonObject instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
     // ignore last forecast, which does not have enough data
@@ -91,7 +66,7 @@ void MetNoParser::parseOneElement(const QJsonObject &obj)
     hourForecast.setNeutralWeatherIcon(KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
     hourForecast.setTemperature(instant[QStringLiteral("air_temperature")].toDouble());
     hourForecast.setPressure(instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
-    hourForecast.setWindDirection(getWindDeg(instant[QStringLiteral("wind_from_direction")].toDouble()));
+    hourForecast.setWindDirectionDegree(instant[QStringLiteral("wind_from_direction")].toDouble());
     hourForecast.setWindSpeed(instant[QStringLiteral("wind_speed")].toDouble());
     hourForecast.setHumidity(instant[QStringLiteral("relative_humidity")].toDouble());
     hourForecast.setFog(instant[QStringLiteral("fog_area_fraction")].toDouble());

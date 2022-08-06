@@ -13,7 +13,10 @@
 #include <memory>
 namespace KWeatherCore
 {
+Q_NAMESPACE_EXPORT(KWEATHERCORE_EXPORT)
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
+Q_ENUM_NS(WindDirection)
+
 /**
  * @short Class represents weatherforecast in a hour
  *
@@ -30,7 +33,8 @@ class KWEATHERCORE_EXPORT HourlyWeatherForecast
     Q_PROPERTY(QString weatherDescription READ weatherDescription)
     Q_PROPERTY(QString weatherIcon READ weatherIcon)
     Q_PROPERTY(QString neutralWeatherIcon READ neutralWeatherIcon)
-    Q_PROPERTY(QString windDirection READ windDirectionStr)
+    Q_PROPERTY(double windDirectionDegree READ windDirectionDegree)
+    Q_PROPERTY(KWeatherCore::WindDirection windDirectionCardinal READ windDirectionCardinal STORED false)
     Q_PROPERTY(qreal temperature READ temperature)
     Q_PROPERTY(qreal pressure READ pressure)
     Q_PROPERTY(qreal windSpeed READ windSpeed)
@@ -114,17 +118,23 @@ public:
      */
     void setPressure(double pressure);
     /**
-     * scoped enum
+     * Wind direction in degree.
+     * That is, the direction the wind is coming from.
+     * @see https://en.wikipedia.org/wiki/Wind_direction
+     * @see windDirectionCardinal
      */
-    WindDirection windDirection() const;
+    double windDirectionDegree() const;
     /**
-     * WindDirection in string. eg. NW
+     * Sets the wind direction in degree.
+     * @see windDirectionDegree
      */
-    QString windDirectionStr() const;
+    void setWindDirectionDegree(double windDirection);
     /**
-     * set wind direction
+     * Cardinal wind direction.
+     * That is, the cardinal direction the wind is coming from.
+     * @see windDirectionDegree
      */
-    void setWindDirection(WindDirection windDirection);
+    WindDirection windDirectionCardinal() const;
     /**
      * wind speed in km/h
      */

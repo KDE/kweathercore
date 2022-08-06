@@ -14,7 +14,7 @@
                     "uvIndex": 1.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 249.5,
                     "windSpeed": 3.1
                 },
                 {
@@ -28,7 +28,7 @@
                     "uvIndex": 0.5,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 247.3,
                     "windSpeed": 2.1
                 },
                 {
@@ -42,7 +42,7 @@
                     "uvIndex": 0.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 185.8,
                     "windSpeed": 0.7
                 },
                 {
@@ -56,7 +56,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 148,
                     "windSpeed": 1.3
                 },
                 {
@@ -70,7 +70,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 166.4,
                     "windSpeed": 1
                 },
                 {
@@ -84,7 +84,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 44.8,
                     "windSpeed": 0.9
                 }
             ],
@@ -111,7 +111,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 79.7,
                     "windSpeed": 0.6
                 },
                 {
@@ -125,7 +125,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 171.4,
                     "windSpeed": 0.5
                 },
                 {
@@ -139,7 +139,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 180.8,
                     "windSpeed": 1.3
                 },
                 {
@@ -153,7 +153,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 174.7,
                     "windSpeed": 1.6
                 },
                 {
@@ -167,7 +167,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 184.6,
                     "windSpeed": 1.4
                 },
                 {
@@ -181,7 +181,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 189.7,
                     "windSpeed": 1.8
                 },
                 {
@@ -195,7 +195,7 @@
                     "uvIndex": 0.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 195.5,
                     "windSpeed": 2.1
                 },
                 {
@@ -209,7 +209,7 @@
                     "uvIndex": 0.3,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 188,
                     "windSpeed": 2
                 },
                 {
@@ -223,7 +223,7 @@
                     "uvIndex": 0.9,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 202.2,
                     "windSpeed": 2.4
                 },
                 {
@@ -237,7 +237,7 @@
                     "uvIndex": 1.9,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 199.7,
                     "windSpeed": 3
                 },
                 {
@@ -251,7 +251,7 @@
                     "uvIndex": 3.2,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 198.2,
                     "windSpeed": 3.6
                 },
                 {
@@ -265,7 +265,7 @@
                     "uvIndex": 4.5,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 194.6,
                     "windSpeed": 3.6
                 },
                 {
@@ -279,7 +279,7 @@
                     "uvIndex": 5.5,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 202.4,
                     "windSpeed": 4
                 },
                 {
@@ -293,7 +293,7 @@
                     "uvIndex": 5.9,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 213.2,
                     "windSpeed": 3.7
                 },
                 {
@@ -307,7 +307,7 @@
                     "uvIndex": 5.6,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 226.9,
                     "windSpeed": 3.3
                 },
                 {
@@ -321,7 +321,7 @@
                     "uvIndex": 4.6,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 232.5,
                     "windSpeed": 3.2
                 },
                 {
@@ -335,7 +335,7 @@
                     "uvIndex": 3.4,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 239.8,
                     "windSpeed": 3.4
                 },
                 {
@@ -349,7 +349,7 @@
                     "uvIndex": 2.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 233.6,
                     "windSpeed": 3
                 },
                 {
@@ -363,7 +363,7 @@
                     "uvIndex": 1.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 237.2,
                     "windSpeed": 2.5
                 },
                 {
@@ -377,7 +377,7 @@
                     "uvIndex": 0.4,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 265.9,
                     "windSpeed": 2.2
                 },
                 {
@@ -391,7 +391,7 @@
                     "uvIndex": 0.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 268.8,
                     "windSpeed": 0.7
                 },
                 {
@@ -405,7 +405,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 181.6,
                     "windSpeed": 0.4
                 },
                 {
@@ -419,7 +419,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 159,
                     "windSpeed": 0.9
                 },
                 {
@@ -433,7 +433,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 214.7,
                     "windSpeed": 0.8
                 }
             ],
@@ -460,7 +460,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 175.6,
                     "windSpeed": 0.7
                 },
                 {
@@ -474,7 +474,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 322.8,
                     "windSpeed": 1.5
                 },
                 {
@@ -488,7 +488,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Light Clouds",
                     "weatherIcon": "weather-few-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 250.2,
                     "windSpeed": 1.1
                 },
                 {
@@ -502,7 +502,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 248.4,
                     "windSpeed": 0.7
                 },
                 {
@@ -516,7 +516,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 174.6,
                     "windSpeed": 0.5
                 },
                 {
@@ -530,7 +530,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Light Clouds",
                     "weatherIcon": "weather-few-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 149.4,
                     "windSpeed": 1.2
                 },
                 {
@@ -544,7 +544,7 @@
                     "uvIndex": 0.1,
                     "weatherDescription": "Light Clouds",
                     "weatherIcon": "weather-few-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 155.1,
                     "windSpeed": 0.9
                 },
                 {
@@ -558,7 +558,7 @@
                     "uvIndex": 0.3,
                     "weatherDescription": "Light Clouds",
                     "weatherIcon": "weather-few-clouds-night",
-                    "windDirection": 4,
+                    "windDirectionDegree": 357.5,
                     "windSpeed": 0.8
                 },
                 {
@@ -572,7 +572,7 @@
                     "uvIndex": 0.8,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 30.1,
                     "windSpeed": 0.7
                 },
                 {
@@ -586,7 +586,7 @@
                     "uvIndex": 1.7,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 170.9,
                     "windSpeed": 1.7
                 },
                 {
@@ -600,7 +600,7 @@
                     "uvIndex": 2.9,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 172.6,
                     "windSpeed": 2.7
                 },
                 {
@@ -614,7 +614,7 @@
                     "uvIndex": 4.2,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 171.6,
                     "windSpeed": 3
                 },
                 {
@@ -628,7 +628,7 @@
                     "uvIndex": 5.1,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 173.7,
                     "windSpeed": 3.3
                 },
                 {
@@ -642,7 +642,7 @@
                     "uvIndex": 5.5,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 179,
                     "windSpeed": 3.2
                 },
                 {
@@ -656,7 +656,7 @@
                     "uvIndex": 5.2,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 181.3,
                     "windSpeed": 2.8
                 },
                 {
@@ -670,7 +670,7 @@
                     "uvIndex": 4.3,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 177.7,
                     "windSpeed": 2.9
                 },
                 {
@@ -684,7 +684,7 @@
                     "uvIndex": 3.1,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 177.9,
                     "windSpeed": 3.1
                 },
                 {
@@ -698,7 +698,7 @@
                     "uvIndex": 1.9,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 173.6,
                     "windSpeed": 3
                 },
                 {
@@ -712,7 +712,7 @@
                     "uvIndex": 1,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 181.2,
                     "windSpeed": 3
                 },
                 {
@@ -726,7 +726,7 @@
                     "uvIndex": 0.4,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 180.8,
                     "windSpeed": 3.3
                 },
                 {
@@ -740,7 +740,7 @@
                     "uvIndex": 0.1,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 163,
                     "windSpeed": 2
                 },
                 {
@@ -754,7 +754,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 156.6,
                     "windSpeed": 2.1
                 },
                 {
@@ -768,7 +768,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 298.9,
                     "windSpeed": 5.1
                 },
                 {
@@ -782,7 +782,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Light Clouds",
                     "weatherIcon": "weather-few-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 328.6,
                     "windSpeed": 3.9
                 }
             ],
@@ -809,7 +809,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 4,
+                    "windDirectionDegree": 344.1,
                     "windSpeed": 3.2
                 },
                 {
@@ -823,7 +823,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 4,
+                    "windDirectionDegree": 360,
                     "windSpeed": 1.7
                 },
                 {
@@ -837,7 +837,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Cloudy",
                     "weatherIcon": "weather-clouds-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 289.8,
                     "windSpeed": 1.6
                 },
                 {
@@ -851,7 +851,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Rain",
                     "weatherIcon": "weather-showers-day",
-                    "windDirection": 3,
+                    "windDirectionDegree": 336.6,
                     "windSpeed": 2.9
                 },
                 {
@@ -865,7 +865,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 322.3,
                     "windSpeed": 4.3
                 },
                 {
@@ -879,7 +879,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 328.1,
                     "windSpeed": 4
                 }
             ],
@@ -906,7 +906,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 317.1,
                     "windSpeed": 2.1
                 },
                 {
@@ -920,7 +920,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 330.2,
                     "windSpeed": 2.2
                 },
                 {
@@ -934,7 +934,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 311.9,
                     "windSpeed": 3
                 },
                 {
@@ -948,7 +948,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 336.4,
                     "windSpeed": 2.9
                 }
             ],
@@ -975,7 +975,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 284.7,
                     "windSpeed": 1
                 },
                 {
@@ -989,7 +989,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 294.9,
                     "windSpeed": 1.1
                 },
                 {
@@ -1003,7 +1003,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 313.8,
                     "windSpeed": 2.6
                 },
                 {
@@ -1017,7 +1017,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 42,
                     "windSpeed": 2.1
                 }
             ],
@@ -1044,7 +1044,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 102.4,
                     "windSpeed": 1
                 },
                 {
@@ -1058,7 +1058,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 239.7,
                     "windSpeed": 1.2
                 },
                 {
@@ -1072,7 +1072,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 56.8,
                     "windSpeed": 2.6
                 },
                 {
@@ -1086,7 +1086,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 44.9,
                     "windSpeed": 3
                 }
             ],
@@ -1113,7 +1113,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 60.5,
                     "windSpeed": 1.5
                 },
                 {
@@ -1127,7 +1127,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 71.9,
                     "windSpeed": 1.5
                 },
                 {
@@ -1141,7 +1141,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 74.5,
                     "windSpeed": 3.9
                 },
                 {
@@ -1155,7 +1155,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Partly Sunny",
                     "weatherIcon": "weather-few-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 42.9,
                     "windSpeed": 3
                 }
             ],
@@ -1182,7 +1182,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 89.2,
                     "windSpeed": 1.6
                 },
                 {
@@ -1196,7 +1196,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 106.9,
                     "windSpeed": 1.7
                 },
                 {
@@ -1210,7 +1210,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 141.2,
                     "windSpeed": 4.1
                 },
                 {
@@ -1224,7 +1224,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 52.4,
                     "windSpeed": 2.6
                 }
             ],
@@ -1251,7 +1251,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear-night",
-                    "windDirection": 3,
+                    "windDirectionDegree": 114,
                     "windSpeed": 1.5
                 },
                 {
@@ -1265,7 +1265,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Clear",
                     "weatherIcon": "weather-clear",
-                    "windDirection": 3,
+                    "windDirectionDegree": 134.4,
                     "windSpeed": 1.6
                 },
                 {
@@ -1279,7 +1279,7 @@
                     "uvIndex": 0,
                     "weatherDescription": "Cloudy",
                     "weatherIcon": "weather-clouds",
-                    "windDirection": 3,
+                    "windDirectionDegree": 267.8,
                     "windSpeed": 3.6
                 }
             ],
