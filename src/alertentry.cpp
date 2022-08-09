@@ -8,44 +8,38 @@
 
 namespace KWeatherCore
 {
-class AlertEntry::AlertEntryPrivate
+class AlertEntry::AlertEntryPrivate : public QSharedData
 {
 public:
     QString identifier;
     QString sender;
     QDateTime sentTime;
-    Status status = Status::Unknown;
-    MsgType msgType = MsgType::Unknown;
-    Scope scope = Scope::Unknown;
+    Status status = Status::UnknownStatus;
+    MsgType msgType = MsgType::UnknownMsgType;
+    Scope scope = Scope::UnknownScope;
     QString note;
     std::vector<AlertInfo> infoVec;
 };
 
 AlertEntry::AlertEntry()
-    : d(std::make_unique<AlertEntryPrivate>())
+    : d(new AlertEntryPrivate)
 {
 }
-AlertEntry::AlertEntry(const AlertEntry &other)
-    : d(std::make_unique<AlertEntryPrivate>(*other.d))
-{
-}
+AlertEntry::AlertEntry(const AlertEntry &other) = default;
 AlertEntry::AlertEntry(AlertEntry &&other) = default;
 AlertEntry::~AlertEntry() = default;
-AlertEntry &AlertEntry::operator=(const AlertEntry &other)
-{
-    *this->d = *other.d;
-    return *this;
-}
+AlertEntry &AlertEntry::operator=(const AlertEntry &other) = default;
 AlertEntry &AlertEntry::operator=(AlertEntry &&other) = default;
-const QString &AlertEntry::identifier() const
+
+QString AlertEntry::identifier() const
 {
     return d->identifier;
 }
-const QString &AlertEntry::sender() const
+QString AlertEntry::sender() const
 {
     return d->sender;
 }
-const QDateTime &AlertEntry::sentTime() const
+QDateTime AlertEntry::sentTime() const
 {
     return d->sentTime;
 }
@@ -61,7 +55,7 @@ AlertEntry::Scope AlertEntry::scope() const
 {
     return d->scope;
 }
-const QString &AlertEntry::note() const
+QString AlertEntry::note() const
 {
     return d->note;
 }

@@ -7,50 +7,58 @@
 #include "kweathercore/kweathercore_export.h"
 #include <QDateTime>
 #include <QObject>
-#include <memory>
+#include <QSharedDataPointer>
 #include <vector>
+
 namespace KWeatherCore
 {
 class AlertInfo;
 /**
- * @short Class represents single CAP
+ * @short Class represents single CAP Alert Message
  *
  * This class contains the information of a parsed
- * CAP file
+ * CAP Alert Message file
  * @see AlertInfo
+ * @see https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html
  *
  * @author Anjani Kumar <anjanik012@gmail.com>
  */
 class KWEATHERCORE_EXPORT AlertEntry
 {
     Q_GADGET
-    Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier)
-    Q_PROPERTY(QString sender READ sender WRITE setSender)
-    Q_PROPERTY(QDateTime sentTime READ sentTime WRITE setSentTime)
-    Q_PROPERTY(QString note READ note WRITE setNote)
+    Q_PROPERTY(QString identifier READ identifier)
+    Q_PROPERTY(QString sender READ sender)
+    Q_PROPERTY(QDateTime sentTime READ sentTime)
+    Q_PROPERTY(QString note READ note)
+    Q_PROPERTY(Status status READ status)
+    Q_PROPERTY(MsgType msgType READ msgType)
+    Q_PROPERTY(Scope scope READ scope)
 public:
     enum class Status {
-        Unknown,
+        UnknownStatus,
         Actual,
         Exercise,
         System,
         Test,
         Draft,
     };
+    Q_ENUM(Status)
     enum class MsgType {
-        Unknown,
+        UnknownMsgType,
         Alert,
         Update,
         Cancel,
         Ack,
         Error,
     };
+    Q_ENUM(MsgType)
     enum class Scope {
-        Unknown,
+        UnknownScope,
         Public,
         Restricted,
         Private,
     };
+    Q_ENUM(Scope)
 
     /**
      * Default constructor, Status, MsgType, Scope
@@ -70,16 +78,16 @@ public:
     /**
      * identifier of CAP
      */
-    const QString &identifier() const;
+    QString identifier() const;
     /**
      * CAP file sender
      */
-    const QString &sender() const;
+    QString sender() const;
     /**
      * sentTime of CAP
      * @return
      */
-    const QDateTime &sentTime() const;
+    QDateTime sentTime() const;
     /**
      * status enum, initilized to Unknown
      */
@@ -95,7 +103,7 @@ public:
     /**
      * note of CAP
      */
-    const QString &note() const;
+    QString note() const;
     /**
      * the parsed info entries in CAP
      * see @AlertInfo
@@ -118,6 +126,6 @@ public:
 
 private:
     class AlertEntryPrivate;
-    std::unique_ptr<AlertEntryPrivate> d;
+    QSharedDataPointer<AlertEntryPrivate> d;
 };
 }

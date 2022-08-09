@@ -15,9 +15,9 @@ public:
     QString title;
     QString summary;
     QString area;
-    AlertInfo::Urgency urgency = AlertInfo::Urgency::Unknown;
-    AlertInfo::Severity severity = AlertInfo::Severity::Unknown;
-    AlertInfo::Certainty certainty = AlertInfo::Certainty::Unknown;
+    AlertInfo::Urgency urgency = AlertInfo::Urgency::UnknownUrgency;
+    AlertInfo::Severity severity = AlertInfo::Severity::UnknownSeverity;
+    AlertInfo::Certainty certainty = AlertInfo::Certainty::UnknownCertainty;
     QDateTime date;
     QUrl CAPUrl;
     AreaCodeVec areaCodes;

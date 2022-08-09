@@ -64,7 +64,7 @@ AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
     } else if (str == QStringLiteral("Past")) {
         return AlertInfo::Urgency::Past;
     } else {
-        return AlertInfo::Urgency::Unknown;
+        return AlertInfo::Urgency::UnknownUrgency;
     }
 }
 
@@ -79,7 +79,7 @@ AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str
     } else if (str == QStringLiteral("Minor")) {
         return AlertInfo::Severity::Minor;
     } else {
-        return AlertInfo::Severity::Unknown;
+        return AlertInfo::Severity::UnknownSeverity;
     }
 }
 
@@ -94,7 +94,7 @@ AlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &s
     } else if (str == QStringLiteral("Unlikely")) {
         return AlertInfo::Certainty::Unlikely;
     } else {
-        return AlertInfo::Certainty::Unknown;
+        return AlertInfo::Certainty::UnknownCertainty;
     }
 }
 
@@ -114,7 +114,7 @@ QString KWeatherCorePrivate::urgencyToString(AlertInfo::Urgency urgency)
     case AlertInfo::Urgency::Past:
         res = i18n("Past");
         break;
-    case AlertInfo::Urgency::Unknown:
+    case AlertInfo::Urgency::UnknownUrgency:
         res = i18n("Unknown");
     }
     return res;
@@ -136,7 +136,7 @@ QString KWeatherCorePrivate::severityToString(AlertInfo::Severity severity)
     case AlertInfo::Severity::Minor:
         res = i18n("Minor");
         break;
-    case AlertInfo::Severity::Unknown:
+    case AlertInfo::Severity::UnknownSeverity:
         res = i18n("Unknown");
     }
     return res;
@@ -158,7 +158,7 @@ QString KWeatherCorePrivate::certaintyToString(AlertInfo::Certainty certainty)
     case AlertInfo::Certainty::Unlikely:
         res = i18n("Unlikely");
         break;
-    case AlertInfo::Certainty::Unknown:
+    case AlertInfo::Certainty::UnknownCertainty:
         res = i18n("Unknown");
     }
     return res;

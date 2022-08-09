@@ -6,7 +6,7 @@
 #include "alertinfo.h"
 namespace KWeatherCore
 {
-class AlertInfo::AlertInfoPrivate
+class AlertInfo::AlertInfoPrivate : public QSharedData
 {
 public:
     QString headline;
@@ -17,29 +17,27 @@ public:
     QDateTime effectiveTime;
     QDateTime onsetTime;
     QDateTime expireTime;
-    Category category = Category::Unknown;
+    Categories categories = Category::Unknown;
     QString instruction;
-    Urgency urgency = Urgency::Unknown;
-    Severity severity = Severity::Unknown;
-    Certainty certainty = Certainty::Unknown;
+    Urgency urgency = Urgency::UnknownUrgency;
+    Severity severity = Severity::UnknownSeverity;
+    Certainty certainty = Certainty::UnknownCertainty;
     Parameter parameter;
     QString areaDesc;
     AreaCodeVec areaCodes;
     std::vector<std::vector<std::pair<float, float>>> polygon;
 };
 AlertInfo::AlertInfo()
-    : d(std::make_unique<AlertInfoPrivate>())
+    : d(new AlertInfoPrivate)
 {
 }
-AlertInfo::AlertInfo(const AlertInfo &other)
-    : d(std::make_unique<AlertInfoPrivate>(*other.d))
-{
-}
+AlertInfo::AlertInfo(const AlertInfo &other) = default;
 AlertInfo::AlertInfo(AlertInfo &&other) = default;
 AlertInfo::~AlertInfo() = default;
+AlertInfo &AlertInfo::operator=(const AlertInfo &other) = default;
 AlertInfo &AlertInfo::operator=(AlertInfo &&other) = default;
 
-const QString &AlertInfo::event() const
+QString AlertInfo::event() const
 {
     return d->event;
 }
@@ -47,39 +45,39 @@ const AreaCodeVec &AlertInfo::areaCodes() const
 {
     return d->areaCodes;
 }
-const QDateTime &AlertInfo::effectiveTime() const
+QDateTime AlertInfo::effectiveTime() const
 {
     return d->effectiveTime;
 }
-const QDateTime &AlertInfo::onsetTime() const
+QDateTime AlertInfo::onsetTime() const
 {
     return d->onsetTime;
 }
-const QDateTime &AlertInfo::expireTime() const
+QDateTime AlertInfo::expireTime() const
 {
     return d->expireTime;
 }
-AlertInfo::Category AlertInfo::category() const
+AlertInfo::Categories AlertInfo::categories() const
 {
-    return d->category;
+    return d->categories;
 }
-const QString &AlertInfo::headline() const
+QString AlertInfo::headline() const
 {
     return d->headline;
 }
-const QString &AlertInfo::description() const
+QString AlertInfo::description() const
 {
     return d->description;
 }
-const QString &AlertInfo::instruction() const
+QString AlertInfo::instruction() const
 {
     return d->instruction;
 }
-const QString &AlertInfo::sender() const
+QString AlertInfo::sender() const
 {
     return d->sender;
 }
-const QString &AlertInfo::language() const
+QString AlertInfo::language() const
 {
     return d->language;
 }
@@ -99,7 +97,7 @@ const Parameter &AlertInfo::parameter() const
 {
     return d->parameter;
 }
-const QString &AlertInfo::areaDesc() const
+QString AlertInfo::areaDesc() const
 {
     return d->areaDesc;
 }
@@ -129,11 +127,11 @@ void AlertInfo::setLanguage(const QString &language)
 }
 void AlertInfo::setCategory(Category category)
 {
-    d->category = category;
+    d->categories = category;
 }
 void AlertInfo::addCategory(Category category)
 {
-    d->category |= category;
+    d->categories |= category;
 }
 void AlertInfo::setEvent(const QString &event)
 {
@@ -200,10 +198,5 @@ void AlertInfo::addPolygon(const std::vector<std::pair<float, float>> &area)
 void AlertInfo::addPolygon(std::vector<std::pair<float, float>> &&area)
 {
     d->polygon.emplace_back(area);
-}
-AlertInfo &AlertInfo::operator=(const AlertInfo &other)
-{
-    *d = *other.d;
-    return *this;
 }
 }

@@ -41,7 +41,7 @@ private Q_SLOTS:
         QCOMPARE(info.instruction().isEmpty(), false);
         QCOMPARE(info.sender(), QLatin1String("NATIONAL WEATHER SERVICE SACRAMENTO CA"));
         QCOMPARE(info.language(), QLatin1String("en-US"));
-        QCOMPARE(info.category(), KWeatherCore::AlertInfo::Category::Met);
+        QCOMPARE(info.categories(), KWeatherCore::AlertInfo::Category::Met);
         QCOMPARE(info.urgency(), KWeatherCore::AlertInfo::Urgency::Immediate);
         QCOMPARE(info.severity(), KWeatherCore::AlertInfo::Severity::Severe);
         QCOMPARE(info.certainty(), KWeatherCore::AlertInfo::Certainty::Observed);
