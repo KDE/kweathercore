@@ -32,7 +32,7 @@ public:
      * the pointer is nullptr until finished() raised
      * @return
      */
-    std::unique_ptr<AlertEntry> value() const;
+    AlertEntry value() const;
 
 private:
     friend class AlertFeedEntry;

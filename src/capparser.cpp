@@ -5,6 +5,8 @@
  */
 
 #include "capparser.h"
+#include "alertentry.h"
+#include "alertinfo.h"
 #include "kweathercore_p.h"
 #include <KLocalizedString>
 #include <QDateTime>
@@ -137,15 +139,10 @@ CAPParser::CAPParser(const QByteArray &data)
         }
     }
 }
-void CAPParser::setData(const QByteArray &data)
-{
-    m_xml.clear();
-    m_xml.addData(data);
-}
 
-std::unique_ptr<AlertEntry> CAPParser::parse()
+AlertEntry CAPParser::parse()
 {
-    auto entry = std::make_unique<AlertEntry>();
+    AlertEntry entry;
     while (m_xml.readNextStartElement()) {
         const auto tag = stringToValue(m_xml.name(), tag_map);
         if (!tag) {
@@ -154,19 +151,19 @@ std::unique_ptr<AlertEntry> CAPParser::parse()
         }
         switch (*tag) {
         case Tags::IDENTIFIER:
-            entry->setIdentifier(m_xml.readElementText());
+            entry.setIdentifier(m_xml.readElementText());
             break;
         case Tags::SENDER:
-            entry->setSender(m_xml.readElementText());
+            entry.setSender(m_xml.readElementText());
             break;
         case Tags::SENT_TIME:
-            entry->setSentTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
+            entry.setSentTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
             break;
         case Tags::STATUS: {
             const auto elementText = m_xml.readElementText();
             const auto status = stringToValue(elementText, status_map);
             if (status) {
-                entry->setStatus(*status);
+                entry.setStatus(*status);
             } else {
                 qWarning() << "Unknown status field" << elementText;
             }
@@ -176,7 +173,7 @@ std::unique_ptr<AlertEntry> CAPParser::parse()
             const auto elementText = m_xml.readElementText();
             const auto msgType = stringToValue(elementText, msgtype_map);
             if (msgType) {
-                entry->setMsgType(*msgType);
+                entry.setMsgType(*msgType);
             } else {
                 qWarning() << "Unknown msgType field" << elementText;
             }
@@ -186,18 +183,18 @@ std::unique_ptr<AlertEntry> CAPParser::parse()
             const auto elementText = m_xml.readElementText();
             const auto scope = stringToValue(elementText, scope_map);
             if (scope) {
-                entry->setScope(*scope);
+                entry.setScope(*scope);
             } else {
                 qWarning() << "Unknown scope field" << elementText;
             }
             break;
         }
         case Tags::NOTE:
-            entry->setNote(m_xml.readElementText());
+            entry.setNote(m_xml.readElementText());
             break;
         case Tags::INFO: {
             auto info = parseInfo();
-            entry->addInfo(info);
+            entry.addInfo(info);
             break;
         }
         default:

@@ -17,7 +17,7 @@ public:
     QByteArray data;
 };
 
-std::unique_ptr<AlertEntry> PendingCAP::value() const
+AlertEntry PendingCAP::value() const
 {
     Q_D(const PendingCAP);
     if (d->data.isEmpty()) {

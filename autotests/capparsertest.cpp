@@ -3,7 +3,9 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "capparser.h"
+#include <KWeatherCore/AlertEntry>
+#include <KWeatherCore/AlertInfo>
+#include <KWeatherCore/CAPParser>
 
 #include <QFile>
 #include <QTest>
@@ -18,18 +20,17 @@ private Q_SLOTS:
         QVERIFY(f.open(QFile::ReadOnly));
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
-        QVERIFY(alert);
 
-        QCOMPARE(alert->status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert->msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
-        QCOMPARE(alert->identifier(), QLatin1String("KSTO1055887203"));
-        QCOMPARE(alert->sender(), QLatin1String("KSTO@NWS.NOAA.GOV"));
-        QCOMPARE(alert->sentTime(), QDateTime({2003, 06, 17}, {14, 57}, Qt::OffsetFromUTC, -7 * 60 * 60));
-        QCOMPARE(alert->scope(), KWeatherCore::AlertEntry::Scope::Public);
-        QCOMPARE(alert->note(), QString());
+        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
+        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.identifier(), QLatin1String("KSTO1055887203"));
+        QCOMPARE(alert.sender(), QLatin1String("KSTO@NWS.NOAA.GOV"));
+        QCOMPARE(alert.sentTime(), QDateTime({2003, 06, 17}, {14, 57}, Qt::OffsetFromUTC, -7 * 60 * 60));
+        QCOMPARE(alert.scope(), KWeatherCore::AlertEntry::Scope::Public);
+        QCOMPARE(alert.note(), QString());
 
-        QCOMPARE(alert->infoVec().size(), 1);
-        const auto &info = alert->infoVec()[0];
+        QCOMPARE(alert.infoVec().size(), 1);
+        const auto &info = alert.infoVec()[0];
 
         QCOMPARE(info.event(), QLatin1String("SEVERE THUNDERSTORM"));
         // TODO area codes

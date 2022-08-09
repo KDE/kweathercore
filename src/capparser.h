@@ -5,25 +5,26 @@
  */
 
 #pragma once
-#include "alertentry.h"
-#include "alertinfo.h"
 
-#include <QObject>
+#include <kweathercore/kweathercore_export.h>
+
 #include <QXmlStreamReader>
-
-#include <memory>
 
 namespace KWeatherCore
 {
+class AlertEntry;
+class AlertInfo;
+
 /**
- * @internal exported only for unit tests.
+ * Parser for CAP Alert Messages
+ *
+ * @see https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html
  */
 class KWEATHERCORE_EXPORT CAPParser
 {
 public:
-    explicit CAPParser(const QByteArray &data = {});
-    void setData(const QByteArray &data);
-    std::unique_ptr<AlertEntry> parse();
+    explicit CAPParser(const QByteArray &data);
+    AlertEntry parse();
 
 private:
     AlertInfo parseInfo();
