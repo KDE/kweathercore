@@ -95,6 +95,7 @@ static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"instruction", InfoTags::INSTRUCTION},
     {"language", InfoTags::LANGUAGE},
     {"onset", InfoTags::ONSET_TIME},
+    {"parameter", InfoTags::PARAMETER},
     {"senderName", InfoTags::SENDERNAME},
     {"severity", InfoTags::SEVERITY},
     {"urgency", InfoTags::URGENCY},

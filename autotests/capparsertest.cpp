@@ -50,6 +50,29 @@ private Q_SLOTS:
         // TODO areaDesc
         // TODO areaPolygon
     }
+
+    void testMultiArea()
+    {
+        QFile f(QFINDTESTDATA("capdata/multi-area.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
+        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.sender(), QLatin1String("vigilance@meteo.fr"));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 10}, {16, 12, 20}, Qt::OffsetFromUTC, +2 * 60 * 60));
+
+        QCOMPARE(alert.infoVec().size(), 2);
+        auto info = alert.infoVec()[0];
+        QCOMPARE(info.language(), QLatin1String("fr-FR"));
+
+        info = alert.infoVec()[1];
+        QCOMPARE(info.language(), QLatin1String("en-GB"));
+        QCOMPARE(info.parameter().size(), 2);
+        QCOMPARE(info.parameter()[1].first, QLatin1String("awareness_type"));
+        QCOMPARE(info.parameter()[1].second, QLatin1String("3; Thunderstorm"));
+    }
 };
 
 QTEST_GUILESS_MAIN(CapParserTest)
