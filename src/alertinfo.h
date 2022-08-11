@@ -37,6 +37,9 @@ class KWEATHERCORE_EXPORT AlertInfo
     Q_PROPERTY(Urgency urgency READ urgency)
     Q_PROPERTY(Severity severity READ severity)
     Q_PROPERTY(Certainty certainty READ certainty)
+    Q_PROPERTY(QString sender READ sender)
+    Q_PROPERTY(QString instruction READ instruction)
+    Q_PROPERTY(QString language READ language)
 
 public:
     enum class Category {
