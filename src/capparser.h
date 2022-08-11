@@ -14,6 +14,7 @@ namespace KWeatherCore
 {
 class AlertEntry;
 class AlertInfo;
+class CAPArea;
 
 /**
  * Parser for CAP Alert Messages
@@ -28,6 +29,7 @@ public:
 
 private:
     AlertInfo parseInfo();
+    CAPArea parseArea();
     QXmlStreamReader m_xml;
 };
 }

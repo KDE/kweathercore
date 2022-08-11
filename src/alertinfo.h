@@ -13,9 +13,8 @@
 
 namespace KWeatherCore
 {
-// code name (FIPS6, UGC...)/code value (002050, AKZ155)
-using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Parameter = std::vector<std::pair<QString, QString>>;
+class CAPArea;
 /**
  * @short Class represents single CAP
  *
@@ -79,12 +78,6 @@ public:
      */
     QString event() const;
     /**
-     * areaCodes
-     * @return pairs of QString, the first one is code type,
-     * ie. {"UGC", "AKZ017 AKZ020 AKZ021 AKZ022 AKZ023"}
-     */
-    const AreaCodeVec &areaCodes() const;
-    /**
      * The effective time of the information of the alert message
      */
     QDateTime effectiveTime() const;
@@ -143,15 +136,9 @@ public:
      * refer to CAP protocol v1.2
      */
     const Parameter &parameter() const;
-    /**
-     * Text describe the area of the alert message
-     */
-    QString areaDesc() const;
-    /**
-     * area polygon
-     * @return latitude longitude pairs
-     */
-    const std::vector<std::vector<std::pair<float, float>>> &polygon() const;
+    /** The areas targeted by this CAP alert message. */
+    const std::vector<CAPArea> &areas() const;
+
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
@@ -160,8 +147,6 @@ public:
     void setCategory(Category category);
     void addCategory(Category category);
     void setEvent(const QString &event);
-    void setAreaCodes(const AreaCodeVec &areaCodes);
-    void addAreaCode(std::pair<QString, QString> &areaCode);
     void setEffectiveTime(const QDateTime &time);
     void setOnsetTime(const QDateTime &time);
     void setExpireTime(const QDateTime &time);
@@ -170,11 +155,7 @@ public:
     void setCertainty(Certainty certainty);
     void setParameter(const Parameter &parameter);
     void addParameter(std::pair<QString, QString> &);
-    void setAreaDesc(const QString &areaDesc);
-    void setPolygon(const std::vector<std::vector<std::pair<float, float>>> &area);
-    void setPolygon(std::vector<std::vector<std::pair<float, float>>> &&area);
-    void addPolygon(const std::vector<std::pair<float, float>> &area);
-    void addPolygon(std::vector<std::pair<float, float>> &&area);
+    void addArea(CAPArea &&area);
     AlertInfo &operator=(const AlertInfo &other);
     AlertInfo &operator=(AlertInfo &&other);
 

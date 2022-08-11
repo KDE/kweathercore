@@ -5,6 +5,7 @@
 
 #include <KWeatherCore/AlertEntry>
 #include <KWeatherCore/AlertInfo>
+#include <KWeatherCore/CAPArea>
 #include <KWeatherCore/CAPParser>
 
 #include <QFile>
@@ -33,7 +34,6 @@ private Q_SLOTS:
         const auto &info = alert.infoVec()[0];
 
         QCOMPARE(info.event(), QLatin1String("SEVERE THUNDERSTORM"));
-        // TODO area codes
         QCOMPARE(info.effectiveTime(), QDateTime());
         QCOMPARE(info.onsetTime(), QDateTime());
         QCOMPARE(info.expireTime(), QDateTime({2003, 06, 17}, {16, 0}, Qt::OffsetFromUTC, -7 * 60 * 60));
@@ -46,9 +46,17 @@ private Q_SLOTS:
         QCOMPARE(info.urgency(), KWeatherCore::AlertInfo::Urgency::Immediate);
         QCOMPARE(info.severity(), KWeatherCore::AlertInfo::Severity::Severe);
         QCOMPARE(info.certainty(), KWeatherCore::AlertInfo::Certainty::Observed);
-        // TODO parameter
-        // TODO areaDesc
-        // TODO areaPolygon
+
+        QCOMPARE(info.areas().size(), 1);
+        const auto area = info.areas()[0];
+        QCOMPARE(area.description(),
+                 QLatin1String("EXTREME NORTH CENTRAL TUOLUMNE COUNTY IN CALIFORNIA, EXTREME NORTHEASTERN CALAVERAS COUNTY IN CALIFORNIA, SOUTHWESTERN ALPINE "
+                               "COUNTY IN CALIFORNIA"));
+        QCOMPARE(area.polygons().size(), 1);
+        QCOMPARE(area.polygons()[0].size(), 5);
+        QCOMPARE(area.geoCodes().size(), 3);
+        QCOMPARE(area.geoCodes()[0].first, QLatin1String("SAME"));
+        QCOMPARE(area.geoCodes()[0].second, QLatin1String("006109"));
     }
 
     void testMultiArea()
@@ -66,12 +74,26 @@ private Q_SLOTS:
         QCOMPARE(alert.infoVec().size(), 2);
         auto info = alert.infoVec()[0];
         QCOMPARE(info.language(), QLatin1String("fr-FR"));
+        QCOMPARE(info.areas().size(), 4);
+        auto area = info.areas()[3];
+        QCOMPARE(area.description(), QLatin1String("Haute Garonne"));
+        QCOMPARE(area.polygons().size(), 0);
+        QCOMPARE(area.geoCodes().size(), 1);
+        QCOMPARE(area.geoCodes()[0].first, QLatin1String("NUTS3"));
+        QCOMPARE(area.geoCodes()[0].second, QLatin1String("FR623"));
 
         info = alert.infoVec()[1];
         QCOMPARE(info.language(), QLatin1String("en-GB"));
         QCOMPARE(info.parameter().size(), 2);
         QCOMPARE(info.parameter()[1].first, QLatin1String("awareness_type"));
         QCOMPARE(info.parameter()[1].second, QLatin1String("3; Thunderstorm"));
+        QCOMPARE(info.areas().size(), 4);
+        area = info.areas()[0];
+        QCOMPARE(area.description(), QLatin1String("Alpes de Haute Provence"));
+        QCOMPARE(area.polygons().size(), 0);
+        QCOMPARE(area.geoCodes().size(), 1);
+        QCOMPARE(area.geoCodes()[0].first, QLatin1String("NUTS3"));
+        QCOMPARE(area.geoCodes()[0].second, QLatin1String("FR821"));
     }
 };
 

@@ -1,9 +1,11 @@
 /*
  * SPDX-FileCopyrightText: 2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2021 Anjani Kumar <anjanik012@gmail.com>
+ * SPDX-FileCopyrightText: 2022 Volker Krause <vkrause@kde.org>
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "alertinfo.h"
+#include "caparea.h"
 namespace KWeatherCore
 {
 class AlertInfo::AlertInfoPrivate : public QSharedData
@@ -23,9 +25,7 @@ public:
     Severity severity = Severity::UnknownSeverity;
     Certainty certainty = Certainty::UnknownCertainty;
     Parameter parameter;
-    QString areaDesc;
-    AreaCodeVec areaCodes;
-    std::vector<std::vector<std::pair<float, float>>> polygon;
+    std::vector<CAPArea> areas;
 };
 AlertInfo::AlertInfo()
     : d(new AlertInfoPrivate)
@@ -40,10 +40,6 @@ AlertInfo &AlertInfo::operator=(AlertInfo &&other) = default;
 QString AlertInfo::event() const
 {
     return d->event;
-}
-const AreaCodeVec &AlertInfo::areaCodes() const
-{
-    return d->areaCodes;
 }
 QDateTime AlertInfo::effectiveTime() const
 {
@@ -97,14 +93,11 @@ const Parameter &AlertInfo::parameter() const
 {
     return d->parameter;
 }
-QString AlertInfo::areaDesc() const
+const std::vector<CAPArea> &AlertInfo::areas() const
 {
-    return d->areaDesc;
+    return d->areas;
 }
-const std::vector<std::vector<std::pair<float, float>>> &AlertInfo::polygon() const
-{
-    return d->polygon;
-}
+
 void AlertInfo::setHeadline(const QString &headline)
 {
     d->headline = headline;
@@ -136,14 +129,6 @@ void AlertInfo::addCategory(Category category)
 void AlertInfo::setEvent(const QString &event)
 {
     d->event = event;
-}
-void AlertInfo::setAreaCodes(const AreaCodeVec &areaCodes)
-{
-    d->areaCodes = areaCodes;
-}
-void AlertInfo::addAreaCode(std::pair<QString, QString> &areaCode)
-{
-    d->areaCodes.push_back(areaCode);
 }
 
 void AlertInfo::setEffectiveTime(const QDateTime &time)
@@ -179,24 +164,8 @@ void AlertInfo::addParameter(std::pair<QString, QString> &p)
     d->parameter.push_back(p);
 }
 
-void AlertInfo::setAreaDesc(const QString &areaDesc)
+void AlertInfo::addArea(CAPArea &&area)
 {
-    d->areaDesc = areaDesc;
-}
-void AlertInfo::setPolygon(const std::vector<std::vector<std::pair<float, float>>> &polygon)
-{
-    d->polygon = polygon;
-}
-void AlertInfo::setPolygon(std::vector<std::vector<std::pair<float, float>>> &&polygon)
-{
-    d->polygon = std::move(polygon);
-}
-void AlertInfo::addPolygon(const std::vector<std::pair<float, float>> &area)
-{
-    d->polygon.push_back(area);
-}
-void AlertInfo::addPolygon(std::vector<std::pair<float, float>> &&area)
-{
-    d->polygon.emplace_back(area);
+    d->areas.push_back(std::move(area));
 }
 }

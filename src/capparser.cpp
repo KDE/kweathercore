@@ -7,6 +7,7 @@
 #include "capparser.h"
 #include "alertentry.h"
 #include "alertinfo.h"
+#include "caparea.h"
 #include "kweathercore_p.h"
 #include <KLocalizedString>
 #include <QDateTime>
@@ -271,25 +272,7 @@ AlertInfo CAPParser::parseInfo()
                     break;
                 }
                 case InfoTags::AREA: {
-                    while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
-                        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
-                            info.setAreaDesc(m_xml.readElementText());
-                        } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
-                            std::pair<QString, QString> p;
-                            m_xml.readNextStartElement();
-                            if (m_xml.name() == QStringLiteral("valueName")) {
-                                p.first = m_xml.readElementText();
-                            }
-                            m_xml.readNextStartElement();
-                            if (m_xml.name() == QStringLiteral("value")) {
-                                p.second = m_xml.readElementText();
-                            }
-                            info.addAreaCode(p);
-                        } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
-                            info.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
-                        }
-                        m_xml.readNext();
-                    }
+                    info.addArea(parseArea());
                     break;
                 }
                 case InfoTags::SENDERNAME: {
@@ -308,5 +291,30 @@ AlertInfo CAPParser::parseInfo()
         }
     }
     return info;
+}
+
+CAPArea CAPParser::parseArea()
+{
+    CAPArea area;
+    while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
+        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
+            area.setDescription(m_xml.readElementText());
+        } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
+            std::pair<QString, QString> p;
+            m_xml.readNextStartElement();
+            if (m_xml.name() == QStringLiteral("valueName")) {
+                p.first = m_xml.readElementText();
+            }
+            m_xml.readNextStartElement();
+            if (m_xml.name() == QStringLiteral("value")) {
+                p.second = m_xml.readElementText();
+            }
+            area.addGeoCode(std::move(p));
+        } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
+            area.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
+        }
+        m_xml.readNext();
+    }
+    return area;
 }
 }
