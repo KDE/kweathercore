@@ -120,6 +120,32 @@ private Q_SLOTS:
         QCOMPARE(circle.longitude, -165.164f);
         QCOMPARE(circle.radius, 1.0f);
     }
+
+    void testPolygon()
+    {
+        QFile f(QFINDTESTDATA("capdata/polygon-trailing-space.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
+        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.sender(), QLatin1String("info.aviso@inmet.gov.br"));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 12}, {13, 22, 45}, Qt::OffsetFromUTC, -3 * 60 * 60));
+
+        QCOMPARE(alert.infoVec().size(), 1);
+        auto info = alert.infoVec()[0];
+        QCOMPARE(info.language(), QLatin1String("pt-BR"));
+        QCOMPARE(info.areas().size(), 1);
+        auto area = info.areas()[0];
+        QCOMPARE(area.polygons().size(), 1);
+        auto polygon = area.polygons()[0];
+        QCOMPARE(polygon.size(), 10);
+        for (const auto &p : polygon) {
+            QVERIFY(p.first != 0.0f);
+            QVERIFY(p.second != 0.0f);
+        }
+    }
 };
 
 QTEST_GUILESS_MAIN(CapParserTest)

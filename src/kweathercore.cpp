@@ -20,10 +20,17 @@ namespace KWeatherCore
 Polygon KWeatherCorePrivate::stringToPolygon(const QString &str)
 {
     Polygon res;
-    const auto pairList = str.split(QLatin1Char(' '));
+    const auto pairList = str.split(QLatin1Char(' '), Qt::SkipEmptyParts);
     for (auto &pair : pairList) {
         auto coordinate = pair.split(QLatin1Char(','));
-        res.push_back({coordinate.front().toFloat(), coordinate.back().toFloat()});
+        if (coordinate.size() != 2) {
+            continue;
+        }
+        bool latOk = false, lonOk = false;
+        res.push_back({coordinate.front().toFloat(&latOk), coordinate.back().toFloat(&lonOk)});
+        if (!latOk || !lonOk) {
+            res.pop_back();
+        }
     }
     return res;
 }
