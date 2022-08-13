@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>PAAQ-1-rfwv11</identifier>
+  <sender>ntwc@noaa.gov</sender>
+  <sent>2022-08-01T00:40:48-00:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <source>NTWC</source>
+  <scope>Public</scope>
+  <code>IPAWSv1.0</code>
+  <incidents>rfwv11</incidents>
+  <info>
+    <category>Geo</category>
+    <event>Tsunami Information</event>
+    <responseType>None</responseType>
+    <urgency>Unknown</urgency>
+    <severity>Minor</severity>
+    <certainty>Unlikely</certainty>
+    <expires>2022-08-01T01:40:48-00:00</expires>
+    <senderName>NWS National Tsunami Warning Center Palmer AK</senderName>
+    <headline>This is a Tsunami Information Statement. </headline>
+    <description>This is a Tsunami Information Statement.  - Event details: Preliminary magnitude 5.2 (Ml) earthquake / Lat: 53.401, Lon: -165.164 at 2022-08-01T00:36:37 UTC An information statement indicates that an earthquake has occurred, but does not pose a tsunami threat, or that a tsunami warning, advisory, or watch has been issued for another section of the ocean. </description>
+    <instruction>  There is NO tsunami danger from this earthquake.  This will be the only U.S. National Tsunami Warning Center    message issued for this event unless additional information    becomes available.   The location and magnitude are based on preliminary information.   Further information will be issued by the United States    Geological Survey (earthquake.usgs.gov) or the appropriate    regional seismic network. </instruction>
+    <web>http://ntwc.arh.noaa.gov/events/PAAQ/2022/08/01/rfwv11/1/WEAK53/WEAK53.txt</web>
+    <parameter>
+      <valueName>EventLocationName</valueName>
+      <value>65 miles SE of Dutch Harbor, Alaska</value>
+    </parameter>
+    <parameter>
+      <valueName>EventPreliminaryMagnitude</valueName>
+      <value>5.2</value>
+    </parameter>
+    <parameter>
+      <valueName>EventPreliminaryMagnitudeType</valueName>
+      <value>Ml</value>
+    </parameter>
+    <parameter>
+      <valueName>EventOriginTime</valueName>
+      <value>2022-08-01T00:36:37-00:00</value>
+    </parameter>
+    <parameter>
+      <valueName>EventDepth</valueName>
+      <value>30 kilometers</value>
+    </parameter>
+    <parameter>
+      <valueName>EventLatLon</valueName>
+      <value>53.401,-165.164 1.000</value>
+    </parameter>
+    <parameter>
+      <valueName>WEAK53</valueName>
+      <value>Public Tsunami Information Statements for AK, BC, and US West Coast</value>
+    </parameter>
+    <parameter>
+      <valueName>EAS-ORG</valueName>
+      <value>WXR</value>
+    </parameter>
+    <resource>
+      <resourceDesc>Event Data as a JSON document</resourceDesc>
+      <mimeType>application/json</mimeType>
+      <uri>http://ntwc.arh.noaa.gov/events/PAAQ/2022/08/01/rfwv11/1/WEAK53/PAAQ.json</uri>
+    </resource>
+    <area>
+      <areaDesc>65 miles SE of Dutch Harbor, Alaska</areaDesc>
+      <circle>53.401,-165.164 1.0</circle>
+    </area>
+  </info>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>h9YHUfOCurGpEzt9gE7Uz6JeKCw=</DigestValue></Reference></SignedInfo><SignatureValue>G22EsIEYI+WATqGv/nixU7Ktf2SJ1/6ZHczLEngogllJu0Qh1Uiteg==</SignatureValue><KeyInfo><KeyValue><DSAKeyValue><P>/X9TgR11EilS30qcLuzk5/YRt1I870QAwx4/gLZRJmlFXUAiUftZPY1Y+r/F9bow9subVWzXgTuA&#13;
+HTRv8mZgt2uZUKWkn5/oBHsQIsJPu6nX/rfGG/g7V+fGqKYVDwT7g/bTxR7DAjVUE1oWkTL2dfOu&#13;
+K2HXKu/yIgMZndFIAcc=</P><Q>l2BQjxUjC8yykrmCouuEC/BYHPU=</Q><G>9+GghdabPd7LvKtcNrhXuXmUr7v6OuqC+VdMCz0HgmdRWVeOutRZT+ZxBxCBgLRJFnEj6EwoFhO3&#13;
+zwkyjMim4TwWeotUfI0o4KOuHiuzpnWRbqN/C/ohNWLx+2J6ASQ7zKTxvqhRkImog9/hWuWfBpKL&#13;
+Zl6Ae1UlZAFMO/7PSSo=</G><Y>XonR3Yg1PO+Hpheh7NMm5UHT3amv+Z0OpCibPuHTwnyyfTUJQLaX249PGVvgM/CPS8MTN24lqbYx&#13;
+NI9dXJLAvIb16cW6eJx+kivl9ObemdndlUkM15quv7dN94sP5GF9RtppDXuq9BD/4lv3ya/TGxjX&#13;
+iMTf93pJwabei82X7Fs=</Y></DSAKeyValue></KeyValue></KeyInfo></Signature></alert>
+

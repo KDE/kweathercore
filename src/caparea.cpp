@@ -16,6 +16,7 @@ class CAPAreaPrivate : public QSharedData
 public:
     QString description;
     std::vector<Polygon> polygons;
+    std::vector<CAPCircle> circles;
     AreaCodeVec geoCodes;
 };
 }
@@ -49,6 +50,16 @@ const std::vector<Polygon> &CAPArea::polygons() const
 void CAPArea::addPolygon(Polygon &&polygon)
 {
     d->polygons.push_back(std::move(polygon));
+}
+
+const std::vector<CAPCircle> &CAPArea::circles() const
+{
+    return d->circles;
+}
+
+void CAPArea::addCircle(CAPCircle &&circle)
+{
+    d->circles.push_back(std::move(circle));
 }
 
 const AreaCodeVec &CAPArea::geoCodes() const

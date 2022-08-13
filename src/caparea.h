@@ -13,11 +13,26 @@
 #include <QMetaType>
 #include <QSharedDataPointer>
 
+#include <cmath>
+
 namespace KWeatherCore
 {
 
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Polygon = std::vector<std::pair<float, float>>;
+
+/** Geographic circle describing the target area of a CAP alert message. */
+struct KWEATHERCORE_EXPORT CAPCircle {
+    Q_GADGET
+    Q_PROPERTY(float latitude MEMBER latitude)
+    Q_PROPERTY(float longitude MEMBER longitude)
+    Q_PROPERTY(float radius MEMBER radius)
+
+public:
+    float latitude = NAN;
+    float longitude = NAN;
+    float radius = NAN;
+};
 
 class CAPAreaPrivate;
 
@@ -44,18 +59,23 @@ public:
     const std::vector<Polygon> &polygons() const;
     void addPolygon(Polygon &&polygon);
 
+    /** Geographic circles(s) enclosing the message target area. */
+    const std::vector<CAPCircle> &circles() const;
+    void addCircle(CAPCircle &&circle);
+
     /** Any geographically-based code to describe a message target area, as key/value pair. */
     const AreaCodeVec &geoCodes() const;
     void addGeoCode(std::pair<QString, QString> &&geoCode);
 
     // TODO
-    // circle, altitude, ceiling: so far not observed in real world data
+    // altitude, ceiling: so far not observed in real world data
 private:
     QSharedDataPointer<CAPAreaPrivate> d;
 };
 
 }
 
+Q_DECLARE_METATYPE(KWeatherCore::CAPCircle)
 Q_DECLARE_METATYPE(KWeatherCore::CAPArea)
 
 #endif // KWEATHERCORE_CAPAREA_H

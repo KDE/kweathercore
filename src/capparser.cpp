@@ -218,7 +218,6 @@ AlertInfo CAPParser::parseInfo()
             }
             const auto tag = stringToValue(m_xml.name(), info_tag_map);
             if (tag) {
-                qDebug() << m_xml.name();
                 switch (*tag) {
                 case InfoTags::CATEGORY: {
                     const auto s = m_xml.readElementText();
@@ -297,6 +296,7 @@ CAPArea CAPParser::parseArea()
 {
     CAPArea area;
     while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
+        m_xml.readNext();
         if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
             area.setDescription(m_xml.readElementText());
         } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
@@ -312,8 +312,20 @@ CAPArea CAPParser::parseArea()
             area.addGeoCode(std::move(p));
         } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
             area.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
+        } else if (m_xml.name() == QLatin1String("circle") && !m_xml.isEndElement()) {
+            const auto t = m_xml.readElementText();
+            const auto commaIdx = t.indexOf(QLatin1Char(','));
+            const auto spaceIdx = t.indexOf(QLatin1Char(' '));
+            if (commaIdx > 0 && spaceIdx > commaIdx && commaIdx < t.size()) {
+                CAPCircle circle;
+                circle.latitude = QStringView(t).left(commaIdx).toFloat();
+                circle.longitude = QStringView(t).mid(commaIdx + 1, spaceIdx - commaIdx - 1).toFloat();
+                circle.radius = QStringView(t).mid(spaceIdx).toFloat();
+                area.addCircle(std::move(circle));
+            }
+        } else if (m_xml.isStartElement()) {
+            qDebug() << "unknown area element:" << m_xml.name();
         }
-        m_xml.readNext();
     }
     return area;
 }

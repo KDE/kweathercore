@@ -95,6 +95,31 @@ private Q_SLOTS:
         QCOMPARE(area.geoCodes()[0].first, QLatin1String("NUTS3"));
         QCOMPARE(area.geoCodes()[0].second, QLatin1String("FR821"));
     }
+
+    void testCircleArea()
+    {
+        QFile f(QFINDTESTDATA("capdata/tsunami.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
+        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.sender(), QLatin1String("ntwc@noaa.gov"));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 01}, {0, 40, 48}, Qt::OffsetFromUTC, 0));
+
+        QCOMPARE(alert.infoVec().size(), 1);
+        auto info = alert.infoVec()[0];
+        QCOMPARE(info.language(), QLatin1String("en-US"));
+        QCOMPARE(info.areas().size(), 1);
+        auto area = info.areas()[0];
+        QCOMPARE(area.polygons().size(), 0);
+        QCOMPARE(area.circles().size(), 1);
+        auto circle = area.circles()[0];
+        QCOMPARE(circle.latitude, 53.401f);
+        QCOMPARE(circle.longitude, -165.164f);
+        QCOMPARE(circle.radius, 1.0f);
+    }
 };
 
 QTEST_GUILESS_MAIN(CapParserTest)
