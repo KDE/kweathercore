@@ -46,6 +46,8 @@ private Q_SLOTS:
         QCOMPARE(info.urgency(), KWeatherCore::AlertInfo::Urgency::Immediate);
         QCOMPARE(info.severity(), KWeatherCore::AlertInfo::Severity::Severe);
         QCOMPARE(info.certainty(), KWeatherCore::AlertInfo::Certainty::Observed);
+        QCOMPARE(info.responseTypes(), KWeatherCore::AlertInfo::ResponseType::Shelter);
+        QCOMPARE(info.contact(), QLatin1String("BARUFFALDI/JUSKIE"));
 
         QCOMPARE(info.areas().size(), 1);
         const auto area = info.areas()[0];
@@ -74,6 +76,8 @@ private Q_SLOTS:
         QCOMPARE(alert.infoVec().size(), 2);
         auto info = alert.infoVec()[0];
         QCOMPARE(info.language(), QLatin1String("fr-FR"));
+        QCOMPARE(info.responseTypes(), KWeatherCore::AlertInfo::ResponseType::Monitor);
+        QCOMPARE(info.web(), QLatin1String("http://vigilance.meteofrance.com/"));
         QCOMPARE(info.areas().size(), 4);
         auto area = info.areas()[3];
         QCOMPARE(area.description(), QLatin1String("Haute Garonne"));

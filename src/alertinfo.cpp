@@ -24,6 +24,9 @@ public:
     Urgency urgency = Urgency::UnknownUrgency;
     Severity severity = Severity::UnknownSeverity;
     Certainty certainty = Certainty::UnknownCertainty;
+    ResponseTypes responseTypes = ResponseType::UnknownResponseType;
+    QString contact;
+    QString web;
     Parameter parameter;
     std::vector<CAPArea> areas;
 };
@@ -89,6 +92,18 @@ AlertInfo::Certainty AlertInfo::certainty() const
 {
     return d->certainty;
 }
+AlertInfo::ResponseTypes AlertInfo::responseTypes() const
+{
+    return d->responseTypes;
+}
+QString AlertInfo::contact() const
+{
+    return d->contact;
+}
+QString AlertInfo::web() const
+{
+    return d->web;
+}
 const Parameter &AlertInfo::parameter() const
 {
     return d->parameter;
@@ -117,10 +132,6 @@ void AlertInfo::setSender(const QString &sender)
 void AlertInfo::setLanguage(const QString &language)
 {
     d->language = language;
-}
-void AlertInfo::setCategory(Category category)
-{
-    d->categories = category;
 }
 void AlertInfo::addCategory(Category category)
 {
@@ -154,6 +165,18 @@ void AlertInfo::setSeverity(Severity severity)
 void AlertInfo::setCertainty(Certainty certainty)
 {
     d->certainty = certainty;
+}
+void AlertInfo::addResponseType(ResponseType responseType)
+{
+    d->responseTypes |= responseType;
+}
+void AlertInfo::setContact(const QString &contact)
+{
+    d->contact = contact;
+}
+void AlertInfo::setWeb(const QString &web)
+{
+    d->web = web;
 }
 void AlertInfo::setParameter(const Parameter &parameter)
 {

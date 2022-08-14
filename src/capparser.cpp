@@ -81,13 +81,17 @@ enum class InfoTags {
     PARAMETER,
     AREA,
     SENDERNAME,
-    LANGUAGE
+    LANGUAGE,
+    RESPONSETYPE,
+    CONTACT,
+    WEB,
 };
 
 static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"area", InfoTags::AREA},
     {"category", InfoTags::CATEGORY},
     {"certainty", InfoTags::CERTAINITY},
+    {"contact", InfoTags::CONTACT},
     {"description", InfoTags::DESCRIPTION},
     {"effective", InfoTags::EFFECTIVE_TIME},
     {"event", InfoTags::EVENT},
@@ -97,9 +101,11 @@ static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"language", InfoTags::LANGUAGE},
     {"onset", InfoTags::ONSET_TIME},
     {"parameter", InfoTags::PARAMETER},
+    {"responseType", InfoTags::RESPONSETYPE},
     {"senderName", InfoTags::SENDERNAME},
     {"severity", InfoTags::SEVERITY},
     {"urgency", InfoTags::URGENCY},
+    {"web", InfoTags::WEB},
 };
 
 static constexpr const MapEntry<AlertEntry::Status> status_map[] = {
@@ -124,6 +130,18 @@ static constexpr const MapEntry<AlertEntry::Scope> scope_map[] = {
     {"Restricted", AlertEntry::Scope::Restricted},
 };
 
+static constexpr const MapEntry<AlertInfo::ResponseType> response_type_map[] = {
+    {"AllClear", AlertInfo::ResponseType::AllClear},
+    {"Assess", AlertInfo::ResponseType::Assess},
+    {"Avoid", AlertInfo::ResponseType::Avoid},
+    {"Evacuate", AlertInfo::ResponseType::Evacuate},
+    {"Execute", AlertInfo::ResponseType::Execute},
+    {"Monitor", AlertInfo::ResponseType::Monitor},
+    {"None", AlertInfo::ResponseType::None},
+    {"Prepare", AlertInfo::ResponseType::Prepare},
+    {"Shelter", AlertInfo::ResponseType::Shelter},
+};
+
 CAPParser::CAPParser(const QByteArray &data)
     : m_xml(data)
 {
@@ -132,7 +150,6 @@ CAPParser::CAPParser(const QByteArray &data)
         while (m_xml.readNextStartElement()) {
             if (m_xml.name() == QStringLiteral("alert")) {
                 flag = true;
-                qDebug() << "valid cap file";
                 break;
             }
         }
@@ -280,6 +297,21 @@ AlertInfo CAPParser::parseInfo()
                 }
                 case InfoTags::LANGUAGE:
                     info.setLanguage(m_xml.readElementText());
+                    break;
+                case InfoTags::RESPONSETYPE: {
+                    const auto elementText = m_xml.readElementText();
+                    if (const auto respType = stringToValue(elementText, response_type_map)) {
+                        info.addResponseType(*respType);
+                    } else {
+                        qWarning() << "Unknown respone type value" << elementText;
+                    }
+                    break;
+                }
+                case InfoTags::CONTACT:
+                    info.setContact(m_xml.readElementText());
+                    break;
+                case InfoTags::WEB:
+                    info.setWeb(m_xml.readElementText());
                     break;
                 }
             } else {

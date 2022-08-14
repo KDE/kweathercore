@@ -39,6 +39,9 @@ class KWEATHERCORE_EXPORT AlertInfo
     Q_PROPERTY(QString sender READ sender)
     Q_PROPERTY(QString instruction READ instruction)
     Q_PROPERTY(QString language READ language)
+    Q_PROPERTY(ResponseTypes responseTypes READ responseTypes)
+    Q_PROPERTY(QString contact READ contact)
+    Q_PROPERTY(QString web READ web)
 
 public:
     enum class Category {
@@ -64,6 +67,21 @@ public:
     Q_ENUM(Severity)
     enum class Certainty { Observed, Likely, Possible, Unlikely, UnknownCertainty };
     Q_ENUM(Certainty)
+
+    enum class ResponseType {
+        UnknownResponseType = 0,
+        Shelter = 1 << 0,
+        Evacuate = 1 << 1,
+        Prepare = 1 << 2,
+        Execute = 1 << 3,
+        Avoid = 1 << 4,
+        Monitor = 1 << 5,
+        Assess = 1 << 6,
+        AllClear = 1 << 7,
+        None = 1 << 8,
+    };
+    Q_DECLARE_FLAGS(ResponseTypes, ResponseType)
+    Q_FLAG(ResponseTypes)
 
     /**
      * default constructor
@@ -132,6 +150,18 @@ public:
      */
     Certainty certainty() const;
     /**
+     * Type of action recommended for the target audience of the alert.
+     */
+    ResponseTypes responseTypes() const;
+    /**
+     * Describing the contact for follow-up and confirmation of the alert message.
+     */
+    QString contact() const;
+    /**
+     * Link associating additional information with the alert message.
+     */
+    QString web() const;
+    /**
      * The Parameter of the alert message
      * refer to CAP protocol v1.2
      */
@@ -144,7 +174,6 @@ public:
     void setInstruction(const QString &instruction);
     void setSender(const QString &sender);
     void setLanguage(const QString &language);
-    void setCategory(Category category);
     void addCategory(Category category);
     void setEvent(const QString &event);
     void setEffectiveTime(const QDateTime &time);
@@ -153,6 +182,9 @@ public:
     void setUrgency(Urgency urgency);
     void setSeverity(Severity severity);
     void setCertainty(Certainty certainty);
+    void addResponseType(ResponseType responseType);
+    void setContact(const QString &contact);
+    void setWeb(const QString &web);
     void setParameter(const Parameter &parameter);
     void addParameter(std::pair<QString, QString> &);
     void addArea(CAPArea &&area);
@@ -166,3 +198,4 @@ private:
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::AlertInfo::Categories)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::AlertInfo::ResponseTypes)
