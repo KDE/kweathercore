@@ -64,6 +64,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     PendingCAP
     CAPParser
     CAPArea
+    CAPNamedValue
     Reply
 
     PREFIX KWeatherCore

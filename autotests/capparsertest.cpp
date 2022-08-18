@@ -57,8 +57,14 @@ private Q_SLOTS:
         QCOMPARE(area.polygons().size(), 1);
         QCOMPARE(area.polygons()[0].size(), 5);
         QCOMPARE(area.geoCodes().size(), 3);
-        QCOMPARE(area.geoCodes()[0].first, QLatin1String("SAME"));
-        QCOMPARE(area.geoCodes()[0].second, QLatin1String("006109"));
+        QCOMPARE(area.geoCodes()[0].name, QLatin1String("SAME"));
+        QCOMPARE(area.geoCodes()[0].value, QLatin1String("006109"));
+        QCOMPARE(area.geoCodes()[1].name, QLatin1String("SAME"));
+        QCOMPARE(area.geoCodes()[1].value, QLatin1String("006009"));
+
+        QCOMPARE(info.eventCodes().size(), 1);
+        QCOMPARE(info.eventCodes()[0].name, QLatin1String("SAME"));
+        QCOMPARE(info.eventCodes()[0].value, QLatin1String("SVR"));
     }
 
     void testMultiArea()
@@ -83,21 +89,21 @@ private Q_SLOTS:
         QCOMPARE(area.description(), QLatin1String("Haute Garonne"));
         QCOMPARE(area.polygons().size(), 0);
         QCOMPARE(area.geoCodes().size(), 1);
-        QCOMPARE(area.geoCodes()[0].first, QLatin1String("NUTS3"));
-        QCOMPARE(area.geoCodes()[0].second, QLatin1String("FR623"));
+        QCOMPARE(area.geoCodes()[0].name, QLatin1String("NUTS3"));
+        QCOMPARE(area.geoCodes()[0].value, QLatin1String("FR623"));
 
         info = alert.infoVec()[1];
         QCOMPARE(info.language(), QLatin1String("en-GB"));
-        QCOMPARE(info.parameter().size(), 2);
-        QCOMPARE(info.parameter()[1].first, QLatin1String("awareness_type"));
-        QCOMPARE(info.parameter()[1].second, QLatin1String("3; Thunderstorm"));
+        QCOMPARE(info.parameters().size(), 2);
+        QCOMPARE(info.parameters()[1].name, QLatin1String("awareness_type"));
+        QCOMPARE(info.parameters()[1].value, QLatin1String("3; Thunderstorm"));
         QCOMPARE(info.areas().size(), 4);
         area = info.areas()[0];
         QCOMPARE(area.description(), QLatin1String("Alpes de Haute Provence"));
         QCOMPARE(area.polygons().size(), 0);
         QCOMPARE(area.geoCodes().size(), 1);
-        QCOMPARE(area.geoCodes()[0].first, QLatin1String("NUTS3"));
-        QCOMPARE(area.geoCodes()[0].second, QLatin1String("FR821"));
+        QCOMPARE(area.geoCodes()[0].name, QLatin1String("NUTS3"));
+        QCOMPARE(area.geoCodes()[0].value, QLatin1String("FR821"));
     }
 
     void testCircleArea()

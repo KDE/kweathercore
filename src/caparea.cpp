@@ -17,7 +17,7 @@ public:
     QString description;
     std::vector<Polygon> polygons;
     std::vector<CAPCircle> circles;
-    AreaCodeVec geoCodes;
+    std::vector<CAPNamedValue> geoCodes;
 };
 }
 
@@ -62,12 +62,12 @@ void CAPArea::addCircle(CAPCircle &&circle)
     d->circles.push_back(std::move(circle));
 }
 
-const AreaCodeVec &CAPArea::geoCodes() const
+const std::vector<CAPNamedValue> &CAPArea::geoCodes() const
 {
     return d->geoCodes;
 }
 
-void CAPArea::addGeoCode(std::pair<QString, QString> &&geoCode)
+void CAPArea::addGeoCode(CAPNamedValue &&geoCode)
 {
     d->geoCodes.push_back(std::move(geoCode));
 }

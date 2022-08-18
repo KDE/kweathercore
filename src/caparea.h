@@ -8,6 +8,7 @@
 #ifndef KWEATHERCORE_CAPAREA_H
 #define KWEATHERCORE_CAPAREA_H
 
+#include "capnamedvalue.h"
 #include <kweathercore/kweathercore_export.h>
 
 #include <QMetaType>
@@ -18,7 +19,6 @@
 namespace KWeatherCore
 {
 
-using AreaCodeVec = std::vector<std::pair<QString, QString>>;
 using Polygon = std::vector<std::pair<float, float>>;
 
 /** Geographic circle describing the target area of a CAP alert message. */
@@ -64,8 +64,8 @@ public:
     void addCircle(CAPCircle &&circle);
 
     /** Any geographically-based code to describe a message target area, as key/value pair. */
-    const AreaCodeVec &geoCodes() const;
-    void addGeoCode(std::pair<QString, QString> &&geoCode);
+    const std::vector<CAPNamedValue> &geoCodes() const;
+    void addGeoCode(CAPNamedValue &&geoCode);
 
     // TODO
     // altitude, ceiling: so far not observed in real world data

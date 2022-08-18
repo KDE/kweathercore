@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
+#include "capnamedvalue.h"
 #include "kweathercore/kweathercore_export.h"
 #include <QDateTime>
 #include <QObject>
@@ -13,7 +14,7 @@
 
 namespace KWeatherCore
 {
-using Parameter = std::vector<std::pair<QString, QString>>;
+
 class CAPArea;
 /**
  * @short Class represents single CAP
@@ -165,9 +166,11 @@ public:
      * The Parameter of the alert message
      * refer to CAP protocol v1.2
      */
-    const Parameter &parameter() const;
+    const std::vector<CAPNamedValue> &parameters() const;
     /** The areas targeted by this CAP alert message. */
     const std::vector<CAPArea> &areas() const;
+    /** System-specific codes for event typing. */
+    const std::vector<CAPNamedValue> &eventCodes() const;
 
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
@@ -185,9 +188,9 @@ public:
     void addResponseType(ResponseType responseType);
     void setContact(const QString &contact);
     void setWeb(const QString &web);
-    void setParameter(const Parameter &parameter);
-    void addParameter(std::pair<QString, QString> &);
+    void addParameter(CAPNamedValue &&param);
     void addArea(CAPArea &&area);
+    void addEventCode(CAPNamedValue &&code);
     AlertInfo &operator=(const AlertInfo &other);
     AlertInfo &operator=(AlertInfo &&other);
 

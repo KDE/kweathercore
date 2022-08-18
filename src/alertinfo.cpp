@@ -27,8 +27,9 @@ public:
     ResponseTypes responseTypes = ResponseType::UnknownResponseType;
     QString contact;
     QString web;
-    Parameter parameter;
+    std::vector<CAPNamedValue> parameters;
     std::vector<CAPArea> areas;
+    std::vector<CAPNamedValue> eventCodes;
 };
 AlertInfo::AlertInfo()
     : d(new AlertInfoPrivate)
@@ -104,13 +105,17 @@ QString AlertInfo::web() const
 {
     return d->web;
 }
-const Parameter &AlertInfo::parameter() const
+const std::vector<CAPNamedValue> &AlertInfo::parameters() const
 {
-    return d->parameter;
+    return d->parameters;
 }
 const std::vector<CAPArea> &AlertInfo::areas() const
 {
     return d->areas;
+}
+const std::vector<CAPNamedValue> &AlertInfo::eventCodes() const
+{
+    return d->eventCodes;
 }
 
 void AlertInfo::setHeadline(const QString &headline)
@@ -178,17 +183,18 @@ void AlertInfo::setWeb(const QString &web)
 {
     d->web = web;
 }
-void AlertInfo::setParameter(const Parameter &parameter)
+void AlertInfo::addParameter(CAPNamedValue &&param)
 {
-    d->parameter = parameter;
-}
-void AlertInfo::addParameter(std::pair<QString, QString> &p)
-{
-    d->parameter.push_back(p);
+    d->parameters.push_back(std::move(param));
 }
 
 void AlertInfo::addArea(CAPArea &&area)
 {
     d->areas.push_back(std::move(area));
+}
+
+void AlertInfo::addEventCode(CAPNamedValue &&code)
+{
+    d->eventCodes.push_back(std::move(code));
 }
 }

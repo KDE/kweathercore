@@ -8,6 +8,7 @@
 #include "alertentry.h"
 #include "alertinfo.h"
 #include "caparea.h"
+#include "capnamedvalue.h"
 #include "kweathercore_p.h"
 #include <KLocalizedString>
 #include <QDateTime>
@@ -70,6 +71,7 @@ enum class InfoTags {
     HEADLINE,
     DESCRIPTION,
     EVENT,
+    EVENTCODE,
     EFFECTIVE_TIME,
     ONSET_TIME,
     EXPIRE_TIME,
@@ -95,6 +97,7 @@ static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"description", InfoTags::DESCRIPTION},
     {"effective", InfoTags::EFFECTIVE_TIME},
     {"event", InfoTags::EVENT},
+    {"eventCode", InfoTags::EVENTCODE},
     {"expires", InfoTags::EXPIRE_TIME},
     {"headline", InfoTags::HEADLINE},
     {"instruction", InfoTags::INSTRUCTION},
@@ -275,16 +278,7 @@ AlertInfo CAPParser::parseInfo()
                     info.setInstruction(m_xml.readElementText());
                     break;
                 case InfoTags::PARAMETER: {
-                    std::pair<QString, QString> p;
-                    m_xml.readNextStartElement();
-                    if (m_xml.name() == QStringLiteral("valueName")) {
-                        p.first = m_xml.readElementText();
-                    }
-                    m_xml.readNextStartElement();
-                    if (m_xml.name() == QStringLiteral("value")) {
-                        p.second = m_xml.readElementText();
-                    }
-                    info.addParameter(p);
+                    info.addParameter(parseNamedValue());
                     break;
                 }
                 case InfoTags::AREA: {
@@ -313,6 +307,9 @@ AlertInfo CAPParser::parseInfo()
                 case InfoTags::WEB:
                     info.setWeb(m_xml.readElementText());
                     break;
+                case InfoTags::EVENTCODE:
+                    info.addEventCode(parseNamedValue());
+                    break;
                 }
             } else {
                 if (m_xml.isStartElement()) {
@@ -332,16 +329,7 @@ CAPArea CAPParser::parseArea()
         if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
             area.setDescription(m_xml.readElementText());
         } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
-            std::pair<QString, QString> p;
-            m_xml.readNextStartElement();
-            if (m_xml.name() == QStringLiteral("valueName")) {
-                p.first = m_xml.readElementText();
-            }
-            m_xml.readNextStartElement();
-            if (m_xml.name() == QStringLiteral("value")) {
-                p.second = m_xml.readElementText();
-            }
-            area.addGeoCode(std::move(p));
+            area.addGeoCode(parseNamedValue());
         } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
             area.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
         } else if (m_xml.name() == QLatin1String("circle") && !m_xml.isEndElement()) {
@@ -360,5 +348,22 @@ CAPArea CAPParser::parseArea()
         }
     }
     return area;
+}
+
+CAPNamedValue CAPParser::parseNamedValue()
+{
+    CAPNamedValue value;
+    const auto elementName = m_xml.name().toString();
+    while (!m_xml.isEndElement() || m_xml.name() != elementName) {
+        m_xml.readNext();
+        if (m_xml.isStartElement() && m_xml.name() == QLatin1String("valueName")) {
+            value.name = m_xml.readElementText();
+        } else if (m_xml.isStartElement() && m_xml.name() == QLatin1String("value")) {
+            value.value = m_xml.readElementText();
+        } else if (m_xml.isStartElement()) {
+            qDebug() << "unknown named value element:" << m_xml.name();
+        }
+    }
+    return value;
 }
 }
