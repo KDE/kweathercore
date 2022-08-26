@@ -43,6 +43,8 @@ class KWEATHERCORE_EXPORT CAPArea
 {
     Q_GADGET
     Q_PROPERTY(QString description READ description)
+    Q_PROPERTY(float altitude READ altitude)
+    Q_PROPERTY(float ceiling READ ceiling)
 public:
     CAPArea();
     CAPArea(const CAPArea &other);
@@ -67,8 +69,20 @@ public:
     const std::vector<CAPNamedValue> &geoCodes() const;
     void addGeoCode(CAPNamedValue &&geoCode);
 
-    // TODO
-    // altitude, ceiling: so far not observed in real world data
+    /** The specific or minimum altitude of the affected area of the alert message.
+     *  The altitude measure is in feet above mean sea level.
+     *  If not set, NAN is returned.
+     */
+    float altitude() const;
+    void setAltitude(float altitude);
+
+    /** The maximum altitude of the affected area of the alert message.
+     *  The altitude measure is in feet above mean sea level.
+     *  If not set, NAN is returned.
+     */
+    float ceiling() const;
+    void setCeiling(float ceiling);
+
 private:
     QSharedDataPointer<CAPAreaPrivate> d;
 };

@@ -18,6 +18,8 @@ public:
     std::vector<Polygon> polygons;
     std::vector<CAPCircle> circles;
     std::vector<CAPNamedValue> geoCodes;
+    float altitude = NAN;
+    float ceiling = NAN;
 };
 }
 
@@ -70,4 +72,24 @@ const std::vector<CAPNamedValue> &CAPArea::geoCodes() const
 void CAPArea::addGeoCode(CAPNamedValue &&geoCode)
 {
     d->geoCodes.push_back(std::move(geoCode));
+}
+
+float CAPArea::altitude() const
+{
+    return d->altitude;
+}
+
+void CAPArea::setAltitude(float altitude)
+{
+    d->altitude = altitude;
+}
+
+float CAPArea::ceiling() const
+{
+    return d->ceiling;
+}
+
+void CAPArea::setCeiling(float ceiling)
+{
+    d->ceiling = ceiling;
 }

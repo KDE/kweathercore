@@ -343,6 +343,10 @@ CAPArea CAPParser::parseArea()
                 circle.radius = QStringView(t).mid(spaceIdx).toFloat();
                 area.addCircle(std::move(circle));
             }
+        } else if (m_xml.name() == QLatin1String("altitude") && !m_xml.isEndElement()) {
+            area.setAltitude(m_xml.readElementText().toFloat());
+        } else if (m_xml.name() == QLatin1String("ceiling") && !m_xml.isEndElement()) {
+            area.setCeiling(m_xml.readElementText().toFloat());
         } else if (m_xml.isStartElement()) {
             qDebug() << "unknown area element:" << m_xml.name();
         }
