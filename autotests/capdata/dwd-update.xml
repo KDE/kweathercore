@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>2.49.0.0.276.0.DWD.PVW.1661544180000.6ffa85ac-a5ed-4e69-977c-e767a423ecd6.MUL</identifier>
+  <sender>opendata@dwd.de</sender>
+  <sent>2022-08-26T22:03:00+02:00</sent>
+  <status>Actual</status>
+  <msgType>Update</msgType>
+  <source>PVW</source>
+  <scope>Public</scope>
+  <code>id:2.49.0.0.276.0.DWD.PVW.1661544180000.6ffa85ac-a5ed-4e69-977c-e767a423ecd6</code>
+  <references>opendata@dwd.de,2.49.0.0.276.0.DWD.PVW.1661542140000.7462e657-ce54-473f-91c8-abe408afe703.MUL,2022-08-26T21:29:00+02:00</references>
+  <info>
+    <language>de-DE</language>
+    <category>Met</category>
+    <event>STARKES GEWITTER</event>
+    <responseType>Prepare</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Moderate</severity>
+    <certainty>Likely</certainty>
+    <eventCode>
+      <valueName>PROFILE_VERSION</valueName>
+      <value>2.1.12</value>
+    </eventCode>
+    <eventCode>
+      <valueName>II</valueName>
+      <value>34</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>THUNDERSTORM</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>RAIN</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>WIND</value>
+    </eventCode>
+    <eventCode>
+      <valueName>GROUP</valueName>
+      <value>HAIL</value>
+    </eventCode>
+    <eventCode>
+      <valueName>AREA_COLOR</valueName>
+      <value>251 140 0</value>
+    </eventCode>
+    <effective>2022-08-26T22:03:00+02:00</effective>
+    <onset>2022-08-26T22:03:00+02:00</onset>
+    <expires>2022-08-26T23:00:00+02:00</expires>
+    <senderName>Deutscher Wetterdienst</senderName>
+    <headline>Amtliche WARNUNG vor STARKEM GEWITTER</headline>
+    <description>Es treten einzelne Gewitter auf. Dabei gibt es Starkregen mit Niederschlagsmengen bis 25 l/m² pro Stunde sowie Windböen mit Geschwindigkeiten bis 60 km/h (17m/s, 33kn, Bft 7) und kleinkörnigen Hagel.</description>
+    <instruction>ACHTUNG! Hinweis auf mögliche Gefahren: Örtlich kann es Blitzschlag geben. Bei Blitzschlag besteht Lebensgefahr! Während des Platzregens sind kurzzeitig Verkehrsbehinderungen möglich.</instruction>
+    <web>https://www.wettergefahren.de</web>
+    <contact>Deutscher Wetterdienst</contact>
+    <parameter>
+      <valueName>gusts</valueName>
+      <value>&lt;60 [km/h]</value>
+    </parameter>
+    <parameter>
+      <valueName>precipitation</valueName>
+      <value>&lt;25 [l/m² in 1h]</value>
+    </parameter>
+    <parameter>
+      <valueName>hail</valueName>
+      <value>&lt;2 [cm]</value>
+    </parameter>
+    <parameter>
+      <valueName>occurrence</valueName>
+      <value>isolated</value>
+    </parameter>
+    <area>
+      <areaDesc>polygonal event area</areaDesc>
+      <polygon>51.437717,13.32218 51.437828,13.332933 51.437717,13.32218</polygon>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+    <area>
+      <areaDesc>Gemeinde Hohendubrau</areaDesc>
+      <geocode>
+        <valueName>WARNCELLID</valueName>
+        <value>814626190</value>
+      </geocode>
+      <altitude>0.0</altitude>
+      <ceiling>9842.5197</ceiling>
+    </area>
+  </info>
+</alert>

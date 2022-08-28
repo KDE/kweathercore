@@ -13,6 +13,7 @@
 namespace KWeatherCore
 {
 class AlertInfo;
+class CAPReference;
 /**
  * @short Class represents single CAP Alert Message
  *
@@ -109,6 +110,15 @@ public:
      * see @AlertInfo
      */
     const std::vector<AlertInfo> &infoVec() const;
+    /**
+     * References to previous CAP alert messages.
+     */
+    const std::vector<CAPReference> &references() const;
+    /**
+     * Reference of this CAP alert message.
+     * @see references()
+     */
+    CAPReference ownReference() const;
 
     void setIdentifier(const QString &identifier);
     void setSender(const QString &sender);
@@ -117,10 +127,8 @@ public:
     void setMsgType(MsgType msgType);
     void setScope(Scope scope);
     void setNote(const QString &note);
-    void setInfoVec(const std::vector<AlertInfo> &infoVec);
-    void setInfoVec(std::vector<AlertInfo> &&infoVec);
-    void addInfo(const AlertInfo &alertInfo);
     void addInfo(AlertInfo &&alertInfo);
+    void setReferences(std::vector<CAPReference> &&references);
     AlertEntry &operator=(const AlertEntry &other);
     AlertEntry &operator=(AlertEntry &&other);
 

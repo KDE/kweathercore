@@ -5,6 +5,7 @@
 
 #include "alertentry.h"
 #include "alertinfo.h"
+#include "capreference.h"
 
 namespace KWeatherCore
 {
@@ -19,6 +20,7 @@ public:
     Scope scope = Scope::UnknownScope;
     QString note;
     std::vector<AlertInfo> infoVec;
+    std::vector<CAPReference> references;
 };
 
 AlertEntry::AlertEntry()
@@ -63,6 +65,14 @@ const std::vector<AlertInfo> &AlertEntry::infoVec() const
 {
     return d->infoVec;
 }
+const std::vector<CAPReference> &AlertEntry::references() const
+{
+    return d->references;
+}
+CAPReference AlertEntry::ownReference() const
+{
+    return CAPReference(sender(), identifier(), sentTime());
+}
 void AlertEntry::setIdentifier(const QString &identifier)
 {
     d->identifier = identifier;
@@ -91,20 +101,12 @@ void AlertEntry::setNote(const QString &note)
 {
     d->note = note;
 }
-void AlertEntry::setInfoVec(const std::vector<AlertInfo> &infoVec)
-{
-    d->infoVec = infoVec;
-}
-void AlertEntry::setInfoVec(std::vector<AlertInfo> &&infoVec)
-{
-    d->infoVec = std::move(infoVec);
-}
-void AlertEntry::addInfo(const AlertInfo &alertInfo)
-{
-    d->infoVec.push_back(alertInfo);
-}
 void AlertEntry::addInfo(AlertInfo &&alertInfo)
 {
     d->infoVec.emplace_back(alertInfo);
+}
+void AlertEntry::setReferences(std::vector<CAPReference> &&references)
+{
+    d->references = std::move(references);
 }
 }

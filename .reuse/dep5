@@ -5,3 +5,7 @@ Source: https://invent.kde.org/libraries/kweathercore
 Files: autotests/met.no/*
 Copyright: The Norwegian Meteorological institute
 License: CC-BY-4.0
+
+Files: autotests/capdata/*.xml
+Copyright: none
+License: CC0-1.0

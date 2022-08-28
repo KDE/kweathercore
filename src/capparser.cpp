@@ -9,6 +9,7 @@
 #include "alertinfo.h"
 #include "caparea.h"
 #include "capnamedvalue.h"
+#include "capreference.h"
 #include "kweathercore_p.h"
 #include <KLocalizedString>
 #include <QDateTime>
@@ -53,7 +54,7 @@ static constexpr const MapEntry<AlertInfo::Category> category_map[] = {
     {"Transport", AlertInfo::Category::Transport},
 };
 
-enum class Tags { ALERT, IDENTIFIER, SENDER, SENT_TIME, STATUS, MSG_TYPE, SCOPE, NOTE, INFO };
+enum class Tags { ALERT, IDENTIFIER, SENDER, SENT_TIME, STATUS, MSG_TYPE, SCOPE, NOTE, INFO, REFERENCES };
 
 static constexpr const MapEntry<Tags> tag_map[] = {
     {"alert", Tags::ALERT},
@@ -61,6 +62,7 @@ static constexpr const MapEntry<Tags> tag_map[] = {
     {"info", Tags::INFO},
     {"msgType", Tags::MSG_TYPE},
     {"note", Tags::NOTE},
+    {"references", Tags::REFERENCES},
     {"scope", Tags::SCOPE},
     {"sender", Tags::SENDER},
     {"sent", Tags::SENT_TIME},
@@ -216,9 +218,12 @@ AlertEntry CAPParser::parse()
             break;
         case Tags::INFO: {
             auto info = parseInfo();
-            entry.addInfo(info);
+            entry.addInfo(std::move(info));
             break;
         }
+        case Tags::REFERENCES:
+            entry.setReferences(parseReferences(m_xml.readElementText()));
+            break;
         default:
             m_xml.skipCurrentElement();
         }
@@ -369,5 +374,23 @@ CAPNamedValue CAPParser::parseNamedValue()
         }
     }
     return value;
+}
+
+std::vector<CAPReference> CAPParser::parseReferences(const QString &refsString)
+{
+    std::vector<CAPReference> refs;
+    // TODO for Qt 6: use QStringTokenizer
+    const auto refsSplit = refsString.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+    refs.reserve(refsSplit.size());
+    for (const auto &refString : refsSplit) {
+        const auto refSplit = refString.split(QLatin1Char(','));
+        if (refSplit.size() != 3) {
+            qDebug() << "failed to parse CAP reference:" << refString;
+            continue;
+        }
+        refs.emplace_back(refSplit.at(0), refSplit.at(1), QDateTime::fromString(refSplit.at(2), Qt::ISODate));
+    }
+
+    return refs;
 }
 }

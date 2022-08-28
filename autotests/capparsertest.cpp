@@ -7,6 +7,7 @@
 #include <KWeatherCore/AlertInfo>
 #include <KWeatherCore/CAPArea>
 #include <KWeatherCore/CAPParser>
+#include <KWeatherCore/CAPReference>
 
 #include <QFile>
 #include <QTest>
@@ -155,6 +156,34 @@ private Q_SLOTS:
             QVERIFY(p.first != 0.0f);
             QVERIFY(p.second != 0.0f);
         }
+    }
+
+    void testReferences()
+    {
+        QFile f(QFINDTESTDATA("capdata/dwd-update.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
+        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Update);
+        QCOMPARE(alert.references().size(), 1);
+        auto ref = alert.references()[0];
+        QCOMPARE(ref.sender(), QLatin1String("opendata@dwd.de"));
+        QCOMPARE(ref.identifier(), QLatin1String("2.49.0.0.276.0.DWD.PVW.1661542140000.7462e657-ce54-473f-91c8-abe408afe703.MUL"));
+        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {21, 29}, Qt::OffsetFromUTC, 2 * 60 * 60));
+
+        ref = alert.ownReference();
+        QCOMPARE(ref.sender(), QLatin1String("opendata@dwd.de"));
+        QCOMPARE(ref.identifier(), QLatin1String("2.49.0.0.276.0.DWD.PVW.1661544180000.6ffa85ac-a5ed-4e69-977c-e767a423ecd6.MUL"));
+        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {22, 3}, Qt::OffsetFromUTC, 2 * 60 * 60));
+
+        QCOMPARE(alert.infoVec().size(), 1);
+        const auto info = alert.infoVec()[0];
+        QCOMPARE(info.areas().size(), 2);
+        const auto area = info.areas()[0];
+        QCOMPARE(area.altitude(), 0.0f);
+        QCOMPARE(area.ceiling(), 9842.5197f);
     }
 };
 

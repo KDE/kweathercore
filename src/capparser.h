@@ -16,6 +16,7 @@ class AlertEntry;
 class AlertInfo;
 class CAPArea;
 class CAPNamedValue;
+class CAPReference;
 
 /**
  * Parser for CAP Alert Messages
@@ -32,6 +33,7 @@ private:
     AlertInfo parseInfo();
     CAPArea parseArea();
     CAPNamedValue parseNamedValue();
+    std::vector<CAPReference> parseReferences(const QString &refsString);
     QXmlStreamReader m_xml;
 };
 }
