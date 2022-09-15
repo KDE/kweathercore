@@ -15,7 +15,7 @@ class CAPAreaPrivate : public QSharedData
 {
 public:
     QString description;
-    std::vector<Polygon> polygons;
+    std::vector<CAPPolygon> polygons;
     std::vector<CAPCircle> circles;
     std::vector<CAPNamedValue> geoCodes;
     float altitude = NAN;
@@ -44,12 +44,12 @@ void CAPArea::setDescription(const QString &areaDesc)
     d->description = areaDesc;
 }
 
-const std::vector<Polygon> &CAPArea::polygons() const
+const std::vector<CAPPolygon> &CAPArea::polygons() const
 {
     return d->polygons;
 }
 
-void CAPArea::addPolygon(Polygon &&polygon)
+void CAPArea::addPolygon(CAPPolygon &&polygon)
 {
     d->polygons.push_back(std::move(polygon));
 }

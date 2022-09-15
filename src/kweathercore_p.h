@@ -13,10 +13,10 @@
 #include <QString>
 
 #include "alertinfo.h"
+#include "caparea.h"
 
 namespace KWeatherCore
 {
-using Polygon = std::vector<std::pair<float, float>>;
 
 // weather description
 struct ResolvedWeatherDesc {
@@ -32,7 +32,7 @@ struct ResolvedWeatherDesc {
 class KWeatherCorePrivate
 {
 public:
-    static Polygon stringToPolygon(const QString &str);
+    static CAPPolygon stringToPolygon(const QString &str);
     static QString toFixedString(double num);
     static QDir getCacheDirectory(double latitude, double longitude);
 

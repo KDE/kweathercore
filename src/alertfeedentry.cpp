@@ -21,7 +21,7 @@ public:
     QDateTime date;
     QUrl CAPUrl;
     AreaCodeVec areaCodes;
-    Polygon polygon;
+    CAPPolygon polygon;
 };
 
 AlertFeedEntry::AlertFeedEntry()
@@ -72,7 +72,7 @@ const AreaCodeVec &AlertFeedEntry::areaCodes() const
 {
     return d->areaCodes;
 }
-const Polygon &AlertFeedEntry::polygon() const
+const CAPPolygon &AlertFeedEntry::polygon() const
 {
     return d->polygon;
 }
@@ -113,15 +113,11 @@ void AlertFeedEntry::setAreaCodes(const AreaCodeVec &areaCodes)
 {
     d->areaCodes = areaCodes;
 }
-void AlertFeedEntry::setPolygon(const Polygon &polygon)
-{
-    d->polygon = polygon;
-}
 void AlertFeedEntry::setAreaCodes(AreaCodeVec &&areaCodes)
 {
     d->areaCodes = std::move(areaCodes);
 }
-void AlertFeedEntry::setPolygon(Polygon &&polygon)
+void AlertFeedEntry::setPolygon(CAPPolygon &&polygon)
 {
     d->polygon = std::move(polygon);
 }

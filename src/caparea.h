@@ -19,10 +19,20 @@
 namespace KWeatherCore
 {
 
-using Polygon = std::vector<std::pair<float, float>>;
+/** A geographic coordinate as part of a polygon. */
+class CAPCoordinate
+{
+public:
+    float latitude = NAN;
+    float longitude = NAN;
+};
+
+/** Geographic polygon describing the target area of a CAP alert message. */
+using CAPPolygon = std::vector<CAPCoordinate>;
 
 /** Geographic circle describing the target area of a CAP alert message. */
-struct KWEATHERCORE_EXPORT CAPCircle {
+class KWEATHERCORE_EXPORT CAPCircle
+{
     Q_GADGET
     Q_PROPERTY(float latitude MEMBER latitude)
     Q_PROPERTY(float longitude MEMBER longitude)
@@ -58,8 +68,8 @@ public:
     void setDescription(const QString &areaDesc);
 
     /** Geographic polygon(s) enclosing the message target area. */
-    const std::vector<Polygon> &polygons() const;
-    void addPolygon(Polygon &&polygon);
+    const std::vector<CAPPolygon> &polygons() const;
+    void addPolygon(CAPPolygon &&polygon);
 
     /** Geographic circles(s) enclosing the message target area. */
     const std::vector<CAPCircle> &circles() const;

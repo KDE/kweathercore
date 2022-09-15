@@ -15,7 +15,8 @@ namespace KWeatherCore
 {
 
 /** CAP key/value pairs as found in area geo codes, alert event codes or alert parameters. */
-struct KWEATHERCORE_EXPORT CAPNamedValue {
+class KWEATHERCORE_EXPORT CAPNamedValue
+{
     Q_GADGET
     Q_PROPERTY(QString name)
     Q_PROPERTY(QString value)
@@ -25,7 +26,6 @@ public:
     QString name;
     QString value;
 };
-
 }
 
 Q_DECLARE_METATYPE(KWeatherCore::CAPNamedValue)

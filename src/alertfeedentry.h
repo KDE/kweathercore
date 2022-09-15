@@ -5,6 +5,7 @@
  */
 #pragma once
 #include "alertinfo.h"
+#include "caparea.h"
 #include "kweathercore/kweathercore_export.h"
 #include "pendingcap.h"
 #include <QObject>
@@ -13,7 +14,6 @@ namespace KWeatherCore
 {
 // code name (FIPS6, UGC...)/code value (002050, AKZ155)
 using AreaCodeVec = std::vector<std::pair<QString, QString>>;
-using Polygon = std::vector<std::pair<float, float>>;
 /**
  * @short Class represents single CAP
  *
@@ -92,7 +92,7 @@ public:
      * area polygon
      * @return latitude longitude pairs
      */
-    const Polygon &polygon() const;
+    const CAPPolygon &polygon() const;
 
     void setTitle(const QString &title);
     void setSummary(const QString &summary);
@@ -103,9 +103,8 @@ public:
     void setDate(const QDateTime &date);
     void setUrl(const QUrl &url);
     void setAreaCodes(const AreaCodeVec &areaCodes);
-    void setPolygon(const Polygon &polygon);
     void setAreaCodes(AreaCodeVec &&areaCodes);
-    void setPolygon(Polygon &&polygon);
+    void setPolygon(CAPPolygon &&polygon);
     AlertFeedEntry &operator=(const AlertFeedEntry &other);
     AlertFeedEntry &operator=(AlertFeedEntry &&other);
 

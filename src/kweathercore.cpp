@@ -17,9 +17,9 @@
 
 namespace KWeatherCore
 {
-Polygon KWeatherCorePrivate::stringToPolygon(const QString &str)
+CAPPolygon KWeatherCorePrivate::stringToPolygon(const QString &str)
 {
-    Polygon res;
+    CAPPolygon res;
     const auto pairList = str.split(QLatin1Char(' '), Qt::SkipEmptyParts);
     for (auto &pair : pairList) {
         auto coordinate = pair.split(QLatin1Char(','));

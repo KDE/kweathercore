@@ -153,8 +153,8 @@ private Q_SLOTS:
         auto polygon = area.polygons()[0];
         QCOMPARE(polygon.size(), 10);
         for (const auto &p : polygon) {
-            QVERIFY(p.first != 0.0f);
-            QVERIFY(p.second != 0.0f);
+            QVERIFY(p.latitude != 0.0f);
+            QVERIFY(p.longitude != 0.0f);
         }
     }
 
