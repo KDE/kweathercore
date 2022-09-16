@@ -5,13 +5,13 @@
  */
 #pragma once
 
-#include "alertentry.h"
 #include "reply.h"
 
 class QNetworkReply;
 
 namespace KWeatherCore
 {
+class CAPAlertMessage;
 class PendingCAPPrivate;
 /**
  * @short The PendingAlerts class contains the reply to an asynchronous
@@ -32,7 +32,7 @@ public:
      * the pointer is nullptr until finished() raised
      * @return
      */
-    AlertEntry value() const;
+    CAPAlertMessage value() const;
 
 private:
     friend class AlertFeedEntry;

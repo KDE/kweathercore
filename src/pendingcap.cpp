@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "pendingcap.h"
+#include "capalertmessage.h"
 #include "capparser.h"
 #include "reply_p.h"
 
@@ -17,7 +18,7 @@ public:
     QByteArray data;
 };
 
-AlertEntry PendingCAP::value() const
+CAPAlertMessage PendingCAP::value() const
 {
     Q_D(const PendingCAP);
     if (d->data.isEmpty()) {

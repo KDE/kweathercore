@@ -60,112 +60,112 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 #endif
 }
 
-AlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
+CAPAlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Immediate")) {
-        return AlertInfo::Urgency::Immediate;
+        return CAPAlertInfo::Urgency::Immediate;
     } else if (str == QStringLiteral("Expected")) {
-        return AlertInfo::Urgency::Expected;
+        return CAPAlertInfo::Urgency::Expected;
     } else if (str == QStringLiteral("Future")) {
-        return AlertInfo::Urgency::Future;
+        return CAPAlertInfo::Urgency::Future;
     } else if (str == QStringLiteral("Past")) {
-        return AlertInfo::Urgency::Past;
+        return CAPAlertInfo::Urgency::Past;
     } else {
-        return AlertInfo::Urgency::UnknownUrgency;
+        return CAPAlertInfo::Urgency::UnknownUrgency;
     }
 }
 
-AlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
+CAPAlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Extreme")) {
-        return AlertInfo::Severity::Extreme;
+        return CAPAlertInfo::Severity::Extreme;
     } else if (str == QStringLiteral("Severe")) {
-        return AlertInfo::Severity::Severe;
+        return CAPAlertInfo::Severity::Severe;
     } else if (str == QStringLiteral("Moderate")) {
-        return AlertInfo::Severity::Moderate;
+        return CAPAlertInfo::Severity::Moderate;
     } else if (str == QStringLiteral("Minor")) {
-        return AlertInfo::Severity::Minor;
+        return CAPAlertInfo::Severity::Minor;
     } else {
-        return AlertInfo::Severity::UnknownSeverity;
+        return CAPAlertInfo::Severity::UnknownSeverity;
     }
 }
 
-AlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
+CAPAlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
 {
     if (str == QStringLiteral("Observed")) {
-        return AlertInfo::Certainty::Observed;
+        return CAPAlertInfo::Certainty::Observed;
     } else if (str == QStringLiteral("Likely")) {
-        return AlertInfo::Certainty::Likely;
+        return CAPAlertInfo::Certainty::Likely;
     } else if (str == QStringLiteral("Possible")) {
-        return AlertInfo::Certainty::Possible;
+        return CAPAlertInfo::Certainty::Possible;
     } else if (str == QStringLiteral("Unlikely")) {
-        return AlertInfo::Certainty::Unlikely;
+        return CAPAlertInfo::Certainty::Unlikely;
     } else {
-        return AlertInfo::Certainty::UnknownCertainty;
+        return CAPAlertInfo::Certainty::UnknownCertainty;
     }
 }
 
-QString KWeatherCorePrivate::urgencyToString(AlertInfo::Urgency urgency)
+QString KWeatherCorePrivate::urgencyToString(CAPAlertInfo::Urgency urgency)
 {
     QString res;
     switch (urgency) {
-    case AlertInfo::Urgency::Immediate:
+    case CAPAlertInfo::Urgency::Immediate:
         res = i18n("Immediate");
         break;
-    case AlertInfo::Urgency::Expected:
+    case CAPAlertInfo::Urgency::Expected:
         res = i18n("Expected");
         break;
-    case AlertInfo::Urgency::Future:
+    case CAPAlertInfo::Urgency::Future:
         res = i18n("Future");
         break;
-    case AlertInfo::Urgency::Past:
+    case CAPAlertInfo::Urgency::Past:
         res = i18n("Past");
         break;
-    case AlertInfo::Urgency::UnknownUrgency:
+    case CAPAlertInfo::Urgency::UnknownUrgency:
         res = i18n("Unknown");
     }
     return res;
 }
 
-QString KWeatherCorePrivate::severityToString(AlertInfo::Severity severity)
+QString KWeatherCorePrivate::severityToString(CAPAlertInfo::Severity severity)
 {
     QString res;
     switch (severity) {
-    case AlertInfo::Severity::Extreme:
+    case CAPAlertInfo::Severity::Extreme:
         res = i18n("Extreme");
         break;
-    case AlertInfo::Severity::Severe:
+    case CAPAlertInfo::Severity::Severe:
         res = i18n("Severe");
         break;
-    case AlertInfo::Severity::Moderate:
+    case CAPAlertInfo::Severity::Moderate:
         res = i18n("Moderate");
         break;
-    case AlertInfo::Severity::Minor:
+    case CAPAlertInfo::Severity::Minor:
         res = i18n("Minor");
         break;
-    case AlertInfo::Severity::UnknownSeverity:
+    case CAPAlertInfo::Severity::UnknownSeverity:
         res = i18n("Unknown");
     }
     return res;
 }
 
-QString KWeatherCorePrivate::certaintyToString(AlertInfo::Certainty certainty)
+QString KWeatherCorePrivate::certaintyToString(CAPAlertInfo::Certainty certainty)
 {
     QString res;
     switch (certainty) {
-    case AlertInfo::Certainty::Observed:
+    case CAPAlertInfo::Certainty::Observed:
         res = i18n("Observed");
         break;
-    case AlertInfo::Certainty::Likely:
+    case CAPAlertInfo::Certainty::Likely:
         res = i18n("Likely");
         break;
-    case AlertInfo::Certainty::Possible:
+    case CAPAlertInfo::Certainty::Possible:
         res = i18n("Possible");
         break;
-    case AlertInfo::Certainty::Unlikely:
+    case CAPAlertInfo::Certainty::Unlikely:
         res = i18n("Unlikely");
         break;
-    case AlertInfo::Certainty::UnknownCertainty:
+    case CAPAlertInfo::Certainty::UnknownCertainty:
         res = i18n("Unknown");
     }
     return res;

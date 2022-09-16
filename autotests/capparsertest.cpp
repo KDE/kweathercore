@@ -3,8 +3,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <KWeatherCore/AlertEntry>
-#include <KWeatherCore/AlertInfo>
+#include <KWeatherCore/CAPAlertInfo>
+#include <KWeatherCore/CAPAlertMessage>
 #include <KWeatherCore/CAPArea>
 #include <KWeatherCore/CAPParser>
 #include <KWeatherCore/CAPReference>
@@ -23,16 +23,16 @@ private Q_SLOTS:
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
 
-        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.identifier(), QLatin1String("KSTO1055887203"));
         QCOMPARE(alert.sender(), QLatin1String("KSTO@NWS.NOAA.GOV"));
         QCOMPARE(alert.sentTime(), QDateTime({2003, 06, 17}, {14, 57}, Qt::OffsetFromUTC, -7 * 60 * 60));
-        QCOMPARE(alert.scope(), KWeatherCore::AlertEntry::Scope::Public);
+        QCOMPARE(alert.scope(), KWeatherCore::CAPAlertMessage::Scope::Public);
         QCOMPARE(alert.note(), QString());
 
-        QCOMPARE(alert.infoVec().size(), 1);
-        const auto &info = alert.infoVec()[0];
+        QCOMPARE(alert.alertInfos().size(), 1);
+        const auto &info = alert.alertInfos()[0];
 
         QCOMPARE(info.event(), QLatin1String("SEVERE THUNDERSTORM"));
         QCOMPARE(info.effectiveTime(), QDateTime());
@@ -43,11 +43,11 @@ private Q_SLOTS:
         QCOMPARE(info.instruction().isEmpty(), false);
         QCOMPARE(info.sender(), QLatin1String("NATIONAL WEATHER SERVICE SACRAMENTO CA"));
         QCOMPARE(info.language(), QLatin1String("en-US"));
-        QCOMPARE(info.categories(), KWeatherCore::AlertInfo::Category::Met);
-        QCOMPARE(info.urgency(), KWeatherCore::AlertInfo::Urgency::Immediate);
-        QCOMPARE(info.severity(), KWeatherCore::AlertInfo::Severity::Severe);
-        QCOMPARE(info.certainty(), KWeatherCore::AlertInfo::Certainty::Observed);
-        QCOMPARE(info.responseTypes(), KWeatherCore::AlertInfo::ResponseType::Shelter);
+        QCOMPARE(info.categories(), KWeatherCore::CAPAlertInfo::Category::Meteorological);
+        QCOMPARE(info.urgency(), KWeatherCore::CAPAlertInfo::Urgency::Immediate);
+        QCOMPARE(info.severity(), KWeatherCore::CAPAlertInfo::Severity::Severe);
+        QCOMPARE(info.certainty(), KWeatherCore::CAPAlertInfo::Certainty::Observed);
+        QCOMPARE(info.responseTypes(), KWeatherCore::CAPAlertInfo::ResponseType::Shelter);
         QCOMPARE(info.contact(), QLatin1String("BARUFFALDI/JUSKIE"));
 
         QCOMPARE(info.areas().size(), 1);
@@ -75,15 +75,15 @@ private Q_SLOTS:
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
 
-        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("vigilance@meteo.fr"));
         QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 10}, {16, 12, 20}, Qt::OffsetFromUTC, +2 * 60 * 60));
 
-        QCOMPARE(alert.infoVec().size(), 2);
-        auto info = alert.infoVec()[0];
+        QCOMPARE(alert.alertInfos().size(), 2);
+        auto info = alert.alertInfos()[0];
         QCOMPARE(info.language(), QLatin1String("fr-FR"));
-        QCOMPARE(info.responseTypes(), KWeatherCore::AlertInfo::ResponseType::Monitor);
+        QCOMPARE(info.responseTypes(), KWeatherCore::CAPAlertInfo::ResponseType::Monitor);
         QCOMPARE(info.web(), QLatin1String("http://vigilance.meteofrance.com/"));
         QCOMPARE(info.areas().size(), 4);
         auto area = info.areas()[3];
@@ -93,7 +93,7 @@ private Q_SLOTS:
         QCOMPARE(area.geoCodes()[0].name, QLatin1String("NUTS3"));
         QCOMPARE(area.geoCodes()[0].value, QLatin1String("FR623"));
 
-        info = alert.infoVec()[1];
+        info = alert.alertInfos()[1];
         QCOMPARE(info.language(), QLatin1String("en-GB"));
         QCOMPARE(info.parameters().size(), 2);
         QCOMPARE(info.parameters()[1].name, QLatin1String("awareness_type"));
@@ -114,13 +114,13 @@ private Q_SLOTS:
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
 
-        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("ntwc@noaa.gov"));
         QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 01}, {0, 40, 48}, Qt::OffsetFromUTC, 0));
 
-        QCOMPARE(alert.infoVec().size(), 1);
-        auto info = alert.infoVec()[0];
+        QCOMPARE(alert.alertInfos().size(), 1);
+        auto info = alert.alertInfos()[0];
         QCOMPARE(info.language(), QLatin1String("en-US"));
         QCOMPARE(info.areas().size(), 1);
         auto area = info.areas()[0];
@@ -139,13 +139,13 @@ private Q_SLOTS:
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
 
-        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Alert);
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("info.aviso@inmet.gov.br"));
         QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 12}, {13, 22, 45}, Qt::OffsetFromUTC, -3 * 60 * 60));
 
-        QCOMPARE(alert.infoVec().size(), 1);
-        auto info = alert.infoVec()[0];
+        QCOMPARE(alert.alertInfos().size(), 1);
+        auto info = alert.alertInfos()[0];
         QCOMPARE(info.language(), QLatin1String("pt-BR"));
         QCOMPARE(info.areas().size(), 1);
         auto area = info.areas()[0];
@@ -165,8 +165,8 @@ private Q_SLOTS:
         KWeatherCore::CAPParser parser(f.readAll());
         auto alert = parser.parse();
 
-        QCOMPARE(alert.status(), KWeatherCore::AlertEntry::Status::Actual);
-        QCOMPARE(alert.msgType(), KWeatherCore::AlertEntry::MsgType::Update);
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Update);
         QCOMPARE(alert.references().size(), 1);
         auto ref = alert.references()[0];
         QCOMPARE(ref.sender(), QLatin1String("opendata@dwd.de"));
@@ -178,8 +178,8 @@ private Q_SLOTS:
         QCOMPARE(ref.identifier(), QLatin1String("2.49.0.0.276.0.DWD.PVW.1661544180000.6ffa85ac-a5ed-4e69-977c-e767a423ecd6.MUL"));
         QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {22, 3}, Qt::OffsetFromUTC, 2 * 60 * 60));
 
-        QCOMPARE(alert.infoVec().size(), 1);
-        const auto info = alert.infoVec()[0];
+        QCOMPARE(alert.alertInfos().size(), 1);
+        const auto info = alert.alertInfos()[0];
         QCOMPARE(info.areas().size(), 2);
         const auto area = info.areas()[0];
         QCOMPARE(area.altitude(), 0.0f);

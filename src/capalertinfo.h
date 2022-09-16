@@ -14,17 +14,17 @@
 
 namespace KWeatherCore
 {
-
+class CAPAlertInfoPrivate;
 class CAPArea;
 /**
- * @short Class represents single CAP
+ * @short Represents a single CAP alert message info element.
  *
- * This class contains the parsed CAP FEED entry
- *
+ * @see CAPAlertMessage
+ * @see https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html §3.2.2
  * @author Han Young <hanyoung@protonmail.com>
  * @author Anjani Kumar <anjanik012@gmail.com>
  */
-class KWEATHERCORE_EXPORT AlertInfo
+class KWEATHERCORE_EXPORT CAPAlertInfo
 {
     Q_GADGET
     Q_PROPERTY(QString headline READ headline)
@@ -47,16 +47,16 @@ class KWEATHERCORE_EXPORT AlertInfo
 public:
     enum class Category {
         Unknown = 0,
-        Geo = 0b1,
-        Met = 0b10,
+        Geophysical = 0b1,
+        Meteorological = 0b10,
         Safety = 0b100,
         Security = 0b1000,
         Rescue = 0b10000,
         Fire = 0b100000,
         Health = 0b1000000,
-        Env = 0b10000000,
+        Environmental = 0b10000000,
         Transport = 0b100000000,
-        Infra = 0b1000000000,
+        Infrastructure = 0b1000000000,
         CBRNE = 0b10000000000,
         Other = 0b100000000000
     };
@@ -84,13 +84,10 @@ public:
     Q_DECLARE_FLAGS(ResponseTypes, ResponseType)
     Q_FLAG(ResponseTypes)
 
-    /**
-     * default constructor
-     */
-    AlertInfo();
-    AlertInfo(const AlertInfo &other);
-    AlertInfo(AlertInfo &&other);
-    ~AlertInfo();
+    CAPAlertInfo();
+    CAPAlertInfo(const CAPAlertInfo &other);
+    CAPAlertInfo(CAPAlertInfo &&other);
+    ~CAPAlertInfo();
     /**
      * The text denoting the type of the subject
      * event of the alert message
@@ -137,17 +134,17 @@ public:
     Categories categories() const;
     /**
      * The urgency of the alert message
-     * @return default to Unknown
+     * @return default to UnknownUrgency
      */
     Urgency urgency() const;
     /**
      * The severity of the alert message
-     * @return default to Unknown
+     * @return default to UnknownSeverity
      */
     Severity severity() const;
     /**
      * The certainty of the alert message
-     * @return default to Unknown
+     * @return default to UnknownCertainty
      */
     Certainty certainty() const;
     /**
@@ -172,6 +169,7 @@ public:
     /** System-specific codes for event typing. */
     const std::vector<CAPNamedValue> &eventCodes() const;
 
+    ///@cond internal
     void setHeadline(const QString &headline);
     void setDescription(const QString &description);
     void setInstruction(const QString &instruction);
@@ -191,14 +189,15 @@ public:
     void addParameter(CAPNamedValue &&param);
     void addArea(CAPArea &&area);
     void addEventCode(CAPNamedValue &&code);
-    AlertInfo &operator=(const AlertInfo &other);
-    AlertInfo &operator=(AlertInfo &&other);
+    ///@endcond
+
+    CAPAlertInfo &operator=(const CAPAlertInfo &other);
+    CAPAlertInfo &operator=(CAPAlertInfo &&other);
 
 private:
-    class AlertInfoPrivate;
-    QSharedDataPointer<AlertInfoPrivate> d;
+    QSharedDataPointer<CAPAlertInfoPrivate> d;
 };
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::AlertInfo::Categories)
-Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::AlertInfo::ResponseTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::CAPAlertInfo::Categories)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KWeatherCore::CAPAlertInfo::ResponseTypes)

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "alertinfo.h"
+#include "capalertinfo.h"
 #include "caparea.h"
 #include "kweathercore/kweathercore_export.h"
 #include "pendingcap.h"
@@ -97,9 +97,9 @@ public:
     void setTitle(const QString &title);
     void setSummary(const QString &summary);
     void setArea(const QString &area);
-    void setUrgency(AlertInfo::Urgency urgency);
-    void setCertainty(AlertInfo::Certainty certainty);
-    void setSeverity(AlertInfo::Severity severity);
+    void setUrgency(CAPAlertInfo::Urgency urgency);
+    void setCertainty(CAPAlertInfo::Certainty certainty);
+    void setSeverity(CAPAlertInfo::Severity severity);
     void setDate(const QDateTime &date);
     void setUrl(const QUrl &url);
     void setAreaCodes(const AreaCodeVec &areaCodes);

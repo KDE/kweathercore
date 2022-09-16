@@ -5,8 +5,8 @@
  */
 
 #include "capparser.h"
-#include "alertentry.h"
-#include "alertinfo.h"
+#include "capalertinfo.h"
+#include "capalertmessage.h"
 #include "caparea.h"
 #include "capnamedvalue.h"
 #include "capreference.h"
@@ -39,19 +39,19 @@ static std::optional<EnumT> stringToValue(const QStringT &s, const MapEntry<Enum
 }
 
 // ### important: keep all the following tables sorted by name!
-static constexpr const MapEntry<AlertInfo::Category> category_map[] = {
-    {"CBRNE", AlertInfo::Category::CBRNE},
-    {"Env", AlertInfo::Category::Env},
-    {"Fire", AlertInfo::Category::Fire},
-    {"Geo", AlertInfo::Category::Geo},
-    {"Health", AlertInfo::Category::Health},
-    {"Infra", AlertInfo::Category::Infra},
-    {"Met", AlertInfo::Category::Met},
-    {"Other", AlertInfo::Category::Other},
-    {"Rescue", AlertInfo::Category::Rescue},
-    {"Safety", AlertInfo::Category::Safety},
-    {"Security", AlertInfo::Category::Security},
-    {"Transport", AlertInfo::Category::Transport},
+static constexpr const MapEntry<CAPAlertInfo::Category> category_map[] = {
+    {"CBRNE", CAPAlertInfo::Category::CBRNE},
+    {"Env", CAPAlertInfo::Category::Environmental},
+    {"Fire", CAPAlertInfo::Category::Fire},
+    {"Geo", CAPAlertInfo::Category::Geophysical},
+    {"Health", CAPAlertInfo::Category::Health},
+    {"Infra", CAPAlertInfo::Category::Infrastructure},
+    {"Met", CAPAlertInfo::Category::Meteorological},
+    {"Other", CAPAlertInfo::Category::Other},
+    {"Rescue", CAPAlertInfo::Category::Rescue},
+    {"Safety", CAPAlertInfo::Category::Safety},
+    {"Security", CAPAlertInfo::Category::Security},
+    {"Transport", CAPAlertInfo::Category::Transport},
 };
 
 enum class Tags { ALERT, IDENTIFIER, SENDER, SENT_TIME, STATUS, MSG_TYPE, SCOPE, NOTE, INFO, REFERENCES };
@@ -113,38 +113,38 @@ static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"web", InfoTags::WEB},
 };
 
-static constexpr const MapEntry<AlertEntry::Status> status_map[] = {
-    {"Actual", AlertEntry::Status::Actual},
-    {"Draft", AlertEntry::Status::Draft},
-    {"Excercise", AlertEntry::Status::Exercise},
-    {"System", AlertEntry::Status::System},
-    {"Test", AlertEntry::Status::Test},
+static constexpr const MapEntry<CAPAlertMessage::Status> status_map[] = {
+    {"Actual", CAPAlertMessage::Status::Actual},
+    {"Draft", CAPAlertMessage::Status::Draft},
+    {"Excercise", CAPAlertMessage::Status::Exercise},
+    {"System", CAPAlertMessage::Status::System},
+    {"Test", CAPAlertMessage::Status::Test},
 };
 
-static constexpr const MapEntry<AlertEntry::MsgType> msgtype_map[] = {
-    {"Ack", AlertEntry::MsgType::Ack},
-    {"Alert", AlertEntry::MsgType::Alert},
-    {"Cancel", AlertEntry::MsgType::Cancel},
-    {"Error", AlertEntry::MsgType::Error},
-    {"Update", AlertEntry::MsgType::Update},
+static constexpr const MapEntry<CAPAlertMessage::MessageType> msgtype_map[] = {
+    {"Ack", CAPAlertMessage::MessageType::Acknowledge},
+    {"Alert", CAPAlertMessage::MessageType::Alert},
+    {"Cancel", CAPAlertMessage::MessageType::Cancel},
+    {"Error", CAPAlertMessage::MessageType::Error},
+    {"Update", CAPAlertMessage::MessageType::Update},
 };
 
-static constexpr const MapEntry<AlertEntry::Scope> scope_map[] = {
-    {"Private", AlertEntry::Scope::Private},
-    {"Public", AlertEntry::Scope::Public},
-    {"Restricted", AlertEntry::Scope::Restricted},
+static constexpr const MapEntry<CAPAlertMessage::Scope> scope_map[] = {
+    {"Private", CAPAlertMessage::Scope::Private},
+    {"Public", CAPAlertMessage::Scope::Public},
+    {"Restricted", CAPAlertMessage::Scope::Restricted},
 };
 
-static constexpr const MapEntry<AlertInfo::ResponseType> response_type_map[] = {
-    {"AllClear", AlertInfo::ResponseType::AllClear},
-    {"Assess", AlertInfo::ResponseType::Assess},
-    {"Avoid", AlertInfo::ResponseType::Avoid},
-    {"Evacuate", AlertInfo::ResponseType::Evacuate},
-    {"Execute", AlertInfo::ResponseType::Execute},
-    {"Monitor", AlertInfo::ResponseType::Monitor},
-    {"None", AlertInfo::ResponseType::None},
-    {"Prepare", AlertInfo::ResponseType::Prepare},
-    {"Shelter", AlertInfo::ResponseType::Shelter},
+static constexpr const MapEntry<CAPAlertInfo::ResponseType> response_type_map[] = {
+    {"AllClear", CAPAlertInfo::ResponseType::AllClear},
+    {"Assess", CAPAlertInfo::ResponseType::Assess},
+    {"Avoid", CAPAlertInfo::ResponseType::Avoid},
+    {"Evacuate", CAPAlertInfo::ResponseType::Evacuate},
+    {"Execute", CAPAlertInfo::ResponseType::Execute},
+    {"Monitor", CAPAlertInfo::ResponseType::Monitor},
+    {"None", CAPAlertInfo::ResponseType::None},
+    {"Prepare", CAPAlertInfo::ResponseType::Prepare},
+    {"Shelter", CAPAlertInfo::ResponseType::Shelter},
 };
 
 CAPParser::CAPParser(const QByteArray &data)
@@ -164,9 +164,9 @@ CAPParser::CAPParser(const QByteArray &data)
     }
 }
 
-AlertEntry CAPParser::parse()
+CAPAlertMessage CAPParser::parse()
 {
-    AlertEntry entry;
+    CAPAlertMessage entry;
     while (m_xml.readNextStartElement()) {
         const auto tag = stringToValue(m_xml.name(), tag_map);
         if (!tag) {
@@ -197,7 +197,7 @@ AlertEntry CAPParser::parse()
             const auto elementText = m_xml.readElementText();
             const auto msgType = stringToValue(elementText, msgtype_map);
             if (msgType) {
-                entry.setMsgType(*msgType);
+                entry.setMessageType(*msgType);
             } else {
                 qWarning() << "Unknown msgType field" << elementText;
             }
@@ -231,9 +231,9 @@ AlertEntry CAPParser::parse()
     return entry;
 }
 
-AlertInfo CAPParser::parseInfo()
+CAPAlertInfo CAPParser::parseInfo()
 {
-    AlertInfo info;
+    CAPAlertInfo info;
 
     if (m_xml.name() == QLatin1String("info")) {
         while (!m_xml.atEnd() && !(m_xml.isEndElement() && m_xml.name() == QLatin1String("info"))) {

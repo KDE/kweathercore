@@ -15,9 +15,9 @@ public:
     QString title;
     QString summary;
     QString area;
-    AlertInfo::Urgency urgency = AlertInfo::Urgency::UnknownUrgency;
-    AlertInfo::Severity severity = AlertInfo::Severity::UnknownSeverity;
-    AlertInfo::Certainty certainty = AlertInfo::Certainty::UnknownCertainty;
+    CAPAlertInfo::Urgency urgency = CAPAlertInfo::Urgency::UnknownUrgency;
+    CAPAlertInfo::Severity severity = CAPAlertInfo::Severity::UnknownSeverity;
+    CAPAlertInfo::Certainty certainty = CAPAlertInfo::Certainty::UnknownCertainty;
     QDateTime date;
     QUrl CAPUrl;
     AreaCodeVec areaCodes;
@@ -89,15 +89,15 @@ void AlertFeedEntry::setArea(const QString &area)
 {
     d->area = area;
 }
-void AlertFeedEntry::setUrgency(AlertInfo::Urgency urgency)
+void AlertFeedEntry::setUrgency(CAPAlertInfo::Urgency urgency)
 {
     d->urgency = urgency;
 }
-void AlertFeedEntry::setCertainty(AlertInfo::Certainty certainty)
+void AlertFeedEntry::setCertainty(CAPAlertInfo::Certainty certainty)
 {
     d->certainty = certainty;
 }
-void AlertFeedEntry::setSeverity(AlertInfo::Severity severity)
+void AlertFeedEntry::setSeverity(CAPAlertInfo::Severity severity)
 {
     d->severity = severity;
 }

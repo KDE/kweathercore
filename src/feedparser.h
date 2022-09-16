@@ -5,7 +5,6 @@
  */
 #pragma once
 #include "alertfeedentry.h"
-#include "alertinfo.h"
 #include <QJsonDocument>
 #include <QXmlStreamReader>
 #include <memory>

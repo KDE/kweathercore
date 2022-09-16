@@ -10,9 +10,9 @@ set(kweathercore_LIB_SRCS
     kweathercore.cpp
     metnoparser.cpp
     pendingweatherforecast.cpp
-    alertinfo.cpp
+    capalertinfo.cpp
     alertfeedentry.cpp
-    alertentry.cpp
+    capalertmessage.cpp
     alertmanager.cpp
     feedparser.cpp
     pendingalerts.cpp
@@ -57,8 +57,8 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     WeatherForecast
     WeatherForecastSource
     GeoTimezone
-    AlertInfo
-    AlertEntry
+    CAPAlertInfo
+    CAPAlertMessage
     AlertFeedEntry
     AlertManager
     PendingAlerts

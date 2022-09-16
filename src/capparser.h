@@ -12,8 +12,8 @@
 
 namespace KWeatherCore
 {
-class AlertEntry;
-class AlertInfo;
+class CAPAlertInfo;
+class CAPAlertMessage;
 class CAPArea;
 class CAPNamedValue;
 class CAPReference;
@@ -27,10 +27,10 @@ class KWEATHERCORE_EXPORT CAPParser
 {
 public:
     explicit CAPParser(const QByteArray &data);
-    AlertEntry parse();
+    CAPAlertMessage parse();
 
 private:
-    AlertInfo parseInfo();
+    CAPAlertInfo parseInfo();
     CAPArea parseArea();
     CAPNamedValue parseNamedValue();
     std::vector<CAPReference> parseReferences(const QString &refsString);
