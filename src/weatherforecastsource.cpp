@@ -10,6 +10,8 @@
 #include "locationqueryresult.h"
 #include "weatherforecast.h"
 
+#include <KTimeZone>
+
 #include <QFile>
 #include <QJsonDocument>
 #include <QNetworkAccessManager>
@@ -44,6 +46,10 @@ PendingWeatherForecast *WeatherForecastSource::requestData(double latitude, doub
         if (weatherforecast.createdTime().secsTo(QDateTime::currentDateTime()) <= 3600) {
             return new PendingWeatherForecast(weatherforecast);
         }
+    }
+
+    if (timezone.isEmpty()) {
+        timezone = QString::fromUtf8(KTimeZone::fromLocation(latitude, longitude));
     }
 
     if (!d->m_nam) {
