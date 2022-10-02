@@ -1,0 +1,191 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kweathercore package.
+#
+# Burkhard Lück <lueck@hube-lueck.de>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kweathercore\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-08-26 00:43+0000\n"
+"PO-Revision-Date: 2021-08-25 16:11+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: kweathercore.cpp:113
+#, kde-format
+msgid "Immediate"
+msgstr "Sofort"
+
+#: kweathercore.cpp:116
+#, kde-format
+msgid "Expected"
+msgstr "Erwartet"
+
+#: kweathercore.cpp:119
+#, kde-format
+msgid "Future"
+msgstr "Zukünftig"
+
+#: kweathercore.cpp:122
+#, kde-format
+msgid "Past"
+msgstr "Vergangen"
+
+#: kweathercore.cpp:125 kweathercore.cpp:147 kweathercore.cpp:169
+#: kweathercore_p.h:23
+#, kde-format
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: kweathercore.cpp:135
+#, kde-format
+msgid "Extreme"
+msgstr "Extrem"
+
+#: kweathercore.cpp:138
+#, kde-format
+msgid "Severe"
+msgstr "Schwer"
+
+#: kweathercore.cpp:141
+#, kde-format
+msgid "Moderate"
+msgstr "Mäßig"
+
+#: kweathercore.cpp:144
+#, kde-format
+msgid "Minor"
+msgstr "Leicht"
+
+#: kweathercore.cpp:157
+#, kde-format
+msgid "Observed"
+msgstr "Beobachtet"
+
+#: kweathercore.cpp:160
+#, kde-format
+msgid "Likely"
+msgstr "Wahrscheinlich"
+
+#: kweathercore.cpp:163
+#, kde-format
+msgid "Possible"
+msgstr "Möglich"
+
+#: kweathercore.cpp:166
+#, kde-format
+msgid "Unlikely"
+msgstr "Unwahrscheinlich"
+
+#: kweathercore.cpp:217 kweathercore.cpp:218 kweathercore.cpp:219
+msgid "Clear"
+msgstr "Klar"
+
+#: kweathercore.cpp:220 kweathercore.cpp:221 kweathercore.cpp:222
+msgid "Cloudy"
+msgstr "Bewölkt"
+
+#: kweathercore.cpp:223
+msgid "Partly Sunny"
+msgstr "Teilweise sonnig"
+
+#: kweathercore.cpp:224 kweathercore.cpp:225
+msgid "Light Clouds"
+msgstr "Leicht bewölkt"
+
+#: kweathercore.cpp:226 kweathercore.cpp:227 kweathercore.cpp:228
+msgid "Fog"
+msgstr "Nebel"
+
+#: kweathercore.cpp:230 kweathercore.cpp:231 kweathercore.cpp:232
+#: kweathercore.cpp:236 kweathercore.cpp:237 kweathercore.cpp:238
+msgid "Heavy Rain"
+msgstr "Starker Regen"
+
+#: kweathercore.cpp:233 kweathercore.cpp:234 kweathercore.cpp:235
+#: kweathercore.cpp:239 kweathercore.cpp:240 kweathercore.cpp:241
+#: kweathercore.cpp:246 kweathercore.cpp:247 kweathercore.cpp:248
+#: kweathercore.cpp:252 kweathercore.cpp:253 kweathercore.cpp:254
+#: kweathercore.cpp:262 kweathercore.cpp:263 kweathercore.cpp:264
+#: kweathercore.cpp:269 kweathercore.cpp:270 kweathercore.cpp:271
+#: kweathercore.cpp:275 kweathercore.cpp:276 kweathercore.cpp:277
+#: kweathercore.cpp:282 kweathercore.cpp:283 kweathercore.cpp:284
+#: kweathercore.cpp:292 kweathercore.cpp:293 kweathercore.cpp:294
+#: kweathercore.cpp:299 kweathercore.cpp:300 kweathercore.cpp:301
+#: kweathercore.cpp:302 kweathercore.cpp:303 kweathercore.cpp:304
+#: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
+#: kweathercore.cpp:319 kweathercore.cpp:320 kweathercore.cpp:321
+#: kweathercore.cpp:326 kweathercore.cpp:327 kweathercore.cpp:328
+#: kweathercore.cpp:332 kweathercore.cpp:333 kweathercore.cpp:334
+#: kweathercore.cpp:345 kweathercore.cpp:346 kweathercore.cpp:347
+msgid "Storm"
+msgstr "Sturm"
+
+#: kweathercore.cpp:243 kweathercore.cpp:244 kweathercore.cpp:245
+#: kweathercore.cpp:249 kweathercore.cpp:250 kweathercore.cpp:251
+msgid "Heavy Sleet"
+msgstr "Heftige Graupelschauer"
+
+#: kweathercore.cpp:256 kweathercore.cpp:257 kweathercore.cpp:258
+#: kweathercore.cpp:259 kweathercore.cpp:260 kweathercore.cpp:261
+msgid "Heavy Snow"
+msgstr "Starker Schneefall"
+
+#: kweathercore.cpp:266 kweathercore.cpp:267 kweathercore.cpp:268
+#: kweathercore.cpp:272 kweathercore.cpp:273 kweathercore.cpp:274
+msgid "Light Rain"
+msgstr "Leichter Regen"
+
+#: kweathercore.cpp:279 kweathercore.cpp:280 kweathercore.cpp:281
+#: kweathercore.cpp:285 kweathercore.cpp:286 kweathercore.cpp:287
+msgid "Light Sleet"
+msgstr "Leichte Graupelschauer"
+
+#: kweathercore.cpp:289 kweathercore.cpp:290 kweathercore.cpp:291
+#: kweathercore.cpp:295 kweathercore.cpp:296 kweathercore.cpp:297
+msgid "Light Snow"
+msgstr "Leichter Schneefall"
+
+#: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
+msgid "Partly Cloudy"
+msgstr "Teilweise bewölkt"
+
+#: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
+#: kweathercore.cpp:316 kweathercore.cpp:317 kweathercore.cpp:318
+msgid "Rain"
+msgstr "Regen"
+
+#: kweathercore.cpp:323 kweathercore.cpp:324 kweathercore.cpp:325
+#: kweathercore.cpp:329 kweathercore.cpp:330 kweathercore.cpp:331
+msgid "Sleet"
+msgstr "Graupel"
+
+#: kweathercore.cpp:336 kweathercore.cpp:337 kweathercore.cpp:338
+#: kweathercore.cpp:339 kweathercore.cpp:340 kweathercore.cpp:341
+#: kweathercore.cpp:342 kweathercore.cpp:343 kweathercore.cpp:344
+msgid "Snow"
+msgstr "Schnee"
+
+#~ msgid "New Moon"
+#~ msgstr "Neumond"
+
+#~ msgid "Waxing Crescent"
+#~ msgstr "Zunehmender Sichelmond"
+
+#~ msgid "Waxing Gibbous"
+#~ msgstr "Zunehmender Mond"
+
+#~ msgid "Full Moon"
+#~ msgstr "Vollmond"
+
+#~ msgid "Waning Gibbous"
+#~ msgstr "Abnehmender Mond"
+
+#~ msgid "Waning Crescent"
+#~ msgstr "Abnehmender Sichelmond"
