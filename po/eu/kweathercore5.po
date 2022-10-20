@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-26 00:43+0000\n"
-"PO-Revision-Date: 2022-10-18 07:41+0200\n"
+"PO-Revision-Date: 2022-10-19 05:25+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -59,36 +59,36 @@ msgstr "Gogorra"
 #: kweathercore.cpp:141
 #, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "Ertaina"
 
 #: kweathercore.cpp:144
 #, kde-format
 msgid "Minor"
-msgstr ""
+msgstr "Txikia"
 
 #: kweathercore.cpp:157
 #, kde-format
 msgid "Observed"
-msgstr ""
+msgstr "Behatua"
 
 #: kweathercore.cpp:160
 #, kde-format
 msgid "Likely"
-msgstr ""
+msgstr "Seguruenik"
 
 #: kweathercore.cpp:163
 #, kde-format
 msgid "Possible"
-msgstr ""
+msgstr "Baliteke"
 
 #: kweathercore.cpp:166
 #, kde-format
 msgid "Unlikely"
-msgstr ""
+msgstr "Nekez"
 
 #: kweathercore.cpp:217 kweathercore.cpp:218 kweathercore.cpp:219
 msgid "Clear"
-msgstr ""
+msgstr "Garbia"
 
 #: kweathercore.cpp:220 kweathercore.cpp:221 kweathercore.cpp:222
 msgid "Cloudy"
