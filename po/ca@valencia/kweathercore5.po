@@ -174,21 +174,3 @@ msgstr "Aiguaneu"
 #: kweathercore.cpp:342 kweathercore.cpp:343 kweathercore.cpp:344
 msgid "Snow"
 msgstr "Neu"
-
-#~ msgid "New Moon"
-#~ msgstr "Lluna nova"
-
-#~ msgid "Waxing Crescent"
-#~ msgstr "Quart creixent"
-
-#~ msgid "Waxing Gibbous"
-#~ msgstr "Gibosa creixent"
-
-#~ msgid "Full Moon"
-#~ msgstr "Lluna plena"
-
-#~ msgid "Waning Gibbous"
-#~ msgstr "Gibosa minvant"
-
-#~ msgid "Waning Crescent"
-#~ msgstr "Quart minvant"
