@@ -20,7 +20,13 @@ namespace KWeatherCore
 CAPPolygon KWeatherCorePrivate::stringToPolygon(const QString &str)
 {
     CAPPolygon res;
-    const auto pairList = str.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    const auto pairList = QStringView(str).split(QLatin1Char(' '), Qt::SkipEmptyParts);
+#else
+    const auto pairList = str.splitRef(QLatin1Char(' '), Qt::SkipEmptyParts);
+#endif
+
+    res.reserve(pairList.size());
     for (auto &pair : pairList) {
         auto coordinate = pair.split(QLatin1Char(','));
         if (coordinate.size() != 2) {
