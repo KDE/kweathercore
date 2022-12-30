@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kweather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-26 00:43+0000\n"
+"POT-Creation-Date: 2022-12-30 00:50+0000\n"
 "PO-Revision-Date: 2021-08-09 22:55+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,158 +17,158 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 20.12.3\n"
 
-#: kweathercore.cpp:113
+#: kweathercore.cpp:119
 #, kde-format
 msgid "Immediate"
 msgstr "즉시"
 
-#: kweathercore.cpp:116
+#: kweathercore.cpp:122
 #, kde-format
 msgid "Expected"
 msgstr "예상됨"
 
-#: kweathercore.cpp:119
+#: kweathercore.cpp:125
 #, kde-format
 msgid "Future"
 msgstr "미래"
 
-#: kweathercore.cpp:122
+#: kweathercore.cpp:128
 #, kde-format
 msgid "Past"
 msgstr "과거"
 
-#: kweathercore.cpp:125 kweathercore.cpp:147 kweathercore.cpp:169
+#: kweathercore.cpp:131 kweathercore.cpp:153 kweathercore.cpp:175
 #: kweathercore_p.h:23
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: kweathercore.cpp:135
+#: kweathercore.cpp:141
 #, kde-format
 msgid "Extreme"
 msgstr "최대"
 
-#: kweathercore.cpp:138
+#: kweathercore.cpp:144
 #, kde-format
 msgid "Severe"
 msgstr "강함"
 
-#: kweathercore.cpp:141
+#: kweathercore.cpp:147
 #, kde-format
 msgid "Moderate"
 msgstr "중간"
 
-#: kweathercore.cpp:144
+#: kweathercore.cpp:150
 #, kde-format
 msgid "Minor"
 msgstr "약함"
 
-#: kweathercore.cpp:157
+#: kweathercore.cpp:163
 #, kde-format
 msgid "Observed"
 msgstr "관측됨"
 
-#: kweathercore.cpp:160
+#: kweathercore.cpp:166
 #, kde-format
 msgid "Likely"
 msgstr "가능성 높음"
 
-#: kweathercore.cpp:163
+#: kweathercore.cpp:169
 #, kde-format
 msgid "Possible"
 msgstr "가능성 있음"
 
-#: kweathercore.cpp:166
+#: kweathercore.cpp:172
 #, kde-format
 msgid "Unlikely"
 msgstr "가능성 낮음"
 
-#: kweathercore.cpp:217 kweathercore.cpp:218 kweathercore.cpp:219
+#: kweathercore.cpp:223 kweathercore.cpp:224 kweathercore.cpp:225
 msgid "Clear"
 msgstr "갬"
 
-#: kweathercore.cpp:220 kweathercore.cpp:221 kweathercore.cpp:222
+#: kweathercore.cpp:226 kweathercore.cpp:227 kweathercore.cpp:228
 msgid "Cloudy"
 msgstr "흐림"
 
-#: kweathercore.cpp:223
+#: kweathercore.cpp:229
 msgid "Partly Sunny"
 msgstr "부분적으로 맑음"
 
-#: kweathercore.cpp:224 kweathercore.cpp:225
+#: kweathercore.cpp:230 kweathercore.cpp:231
 msgid "Light Clouds"
 msgstr "구름 조금"
 
-#: kweathercore.cpp:226 kweathercore.cpp:227 kweathercore.cpp:228
+#: kweathercore.cpp:232 kweathercore.cpp:233 kweathercore.cpp:234
 msgid "Fog"
 msgstr "안개"
 
-#: kweathercore.cpp:230 kweathercore.cpp:231 kweathercore.cpp:232
 #: kweathercore.cpp:236 kweathercore.cpp:237 kweathercore.cpp:238
+#: kweathercore.cpp:242 kweathercore.cpp:243 kweathercore.cpp:244
 msgid "Heavy Rain"
 msgstr "강한 비"
 
-#: kweathercore.cpp:233 kweathercore.cpp:234 kweathercore.cpp:235
 #: kweathercore.cpp:239 kweathercore.cpp:240 kweathercore.cpp:241
-#: kweathercore.cpp:246 kweathercore.cpp:247 kweathercore.cpp:248
+#: kweathercore.cpp:245 kweathercore.cpp:246 kweathercore.cpp:247
 #: kweathercore.cpp:252 kweathercore.cpp:253 kweathercore.cpp:254
-#: kweathercore.cpp:262 kweathercore.cpp:263 kweathercore.cpp:264
-#: kweathercore.cpp:269 kweathercore.cpp:270 kweathercore.cpp:271
+#: kweathercore.cpp:258 kweathercore.cpp:259 kweathercore.cpp:260
+#: kweathercore.cpp:268 kweathercore.cpp:269 kweathercore.cpp:270
 #: kweathercore.cpp:275 kweathercore.cpp:276 kweathercore.cpp:277
-#: kweathercore.cpp:282 kweathercore.cpp:283 kweathercore.cpp:284
-#: kweathercore.cpp:292 kweathercore.cpp:293 kweathercore.cpp:294
-#: kweathercore.cpp:299 kweathercore.cpp:300 kweathercore.cpp:301
-#: kweathercore.cpp:302 kweathercore.cpp:303 kweathercore.cpp:304
-#: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
+#: kweathercore.cpp:281 kweathercore.cpp:282 kweathercore.cpp:283
+#: kweathercore.cpp:288 kweathercore.cpp:289 kweathercore.cpp:290
+#: kweathercore.cpp:298 kweathercore.cpp:299 kweathercore.cpp:300
+#: kweathercore.cpp:305 kweathercore.cpp:306 kweathercore.cpp:307
+#: kweathercore.cpp:308 kweathercore.cpp:309 kweathercore.cpp:310
 #: kweathercore.cpp:319 kweathercore.cpp:320 kweathercore.cpp:321
-#: kweathercore.cpp:326 kweathercore.cpp:327 kweathercore.cpp:328
+#: kweathercore.cpp:325 kweathercore.cpp:326 kweathercore.cpp:327
 #: kweathercore.cpp:332 kweathercore.cpp:333 kweathercore.cpp:334
-#: kweathercore.cpp:345 kweathercore.cpp:346 kweathercore.cpp:347
+#: kweathercore.cpp:338 kweathercore.cpp:339 kweathercore.cpp:340
+#: kweathercore.cpp:351 kweathercore.cpp:352 kweathercore.cpp:353
 msgid "Storm"
 msgstr "폭풍"
 
-#: kweathercore.cpp:243 kweathercore.cpp:244 kweathercore.cpp:245
 #: kweathercore.cpp:249 kweathercore.cpp:250 kweathercore.cpp:251
+#: kweathercore.cpp:255 kweathercore.cpp:256 kweathercore.cpp:257
 msgid "Heavy Sleet"
 msgstr "강한 진눈깨비"
 
-#: kweathercore.cpp:256 kweathercore.cpp:257 kweathercore.cpp:258
-#: kweathercore.cpp:259 kweathercore.cpp:260 kweathercore.cpp:261
+#: kweathercore.cpp:262 kweathercore.cpp:263 kweathercore.cpp:264
+#: kweathercore.cpp:265 kweathercore.cpp:266 kweathercore.cpp:267
 msgid "Heavy Snow"
 msgstr "강한 눈"
 
-#: kweathercore.cpp:266 kweathercore.cpp:267 kweathercore.cpp:268
 #: kweathercore.cpp:272 kweathercore.cpp:273 kweathercore.cpp:274
+#: kweathercore.cpp:278 kweathercore.cpp:279 kweathercore.cpp:280
 msgid "Light Rain"
 msgstr "약한 비"
 
-#: kweathercore.cpp:279 kweathercore.cpp:280 kweathercore.cpp:281
 #: kweathercore.cpp:285 kweathercore.cpp:286 kweathercore.cpp:287
+#: kweathercore.cpp:291 kweathercore.cpp:292 kweathercore.cpp:293
 msgid "Light Sleet"
 msgstr "약한 진눈깨비"
 
-#: kweathercore.cpp:289 kweathercore.cpp:290 kweathercore.cpp:291
 #: kweathercore.cpp:295 kweathercore.cpp:296 kweathercore.cpp:297
+#: kweathercore.cpp:301 kweathercore.cpp:302 kweathercore.cpp:303
 msgid "Light Snow"
 msgstr "약한 눈"
 
-#: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
+#: kweathercore.cpp:312 kweathercore.cpp:313 kweathercore.cpp:314
 msgid "Partly Cloudy"
 msgstr "부분적으로 흐림"
 
-#: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 #: kweathercore.cpp:316 kweathercore.cpp:317 kweathercore.cpp:318
+#: kweathercore.cpp:322 kweathercore.cpp:323 kweathercore.cpp:324
 msgid "Rain"
 msgstr "비"
 
-#: kweathercore.cpp:323 kweathercore.cpp:324 kweathercore.cpp:325
 #: kweathercore.cpp:329 kweathercore.cpp:330 kweathercore.cpp:331
+#: kweathercore.cpp:335 kweathercore.cpp:336 kweathercore.cpp:337
 msgid "Sleet"
 msgstr "진눈깨비"
 
-#: kweathercore.cpp:336 kweathercore.cpp:337 kweathercore.cpp:338
-#: kweathercore.cpp:339 kweathercore.cpp:340 kweathercore.cpp:341
 #: kweathercore.cpp:342 kweathercore.cpp:343 kweathercore.cpp:344
+#: kweathercore.cpp:345 kweathercore.cpp:346 kweathercore.cpp:347
+#: kweathercore.cpp:348 kweathercore.cpp:349 kweathercore.cpp:350
 msgid "Snow"
 msgstr "눈"
 
