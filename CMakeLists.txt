@@ -1,19 +1,18 @@
 cmake_minimum_required(VERSION 3.5)
-set(KF5_VERSION "0.7.0") # handled by release scripts
-set(KF5_DEP_VERSION "5.75.0") # handled by release scripts
-project(KWeatherCore VERSION ${KF5_VERSION})
+project(KWeatherCore VERSION "0.7.0")
 
 set(CMAKE_CXX_STANDARD 17)
 
 include(FeatureSummary)
-find_package(ECM ${KF5_DEP_VERSION}  NO_MODULE)
+
+set(REQUIRED_QT_VERSION 5.12.0)
+set(KF_DEP_VERSION "5.75.0")
+
+find_package(ECM ${KF_DEP_VERSION}  NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
 feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-
-set(REQUIRED_QT_VERSION 5.12.0)
 
 include(KDEInstallDirs)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
@@ -32,11 +31,11 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KWEATHERCORE
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kweathercore_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5KWeatherCoreConfigVersion.cmake"
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF${QT_MAJOR_VERSION}KWeatherCoreConfigVersion.cmake"
                         SOVERSION 5)
 
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
-find_package(KF5 ${KF5_DEP_VERSION} REQUIRED COMPONENTS I18n Holidays)
+find_package(KF${QT_MAJOR_VERSION} ${KF_DEP_VERSION} REQUIRED COMPONENTS I18n Holidays)
 
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kweathercore5\")
@@ -58,37 +57,37 @@ if(BUILD_EXAMPLES)
 endif()
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5KWeatherCore")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF${QT_MAJOR_VERSION}KWeatherCore")
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KF5KWeatherCore_QCH
-        FILE KF5KWeatherCoreQchTargets.cmake
+        TARGETS KF${QT_MAJOR_VERSION}KWeatherCore_QCH
+        FILE KF${QT_MAJOR_VERSION}KWeatherCoreQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5KWeatherCoreQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF${QT_MAJOR_VERSION}KWeatherCoreQchTargets.cmake\")")
 endif()
 
 include(CMakePackageConfigHelpers)
 
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KF5KWeatherCoreConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5KWeatherCoreConfig.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KFKWeatherCoreConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF${QT_MAJOR_VERSION}KWeatherCoreConfig.cmake"
     INSTALL_DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
 )
 
 install(FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/KF5KWeatherCoreConfig.cmake"
-            "${CMAKE_CURRENT_BINARY_DIR}/KF5KWeatherCoreConfigVersion.cmake"
+            "${CMAKE_CURRENT_BINARY_DIR}/KF${QT_MAJOR_VERSION}KWeatherCoreConfig.cmake"
+            "${CMAKE_CURRENT_BINARY_DIR}/KF${QT_MAJOR_VERSION}KWeatherCoreConfigVersion.cmake"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
 )
 
-install(EXPORT KF5KWeatherCoreTargets
+install(EXPORT KF${QT_MAJOR_VERSION}KWeatherCoreTargets
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE KF5KWeatherCoreTargets.cmake
-        NAMESPACE KF5::)
+        FILE KF${QT_MAJOR_VERSION}KWeatherCoreTargets.cmake
+        NAMESPACE KF${QT_MAJOR_VERSION}::)
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kweathercore_version.h
