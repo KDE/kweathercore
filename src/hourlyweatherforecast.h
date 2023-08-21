@@ -59,7 +59,7 @@ public:
     /**
      * construct from QJsonObject
      */
-    static HourlyWeatherForecast fromJson(QJsonObject obj);
+    static HourlyWeatherForecast fromJson(const QJsonObject &obj);
     /**
      * date of the forecast
      * @return

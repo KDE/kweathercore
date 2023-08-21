@@ -329,13 +329,13 @@ CAPAlertInfo CAPParser::parseInfo()
 CAPArea CAPParser::parseArea()
 {
     CAPArea area;
-    while (!(m_xml.isEndElement() && m_xml.name() == QStringLiteral("area"))) {
+    while (!(m_xml.isEndElement() && m_xml.name() == QLatin1String("area"))) {
         m_xml.readNext();
-        if (m_xml.name() == QStringLiteral("areaDesc") && !m_xml.isEndElement()) {
+        if (m_xml.name() == QLatin1String("areaDesc") && !m_xml.isEndElement()) {
             area.setDescription(m_xml.readElementText());
-        } else if (m_xml.name() == QStringLiteral("geocode") && !m_xml.isEndElement()) {
+        } else if (m_xml.name() == QLatin1String("geocode") && !m_xml.isEndElement()) {
             area.addGeoCode(parseNamedValue());
-        } else if (m_xml.name() == QStringLiteral("polygon") && !m_xml.isEndElement()) {
+        } else if (m_xml.name() == QLatin1String("polygon") && !m_xml.isEndElement()) {
             area.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
         } else if (m_xml.name() == QLatin1String("circle") && !m_xml.isEndElement()) {
             const auto t = m_xml.readElementText();

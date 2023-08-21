@@ -17,35 +17,35 @@ FeedParser::FeedParser(const QJsonDocument &configFile, QObject *parent)
 
 void FeedParser::setConfig(const QJsonDocument &configFile)
 {
-    auto obj = configFile.object();
+    const auto obj = configFile.object();
 
-    m_url = QUrl(obj[QStringLiteral("url")].toString());
-    m_entryMarker = obj[QStringLiteral("entry_marker")].toString();
-    m_titleMarker = obj[QStringLiteral("title")].toString();
+    m_url = QUrl(obj[QLatin1String("url")].toString());
+    m_entryMarker = obj[QLatin1String("entry_marker")].toString();
+    m_titleMarker = obj[QLatin1String("title")].toString();
 
-    auto cap_it = obj.find(QStringLiteral("cap"));
+    auto cap_it = obj.find(QLatin1String("cap"));
     if (cap_it != obj.end()) {
         m_hasCap = true;
-        auto cap_obj = cap_it->toObject();
-        m_capLinkElementMarker = cap_obj[QStringLiteral("element")].toString();
-        m_capValueType = cap_obj[QStringLiteral("type")].toString();
-        m_capValueMarker = cap_obj[QStringLiteral("value")].toString();
+        const auto cap_obj = cap_it->toObject();
+        m_capLinkElementMarker = cap_obj[QLatin1String("element")].toString();
+        m_capValueType = cap_obj[QLatin1String("type")].toString();
+        m_capValueMarker = cap_obj[QLatin1String("value")].toString();
     } else {
         m_hasCap = false;
         m_capLinkElementMarker.clear();
         m_capValueMarker.clear();
         m_capValueType.clear();
     }
-    m_summaryMarker = obj[QStringLiteral("summary")].toString();
+    m_summaryMarker = obj[QLatin1String("summary")].toString();
 
-    auto area_it = obj.find(QStringLiteral("area"));
+    auto area_it = obj.find(QLatin1String("area"));
     if (area_it != obj.end()) {
         m_hasArea = true;
-        auto area_obj = area_it->toObject();
-        m_areaNameMarker = area_obj[QStringLiteral("name")].toString();
-        m_polygonMarker = area_obj[QStringLiteral("polygon")].toString();
-        m_FIPS6Marker = area_obj[QStringLiteral("FIPS6")].toString();
-        m_UGCMarker = area_obj[QStringLiteral("UGC")].toString();
+        const auto area_obj = area_it->toObject();
+        m_areaNameMarker = area_obj[QLatin1String("name")].toString();
+        m_polygonMarker = area_obj[QLatin1String("polygon")].toString();
+        m_FIPS6Marker = area_obj[QLatin1String("FIPS6")].toString();
+        m_UGCMarker = area_obj[QLatin1String("UGC")].toString();
     } else {
         m_hasArea = false;
         m_areaNameMarker.clear();
@@ -54,16 +54,16 @@ void FeedParser::setConfig(const QJsonDocument &configFile)
         m_UGCMarker.clear();
     }
 
-    m_urgencyMarker = obj[QStringLiteral("urgency")].toString();
-    m_severityMarker = obj[QStringLiteral("severity")].toString();
-    m_certaintyMarker = obj[QStringLiteral("certainty")].toString();
+    m_urgencyMarker = obj[QLatin1String("urgency")].toString();
+    m_severityMarker = obj[QLatin1String("severity")].toString();
+    m_certaintyMarker = obj[QLatin1String("certainty")].toString();
 
-    auto date_it = obj.find(QStringLiteral("date"));
+    auto date_it = obj.find(QLatin1String("date"));
     if (date_it != obj.end()) {
         m_hasDate = true;
-        auto date_obj = date_it->toObject();
-        m_dateFormat = date_obj[QStringLiteral("format")].toString();
-        m_dateMarker = date_obj[QStringLiteral("element")].toString();
+        const auto date_obj = date_it->toObject();
+        m_dateFormat = date_obj[QLatin1String("format")].toString();
+        m_dateMarker = date_obj[QLatin1String("element")].toString();
     } else {
         m_hasDate = false;
         m_dateFormat.clear();
@@ -107,7 +107,7 @@ std::unique_ptr<AlertFeedEntry> FeedParser::parseOneEntry(QXmlStreamReader &read
         } else if (m_hasArea && reader.name() == m_UGCMarker) {
             areaCodes.push_back({QStringLiteral("UGC"), reader.readElementText()});
         } else if (m_hasDate && reader.name() == m_dateMarker) {
-            if (m_dateFormat == QStringLiteral("ISO-8601")) {
+            if (m_dateFormat == QLatin1String("ISO-8601")) {
                 entry->setDate(QDateTime::fromString(reader.readElementText(), Qt::ISODate));
             } else {
                 entry->setDate(QDateTime::fromString(reader.readElementText(), m_dateFormat));
@@ -122,9 +122,9 @@ QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const
 {
     Q_ASSERT(m_hasCap && reader.isStartElement() && reader.name() == m_capLinkElementMarker);
 
-    if (m_capValueType == QStringLiteral("attribute")) {
+    if (m_capValueType == QLatin1String("attribute")) {
         return QUrl(reader.attributes().value(m_capValueMarker).toString());
-    } else if (m_capValueType == QStringLiteral("text")) {
+    } else if (m_capValueType == QLatin1String("text")) {
         return QUrl(reader.readElementText());
     } else {
         return QUrl();

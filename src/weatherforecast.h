@@ -36,7 +36,7 @@ public:
     /**
      * construct from json
      */
-    static WeatherForecast fromJson(QJsonObject obj);
+    static WeatherForecast fromJson(const QJsonObject &obj);
     /**
      * @return daily weather forecast
      */

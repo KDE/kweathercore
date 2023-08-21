@@ -29,11 +29,11 @@ public:
 
 static std::optional<QString> findSubdivision(const QJsonObject &json)
 {
-    const auto adminCodeIter = json.constFind(QStringLiteral("adminCodes1"));
+    const auto adminCodeIter = json.constFind(QLatin1String("adminCodes1"));
     if (adminCodeIter == json.constEnd()) {
         return std::nullopt;
     } else {
-        return (*adminCodeIter).toObject().value(QStringLiteral("ISO3166_2")).toString();
+        return (*adminCodeIter).toObject().value(QLatin1String("ISO3166_2")).toString();
     }
 }
 
@@ -58,10 +58,10 @@ LocationQueryReply::LocationQueryReply(const QString &name, int number, QNetwork
             return;
         }
 
-        QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-        QJsonObject root = document.object();
+        const QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+        const QJsonObject root = document.object();
 
-        auto counts = root[QStringLiteral("totalResultsCount")].toInt();
+        auto counts = root[QLatin1String("totalResultsCount")].toInt();
         // if no result
         if (!counts) {
             d->setError(Reply::NotFound);
@@ -70,25 +70,25 @@ LocationQueryReply::LocationQueryReply(const QString &name, int number, QNetwork
         }
 
         // if our api calls reached daily limit
-        if (root[QStringLiteral("status")].toObject()[QStringLiteral("value")].toInt() == 18) {
+        if (root[QLatin1String("status")].toObject()[QLatin1String("value")].toInt() == 18) {
             d->setError(Reply::RateLimitExceeded);
             qWarning("API calls reached daily limit");
             Q_EMIT finished();
             return;
         }
 
-        auto geonames = root.value(QStringLiteral("geonames")).toArray();
+        const auto geonames = root.value(QLatin1String("geonames")).toArray();
         // add query results
         for (const auto &resRef : qAsConst(geonames)) {
-            auto res = resRef.toObject();
-            auto result = LocationQueryResult(res.value(QStringLiteral("lat")).toString().toFloat(),
-                                              res.value(QStringLiteral("lng")).toString().toFloat(),
-                                              res.value(QStringLiteral("toponymName")).toString(),
-                                              res.value(QStringLiteral("name")).toString(),
-                                              res.value(QStringLiteral("countryCode")).toString(),
-                                              res.value(QStringLiteral("countryName")).toString(),
-                                              QString::number(res.value(QStringLiteral("geonameId")).toInt()),
-                                              findSubdivision(res));
+            const auto res = resRef.toObject();
+            const auto result = LocationQueryResult(res.value(QLatin1String("lat")).toString().toFloat(),
+                                                    res.value(QLatin1String("lng")).toString().toFloat(),
+                                                    res.value(QLatin1String("toponymName")).toString(),
+                                                    res.value(QLatin1String("name")).toString(),
+                                                    res.value(QLatin1String("countryCode")).toString(),
+                                                    res.value(QLatin1String("countryName")).toString(),
+                                                    QString::number(res.value(QLatin1String("geonameId")).toInt()),
+                                                    findSubdivision(res));
             d->m_result.push_back(result);
         }
 
@@ -125,17 +125,17 @@ LocationQueryReply::LocationQueryReply(QGeoPositionInfoSource *source, QNetworkA
         QObject::connect(reply, &QNetworkReply::finished, [this, lat, lon, reply] {
             Q_D(LocationQueryReply);
             reply->deleteLater();
-            QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
-            QJsonObject root = document.object();
-            auto array = root[QStringLiteral("geonames")].toArray();
+            const QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
+            const QJsonObject root = document.object();
+            const auto array = root[QLatin1String("geonames")].toArray();
             if (array.size()) {
                 d->m_result.push_back(LocationQueryResult(lat,
                                                           lon,
-                                                          array.at(0)[QStringLiteral("toponymName")].toString(),
-                                                          array.at(0)[QStringLiteral("name")].toString(),
-                                                          array.at(0)[QStringLiteral("countryCode")].toString(),
-                                                          array.at(0)[QStringLiteral("countryName")].toString(),
-                                                          QString::number(root[QStringLiteral("geonameId")].toInt())));
+                                                          array.at(0)[QLatin1String("toponymName")].toString(),
+                                                          array.at(0)[QLatin1String("name")].toString(),
+                                                          array.at(0)[QLatin1String("countryCode")].toString(),
+                                                          array.at(0)[QLatin1String("countryName")].toString(),
+                                                          QString::number(root[QLatin1String("geonameId")].toInt())));
             } else {
                 d->setError(Reply::NotFound);
             }

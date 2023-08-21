@@ -50,34 +50,34 @@ HourlyWeatherForecast &HourlyWeatherForecast::operator=(HourlyWeatherForecast &&
 QJsonObject HourlyWeatherForecast::toJson() const
 {
     QJsonObject obj;
-    obj[QStringLiteral("date")] = date().toString(Qt::ISODate);
-    obj[QStringLiteral("weatherDescription")] = weatherDescription();
-    obj[QStringLiteral("weatherIcon")] = weatherIcon();
-    obj[QStringLiteral("neutralWeatherIcon")] = neutralWeatherIcon();
-    obj[QStringLiteral("temperature")] = temperature();
-    obj[QStringLiteral("pressure")] = pressure();
-    obj[QStringLiteral("windDirectionDegree")] = windDirectionDegree();
-    obj[QStringLiteral("windSpeed")] = windSpeed();
-    obj[QStringLiteral("humidity")] = humidity();
-    obj[QStringLiteral("fog")] = fog();
-    obj[QStringLiteral("uvIndex")] = uvIndex();
-    obj[QStringLiteral("precipitationAmount")] = precipitationAmount();
+    obj[QLatin1String("date")] = date().toString(Qt::ISODate);
+    obj[QLatin1String("weatherDescription")] = weatherDescription();
+    obj[QLatin1String("weatherIcon")] = weatherIcon();
+    obj[QLatin1String("neutralWeatherIcon")] = neutralWeatherIcon();
+    obj[QLatin1String("temperature")] = temperature();
+    obj[QLatin1String("pressure")] = pressure();
+    obj[QLatin1String("windDirectionDegree")] = windDirectionDegree();
+    obj[QLatin1String("windSpeed")] = windSpeed();
+    obj[QLatin1String("humidity")] = humidity();
+    obj[QLatin1String("fog")] = fog();
+    obj[QLatin1String("uvIndex")] = uvIndex();
+    obj[QLatin1String("precipitationAmount")] = precipitationAmount();
     return obj;
 }
-HourlyWeatherForecast HourlyWeatherForecast::fromJson(QJsonObject obj)
+HourlyWeatherForecast HourlyWeatherForecast::fromJson(const QJsonObject &obj)
 {
-    HourlyWeatherForecast ret(QDateTime::fromString(obj[QStringLiteral("date")].toString(), Qt::ISODate));
-    ret.setWeatherDescription(obj[QStringLiteral("weatherDescription")].toString());
-    ret.setWeatherIcon(obj[QStringLiteral("weatherIcon")].toString());
-    ret.setNeutralWeatherIcon(obj[QStringLiteral("neutralWeatherIcon")].toString());
-    ret.setTemperature(obj[QStringLiteral("temperature")].toDouble());
-    ret.setPressure(obj[QStringLiteral("pressure")].toDouble());
-    ret.setWindDirectionDegree(obj[QStringLiteral("windDirectionDegree")].toDouble(NAN));
-    ret.setWindSpeed(obj[QStringLiteral("windSpeed")].toDouble());
-    ret.setHumidity(obj[QStringLiteral("humidity")].toDouble());
-    ret.setFog(obj[QStringLiteral("fog")].toDouble());
-    ret.setUvIndex(obj[QStringLiteral("uvIndex")].toDouble());
-    ret.setPrecipitationAmount(obj[QStringLiteral("precipitationAmount")].toDouble());
+    HourlyWeatherForecast ret(QDateTime::fromString(obj[QLatin1String("date")].toString(), Qt::ISODate));
+    ret.setWeatherDescription(obj[QLatin1String("weatherDescription")].toString());
+    ret.setWeatherIcon(obj[QLatin1String("weatherIcon")].toString());
+    ret.setNeutralWeatherIcon(obj[QLatin1String("neutralWeatherIcon")].toString());
+    ret.setTemperature(obj[QLatin1String("temperature")].toDouble());
+    ret.setPressure(obj[QLatin1String("pressure")].toDouble());
+    ret.setWindDirectionDegree(obj[QLatin1String("windDirectionDegree")].toDouble(NAN));
+    ret.setWindSpeed(obj[QLatin1String("windSpeed")].toDouble());
+    ret.setHumidity(obj[QLatin1String("humidity")].toDouble());
+    ret.setFog(obj[QLatin1String("fog")].toDouble());
+    ret.setUvIndex(obj[QLatin1String("uvIndex")].toDouble());
+    ret.setPrecipitationAmount(obj[QLatin1String("precipitationAmount")].toDouble());
     return ret;
 }
 const QDateTime &HourlyWeatherForecast::date() const

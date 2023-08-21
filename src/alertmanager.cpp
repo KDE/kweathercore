@@ -76,9 +76,9 @@ void AlertManager::loadConfigs()
             QFile file(it.next());
             if ((it.fileName()).right(4) == QStringLiteral("json")) {
                 file.open(QIODevice::ReadOnly | QIODevice::Text);
-                auto config = QJsonDocument::fromJson(file.readAll()).object();
-                QJsonValue key = config.value(QStringLiteral("country"));
-                d->hash[key.toString()] = std::make_pair(it.filePath(), config[QStringLiteral("url")].toString());
+                const auto config = QJsonDocument::fromJson(file.readAll()).object();
+                const QJsonValue key = config.value(QLatin1String("country"));
+                d->hash[key.toString()] = std::make_pair(it.filePath(), config[QLatin1String("url")].toString());
             }
         }
     }

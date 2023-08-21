@@ -51,7 +51,7 @@ public:
     /**
      * Construct a DailyWeatherForecast from QJsonObject
      */
-    static DailyWeatherForecast fromJson(QJsonObject obj);
+    static DailyWeatherForecast fromJson(const QJsonObject &obj);
     /**
      * @return @c true if the object is created without data
      * this value won't change once the class is created with the exceptions of

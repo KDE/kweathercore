@@ -68,13 +68,13 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
 
 CAPAlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Immediate")) {
+    if (str == QLatin1String("Immediate")) {
         return CAPAlertInfo::Urgency::Immediate;
-    } else if (str == QStringLiteral("Expected")) {
+    } else if (str == QLatin1String("Expected")) {
         return CAPAlertInfo::Urgency::Expected;
-    } else if (str == QStringLiteral("Future")) {
+    } else if (str == QLatin1String("Future")) {
         return CAPAlertInfo::Urgency::Future;
-    } else if (str == QStringLiteral("Past")) {
+    } else if (str == QLatin1String("Past")) {
         return CAPAlertInfo::Urgency::Past;
     } else {
         return CAPAlertInfo::Urgency::UnknownUrgency;
@@ -83,13 +83,13 @@ CAPAlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &st
 
 CAPAlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Extreme")) {
+    if (str == QLatin1String("Extreme")) {
         return CAPAlertInfo::Severity::Extreme;
-    } else if (str == QStringLiteral("Severe")) {
+    } else if (str == QLatin1String("Severe")) {
         return CAPAlertInfo::Severity::Severe;
-    } else if (str == QStringLiteral("Moderate")) {
+    } else if (str == QLatin1String("Moderate")) {
         return CAPAlertInfo::Severity::Moderate;
-    } else if (str == QStringLiteral("Minor")) {
+    } else if (str == QLatin1String("Minor")) {
         return CAPAlertInfo::Severity::Minor;
     } else {
         return CAPAlertInfo::Severity::UnknownSeverity;
@@ -98,13 +98,13 @@ CAPAlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &
 
 CAPAlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
 {
-    if (str == QStringLiteral("Observed")) {
+    if (str == QLatin1String("Observed")) {
         return CAPAlertInfo::Certainty::Observed;
-    } else if (str == QStringLiteral("Likely")) {
+    } else if (str == QLatin1String("Likely")) {
         return CAPAlertInfo::Certainty::Likely;
-    } else if (str == QStringLiteral("Possible")) {
+    } else if (str == QLatin1String("Possible")) {
         return CAPAlertInfo::Certainty::Possible;
-    } else if (str == QStringLiteral("Unlikely")) {
+    } else if (str == QLatin1String("Unlikely")) {
         return CAPAlertInfo::Certainty::Unlikely;
     } else {
         return CAPAlertInfo::Certainty::UnknownCertainty;

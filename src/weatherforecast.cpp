@@ -47,26 +47,26 @@ QJsonObject WeatherForecast::toJson() const
     for (auto d : dailyWeatherForecast()) {
         dayArray.append(d.toJson());
     }
-    obj[QStringLiteral("day")] = dayArray;
-    obj[QStringLiteral("lat")] = latitude();
-    obj[QStringLiteral("lon")] = longitude();
-    obj[QStringLiteral("timezone")] = timezone();
-    obj[QStringLiteral("createdTime")] = createdTime().toString(Qt::ISODate);
+    obj[QLatin1String("day")] = dayArray;
+    obj[QLatin1String("lat")] = latitude();
+    obj[QLatin1String("lon")] = longitude();
+    obj[QLatin1String("timezone")] = timezone();
+    obj[QLatin1String("createdTime")] = createdTime().toString(Qt::ISODate);
     return obj;
 }
 
-WeatherForecast WeatherForecast::fromJson(QJsonObject obj)
+WeatherForecast WeatherForecast::fromJson(const QJsonObject &obj)
 {
     WeatherForecast w;
     std::vector<DailyWeatherForecast> dayVec;
-    const auto &array = obj[QStringLiteral("day")].toArray();
+    const auto &array = obj[QLatin1String("day")].toArray();
     for (const auto &d : array) {
         dayVec.push_back(DailyWeatherForecast::fromJson(d.toObject()));
     }
     w.setDailyWeatherForecast(dayVec);
-    w.setCoordinate(obj[QStringLiteral("lat")].toDouble(), obj[QStringLiteral("lon")].toDouble());
-    w.setTimezone(obj[QStringLiteral("timezone")].toString());
-    w.setCreatedTime(QDateTime::fromString(obj[QStringLiteral("createdTime")].toString(), Qt::ISODate));
+    w.setCoordinate(obj[QLatin1String("lat")].toDouble(), obj[QLatin1String("lon")].toDouble());
+    w.setTimezone(obj[QLatin1String("timezone")].toString());
+    w.setCreatedTime(QDateTime::fromString(obj[QLatin1String("createdTime")].toString(), Qt::ISODate));
     return w;
 }
 const std::vector<DailyWeatherForecast> &WeatherForecast::dailyWeatherForecast() const

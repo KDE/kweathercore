@@ -19,14 +19,14 @@ using namespace KWeatherCore;
 
 void MetNoParser::parseLocationForecast(const QByteArray &data)
 {
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(data);
+    const QJsonDocument jsonDocument = QJsonDocument::fromJson(data);
 
     if (jsonDocument.isObject()) {
-        QJsonObject obj = jsonDocument.object();
-        QJsonObject prop = obj[QStringLiteral("properties")].toObject();
+        const QJsonObject obj = jsonDocument.object();
+        const QJsonObject prop = obj[QLatin1String("properties")].toObject();
 
-        if (prop.contains(QStringLiteral("timeseries"))) {
-            QJsonArray timeseries = prop[QStringLiteral("timeseries")].toArray();
+        if (prop.contains(QLatin1String("timeseries"))) {
+            const QJsonArray timeseries = prop[QLatin1String("timeseries")].toArray();
 
             // loop over all forecast data
             for (const auto &ref : qAsConst(timeseries)) {
@@ -38,10 +38,10 @@ void MetNoParser::parseLocationForecast(const QByteArray &data)
 
 void MetNoParser::parseOneElement(const QJsonObject &obj)
 {
-    QJsonObject data = obj[QStringLiteral("data")].toObject();
-    QJsonObject instant = data[QStringLiteral("instant")].toObject()[QStringLiteral("details")].toObject();
+    const QJsonObject data = obj[QLatin1String("data")].toObject();
+    const QJsonObject instant = data[QLatin1String("instant")].toObject()[QLatin1String("details")].toObject();
     // ignore last forecast, which does not have enough data
-    if (!data.contains(QStringLiteral("next_6_hours")) && !data.contains(QStringLiteral("next_1_hours"))) {
+    if (!data.contains(QLatin1String("next_6_hours")) && !data.contains(QLatin1String("next_1_hours"))) {
         return;
     }
 
@@ -50,27 +50,27 @@ void MetNoParser::parseOneElement(const QJsonObject &obj)
     double precipitationAmount = 0;
     // some fields contain only "next_1_hours", and others may contain only
     // "next_6_hours"
-    if (data.contains(QStringLiteral("next_1_hours"))) {
-        QJsonObject nextOneHours = data[QStringLiteral("next_1_hours")].toObject();
-        symbolCode = nextOneHours[QStringLiteral("summary")].toObject()[QStringLiteral("symbol_code")].toString(QStringLiteral("unknown"));
-        precipitationAmount = nextOneHours[QStringLiteral("details")].toObject()[QStringLiteral("precipitation_amount")].toDouble();
+    if (data.contains(QLatin1String("next_1_hours"))) {
+        const QJsonObject nextOneHours = data[QLatin1String("next_1_hours")].toObject();
+        symbolCode = nextOneHours[QLatin1String("summary")].toObject()[QLatin1String("symbol_code")].toString(QLatin1String("unknown"));
+        precipitationAmount = nextOneHours[QLatin1String("details")].toObject()[QLatin1String("precipitation_amount")].toDouble();
     } else {
-        QJsonObject nextSixHours = data[QStringLiteral("next_6_hours")].toObject();
-        symbolCode = nextSixHours[QStringLiteral("summary")].toObject()[QStringLiteral("symbol_code")].toString(QStringLiteral("unknown"));
-        precipitationAmount = nextSixHours[QStringLiteral("details")].toObject()[QStringLiteral("precipitation_amount")].toDouble();
+        const QJsonObject nextSixHours = data[QLatin1String("next_6_hours")].toObject();
+        symbolCode = nextSixHours[QLatin1String("summary")].toObject()[QLatin1String("symbol_code")].toString(QLatin1String("unknown"));
+        precipitationAmount = nextSixHours[QLatin1String("details")].toObject()[QLatin1String("precipitation_amount")].toDouble();
     }
 
     symbolCode = symbolCode.split(QLatin1Char('_'))[0]; // trim _[day/night] from end -
                                                         // https://api.met.no/weatherapi/weathericon/2.0/legends
-    HourlyWeatherForecast hourForecast(QDateTime::fromString(obj.value(QStringLiteral("time")).toString(), Qt::ISODate));
-    hourForecast.setNeutralWeatherIcon(KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QStringLiteral("_neutral")).icon);
-    hourForecast.setTemperature(instant[QStringLiteral("air_temperature")].toDouble());
-    hourForecast.setPressure(instant[QStringLiteral("air_pressure_at_sea_level")].toDouble());
-    hourForecast.setWindDirectionDegree(instant[QStringLiteral("wind_from_direction")].toDouble());
-    hourForecast.setWindSpeed(instant[QStringLiteral("wind_speed")].toDouble());
-    hourForecast.setHumidity(instant[QStringLiteral("relative_humidity")].toDouble());
-    hourForecast.setFog(instant[QStringLiteral("fog_area_fraction")].toDouble());
-    hourForecast.setUvIndex(instant[QStringLiteral("ultraviolet_index_clear_sky")].toDouble());
+    HourlyWeatherForecast hourForecast(QDateTime::fromString(obj.value(QLatin1String("time")).toString(), Qt::ISODate));
+    hourForecast.setNeutralWeatherIcon(KWeatherCorePrivate::resolveAPIWeatherDesc(symbolCode + QLatin1String("_neutral")).icon);
+    hourForecast.setTemperature(instant[QLatin1String("air_temperature")].toDouble());
+    hourForecast.setPressure(instant[QLatin1String("air_pressure_at_sea_level")].toDouble());
+    hourForecast.setWindDirectionDegree(instant[QLatin1String("wind_from_direction")].toDouble());
+    hourForecast.setWindSpeed(instant[QLatin1String("wind_speed")].toDouble());
+    hourForecast.setHumidity(instant[QLatin1String("relative_humidity")].toDouble());
+    hourForecast.setFog(instant[QLatin1String("fog_area_fraction")].toDouble());
+    hourForecast.setUvIndex(instant[QLatin1String("ultraviolet_index_clear_sky")].toDouble());
     hourForecast.setPrecipitationAmount(precipitationAmount);
     hourForecast.setSymbolCode(symbolCode);
     hourlyForecast.push_back(std::move(hourForecast));

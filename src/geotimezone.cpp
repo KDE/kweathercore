@@ -41,13 +41,13 @@ GeoTimezone::GeoTimezone(QNetworkAccessManager *nam, double lat, double lon, QOb
         if (reply->error() != QNetworkReply::NoError) {
             d->setError(Reply::NetworkError, reply->errorString());
         } else {
-            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+            const QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
             // if our api calls reached daily limit
-            if (doc[QStringLiteral("status")][QStringLiteral("value")].toInt() == 18) {
+            if (doc[QLatin1String("status")][QLatin1String("value")].toInt() == 18) {
                 d->setError(Reply::RateLimitExceeded);
                 qWarning() << "api calls reached daily limit";
             } else {
-                d->m_timezone = doc[QStringLiteral("timezoneId")].toString();
+                d->m_timezone = doc[QLatin1String("timezoneId")].toString();
             }
         }
         Q_EMIT finished();
