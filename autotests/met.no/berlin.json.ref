@@ -850,7 +850,7 @@
                     "temperature": 21.1,
                     "uvIndex": 0,
                     "weatherDescription": "Rain",
-                    "weatherIcon": "weather-showers-day",
+                    "weatherIcon": "weather-showers",
                     "windDirectionDegree": 336.6,
                     "windSpeed": 2.9
                 },
