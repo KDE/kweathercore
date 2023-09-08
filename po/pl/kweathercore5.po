@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 00:50+0000\n"
+"POT-Creation-Date: 2023-09-08 00:44+0000\n"
 "PO-Revision-Date: 2021-09-25 08:12+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -85,92 +85,92 @@ msgstr "Możliwe"
 msgid "Unlikely"
 msgstr "Mało prawdopodobne"
 
-#: kweathercore.cpp:223 kweathercore.cpp:224 kweathercore.cpp:225
+#: kweathercore.cpp:228 kweathercore.cpp:229 kweathercore.cpp:230
 msgid "Clear"
 msgstr "Bezchmurnie"
 
-#: kweathercore.cpp:226 kweathercore.cpp:227 kweathercore.cpp:228
+#: kweathercore.cpp:231 kweathercore.cpp:232 kweathercore.cpp:233
 msgid "Cloudy"
 msgstr "Pochmurno"
 
-#: kweathercore.cpp:229
+#: kweathercore.cpp:234
 msgid "Partly Sunny"
 msgstr "Miejscami słonecznie"
 
-#: kweathercore.cpp:230 kweathercore.cpp:231
+#: kweathercore.cpp:235 kweathercore.cpp:236
 msgid "Light Clouds"
 msgstr "Małe zachmurzenie"
 
-#: kweathercore.cpp:232 kweathercore.cpp:233 kweathercore.cpp:234
+#: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
 msgid "Fog"
 msgstr "Mgła"
 
-#: kweathercore.cpp:236 kweathercore.cpp:237 kweathercore.cpp:238
-#: kweathercore.cpp:242 kweathercore.cpp:243 kweathercore.cpp:244
+#: kweathercore.cpp:241 kweathercore.cpp:242 kweathercore.cpp:243
+#: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
 msgid "Heavy Rain"
 msgstr "Duży deszcz"
 
-#: kweathercore.cpp:239 kweathercore.cpp:240 kweathercore.cpp:241
-#: kweathercore.cpp:245 kweathercore.cpp:246 kweathercore.cpp:247
-#: kweathercore.cpp:252 kweathercore.cpp:253 kweathercore.cpp:254
-#: kweathercore.cpp:258 kweathercore.cpp:259 kweathercore.cpp:260
-#: kweathercore.cpp:268 kweathercore.cpp:269 kweathercore.cpp:270
-#: kweathercore.cpp:275 kweathercore.cpp:276 kweathercore.cpp:277
-#: kweathercore.cpp:281 kweathercore.cpp:282 kweathercore.cpp:283
-#: kweathercore.cpp:288 kweathercore.cpp:289 kweathercore.cpp:290
-#: kweathercore.cpp:298 kweathercore.cpp:299 kweathercore.cpp:300
-#: kweathercore.cpp:305 kweathercore.cpp:306 kweathercore.cpp:307
-#: kweathercore.cpp:308 kweathercore.cpp:309 kweathercore.cpp:310
-#: kweathercore.cpp:319 kweathercore.cpp:320 kweathercore.cpp:321
-#: kweathercore.cpp:325 kweathercore.cpp:326 kweathercore.cpp:327
-#: kweathercore.cpp:332 kweathercore.cpp:333 kweathercore.cpp:334
-#: kweathercore.cpp:338 kweathercore.cpp:339 kweathercore.cpp:340
-#: kweathercore.cpp:351 kweathercore.cpp:352 kweathercore.cpp:353
+#: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
+#: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
+#: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
+#: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
+#: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
+#: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
+#: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
+#: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
+#: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
+#: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
+#: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
+#: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
+#: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
+#: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
+#: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
+#: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Storm"
 msgstr "Sztorm"
 
-#: kweathercore.cpp:249 kweathercore.cpp:250 kweathercore.cpp:251
-#: kweathercore.cpp:255 kweathercore.cpp:256 kweathercore.cpp:257
+#: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
+#: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
 msgid "Heavy Sleet"
 msgstr "Duży deszcz ze śniegiem"
 
-#: kweathercore.cpp:262 kweathercore.cpp:263 kweathercore.cpp:264
-#: kweathercore.cpp:265 kweathercore.cpp:266 kweathercore.cpp:267
+#: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
+#: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
 msgid "Heavy Snow"
 msgstr "Duże opady śniegu"
 
-#: kweathercore.cpp:272 kweathercore.cpp:273 kweathercore.cpp:274
-#: kweathercore.cpp:278 kweathercore.cpp:279 kweathercore.cpp:280
+#: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
+#: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
 msgid "Light Rain"
 msgstr "Mały deszcz"
 
-#: kweathercore.cpp:285 kweathercore.cpp:286 kweathercore.cpp:287
-#: kweathercore.cpp:291 kweathercore.cpp:292 kweathercore.cpp:293
+#: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
+#: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
 msgid "Light Sleet"
 msgstr "Mały deszcz ze śniegiem"
 
-#: kweathercore.cpp:295 kweathercore.cpp:296 kweathercore.cpp:297
-#: kweathercore.cpp:301 kweathercore.cpp:302 kweathercore.cpp:303
+#: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
+#: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
 msgid "Light Snow"
 msgstr "Małe opady śniegu"
 
-#: kweathercore.cpp:312 kweathercore.cpp:313 kweathercore.cpp:314
+#: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
 msgstr "Miejscami pochmurno"
 
-#: kweathercore.cpp:316 kweathercore.cpp:317 kweathercore.cpp:318
-#: kweathercore.cpp:322 kweathercore.cpp:323 kweathercore.cpp:324
+#: kweathercore.cpp:321 kweathercore.cpp:322 kweathercore.cpp:323
+#: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain"
 msgstr "Deszcz"
 
-#: kweathercore.cpp:329 kweathercore.cpp:330 kweathercore.cpp:331
-#: kweathercore.cpp:335 kweathercore.cpp:336 kweathercore.cpp:337
+#: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
+#: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet"
 msgstr "Deszcz ze śniegiem"
 
-#: kweathercore.cpp:342 kweathercore.cpp:343 kweathercore.cpp:344
-#: kweathercore.cpp:345 kweathercore.cpp:346 kweathercore.cpp:347
-#: kweathercore.cpp:348 kweathercore.cpp:349 kweathercore.cpp:350
+#: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
+#: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
+#: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow"
 msgstr "Śnieg"
 
