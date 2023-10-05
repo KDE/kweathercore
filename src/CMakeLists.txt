@@ -1,26 +1,49 @@
 set(kweathercore_LIB_SRCS
     locationquery.cpp
+    locationquery.h
     locationqueryreply.cpp
+    locationqueryreply.h
     locationqueryresult.cpp
+    locationqueryresult.h
     weatherforecastsource.cpp
+    weatherforecastsource.h
     weatherforecast.cpp
+    weatherforecast.h
     hourlyweatherforecast.cpp
+    hourlyweatherforecast.h
     dailyweatherforecast.cpp
+    dailyweatherforecast.h
     geotimezone.cpp
+    geotimezone.h
     kweathercore.cpp
+    kweathercore_p.h
     metnoparser.cpp
+    metnoparser_p.h
     pendingweatherforecast.cpp
+    pendingweatherforecast.h
+    pendingweatherforecast_p.h
     capalertinfo.cpp
+    capalertinfo.h
     alertfeedentry.cpp
+    alertfeedentry.h
     capalertmessage.cpp
+    capalertmessage.h
     alertmanager.cpp
+    alertmanager.h
     feedparser.cpp
+    feedparser.h
     pendingalerts.cpp
+    pendingalerts.h
     pendingcap.cpp
+    pendingcap.h
     capparser.cpp
+    capparser.h
     caparea.cpp
+    caparea.h
     capreference.cpp
+    capreference.h
     reply.cpp
+    reply.h
 )
 
 

@@ -223,3 +223,5 @@ DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast
     return *this;
 }
 }
+
+#include "moc_dailyweatherforecast.cpp"

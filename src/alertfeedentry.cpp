@@ -128,3 +128,5 @@ AlertFeedEntry &AlertFeedEntry::operator=(const AlertFeedEntry &other)
 }
 AlertFeedEntry &AlertFeedEntry::operator=(AlertFeedEntry &&other) = default;
 }
+
+#include "moc_alertfeedentry.cpp"

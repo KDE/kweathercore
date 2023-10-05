@@ -93,3 +93,5 @@ void CAPArea::setCeiling(float ceiling)
 {
     d->ceiling = ceiling;
 }
+
+#include "moc_caparea.cpp"

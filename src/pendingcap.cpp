@@ -46,3 +46,5 @@ PendingCAP::PendingCAP(QNetworkReply *reply, QObject *parent)
 
 PendingCAP::~PendingCAP() = default;
 }
+
+#include "moc_pendingcap.cpp"

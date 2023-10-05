@@ -30,3 +30,5 @@ void GeoTimezoneTest::testTimezone()
     }
 }
 QTEST_MAIN(GeoTimezoneTest)
+
+#include "moc_geotimezonetest.cpp"

@@ -66,8 +66,8 @@ public:
     /**
      * LocationQuery
      */
-    LocationQuery(QObject *parent = nullptr);
-    ~LocationQuery();
+    explicit LocationQuery(QObject *parent = nullptr);
+    ~LocationQuery() override;
     /**
      * query query locations by name
      * @param name name of location, not necessary in English

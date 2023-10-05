@@ -110,3 +110,5 @@ void CAPAlertMessage::setReferences(std::vector<CAPReference> &&references)
     d->references = std::move(references);
 }
 }
+
+#include "moc_capalertmessage.cpp"

@@ -223,3 +223,5 @@ HourlyWeatherForecast &HourlyWeatherForecast::operator=(const HourlyWeatherForec
     return *this;
 }
 }
+
+#include "moc_hourlyweatherforecast.cpp"

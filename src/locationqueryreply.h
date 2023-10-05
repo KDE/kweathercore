@@ -26,7 +26,7 @@ class LocationQueryReplyPrivate;
 class KWEATHERCORE_EXPORT LocationQueryReply : public Reply
 {
 public:
-    ~LocationQueryReply();
+    ~LocationQueryReply() override;
 
     /** Result of the location query.
      *  Can be none, one or multiple elements.

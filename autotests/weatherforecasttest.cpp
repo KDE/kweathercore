@@ -42,3 +42,5 @@ void WeatherForecastTest::testJson()
     QCOMPARE(d2.toJson(), d1.toJson());
 }
 QTEST_MAIN(WeatherForecastTest)
+
+#include "moc_weatherforecasttest.cpp"

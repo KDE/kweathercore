@@ -59,3 +59,5 @@ QDateTime CAPReference::sent() const
 {
     return d->sent;
 }
+
+#include "moc_capreference.cpp"

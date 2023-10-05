@@ -78,3 +78,5 @@ void LocationQuery::setNetworkAccessManager(QNetworkAccessManager *nam)
     d->manager = nam;
 }
 }
+
+#include "moc_locationquery.cpp"

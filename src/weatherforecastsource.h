@@ -34,7 +34,7 @@ class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
     Q_OBJECT
 public:
     explicit WeatherForecastSource(QObject *parent = nullptr);
-    ~WeatherForecastSource();
+    ~WeatherForecastSource() override;
 
     /**
      * requestData

@@ -85,3 +85,5 @@ const std::optional<QString> &LocationQueryResult::subdivision() const
     return d->subdivision;
 }
 }
+
+#include "moc_locationqueryresult.cpp"

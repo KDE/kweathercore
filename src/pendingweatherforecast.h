@@ -26,7 +26,7 @@ class KWEATHERCORE_EXPORT PendingWeatherForecast : public Reply
 {
     Q_OBJECT
 public:
-    ~PendingWeatherForecast();
+    ~PendingWeatherForecast() override;
 
     /**
      * value pointer to the shared weather data

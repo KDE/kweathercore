@@ -25,7 +25,7 @@ class KWEATHERCORE_EXPORT PendingCAP : public Reply
 {
     Q_OBJECT
 public:
-    ~PendingCAP();
+    ~PendingCAP() override;
 
     /**
      * value pointer to the shared alerts data

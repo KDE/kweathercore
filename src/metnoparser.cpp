@@ -29,7 +29,7 @@ void MetNoParser::parseLocationForecast(const QByteArray &data)
             const QJsonArray timeseries = prop[QLatin1String("timeseries")].toArray();
 
             // loop over all forecast data
-            for (const auto &ref : qAsConst(timeseries)) {
+            for (const auto &ref : std::as_const(timeseries)) {
                 parseOneElement(ref.toObject());
             }
         }

@@ -49,3 +49,5 @@ void DailyForecastTest::testJson()
     QCOMPARE(d3.toJson(), d2.toJson());
 }
 QTEST_MAIN(DailyForecastTest)
+
+#include "moc_dailyweatherforecasttest.cpp"

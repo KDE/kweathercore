@@ -29,7 +29,7 @@ class KWEATHERCORE_EXPORT PendingAlerts : public Reply
 {
     Q_OBJECT
 public:
-    ~PendingAlerts();
+    ~PendingAlerts() override;
 
     /**
      * value pointer to the shared alerts data

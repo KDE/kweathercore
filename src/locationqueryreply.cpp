@@ -79,7 +79,7 @@ LocationQueryReply::LocationQueryReply(const QString &name, int number, QNetwork
 
         const auto geonames = root.value(QLatin1String("geonames")).toArray();
         // add query results
-        for (const auto &resRef : qAsConst(geonames)) {
+        for (const auto &resRef : std::as_const(geonames)) {
             const auto res = resRef.toObject();
             const auto result = LocationQueryResult(res.value(QLatin1String("lat")).toString().toFloat(),
                                                     res.value(QLatin1String("lng")).toString().toFloat(),

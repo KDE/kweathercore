@@ -46,3 +46,5 @@ AlertEntries PendingAlerts::value() const
     return d->alertEntries;
 }
 }
+
+#include "moc_pendingalerts.cpp"

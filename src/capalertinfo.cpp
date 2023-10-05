@@ -200,3 +200,5 @@ void CAPAlertInfo::addEventCode(CAPNamedValue &&code)
     d->eventCodes.push_back(std::move(code));
 }
 }
+
+#include "moc_capalertinfo.cpp"

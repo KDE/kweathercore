@@ -120,3 +120,5 @@ WeatherForecast PendingWeatherForecast::value() const
     return d->parser.forecast;
 }
 }
+
+#include "moc_pendingweatherforecast.cpp"

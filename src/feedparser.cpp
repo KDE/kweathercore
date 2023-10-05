@@ -137,3 +137,5 @@ void FeedParser::parsePolygonElement(QXmlStreamReader &reader, AlertFeedEntry &e
     }
 }
 }
+
+#include "moc_feedparser.cpp"

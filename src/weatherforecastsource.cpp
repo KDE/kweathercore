@@ -81,3 +81,5 @@ void WeatherForecastSource::setNetworkAccessManager(QNetworkAccessManager *nam)
     d->m_nam = nam;
 }
 }
+
+#include "moc_weatherforecastsource.cpp"

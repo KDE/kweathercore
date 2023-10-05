@@ -60,3 +60,5 @@ QString GeoTimezone::timezone() const
     return d->m_timezone;
 }
 }
+
+#include "moc_geotimezone.cpp"

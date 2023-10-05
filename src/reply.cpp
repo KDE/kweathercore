@@ -31,3 +31,5 @@ QString Reply::errorMessage() const
 {
     return d_ptr->m_errorMessage;
 }
+
+#include "moc_reply.cpp"

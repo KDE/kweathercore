@@ -24,7 +24,7 @@ class KWEATHERCORE_EXPORT Reply : public QObject
 {
     Q_OBJECT
 public:
-    ~Reply();
+    ~Reply() override;
 
     /** Possible error states of the job. */
     enum Error {
