@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-02 00:41+0000\n"
-"PO-Revision-Date: 2023-07-29 12:25+0100\n"
+"PO-Revision-Date: 2023-11-02 20:18+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -110,49 +110,43 @@ msgstr "Pluvego"
 
 #: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
 msgid "Thunderstorm with Heavy Rain"
-msgstr ""
+msgstr "Fulmotondro kun Peza Pluvo"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-#, fuzzy
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
 msgstr "Pluvego"
 
 #: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr ""
+msgstr "Fulmotondro kun Peza Pluvego"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
-msgstr "Peza Neĝo"
+msgstr "Peza Neĝopluvo"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "Fulmotondro kun Peza Neĝopluvo"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
-msgstr "Peza Neĝo"
+msgstr "Peza Neĝpluvduŝo"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "Fulmotondro kun Peza Pluvduŝo"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
 msgstr "Peza Neĝo"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-#, fuzzy
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
-msgstr "Peza Neĝo"
+msgstr "Peza Neĝoduŝo"
 
 #: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr ""
+msgstr "Fulmotondro kun Peza Neĝoduŝo"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
@@ -160,31 +154,27 @@ msgstr "Malpeza Pluvo"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Pluvo"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-#, fuzzy
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
-msgstr "Malpeza Pluvo"
+msgstr "Malpeza Pluvduŝo"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Pluvduŝo"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
-msgstr "Malpeza Neĝo"
+msgstr "Malpeza Neĝopluvo"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Neĝopluvo"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "Malpeza Neĝo"
+msgstr "Malpeza Neĝpluvduŝo"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
@@ -192,21 +182,19 @@ msgstr "Malpeza Neĝo"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Neĝo"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "Malpeza Neĝo"
+msgstr "Malpeza Neĝoduŝo"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Neĝpluvduŝo"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "Fulmotondro kun Malpeza Neĝoduŝo"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
@@ -218,31 +206,31 @@ msgstr "Pluvo"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "Fulmotondro kun Pluvo"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
-msgstr ""
+msgstr "Pluvoduŝo"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "Fulmotondro kun Pluvduŝo"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
-msgstr "Pluvo"
+msgstr "Neĝopluvo"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "Fulmotondro kun Neĝopluvo"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "Neĝpluvduŝo"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "Fulmotondro kun Neĝpluvduŝo"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
@@ -250,15 +238,12 @@ msgstr "Neĝo"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "Fulmotondro kun Neĝo"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
-msgstr ""
+msgstr "Neĝduŝo"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
-
-#~ msgid "Storm"
-#~ msgstr "Ŝtormo"
+msgstr "Fulmotondro kun Neĝduŝo"
