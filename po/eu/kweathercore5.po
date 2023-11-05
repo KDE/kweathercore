@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-02 00:41+0000\n"
+"POT-Creation-Date: 2023-11-05 12:28+0000\n"
 "PO-Revision-Date: 2023-11-04 20:29+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -115,7 +115,6 @@ msgid "Thunderstorm with Heavy Rain"
 msgstr "Trumoi-ekaitza euri-jasa handiarekin"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
 msgstr "Euri zaparrada handia"
 
@@ -132,7 +131,6 @@ msgid "Thunderstorm with Heavy Sleet"
 msgstr "Trumoi-ekaitza elurbusti-jasa handiarekin"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
 msgstr "Elurbusti zaparrada handia"
 
@@ -145,7 +143,6 @@ msgid "Heavy Snow"
 msgstr "Elur-jasa handia"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
 msgstr "Elur zaparrada handia"
 
@@ -162,7 +159,6 @@ msgid "Thunderstorm with Light Rain"
 msgstr "Trumoi-ekaitza euri txikiarekin"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
 msgstr "Euri zaparrada txikia"
 
@@ -179,7 +175,6 @@ msgid "Thunderstorm with Light Sleet"
 msgstr "Trumoi-ekaitza elurbusti txikiarekin"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
 msgstr "Elurbusti zaparrada txikia"
 
@@ -192,7 +187,6 @@ msgid "Thunderstorm with Light Snow"
 msgstr "Trumoi-ekaitza elur txikiarekin"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
 msgstr "Elur zaparrada txikia"
 
@@ -258,4 +252,3 @@ msgstr "Trumoi-ekaitza elur zaparradarekin"
 
 #~ msgid "Storm"
 #~ msgstr "Ekaitza"
-
