@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kweathercore package.
 #
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021.
+# SPDX-FileCopyrightText: 2020, 2021, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkweather5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2021-08-08 23:54+0200\n"
+"PO-Revision-Date: 2023-11-02 17:45+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.07.90\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: kweathercore.cpp:119
 #, kde-format
@@ -111,49 +111,43 @@ msgstr "Lluvia intensa"
 
 #: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
 msgid "Thunderstorm with Heavy Rain"
-msgstr ""
+msgstr "Tormenta con lluvia intensa"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-#, fuzzy
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
-msgstr "Lluvia intensa"
+msgstr "Chubascos intensos"
 
 #: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr ""
+msgstr "Tormenta con chubascos intensos"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
-msgstr "Perdigones de hielo pesados"
+msgstr "Granizo intenso"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "Tormenta con granizo intenso"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
-msgstr "Perdigones de hielo pesados"
+msgstr "Granizada intensa"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "Tormenta con granizada intensa"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
-msgstr "Nevada intensa"
+msgstr "Nieve intensa"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-#, fuzzy
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
-msgstr "Nevada intensa"
+msgstr "Nevadas intensas"
 
 #: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr ""
+msgstr "Tormenta con nevadas intensas"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
@@ -161,53 +155,47 @@ msgstr "Lluvia débil"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr ""
+msgstr "Tormenta con lluvia débil"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-#, fuzzy
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
-msgstr "Lluvia débil"
+msgstr "Chubascos débiles"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr ""
+msgstr "Tormenta con chubascos débiles"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
-msgstr "Perdigones de hielo ligeros"
+msgstr "Granizo débil"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "Tormenta con granizo débil"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "Perdigones de hielo ligeros"
+msgstr "Granizada débil"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
-msgstr "Nieve ligera"
+msgstr "Nieve débil"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "Tormenta con nieve débil"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "Nieve ligera"
+msgstr "Nevadas débiles"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "Tormenta con granizada débil"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "Tormenta con nevadas débiles"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
@@ -219,31 +207,31 @@ msgstr "Lluvia"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "Tormenta con lluvia"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
-msgstr ""
+msgstr "Chubascos"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "Tormenta con chubascos"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
-msgstr "Perdigones de hielo"
+msgstr "Granizo"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "Tormenta con granizo"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "Granizada"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "Tormenta con granizada"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
@@ -251,15 +239,15 @@ msgstr "Nieve"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "Tormenta con nieve"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
-msgstr ""
+msgstr "Nevadas"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
+msgstr "Tormenta con nevadas"
 
 #~ msgid "Storm"
 #~ msgstr "Tormenta"
