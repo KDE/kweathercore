@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2023.
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-05-02 21:35+0200\n"
+"PO-Revision-Date: 2023-11-11 15:18+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,38 +15,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: kweathercore.cpp:119
 #, kde-format
 msgid "Immediate"
-msgstr "Actual"
+msgstr "Inmediata"
 
 #: kweathercore.cpp:122
 #, kde-format
 msgid "Expected"
-msgstr "Previsto"
+msgstr "Prevista"
 
 #: kweathercore.cpp:125
 #, kde-format
 msgid "Future"
-msgstr "Futuro"
+msgstr "Futura"
 
 #: kweathercore.cpp:128
 #, kde-format
 msgid "Past"
-msgstr "Pasado"
+msgstr "Pasada"
 
 #: kweathercore.cpp:131 kweathercore.cpp:153 kweathercore.cpp:175
 #: kweathercore_p.h:23
 #, kde-format
 msgid "Unknown"
-msgstr "Descoñecido"
+msgstr "Descoñecida"
 
 #: kweathercore.cpp:141
 #, kde-format
 msgid "Extreme"
-msgstr "Extremo"
+msgstr "Extrema"
 
 #: kweathercore.cpp:144
 #, kde-format
@@ -56,7 +56,7 @@ msgstr "Forte"
 #: kweathercore.cpp:147
 #, kde-format
 msgid "Moderate"
-msgstr "Moderado"
+msgstr "Moderada"
 
 #: kweathercore.cpp:150
 #, kde-format
@@ -66,7 +66,7 @@ msgstr "Leve"
 #: kweathercore.cpp:163
 #, kde-format
 msgid "Observed"
-msgstr "Observado"
+msgstr "Observada"
 
 #: kweathercore.cpp:166
 #, kde-format
@@ -85,19 +85,19 @@ msgstr "Improbábel"
 
 #: kweathercore.cpp:228 kweathercore.cpp:229 kweathercore.cpp:230
 msgid "Clear"
-msgstr "Despexado"
+msgstr "Claro"
 
 #: kweathercore.cpp:231 kweathercore.cpp:232 kweathercore.cpp:233
 msgid "Cloudy"
-msgstr "Anubrado"
+msgstr "Nubrado"
 
 #: kweathercore.cpp:234
 msgid "Partly Sunny"
-msgstr "Parcialmente soleado"
+msgstr "Solada parcial"
 
 #: kweathercore.cpp:235 kweathercore.cpp:236
 msgid "Light Clouds"
-msgstr "Lixeiramente anubrado"
+msgstr "Lixeiramente nubrado"
 
 #: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
 msgid "Fog"
@@ -105,85 +105,75 @@ msgstr "Néboa"
 
 #: kweathercore.cpp:241 kweathercore.cpp:242 kweathercore.cpp:243
 msgid "Heavy Rain"
-msgstr "Ballóns de chuvia"
+msgstr "Diluvio"
 
 #: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
 msgid "Thunderstorm with Heavy Rain"
-msgstr ""
+msgstr "Tronada con diluvio"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-#, fuzzy
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
-msgstr "Ballóns de chuvia"
+msgstr "Treboadas"
 
 #: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr ""
+msgstr "Tronada con treboadas"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
-msgstr "Canizo intenso"
+msgstr "Sarabiada intensa"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "Tronada con sarabiada intensa"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
-msgstr "Canizo intenso"
+msgstr "Chuvascos de sarabia intensa"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "Tronada con chuvascos de sarabia intensa"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
-msgstr "Neve intensa"
+msgstr "Nevada intensa"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-#, fuzzy
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
-msgstr "Neve intensa"
+msgstr "Nevadas intermitentes e intensas"
 
 #: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr ""
+msgstr "Tronada con nevadas intermitentes e intensas"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
-msgstr "Chuvasco"
+msgstr "Orballo"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr ""
+msgstr "Tronada con orballo"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-#, fuzzy
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
-msgstr "Chuvasco"
+msgstr "Chuvascos de orballo"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr ""
+msgstr "Tronada con chuvascos de orballo"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
-msgstr "Canizo leve"
+msgstr "Sarabia leve"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "Tronada con sarabia leve"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "Canizo leve"
+msgstr "Chuvascos de sarabia leve"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
@@ -191,73 +181,71 @@ msgstr "Puvisada"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "Tronada con puvisadas intermitentes"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "Puvisada"
+msgstr "Puvisadas intermitentes"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "Tronada con chuvascos de sarabia leve"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "Tronada con puvisadas intermitentes"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
-msgstr "Parcialmente anubrado"
+msgstr "Parcialmente nubrado"
 
 #: kweathercore.cpp:321 kweathercore.cpp:322 kweathercore.cpp:323
 msgid "Rain"
-msgstr "Chuvia"
+msgstr "Choiva"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "Tronada con choiva"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
-msgstr ""
+msgstr "Chuvascos"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "Tronada con chuvascos"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
-msgstr "Canizo"
+msgstr "Sarabiada"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "Tronada con sarabia"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "Chuvascos de sarabia"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "Tronada con con chuvascos de sarabia"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
-msgstr "Neve"
+msgstr "Nevada"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "Tronada con nevada"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
-msgstr ""
+msgstr "Nevada intermitente"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
+msgstr "Tronada con nevadas intermitentes"
 
 #~ msgid "Storm"
 #~ msgstr "Tormenta"
