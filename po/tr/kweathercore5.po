@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the kweathercore package.
 #
 # SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
+# Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-11-02 12:29+0300\n"
+"PO-Revision-Date: 2023-11-13 01:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #: kweathercore.cpp:119
 #, kde-format
@@ -46,22 +47,22 @@ msgstr "Bilinmiyor"
 #: kweathercore.cpp:141
 #, kde-format
 msgid "Extreme"
-msgstr "Aşırı Şiddetli"
+msgstr "Aşırı"
 
 #: kweathercore.cpp:144
 #, kde-format
 msgid "Severe"
-msgstr "Şiddetli"
+msgstr "Kuvvetli"
 
 #: kweathercore.cpp:147
 #, kde-format
 msgid "Moderate"
-msgstr "Orta Derecede"
+msgstr "Orta"
 
 #: kweathercore.cpp:150
 #, kde-format
 msgid "Minor"
-msgstr "Az"
+msgstr "Çok Az"
 
 #: kweathercore.cpp:163
 #, kde-format
@@ -93,11 +94,11 @@ msgstr "Bulutlu"
 
 #: kweathercore.cpp:234
 msgid "Partly Sunny"
-msgstr "Az Güneşli"
+msgstr "Parçalı Güneşli"
 
 #: kweathercore.cpp:235 kweathercore.cpp:236
 msgid "Light Clouds"
-msgstr "Hafif Bulutlar"
+msgstr "Hafif Bulutlu"
 
 #: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
 msgid "Fog"
@@ -109,7 +110,7 @@ msgstr "Şiddetli Yağmur"
 
 #: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
 msgid "Thunderstorm with Heavy Rain"
-msgstr "Şiddetli Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Şiddetli Yağmur"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
 msgid "Heavy Rain Shower"
@@ -117,35 +118,35 @@ msgstr "Şiddetli Sağanak Yağmur"
 
 #: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr "Şiddetli Sağanak Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Şiddetli Sağanak Yağmur"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
-msgstr "Şiddetli Sulusepken"
+msgstr "Yoğun Sulusepken"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr "Şiddetli Sulu Sepken ve Fırtına"
+msgstr "Gök Gürültülü Yoğun Sulusepken"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
 msgid "Heavy Sleet Shower"
-msgstr "Şiddetli Sağanak Sulusepken"
+msgstr "Yoğun Sağanak Sulusepken"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr "Şiddetli Sağanak Sulusepken ve Fırtına"
+msgstr "Gök Gürültülü Yoğun Sağanak Sulusepken"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
-msgstr "Şiddetli Kar"
+msgstr "Yoğun Kar"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
 msgid "Heavy Snow Shower"
-msgstr "Şiddetli Sağanak Kar"
+msgstr "Yoğun Sağanak Kar"
 
 #: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr "Şiddetli Sağanak Kar ve Fırtına"
+msgstr "Gök Gürültülü Yoğun Sağanak Kar"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
@@ -153,7 +154,7 @@ msgstr "Hafif Yağmur"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr "Hafif Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Hafif Yağmur"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
 msgid "Light Rain Shower"
@@ -161,7 +162,7 @@ msgstr "Hafif Sağanak Yağmur"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr "Hafif Sağanak Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Hafif Sağanak Yağmur"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
@@ -169,7 +170,7 @@ msgstr "Hafif Sulusepken"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr "Hafif Sulusepken ve Fırtına"
+msgstr "Gök Gürültülü Hafif Sulusepken"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
 msgid "Light Sleet Shower"
@@ -181,7 +182,7 @@ msgstr "Hafif Kar"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr "Hafif Kar ve Fırtına"
+msgstr "Gök Gürültülü Hafif Kar"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
 msgid "Light Snow Shower"
@@ -189,11 +190,11 @@ msgstr "Hafif Sağanak Kar"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr "Hafif Sağanak Sulusepken ve Fırtına"
+msgstr "Gök Gürültülü Hafif Sağanak Sulusepken"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr "Hafif Sağanak Kar ve Fırtına"
+msgstr "Gök Gürültülü Hafif Sağanak Kar"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
@@ -205,7 +206,7 @@ msgstr "Yağmur"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr "Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Yağmur"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
@@ -213,15 +214,15 @@ msgstr "Sağanak Yağmur"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr "Sağanak Yağmur ve Fırtına"
+msgstr "Gök Gürültülü Sağanak Yağmur"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
-msgstr "Sulu Sepken"
+msgstr "Sulusepken"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr "Sulusepken ve Fırtına"
+msgstr "Gök Gürültülü Sulusepken"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
@@ -229,7 +230,7 @@ msgstr "Sağanak Sulusepken"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr "Sağanak Sulusepken ve Fırtına"
+msgstr "Gök Gürültülü Sağanak Sulusepken"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
@@ -237,7 +238,7 @@ msgstr "Kar"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr "Kar ve Fırtına"
+msgstr "Gök Gürültülü Kar"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
@@ -245,7 +246,7 @@ msgstr "Sağanak Kar"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr "Sağanak Kar ve Fırtına"
+msgstr "Gök Gürültülü Sağanak Kar"
 
 #~ msgid "Storm"
 #~ msgstr "Fırtına"
