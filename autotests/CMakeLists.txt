@@ -13,7 +13,7 @@ ecm_add_tests(
     weatherforecasttest.cpp
     locationquerytest.cpp
     pendingweatherforecasttest.cpp
-    LINK_LIBRARIES KF${QT_MAJOR_VERSION}::KWeatherCore Qt${QT_MAJOR_VERSION}::Test
+    LINK_LIBRARIES KWeatherCore Qt6::Test
 )
 
-ecm_add_tests(geotimezonetest.cpp LINK_LIBRARIES KF${QT_MAJOR_VERSION}::KWeatherCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Network)
+ecm_add_tests(geotimezonetest.cpp LINK_LIBRARIES KWeatherCore Qt6::Test Qt6::Network)
