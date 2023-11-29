@@ -38,7 +38,7 @@ find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS I18n Holidays)
 
 
-add_definitions(-DTRANSLATION_DOMAIN=\"kweathercore\")
+add_definitions(-DTRANSLATION_DOMAIN=\"kweathercore6\")
 if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
 endif()
