@@ -7,9 +7,11 @@
 
 #include "locationqueryreply.h"
 #include "kweathercore_p.h"
+#include "locationquery.h"
 #include "locationqueryresult.h"
 #include "reply_p.h"
 
+#include <QCoreApplication>
 #include <QGeoPositionInfo>
 #include <QGeoPositionInfoSource>
 #include <QJsonArray>
@@ -19,11 +21,16 @@
 #include <QNetworkReply>
 #include <QUrlQuery>
 
+#if QT_CONFIG(permissions)
+#include <QPermissions>
+#endif
+
 using namespace KWeatherCore;
 
 class KWeatherCore::LocationQueryReplyPrivate : public ReplyPrivate
 {
 public:
+    void requestPosition(LocationQueryReply *q, QGeoPositionInfoSource *source, QNetworkAccessManager *nam);
     std::vector<LocationQueryResult> m_result;
 };
 
@@ -106,7 +113,40 @@ LocationQueryReply::LocationQueryReply(QGeoPositionInfoSource *source, QNetworkA
         return;
     }
 
-    connect(source, &QGeoPositionInfoSource::positionUpdated, this, [this, nam](const QGeoPositionInfo &pos) {
+#if QT_CONFIG(permissions)
+    QLocationPermission permission;
+    permission.setAccuracy(QLocationPermission::Precise);
+    permission.setAvailability(QLocationPermission::WhenInUse);
+    switch (QCoreApplication::instance()->checkPermission(permission)) {
+    case Qt::PermissionStatus::Undetermined:
+        QCoreApplication::instance()->requestPermission(permission, this, [this, nam, source](const auto &permission) {
+            Q_D(LocationQueryReply);
+            if (permission.status() == Qt::PermissionStatus::Granted) {
+                d->requestPosition(this, source, nam);
+            } else {
+                d->setError(LocationQueryReply::NoService);
+                Q_EMIT finished();
+            }
+        });
+        return;
+    case Qt::PermissionStatus::Denied:
+        d->setError(LocationQueryReply::NoService);
+        QMetaObject::invokeMethod(this, &LocationQueryReply::finished, Qt::QueuedConnection);
+        return;
+    case Qt::PermissionStatus::Granted:
+        d->requestPosition(this, source, nam);
+        break;
+    }
+#else
+    d->requestPosition(this, source, nam);
+#endif
+}
+
+LocationQueryReply::~LocationQueryReply() = default;
+
+void LocationQueryReplyPrivate::requestPosition(LocationQueryReply *q, QGeoPositionInfoSource *source, QNetworkAccessManager *nam)
+{
+    QObject::connect(source, &QGeoPositionInfoSource::positionUpdated, q, [this, q, nam](const QGeoPositionInfo &pos) {
         const auto lat = pos.coordinate().latitude();
         const auto lon = pos.coordinate().longitude();
         QUrl url(QStringLiteral("http://api.geonames.org/findNearbyJSON"));
@@ -122,32 +162,29 @@ LocationQueryReply::LocationQueryReply(QGeoPositionInfoSource *source, QNetworkA
         qWarning() << "lat: " << lat << "lon: " << lon;
         auto reply = nam->get(req);
 
-        QObject::connect(reply, &QNetworkReply::finished, [this, lat, lon, reply] {
-            Q_D(LocationQueryReply);
+        QObject::connect(reply, &QNetworkReply::finished, q, [this, q, lat, lon, reply] {
             reply->deleteLater();
             const QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
             const QJsonObject root = document.object();
             const auto array = root[QLatin1String("geonames")].toArray();
             if (array.size()) {
-                d->m_result.push_back(LocationQueryResult(lat,
-                                                          lon,
-                                                          array.at(0)[QLatin1String("toponymName")].toString(),
-                                                          array.at(0)[QLatin1String("name")].toString(),
-                                                          array.at(0)[QLatin1String("countryCode")].toString(),
-                                                          array.at(0)[QLatin1String("countryName")].toString(),
-                                                          QString::number(root[QLatin1String("geonameId")].toInt())));
+                m_result.push_back(LocationQueryResult(lat,
+                                                       lon,
+                                                       array.at(0)[QLatin1String("toponymName")].toString(),
+                                                       array.at(0)[QLatin1String("name")].toString(),
+                                                       array.at(0)[QLatin1String("countryCode")].toString(),
+                                                       array.at(0)[QLatin1String("countryName")].toString(),
+                                                       QString::number(root[QLatin1String("geonameId")].toInt())));
             } else {
-                d->setError(Reply::NotFound);
+                setError(Reply::NotFound);
             }
 
-            Q_EMIT finished();
+            Q_EMIT q->finished();
         });
     });
 
     source->requestUpdate();
 }
-
-LocationQueryReply::~LocationQueryReply() = default;
 
 const std::vector<LocationQueryResult> &LocationQueryReply::result() const
 {
