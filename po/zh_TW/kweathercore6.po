@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2024-01-08 19:34+0900\n"
+"PO-Revision-Date: 2024-01-14 14:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.01.85\n"
+"X-Generator: Lokalize 24.01.90\n"
 
 #: kweathercore.cpp:119
 #, kde-format
@@ -49,22 +49,22 @@ msgstr "未知"
 #: kweathercore.cpp:141
 #, kde-format
 msgid "Extreme"
-msgstr ""
+msgstr "極端"
 
 #: kweathercore.cpp:144
 #, kde-format
 msgid "Severe"
-msgstr ""
+msgstr "嚴重"
 
 #: kweathercore.cpp:147
 #, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "普通"
 
 #: kweathercore.cpp:150
 #, kde-format
 msgid "Minor"
-msgstr ""
+msgstr "微小"
 
 #: kweathercore.cpp:163
 #, kde-format
@@ -96,15 +96,15 @@ msgstr "多雲"
 
 #: kweathercore.cpp:234
 msgid "Partly Sunny"
-msgstr "局部地區晴朗"
+msgstr "局部晴朗"
 
 #: kweathercore.cpp:235 kweathercore.cpp:236
 msgid "Light Clouds"
-msgstr ""
+msgstr "晴時多雲"
 
 #: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
 msgid "Fog"
-msgstr ""
+msgstr "霧"
 
 #: kweathercore.cpp:241 kweathercore.cpp:242 kweathercore.cpp:243
 msgid "Heavy Rain"
@@ -124,19 +124,19 @@ msgstr "雷風暴夾帶大陣雨"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
-msgstr ""
+msgstr "大凍雨"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "雷風暴夾帶大凍雨"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
 msgid "Heavy Sleet Shower"
-msgstr ""
+msgstr "大陣性凍雨"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "雷風暴夾帶大陣性凍雨"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
@@ -168,15 +168,15 @@ msgstr "雷風暴夾小陣雨"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
-msgstr ""
+msgstr "小凍雨"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "雷風暴夾帶小凍雨"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
 msgid "Light Sleet Shower"
-msgstr ""
+msgstr "小陣性凍雨"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
@@ -192,7 +192,7 @@ msgstr "小陣雪"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "雷風暴夾帶小陣性凍雨"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
@@ -200,7 +200,7 @@ msgstr "雷風暴夾小陣雪"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
-msgstr "部份多雲"
+msgstr "局部多雲"
 
 #: kweathercore.cpp:321 kweathercore.cpp:322 kweathercore.cpp:323
 msgid "Rain"
@@ -220,19 +220,19 @@ msgstr "雷風暴夾陣雨"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
-msgstr ""
+msgstr "凍雨"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "雷風暴夾帶凍雨"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "凍陣雨"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "雷風暴夾帶凍陣雨"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
