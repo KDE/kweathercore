@@ -246,6 +246,3 @@ msgstr "Обилен снеговалеж"
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
 msgstr "Гръмотевична буря с обилен снеговалеж"
-
-#~ msgid "Storm"
-#~ msgstr "Буря"
