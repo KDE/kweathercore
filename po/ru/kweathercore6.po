@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2023.
+# SPDX-FileCopyrightText: 2021, 2023, 2024 Alexander Yavorsky <kekcuha@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-12-27 10:40+0300\n"
+"PO-Revision-Date: 2024-02-07 11:06+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: kweathercore.cpp:119
 #, kde-format
 msgid "Immediate"
-msgstr ""
+msgstr "Сейчас"
 
 #: kweathercore.cpp:122
 #, kde-format
 msgid "Expected"
-msgstr ""
+msgstr "Ожидается"
 
 #: kweathercore.cpp:125
 #, kde-format
 msgid "Future"
-msgstr ""
+msgstr "Потом"
 
 #: kweathercore.cpp:128
 #, kde-format
 msgid "Past"
-msgstr ""
+msgstr "Прошёл"
 
 #: kweathercore.cpp:131 kweathercore.cpp:153 kweathercore.cpp:175
 #: kweathercore_p.h:23
@@ -47,42 +47,42 @@ msgstr "Неизвестно"
 #: kweathercore.cpp:141
 #, kde-format
 msgid "Extreme"
-msgstr ""
+msgstr "Очень сильный"
 
 #: kweathercore.cpp:144
 #, kde-format
 msgid "Severe"
-msgstr ""
+msgstr "Сильный"
 
 #: kweathercore.cpp:147
 #, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "Средний"
 
 #: kweathercore.cpp:150
 #, kde-format
 msgid "Minor"
-msgstr ""
+msgstr "Небольшой"
 
 #: kweathercore.cpp:163
 #, kde-format
 msgid "Observed"
-msgstr ""
+msgstr "Наблюдается"
 
 #: kweathercore.cpp:166
 #, kde-format
 msgid "Likely"
-msgstr ""
+msgstr "Вероятен"
 
 #: kweathercore.cpp:169
 #, kde-format
 msgid "Possible"
-msgstr ""
+msgstr "Возможен"
 
 #: kweathercore.cpp:172
 #, kde-format
 msgid "Unlikely"
-msgstr ""
+msgstr "Маловероятен"
 
 #: kweathercore.cpp:228 kweathercore.cpp:229 kweathercore.cpp:230
 msgid "Clear"
@@ -150,33 +150,31 @@ msgstr "Сильный снегопад с грозами"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
-msgstr "Небольшой дождь"
+msgstr "Слабый дождь"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr "Небольшой дождь с грозами"
+msgstr "Слабый дождь с грозами"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
 msgid "Light Rain Shower"
-msgstr "Небольшой ливневый дождь"
+msgstr "Слабый ливневый дождь"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr "Небольшой ливневый дождь с грозами"
+msgstr "Слабый ливневый дождь с грозами"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
-msgstr "Небольшой дождь со снегом"
+msgstr "Слабый дождь со снегом"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr "Небольшой дождь со снегом и грозами"
+msgstr "Слабый дождь со снегом и грозами"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "Небольшой дождь со снегом"
+msgstr "Слабый дождь со снегом"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
@@ -184,21 +182,19 @@ msgstr "Небольшой снег"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "Слабый снег с грозами"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "Небольшой снег"
+msgstr "Слабый снегопад"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "Слабый дождь со снегом с грозой"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "Слабый снегопад с грозами"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
@@ -210,15 +206,15 @@ msgstr "Дождь"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "Дождь с грозой"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
-msgstr ""
+msgstr "Ливневый дождь"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "Ливневый дождь с грозами"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
@@ -226,31 +222,31 @@ msgstr "Дождь со снегом"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "Дождь со снегом и грозами"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "Ливневый дождь со снегом"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "Ливневый дождь со снегом и грозами"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
-msgstr "Снег"
+msgstr "Снегопад"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "Снегопад с грозами"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
-msgstr ""
+msgstr "Сильный снегопад"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
+msgstr "Сильный снегопад с грозами"
 
 #~ msgid "Storm"
 #~ msgstr "Буря"
