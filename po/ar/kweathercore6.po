@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:28+0000\n"
-"PO-Revision-Date: 2023-01-26 13:28+0400\n"
+"PO-Revision-Date: 2024-02-12 12:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: kweathercore.cpp:119
 #, kde-format
@@ -110,17 +110,15 @@ msgstr "مطر غزير"
 
 #: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
 msgid "Thunderstorm with Heavy Rain"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بمطر غزير"
 
 #: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-#, fuzzy
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
-msgstr "مطر غزير"
+msgstr "زخة مطر غزير"
 
 #: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بزخة مطر غزير"
 
 #: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
 msgid "Heavy Sleet"
@@ -128,31 +126,27 @@ msgstr "مطر متجمد غزير"
 
 #: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "عاصفة رعدية مع زخة مطر متجمد"
 
 #: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
-msgstr "مطر متجمد غزير"
+msgstr "زخة مطر متجمد غزيرة"
 
 #: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "عاصفة رعدية مع زخة مطر متجمد غزيرة"
 
 #: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
 msgid "Heavy Snow"
 msgstr "ثلج غزير"
 
 #: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-#, fuzzy
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
-msgstr "ثلج غزير"
+msgstr "زخة ثلج غزيرة"
 
 #: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بزخة ثلج غزيرة"
 
 #: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
 msgid "Light Rain"
@@ -160,17 +154,15 @@ msgstr "مطر خفيف"
 
 #: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
 msgid "Thunderstorm with Light Rain"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بمطر خفيف"
 
 #: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-#, fuzzy
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
-msgstr "مطر خفيف"
+msgstr "زخة مطر خفيفة"
 
 #: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
 msgid "Thunderstorm with Light Rain Shower"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بزخة مطر خفيفة"
 
 #: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
 msgid "Light Sleet"
@@ -178,13 +170,11 @@ msgstr "مطر متجمد خفيف"
 
 #: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "عاصفة رعدية مع مطر متجمد خفيف"
 
 #: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "مطر متجمد خفيف"
+msgstr "زخة مطر متجمد خفيف"
 
 #: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
 msgid "Light Snow"
@@ -192,21 +182,19 @@ msgstr "ثلج خفيف"
 
 #: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "عاصفة رعدية مع ثلج خفيف"
 
 #: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "ثلج خفيف"
+msgstr "زخة ثلج خفيفة"
 
 #: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "عاصفة رعدية مع زخة مطر متجمد خفيفة"
 
 #: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "عاصفة رعدية مع زخة ثلجية خفيفة"
 
 #: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
 msgid "Partly Cloudy"
@@ -218,15 +206,15 @@ msgstr "مطر"
 
 #: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "عاصفة رعدية مع المطر"
 
 #: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
 msgid "Rain Shower"
-msgstr ""
+msgstr "زخة مطر"
 
 #: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "عاصفة رعدية مصحوبة بزخة مطر"
 
 #: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
 msgid "Sleet"
@@ -234,15 +222,15 @@ msgstr "مطر متجمد"
 
 #: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "عاصفة رعدية مع مطر متجمد"
 
 #: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
 msgid "Sleet Shower"
-msgstr ""
+msgstr "زخة مطر متجمد"
 
 #: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "عاصفة رعدية مع زخة مطر متجمد"
 
 #: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
 msgid "Snow"
@@ -250,15 +238,15 @@ msgstr "ثلج"
 
 #: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "عاصفة رعدية مع ثلج"
 
 #: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
 msgid "Snow Shower"
-msgstr ""
+msgstr "زخة ثلج"
 
 #: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
+msgstr "عاصفة رعدية مع زخات ثلجية"
 
 #~ msgid "Storm"
 #~ msgstr "عاصف"
