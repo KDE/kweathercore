@@ -109,10 +109,6 @@ void AlertFeedEntry::setUrl(const QUrl &url)
 {
     d->CAPUrl = url;
 }
-void AlertFeedEntry::setAreaCodes(const AreaCodeVec &areaCodes)
-{
-    d->areaCodes = areaCodes;
-}
 void AlertFeedEntry::setAreaCodes(AreaCodeVec &&areaCodes)
 {
     d->areaCodes = std::move(areaCodes);

@@ -26,7 +26,7 @@ void WeatherForecastTest::testDailyMerge()
         d.setDate(date.addDays(i));
         vec.push_back(d);
     }
-    d1.setDailyWeatherForecast(vec);
+    d1.setDailyWeatherForecast(std::move(vec));
 
     QCOMPARE(d1.dailyWeatherForecast().size(), 3);
 }

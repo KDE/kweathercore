@@ -115,7 +115,7 @@ std::unique_ptr<AlertFeedEntry> FeedParser::parseOneEntry(QXmlStreamReader &read
         }
     }
 
-    entry->setAreaCodes(areaCodes);
+    entry->setAreaCodes(std::move(areaCodes));
     return entry;
 }
 QUrl FeedParser::parseCapElement(QXmlStreamReader &reader) const

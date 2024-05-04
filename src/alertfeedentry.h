@@ -102,7 +102,6 @@ public:
     void setSeverity(CAPAlertInfo::Severity severity);
     void setDate(const QDateTime &date);
     void setUrl(const QUrl &url);
-    void setAreaCodes(const AreaCodeVec &areaCodes);
     void setAreaCodes(AreaCodeVec &&areaCodes);
     void setPolygon(CAPPolygon &&polygon);
     AlertFeedEntry &operator=(const AlertFeedEntry &other);

@@ -159,11 +159,6 @@ public:
      */
     const std::vector<HourlyWeatherForecast> &hourlyWeatherForecast() const;
     /**
-     * set the hourly forecast of the day
-     * @param forecast make sure they are sorted and on the same day
-     */
-    void setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast);
-    /**
      * overloaded version
      * @param forecast
      */

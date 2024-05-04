@@ -81,7 +81,7 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(const QJsonObject &obj)
     for (int i = 0; i < array.size(); i++) {
         hourlyVec.push_back(HourlyWeatherForecast::fromJson(array.at(i).toObject()));
     }
-    ret.setHourlyWeatherForecast(hourlyVec);
+    ret.setHourlyWeatherForecast(std::move(hourlyVec));
     return ret;
 }
 bool DailyWeatherForecast::isValid() const
@@ -171,10 +171,6 @@ QDateTime DailyWeatherForecast::dateTime() const
 const std::vector<HourlyWeatherForecast> &DailyWeatherForecast::hourlyWeatherForecast() const
 {
     return d->hourlyWeatherForecast;
-}
-void DailyWeatherForecast::setHourlyWeatherForecast(const std::vector<HourlyWeatherForecast> &forecast)
-{
-    d->hourlyWeatherForecast = forecast;
 }
 void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherForecast> &&forecast)
 {

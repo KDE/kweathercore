@@ -61,7 +61,6 @@ public:
      * @param timezone valid IANA Time Zone ID
      */
     void setTimezone(QString timezone);
-    void setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast);
     void setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast);
 
     /**

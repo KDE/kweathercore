@@ -63,7 +63,7 @@ WeatherForecast WeatherForecast::fromJson(const QJsonObject &obj)
     for (const auto &d : array) {
         dayVec.push_back(DailyWeatherForecast::fromJson(d.toObject()));
     }
-    w.setDailyWeatherForecast(dayVec);
+    w.setDailyWeatherForecast(std::move(dayVec));
     w.setCoordinate(obj[QLatin1String("lat")].toDouble(), obj[QLatin1String("lon")].toDouble());
     w.setTimezone(obj[QLatin1String("timezone")].toString());
     w.setCreatedTime(QDateTime::fromString(obj[QLatin1String("createdTime")].toString(), Qt::ISODate));
@@ -97,10 +97,6 @@ void WeatherForecast::setCoordinate(double latitude, double longitude)
 void WeatherForecast::setTimezone(QString timezone)
 {
     d->timezone = std::move(timezone);
-}
-void WeatherForecast::setDailyWeatherForecast(const std::vector<DailyWeatherForecast> &forecast)
-{
-    d->dailyWeatherForecast = forecast;
 }
 void WeatherForecast::setDailyWeatherForecast(std::vector<DailyWeatherForecast> &&forecast)
 {
