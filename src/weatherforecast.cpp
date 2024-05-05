@@ -22,23 +22,13 @@ WeatherForecast::WeatherForecast()
 {
 }
 
-WeatherForecast::WeatherForecast(const WeatherForecast &other)
-    : d(other.d)
-{
-}
+WeatherForecast::WeatherForecast(const WeatherForecast &) = default;
+WeatherForecast::WeatherForecast(WeatherForecast &&) noexcept = default;
 
-WeatherForecast &WeatherForecast::operator=(const WeatherForecast &other)
-{
-    if (this != &other) {
-        d = other.d;
-    }
+WeatherForecast &WeatherForecast::operator=(const WeatherForecast &) = default;
+WeatherForecast &WeatherForecast::operator=(WeatherForecast &&) noexcept = default;
 
-    return *this;
-}
-
-WeatherForecast::~WeatherForecast()
-{
-}
+WeatherForecast::~WeatherForecast() = default;
 
 QJsonObject WeatherForecast::toJson() const
 {
@@ -113,7 +103,7 @@ WeatherForecast &WeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
 
     // if not find, append it at end
     auto newDay = DailyWeatherForecast();
-    newDay += forecast;
+    newDay += std::move(forecast);
     d->dailyWeatherForecast.push_back(std::move(newDay));
     return *this;
 }

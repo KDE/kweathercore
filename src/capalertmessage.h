@@ -69,7 +69,7 @@ public:
      */
     CAPAlertMessage();
     CAPAlertMessage(const CAPAlertMessage &other);
-    CAPAlertMessage(CAPAlertMessage &&other);
+    CAPAlertMessage(CAPAlertMessage &&other) noexcept;
     ~CAPAlertMessage();
 
     /**
@@ -134,7 +134,7 @@ public:
     ///@endcond
 
     CAPAlertMessage &operator=(const CAPAlertMessage &other);
-    CAPAlertMessage &operator=(CAPAlertMessage &&other);
+    CAPAlertMessage &operator=(CAPAlertMessage &&other) noexcept;
 
 private:
     QSharedDataPointer<CAPAlertMessagePrivate> d;

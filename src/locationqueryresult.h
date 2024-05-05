@@ -55,10 +55,10 @@ public:
                         QString geonameId = QString(),
                         std::optional<QString> subdivision = std::nullopt);
     LocationQueryResult(const LocationQueryResult &other);
-    LocationQueryResult(LocationQueryResult &&other);
+    LocationQueryResult(LocationQueryResult &&other) noexcept;
     ~LocationQueryResult();
     LocationQueryResult &operator=(const LocationQueryResult &other);
-    LocationQueryResult &operator=(LocationQueryResult &&other);
+    LocationQueryResult &operator=(LocationQueryResult &&other) noexcept;
     double latitude() const;
 
     double longitude() const;

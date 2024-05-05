@@ -49,7 +49,7 @@ public:
     HourlyWeatherForecast();
     explicit HourlyWeatherForecast(const QDateTime &date);
     HourlyWeatherForecast(const HourlyWeatherForecast &other);
-    HourlyWeatherForecast(HourlyWeatherForecast &&other);
+    HourlyWeatherForecast(HourlyWeatherForecast &&other) noexcept;
     ~HourlyWeatherForecast();
 
     /**
@@ -180,7 +180,7 @@ public:
      */
     bool operator==(const KWeatherCore::HourlyWeatherForecast &) const;
     HourlyWeatherForecast &operator=(const HourlyWeatherForecast &other);
-    HourlyWeatherForecast &operator=(HourlyWeatherForecast &&other);
+    HourlyWeatherForecast &operator=(HourlyWeatherForecast &&other) noexcept;
 
 private:
     class HourlyWeatherForecastPrivate;

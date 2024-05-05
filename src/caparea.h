@@ -58,10 +58,10 @@ class KWEATHERCORE_EXPORT CAPArea
 public:
     CAPArea();
     CAPArea(const CAPArea &other);
-    CAPArea(CAPArea &&other);
+    CAPArea(CAPArea &&other) noexcept;
     ~CAPArea();
     CAPArea &operator=(const CAPArea &other);
-    CAPArea &operator=(CAPArea &&other);
+    CAPArea &operator=(CAPArea &&other) noexcept;
 
     /** A text description of the message target area. */
     QString description() const;

@@ -34,11 +34,11 @@ CAPReference::CAPReference(const QString &sender, const QString &identifier, con
 }
 
 CAPReference::CAPReference(const CAPReference &) = default;
-CAPReference::CAPReference(CAPReference &&) = default;
+CAPReference::CAPReference(CAPReference &&) noexcept = default;
 CAPReference::~CAPReference() = default;
 
 CAPReference &CAPReference::operator=(const CAPReference &) = default;
-CAPReference &CAPReference::operator=(CAPReference &&) = default;
+CAPReference &CAPReference::operator=(CAPReference &&) noexcept = default;
 
 bool CAPReference::operator==(const CAPReference &other) const
 {

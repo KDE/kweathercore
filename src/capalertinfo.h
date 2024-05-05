@@ -86,7 +86,7 @@ public:
 
     CAPAlertInfo();
     CAPAlertInfo(const CAPAlertInfo &other);
-    CAPAlertInfo(CAPAlertInfo &&other);
+    CAPAlertInfo(CAPAlertInfo &&other) noexcept;
     ~CAPAlertInfo();
     /**
      * The text denoting the type of the subject
@@ -192,7 +192,7 @@ public:
     ///@endcond
 
     CAPAlertInfo &operator=(const CAPAlertInfo &other);
-    CAPAlertInfo &operator=(CAPAlertInfo &&other);
+    CAPAlertInfo &operator=(CAPAlertInfo &&other) noexcept;
 
 private:
     QSharedDataPointer<CAPAlertInfoPrivate> d;

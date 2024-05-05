@@ -38,10 +38,10 @@ CAPAlertInfo::CAPAlertInfo()
 {
 }
 CAPAlertInfo::CAPAlertInfo(const CAPAlertInfo &other) = default;
-CAPAlertInfo::CAPAlertInfo(CAPAlertInfo &&other) = default;
+CAPAlertInfo::CAPAlertInfo(CAPAlertInfo &&other) noexcept = default;
 CAPAlertInfo::~CAPAlertInfo() = default;
 CAPAlertInfo &CAPAlertInfo::operator=(const CAPAlertInfo &other) = default;
-CAPAlertInfo &CAPAlertInfo::operator=(CAPAlertInfo &&other) = default;
+CAPAlertInfo &CAPAlertInfo::operator=(CAPAlertInfo &&other) noexcept = default;
 
 QString CAPAlertInfo::event() const
 {

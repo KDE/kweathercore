@@ -42,7 +42,7 @@ public:
     explicit DailyWeatherForecast(const QDate &date);
     DailyWeatherForecast(const DailyWeatherForecast &other);
     ~DailyWeatherForecast();
-    DailyWeatherForecast(DailyWeatherForecast &&other);
+    DailyWeatherForecast(DailyWeatherForecast &&other) noexcept;
     /**
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
@@ -170,7 +170,7 @@ public:
      * @param forecast make sure it's on the same day
      * @return result DailyWeatherForecast
      */
-    DailyWeatherForecast &operator+=(const HourlyWeatherForecast &forecast);
+    DailyWeatherForecast &operator+=(HourlyWeatherForecast &&forecast);
     /**
      * if on the same day
      * @param forecast
@@ -185,7 +185,7 @@ public:
     bool operator<(const DailyWeatherForecast &forecast) const;
 
     DailyWeatherForecast &operator=(const DailyWeatherForecast &other);
-    DailyWeatherForecast &operator=(DailyWeatherForecast &&other);
+    DailyWeatherForecast &operator=(DailyWeatherForecast &&other) noexcept;
 
 private:
     class DailyWeatherForecastPrivate;

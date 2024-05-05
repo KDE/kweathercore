@@ -28,8 +28,8 @@ public:
     std::vector<HourlyWeatherForecast> hourlyWeatherForecast;
 };
 DailyWeatherForecast::~DailyWeatherForecast() = default;
-DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) = default;
-DailyWeatherForecast &DailyWeatherForecast::operator=(DailyWeatherForecast &&other) = default;
+DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) noexcept = default;
+DailyWeatherForecast &DailyWeatherForecast::operator=(DailyWeatherForecast &&other) noexcept = default;
 DailyWeatherForecast::DailyWeatherForecast()
     : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
@@ -177,7 +177,7 @@ void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherFor
     d->hourlyWeatherForecast = std::move(forecast);
 }
 
-DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForecast &forecast)
+DailyWeatherForecast &DailyWeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
 {
     if (isValid()) {
         setDate(forecast.date().date());
@@ -200,7 +200,7 @@ DailyWeatherForecast &DailyWeatherForecast::operator+=(const HourlyWeatherForeca
         setMinTemp(std::min(minTemp(), forecast.temperature()));
     }
 
-    d->hourlyWeatherForecast.push_back(forecast);
+    d->hourlyWeatherForecast.push_back(std::move(forecast));
     return *this;
 }
 

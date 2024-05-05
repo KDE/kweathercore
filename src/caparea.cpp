@@ -29,10 +29,10 @@ CAPArea::CAPArea()
 }
 
 CAPArea::CAPArea(const CAPArea &other) = default;
-CAPArea::CAPArea(CAPArea &&other) = default;
+CAPArea::CAPArea(CAPArea &&other) noexcept = default;
 CAPArea::~CAPArea() = default;
 CAPArea &CAPArea::operator=(const CAPArea &other) = default;
-CAPArea &CAPArea::operator=(CAPArea &&other) = default;
+CAPArea &CAPArea::operator=(CAPArea &&other) noexcept = default;
 
 QString CAPArea::description() const
 {

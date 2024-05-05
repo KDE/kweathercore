@@ -27,7 +27,9 @@ public:
      */
     WeatherForecast();
     WeatherForecast(const WeatherForecast &other);
+    WeatherForecast(WeatherForecast &&) noexcept;
     WeatherForecast &operator=(const WeatherForecast &other);
+    WeatherForecast &operator=(WeatherForecast &&) noexcept;
     ~WeatherForecast();
     /**
      * convert to QJsonObject

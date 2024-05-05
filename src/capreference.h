@@ -30,10 +30,10 @@ public:
     explicit CAPReference();
     explicit CAPReference(const QString &sender, const QString &identifier, const QDateTime &sent);
     CAPReference(const CAPReference &);
-    CAPReference(CAPReference &&);
+    CAPReference(CAPReference &&) noexcept;
     ~CAPReference();
     CAPReference &operator=(const CAPReference &);
-    CAPReference &operator=(CAPReference &&);
+    CAPReference &operator=(CAPReference &&) noexcept;
 
     bool operator==(const CAPReference &other) const;
 

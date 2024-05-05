@@ -28,10 +28,10 @@ CAPAlertMessage::CAPAlertMessage()
 {
 }
 CAPAlertMessage::CAPAlertMessage(const CAPAlertMessage &other) = default;
-CAPAlertMessage::CAPAlertMessage(CAPAlertMessage &&other) = default;
+CAPAlertMessage::CAPAlertMessage(CAPAlertMessage &&other) noexcept = default;
 CAPAlertMessage::~CAPAlertMessage() = default;
 CAPAlertMessage &CAPAlertMessage::operator=(const CAPAlertMessage &other) = default;
-CAPAlertMessage &CAPAlertMessage::operator=(CAPAlertMessage &&other) = default;
+CAPAlertMessage &CAPAlertMessage::operator=(CAPAlertMessage &&other) noexcept = default;
 
 QString CAPAlertMessage::identifier() const
 {

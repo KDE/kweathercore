@@ -27,7 +27,7 @@ void DailyForecastTest::testHourlyMerge()
         h.setWindSpeed(5);
         h.setHumidity(0.1);
 
-        d1 += h;
+        d1 += std::move(h);
     }
     QCOMPARE(d1.isValid(), false);
 
@@ -37,7 +37,7 @@ void DailyForecastTest::testDailyMerge()
 {
     const auto &vec = d1.hourlyWeatherForecast();
     for (auto &h : vec) {
-        d2 += h;
+        d2 += HourlyWeatherForecast(h);
     }
 
     QCOMPARE(d2.hourlyWeatherForecast().size(), d1.hourlyWeatherForecast().size());

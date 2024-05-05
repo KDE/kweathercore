@@ -20,7 +20,7 @@ LocationQueryResult::LocationQueryResult()
     : d(std::make_unique<LocationQueryResultPrivate>())
 {
 }
-LocationQueryResult::LocationQueryResult(LocationQueryResult &&other) = default;
+LocationQueryResult::LocationQueryResult(LocationQueryResult &&other) noexcept = default;
 LocationQueryResult::LocationQueryResult(double latitude,
                                          double longitude,
                                          QString toponymName,
@@ -51,7 +51,7 @@ LocationQueryResult &LocationQueryResult::operator=(const LocationQueryResult &o
     *d = *other.d;
     return *this;
 }
-LocationQueryResult &LocationQueryResult::operator=(LocationQueryResult &&other) = default;
+LocationQueryResult &LocationQueryResult::operator=(LocationQueryResult &&other) noexcept = default;
 double LocationQueryResult::latitude() const
 {
     return d->latitude;

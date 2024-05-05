@@ -33,7 +33,7 @@ HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
 {
     d->date = date;
 }
-HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) = default;
+HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) noexcept = default;
 HourlyWeatherForecast::~HourlyWeatherForecast() = default;
 
 HourlyWeatherForecast::HourlyWeatherForecast()
@@ -46,7 +46,7 @@ HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other)
 {
     *d = *other.d;
 }
-HourlyWeatherForecast &HourlyWeatherForecast::operator=(HourlyWeatherForecast &&other) = default;
+HourlyWeatherForecast &HourlyWeatherForecast::operator=(HourlyWeatherForecast &&other) noexcept = default;
 QJsonObject HourlyWeatherForecast::toJson() const
 {
     QJsonObject obj;
