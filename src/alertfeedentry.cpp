@@ -46,17 +46,17 @@ const QString &AlertFeedEntry::area() const
 {
     return d->area;
 }
-QString AlertFeedEntry::urgency() const
+CAPAlertInfo::Urgency AlertFeedEntry::urgency() const
 {
-    return KWeatherCorePrivate::urgencyToString(d->urgency);
+    return d->urgency;
 }
-QString AlertFeedEntry::severity() const
+CAPAlertInfo::Severity AlertFeedEntry::severity() const
 {
-    return KWeatherCorePrivate::severityToString(d->severity);
+    return d->severity;
 }
-QString AlertFeedEntry::certainty() const
+CAPAlertInfo::Certainty AlertFeedEntry::certainty() const
 {
-    return KWeatherCorePrivate::certaintyToString(d->certainty);
+    return d->certainty;
 }
 const QDateTime &AlertFeedEntry::date() const
 {

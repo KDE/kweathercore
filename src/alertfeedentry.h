@@ -27,9 +27,9 @@ class KWEATHERCORE_EXPORT AlertFeedEntry
     Q_PROPERTY(QString title READ title)
     Q_PROPERTY(QString summary READ summary)
     Q_PROPERTY(QString area READ area)
-    Q_PROPERTY(QString urgency READ urgency)
-    Q_PROPERTY(QString severity READ severity)
-    Q_PROPERTY(QString certainty READ certainty)
+    Q_PROPERTY(CAPAlertInfo::Urgency urgency READ urgency)
+    Q_PROPERTY(CAPAlertInfo::Severity severity READ severity)
+    Q_PROPERTY(CAPAlertInfo::Certainty certainty READ certainty)
     Q_PROPERTY(QDateTime date READ date)
 public:
     /**
@@ -59,17 +59,17 @@ public:
      * urgency
      * @return localized, "Unknown" by defaut
      */
-    QString urgency() const;
+    CAPAlertInfo::Urgency urgency() const;
     /**
      * severity
      * @return localized, "Unknown" by defaut
      */
-    QString severity() const;
+    CAPAlertInfo::Severity severity() const;
     /**
      * certainty
      * @return localized, "Unknown" by defaut
      */
-    QString certainty() const;
+    CAPAlertInfo::Certainty certainty() const;
     /**
      * could be date of the alert or the date of this message
      * refer to CAP for accurate date

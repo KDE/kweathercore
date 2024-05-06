@@ -39,9 +39,6 @@ public:
     static CAPAlertInfo::Urgency urgencyStringToEnum(const QString &str);
     static CAPAlertInfo::Severity severityStringToEnum(const QString &str);
     static CAPAlertInfo::Certainty certaintyStringToEnum(const QString &str);
-    static QString urgencyToString(CAPAlertInfo::Urgency urgency);
-    static QString severityToString(CAPAlertInfo::Severity severity);
-    static QString certaintyToString(CAPAlertInfo::Certainty certainty);
 
     static int weatherIconPriorityRank(const QString &icon);
     static ResolvedWeatherDesc resolveAPIWeatherDesc(const QString &desc);
