@@ -24,7 +24,6 @@ namespace KWeatherCore
 class KWEATHERCORE_EXPORT DailyWeatherForecast
 {
     Q_GADGET
-    Q_PROPERTY(bool valid READ isValid)
     Q_PROPERTY(qreal maxTemp READ maxTemp WRITE setMaxTemp)
     Q_PROPERTY(qreal minTemp READ minTemp WRITE setMinTemp)
     Q_PROPERTY(qreal precipitation READ precipitation WRITE setPrecipitation)
@@ -52,12 +51,6 @@ public:
      * Construct a DailyWeatherForecast from QJsonObject
      */
     static DailyWeatherForecast fromJson(const QJsonObject &obj);
-    /**
-     * @return @c true if the object is created without data
-     * this value won't change once the class is created with the exceptions of
-     * Day/Hour merge
-     */
-    bool isValid() const;
     /**
      * set the maximum temperature of the day
      * @param maxTemp maximum temperature of the day, in celsius

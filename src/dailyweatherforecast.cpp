@@ -13,8 +13,6 @@ namespace KWeatherCore
 class DailyWeatherForecast::DailyWeatherForecastPrivate
 {
 public:
-    bool isValid = true;
-
     double maxTemp = std::numeric_limits<double>::lowest();
     double minTemp = std::numeric_limits<double>::max();
     double precipitation = 0; // mm
@@ -38,7 +36,6 @@ DailyWeatherForecast::DailyWeatherForecast(const QDate &date)
     : d(std::make_unique<DailyWeatherForecastPrivate>())
 {
     d->date = date;
-    d->isValid = false;
 }
 DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other)
     : d(std::make_unique<DailyWeatherForecastPrivate>())
@@ -83,10 +80,6 @@ DailyWeatherForecast DailyWeatherForecast::fromJson(const QJsonObject &obj)
     }
     ret.setHourlyWeatherForecast(std::move(hourlyVec));
     return ret;
-}
-bool DailyWeatherForecast::isValid() const
-{
-    return d->isValid;
 }
 void DailyWeatherForecast::setMaxTemp(double maxTemp)
 {
@@ -179,11 +172,10 @@ void DailyWeatherForecast::setHourlyWeatherForecast(std::vector<HourlyWeatherFor
 
 DailyWeatherForecast &DailyWeatherForecast::operator+=(HourlyWeatherForecast &&forecast)
 {
-    if (isValid()) {
+    if (!d->date.isValid()) {
         setDate(forecast.date().date());
         setWeatherDescription(forecast.weatherDescription());
         setWeatherIcon(forecast.weatherIcon());
-        d->isValid = false;
     }
 
     if (date().daysTo(forecast.date().date()) == 0) {

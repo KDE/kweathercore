@@ -8,11 +8,6 @@
 
 using namespace KWeatherCore;
 
-void DailyForecastTest::testNull()
-{
-    QCOMPARE(d1.isValid(), true);
-}
-
 void DailyForecastTest::testHourlyMerge()
 {
     for (int i = 0; i < 24; ++i) {
@@ -29,8 +24,6 @@ void DailyForecastTest::testHourlyMerge()
 
         d1 += std::move(h);
     }
-    QCOMPARE(d1.isValid(), false);
-
     QCOMPARE(d1.hourlyWeatherForecast().size(), 24);
 }
 void DailyForecastTest::testDailyMerge()

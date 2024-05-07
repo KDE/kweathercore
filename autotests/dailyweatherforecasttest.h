@@ -15,7 +15,6 @@ class DailyForecastTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void testNull();
     void testHourlyMerge();
     void testDailyMerge();
     void testJson();
