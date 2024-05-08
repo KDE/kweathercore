@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:28+0000\n"
+"POT-Creation-Date: 2024-05-08 00:37+0000\n"
 "PO-Revision-Date: 2023-11-04 12:54+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19,235 +19,210 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: kweathercore.cpp:119
-#, kde-format
-msgid "Immediate"
-msgstr "Natychmiast"
+#: kweathercore.cpp:162 kweathercore.cpp:163 kweathercore.cpp:164
+msgid "Clear"
+msgstr "Bezchmurnie"
 
-#: kweathercore.cpp:122
-#, kde-format
-msgid "Expected"
-msgstr "Oczekiwany"
+#: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
+msgid "Cloudy"
+msgstr "Pochmurno"
 
-#: kweathercore.cpp:125
-#, kde-format
-msgid "Future"
-msgstr "Przyszły"
+#: kweathercore.cpp:168
+msgid "Partly Sunny"
+msgstr "Miejscami słonecznie"
 
-#: kweathercore.cpp:128
-#, kde-format
-msgid "Past"
-msgstr "Przez"
+#: kweathercore.cpp:169 kweathercore.cpp:170
+msgid "Light Clouds"
+msgstr "Małe zachmurzenie"
 
-#: kweathercore.cpp:131 kweathercore.cpp:153 kweathercore.cpp:175
+#: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
+msgid "Fog"
+msgstr "Mgła"
+
+#: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
+msgid "Heavy Rain"
+msgstr "Duży deszcz"
+
+#: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
+msgid "Thunderstorm with Heavy Rain"
+msgstr "Burze z dużymi deszczami"
+
+#: kweathercore.cpp:181 kweathercore.cpp:182 kweathercore.cpp:183
+msgid "Heavy Rain Shower"
+msgstr "Duży deszcz"
+
+#: kweathercore.cpp:184 kweathercore.cpp:185 kweathercore.cpp:186
+msgid "Thunderstorm with Heavy Rain Shower"
+msgstr "Burze z dużym opadem deszczu"
+
+#: kweathercore.cpp:188 kweathercore.cpp:189 kweathercore.cpp:190
+msgid "Heavy Sleet"
+msgstr "Duży opad deszczu ze śniegiem"
+
+#: kweathercore.cpp:191 kweathercore.cpp:192 kweathercore.cpp:193
+msgid "Thunderstorm with Heavy Sleet"
+msgstr "Burze z dużym deszczem ze śniegiem"
+
+#: kweathercore.cpp:194 kweathercore.cpp:195 kweathercore.cpp:196
+msgid "Heavy Sleet Shower"
+msgstr "Duży opad deszczu ze śniegiem"
+
+#: kweathercore.cpp:197 kweathercore.cpp:198 kweathercore.cpp:199
+msgid "Thunderstorm with Heavy Sleet Shower"
+msgstr "Burze z dużą ulewą deszczu ze śniegiem"
+
+#: kweathercore.cpp:201 kweathercore.cpp:202 kweathercore.cpp:203
+msgid "Heavy Snow"
+msgstr "Duże opady śniegu"
+
+#: kweathercore.cpp:204 kweathercore.cpp:205 kweathercore.cpp:206
+msgid "Heavy Snow Shower"
+msgstr "Duży opad śniegu"
+
+#: kweathercore.cpp:207 kweathercore.cpp:208 kweathercore.cpp:209
+msgid "Thunderstorm with Heavy Snow Shower"
+msgstr "Burze z dużym opadem śniegu"
+
+#: kweathercore.cpp:211 kweathercore.cpp:212 kweathercore.cpp:213
+msgid "Light Rain"
+msgstr "Mały deszcz"
+
+#: kweathercore.cpp:214 kweathercore.cpp:215 kweathercore.cpp:216
+msgid "Thunderstorm with Light Rain"
+msgstr "Burze z małymi deszczami"
+
+#: kweathercore.cpp:217 kweathercore.cpp:218 kweathercore.cpp:219
+msgid "Light Rain Shower"
+msgstr "Mały deszcz"
+
+#: kweathercore.cpp:220 kweathercore.cpp:221 kweathercore.cpp:222
+msgid "Thunderstorm with Light Rain Shower"
+msgstr "Burze z małym opadem deszczu"
+
+#: kweathercore.cpp:224 kweathercore.cpp:225 kweathercore.cpp:226
+msgid "Light Sleet"
+msgstr "Mały opad deszczu ze śniegiem"
+
+#: kweathercore.cpp:227 kweathercore.cpp:228 kweathercore.cpp:229
+msgid "Thunderstorm with Light Sleet"
+msgstr "Burze z małym deszczem ze śniegiem"
+
+#: kweathercore.cpp:230 kweathercore.cpp:231 kweathercore.cpp:232
+msgid "Light Sleet Shower"
+msgstr "Mały opad deszczu ze śniegiem"
+
+#: kweathercore.cpp:234 kweathercore.cpp:235 kweathercore.cpp:236
+msgid "Light Snow"
+msgstr "Małe opady śniegu"
+
+#: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
+msgid "Thunderstorm with Light Snow"
+msgstr "Burze z małymi opadami śniegu"
+
+#: kweathercore.cpp:240 kweathercore.cpp:241 kweathercore.cpp:242
+msgid "Light Snow Shower"
+msgstr "Mały opad śniegu"
+
+#: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
+msgid "Thunderstorm with Light Sleet Shower"
+msgstr "Burze z małą ulewą deszczu ze śniegiem"
+
+#: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
+msgid "Thunderstorm with Light Snow Shower"
+msgstr "Burze z małym opadem śniegu"
+
+#: kweathercore.cpp:251 kweathercore.cpp:252 kweathercore.cpp:253
+msgid "Partly Cloudy"
+msgstr "Miejscami pochmurno"
+
+#: kweathercore.cpp:255 kweathercore.cpp:256 kweathercore.cpp:257
+msgid "Rain"
+msgstr "Deszcz"
+
+#: kweathercore.cpp:258 kweathercore.cpp:259 kweathercore.cpp:260
+msgid "Thunderstorm with Rain"
+msgstr "Burza z deszczem"
+
+#: kweathercore.cpp:261 kweathercore.cpp:262 kweathercore.cpp:263
+msgid "Rain Shower"
+msgstr "Deszcz"
+
+#: kweathercore.cpp:264 kweathercore.cpp:265 kweathercore.cpp:266
+msgid "Thunderstorm with Rain Shower"
+msgstr "Burza z deszczem"
+
+#: kweathercore.cpp:268 kweathercore.cpp:269 kweathercore.cpp:270
+msgid "Sleet"
+msgstr "Deszcz ze śniegiem"
+
+#: kweathercore.cpp:271 kweathercore.cpp:272 kweathercore.cpp:273
+msgid "Thunderstorm with Sleet"
+msgstr "Burze z opadem deszczu ze śniegiem"
+
+#: kweathercore.cpp:274 kweathercore.cpp:275 kweathercore.cpp:276
+msgid "Sleet Shower"
+msgstr "Opad deszczu ze śniegiem"
+
+#: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
+msgid "Thunderstorm with Sleet Shower"
+msgstr "Burze z ulewą deszczu ze śniegiem"
+
+#: kweathercore.cpp:281 kweathercore.cpp:282 kweathercore.cpp:283
+msgid "Snow"
+msgstr "Śnieg"
+
+#: kweathercore.cpp:284 kweathercore.cpp:285 kweathercore.cpp:286
+msgid "Thunderstorm with Snow"
+msgstr "Burza ze śniegiem"
+
+#: kweathercore.cpp:287 kweathercore.cpp:288 kweathercore.cpp:289
+msgid "Snow Shower"
+msgstr "Opad śniegu"
+
+#: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
+msgid "Thunderstorm with Snow Shower"
+msgstr "Burze z opadem śniegu"
+
 #: kweathercore_p.h:23
 #, kde-format
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: kweathercore.cpp:141
-#, kde-format
-msgid "Extreme"
-msgstr "Najwyższa"
+#~ msgid "Immediate"
+#~ msgstr "Natychmiast"
 
-#: kweathercore.cpp:144
-#, kde-format
-msgid "Severe"
-msgstr "Poważny"
+#~ msgid "Expected"
+#~ msgstr "Oczekiwany"
 
-#: kweathercore.cpp:147
-#, kde-format
-msgid "Moderate"
-msgstr "Umiarkowane"
+#~ msgid "Future"
+#~ msgstr "Przyszły"
 
-#: kweathercore.cpp:150
-#, kde-format
-msgid "Minor"
-msgstr "Mały"
+#~ msgid "Past"
+#~ msgstr "Przez"
 
-#: kweathercore.cpp:163
-#, kde-format
-msgid "Observed"
-msgstr "Zaobserwowane"
+#~ msgid "Extreme"
+#~ msgstr "Najwyższa"
 
-#: kweathercore.cpp:166
-#, kde-format
-msgid "Likely"
-msgstr "Prawdopodobne"
+#~ msgid "Severe"
+#~ msgstr "Poważny"
 
-#: kweathercore.cpp:169
-#, kde-format
-msgid "Possible"
-msgstr "Możliwe"
+#~ msgid "Moderate"
+#~ msgstr "Umiarkowane"
 
-#: kweathercore.cpp:172
-#, kde-format
-msgid "Unlikely"
-msgstr "Mało prawdopodobne"
+#~ msgid "Minor"
+#~ msgstr "Mały"
 
-#: kweathercore.cpp:228 kweathercore.cpp:229 kweathercore.cpp:230
-msgid "Clear"
-msgstr "Bezchmurnie"
+#~ msgid "Observed"
+#~ msgstr "Zaobserwowane"
 
-#: kweathercore.cpp:231 kweathercore.cpp:232 kweathercore.cpp:233
-msgid "Cloudy"
-msgstr "Pochmurno"
+#~ msgid "Likely"
+#~ msgstr "Prawdopodobne"
 
-#: kweathercore.cpp:234
-msgid "Partly Sunny"
-msgstr "Miejscami słonecznie"
+#~ msgid "Possible"
+#~ msgstr "Możliwe"
 
-#: kweathercore.cpp:235 kweathercore.cpp:236
-msgid "Light Clouds"
-msgstr "Małe zachmurzenie"
-
-#: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
-msgid "Fog"
-msgstr "Mgła"
-
-#: kweathercore.cpp:241 kweathercore.cpp:242 kweathercore.cpp:243
-msgid "Heavy Rain"
-msgstr "Duży deszcz"
-
-#: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
-msgid "Thunderstorm with Heavy Rain"
-msgstr "Burze z dużymi deszczami"
-
-#: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
-msgid "Heavy Rain Shower"
-msgstr "Duży deszcz"
-
-#: kweathercore.cpp:250 kweathercore.cpp:251 kweathercore.cpp:252
-msgid "Thunderstorm with Heavy Rain Shower"
-msgstr "Burze z dużym opadem deszczu"
-
-#: kweathercore.cpp:254 kweathercore.cpp:255 kweathercore.cpp:256
-msgid "Heavy Sleet"
-msgstr "Duży opad deszczu ze śniegiem"
-
-#: kweathercore.cpp:257 kweathercore.cpp:258 kweathercore.cpp:259
-msgid "Thunderstorm with Heavy Sleet"
-msgstr "Burze z dużym deszczem ze śniegiem"
-
-#: kweathercore.cpp:260 kweathercore.cpp:261 kweathercore.cpp:262
-msgid "Heavy Sleet Shower"
-msgstr "Duży opad deszczu ze śniegiem"
-
-#: kweathercore.cpp:263 kweathercore.cpp:264 kweathercore.cpp:265
-msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr "Burze z dużą ulewą deszczu ze śniegiem"
-
-#: kweathercore.cpp:267 kweathercore.cpp:268 kweathercore.cpp:269
-msgid "Heavy Snow"
-msgstr "Duże opady śniegu"
-
-#: kweathercore.cpp:270 kweathercore.cpp:271 kweathercore.cpp:272
-msgid "Heavy Snow Shower"
-msgstr "Duży opad śniegu"
-
-#: kweathercore.cpp:273 kweathercore.cpp:274 kweathercore.cpp:275
-msgid "Thunderstorm with Heavy Snow Shower"
-msgstr "Burze z dużym opadem śniegu"
-
-#: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
-msgid "Light Rain"
-msgstr "Mały deszcz"
-
-#: kweathercore.cpp:280 kweathercore.cpp:281 kweathercore.cpp:282
-msgid "Thunderstorm with Light Rain"
-msgstr "Burze z małymi deszczami"
-
-#: kweathercore.cpp:283 kweathercore.cpp:284 kweathercore.cpp:285
-msgid "Light Rain Shower"
-msgstr "Mały deszcz"
-
-#: kweathercore.cpp:286 kweathercore.cpp:287 kweathercore.cpp:288
-msgid "Thunderstorm with Light Rain Shower"
-msgstr "Burze z małym opadem deszczu"
-
-#: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
-msgid "Light Sleet"
-msgstr "Mały opad deszczu ze śniegiem"
-
-#: kweathercore.cpp:293 kweathercore.cpp:294 kweathercore.cpp:295
-msgid "Thunderstorm with Light Sleet"
-msgstr "Burze z małym deszczem ze śniegiem"
-
-#: kweathercore.cpp:296 kweathercore.cpp:297 kweathercore.cpp:298
-msgid "Light Sleet Shower"
-msgstr "Mały opad deszczu ze śniegiem"
-
-#: kweathercore.cpp:300 kweathercore.cpp:301 kweathercore.cpp:302
-msgid "Light Snow"
-msgstr "Małe opady śniegu"
-
-#: kweathercore.cpp:303 kweathercore.cpp:304 kweathercore.cpp:305
-msgid "Thunderstorm with Light Snow"
-msgstr "Burze z małymi opadami śniegu"
-
-#: kweathercore.cpp:306 kweathercore.cpp:307 kweathercore.cpp:308
-msgid "Light Snow Shower"
-msgstr "Mały opad śniegu"
-
-#: kweathercore.cpp:310 kweathercore.cpp:311 kweathercore.cpp:312
-msgid "Thunderstorm with Light Sleet Shower"
-msgstr "Burze z małą ulewą deszczu ze śniegiem"
-
-#: kweathercore.cpp:313 kweathercore.cpp:314 kweathercore.cpp:315
-msgid "Thunderstorm with Light Snow Shower"
-msgstr "Burze z małym opadem śniegu"
-
-#: kweathercore.cpp:317 kweathercore.cpp:318 kweathercore.cpp:319
-msgid "Partly Cloudy"
-msgstr "Miejscami pochmurno"
-
-#: kweathercore.cpp:321 kweathercore.cpp:322 kweathercore.cpp:323
-msgid "Rain"
-msgstr "Deszcz"
-
-#: kweathercore.cpp:324 kweathercore.cpp:325 kweathercore.cpp:326
-msgid "Thunderstorm with Rain"
-msgstr "Burza z deszczem"
-
-#: kweathercore.cpp:327 kweathercore.cpp:328 kweathercore.cpp:329
-msgid "Rain Shower"
-msgstr "Deszcz"
-
-#: kweathercore.cpp:330 kweathercore.cpp:331 kweathercore.cpp:332
-msgid "Thunderstorm with Rain Shower"
-msgstr "Burza z deszczem"
-
-#: kweathercore.cpp:334 kweathercore.cpp:335 kweathercore.cpp:336
-msgid "Sleet"
-msgstr "Deszcz ze śniegiem"
-
-#: kweathercore.cpp:337 kweathercore.cpp:338 kweathercore.cpp:339
-msgid "Thunderstorm with Sleet"
-msgstr "Burze z opadem deszczu ze śniegiem"
-
-#: kweathercore.cpp:340 kweathercore.cpp:341 kweathercore.cpp:342
-msgid "Sleet Shower"
-msgstr "Opad deszczu ze śniegiem"
-
-#: kweathercore.cpp:343 kweathercore.cpp:344 kweathercore.cpp:345
-msgid "Thunderstorm with Sleet Shower"
-msgstr "Burze z ulewą deszczu ze śniegiem"
-
-#: kweathercore.cpp:347 kweathercore.cpp:348 kweathercore.cpp:349
-msgid "Snow"
-msgstr "Śnieg"
-
-#: kweathercore.cpp:350 kweathercore.cpp:351 kweathercore.cpp:352
-msgid "Thunderstorm with Snow"
-msgstr "Burza ze śniegiem"
-
-#: kweathercore.cpp:353 kweathercore.cpp:354 kweathercore.cpp:355
-msgid "Snow Shower"
-msgstr "Opad śniegu"
-
-#: kweathercore.cpp:356 kweathercore.cpp:357 kweathercore.cpp:358
-msgid "Thunderstorm with Snow Shower"
-msgstr "Burze z opadem śniegu"
+#~ msgid "Unlikely"
+#~ msgstr "Mało prawdopodobne"
 
 #~ msgid "Storm"
 #~ msgstr "Sztorm"
