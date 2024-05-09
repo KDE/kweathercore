@@ -187,39 +187,3 @@ msgstr ""
 #, kde-format
 msgid "Unknown"
 msgstr "Ukjend"
-
-#~ msgid "Immediate"
-#~ msgstr "Med ein gong"
-
-#~ msgid "Expected"
-#~ msgstr "Venta"
-
-#~ msgid "Future"
-#~ msgstr "Framtid"
-
-#~ msgid "Past"
-#~ msgstr "Lim inn"
-
-#~ msgid "Extreme"
-#~ msgstr "Ekstrem"
-
-#~ msgid "Severe"
-#~ msgstr "Kraftig"
-
-#~ msgid "Moderate"
-#~ msgstr "Moderat"
-
-#~ msgid "Minor"
-#~ msgstr "Lett"
-
-#~ msgid "Observed"
-#~ msgstr "Observert"
-
-#~ msgid "Likely"
-#~ msgstr "Sannsynleg"
-
-#~ msgid "Possible"
-#~ msgstr "Mogleg"
-
-#~ msgid "Unlikely"
-#~ msgstr "Usannsynleg"

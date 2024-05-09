@@ -185,39 +185,3 @@ msgstr "雷暴伴有阵雪"
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
-
-#~ msgid "Immediate"
-#~ msgstr "当前"
-
-#~ msgid "Expected"
-#~ msgstr "预计"
-
-#~ msgid "Future"
-#~ msgstr "未来"
-
-#~ msgid "Past"
-#~ msgstr "过去"
-
-#~ msgid "Extreme"
-#~ msgstr "极端"
-
-#~ msgid "Severe"
-#~ msgstr "严重"
-
-#~ msgid "Moderate"
-#~ msgstr "中等"
-
-#~ msgid "Minor"
-#~ msgstr "轻微"
-
-#~ msgid "Observed"
-#~ msgstr "有观测记录"
-
-#~ msgid "Likely"
-#~ msgstr "大概率"
-
-#~ msgid "Possible"
-#~ msgstr "有概率"
-
-#~ msgid "Unlikely"
-#~ msgstr "小概率"
