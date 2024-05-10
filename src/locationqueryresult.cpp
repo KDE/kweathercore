@@ -5,15 +5,19 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #include "locationqueryresult.h"
+
+#include <KCountry>
+
 #include <memory>
 #include <optional>
+
 namespace KWeatherCore
 {
 class LocationQueryResult::LocationQueryResultPrivate
 {
 public:
     double latitude, longitude;
-    QString toponymName, name, countryCode, countryName, geonameId;
+    QString toponymName, name, countryCode, geonameId;
     std::optional<QString> subdivision;
 };
 LocationQueryResult::LocationQueryResult()
@@ -26,7 +30,6 @@ LocationQueryResult::LocationQueryResult(double latitude,
                                          QString toponymName,
                                          QString name,
                                          QString countryCode,
-                                         QString countryName,
                                          QString geonameId,
                                          std::optional<QString> subdivision)
     : d(std::make_unique<LocationQueryResultPrivate>())
@@ -36,7 +39,6 @@ LocationQueryResult::LocationQueryResult(double latitude,
     d->toponymName = std::move(toponymName);
     d->name = std::move(name);
     d->countryCode = std::move(countryCode);
-    d->countryName = std::move(countryName);
     d->geonameId = std::move(geonameId);
     d->subdivision = std::move(subdivision);
 }
@@ -72,9 +74,9 @@ const QString &LocationQueryResult::countryCode() const
 {
     return d->countryCode;
 }
-const QString &LocationQueryResult::countryName() const
+QString LocationQueryResult::countryName() const
 {
-    return d->countryName;
+    return KCountry::fromAlpha2(d->countryCode).name();
 }
 const QString &LocationQueryResult::geonameId() const
 {

@@ -93,7 +93,6 @@ LocationQueryReply::LocationQueryReply(const QString &name, int number, QNetwork
                                                     res.value(QLatin1String("toponymName")).toString(),
                                                     res.value(QLatin1String("name")).toString(),
                                                     res.value(QLatin1String("countryCode")).toString(),
-                                                    res.value(QLatin1String("countryName")).toString(),
                                                     QString::number(res.value(QLatin1String("geonameId")).toInt()),
                                                     findSubdivision(res));
             d->m_result.push_back(result);

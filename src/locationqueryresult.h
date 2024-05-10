@@ -42,7 +42,6 @@ public:
      * @param toponymName toponym name of location, detailed
      * @param name display name, short
      * @param countryCode country code, follow no standard but should be unique
-     * @param countryName country name
      * @param geonameId internal unique id
      * @param subdivision state, province, or other country subdivision, Follows ISO 3166-2
      */
@@ -51,7 +50,6 @@ public:
                         QString toponymName = QString(),
                         QString name = QString(),
                         QString countryCode = QString(),
-                        QString countryName = QString(),
                         QString geonameId = QString(),
                         std::optional<QString> subdivision = std::nullopt);
     LocationQueryResult(const LocationQueryResult &other);
@@ -75,9 +73,9 @@ public:
      */
     const QString &countryCode() const;
     /**
-     * country name
+     * Translated name of the country.
      */
-    const QString &countryName() const;
+    [[nodiscard]] QString countryName() const;
     /**
      * internal unique id
      */
