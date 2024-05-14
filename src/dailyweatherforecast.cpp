@@ -8,9 +8,11 @@
 #include "kweathercore_p.h"
 #include "pendingweatherforecast_p.h"
 #include <QJsonArray>
+#include <QJsonObject>
+
 namespace KWeatherCore
 {
-class DailyWeatherForecast::DailyWeatherForecastPrivate
+class DailyWeatherForecastPrivate : public QSharedData
 {
 public:
     double maxTemp = std::numeric_limits<double>::lowest();
@@ -27,23 +29,20 @@ public:
 };
 DailyWeatherForecast::~DailyWeatherForecast() = default;
 DailyWeatherForecast::DailyWeatherForecast(DailyWeatherForecast &&other) noexcept = default;
+DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast &other) = default;
 DailyWeatherForecast &DailyWeatherForecast::operator=(DailyWeatherForecast &&other) noexcept = default;
 DailyWeatherForecast::DailyWeatherForecast()
-    : d(std::make_unique<DailyWeatherForecastPrivate>())
+    : d(new DailyWeatherForecastPrivate)
 {
 }
 DailyWeatherForecast::DailyWeatherForecast(const QDate &date)
-    : d(std::make_unique<DailyWeatherForecastPrivate>())
+    : d(new DailyWeatherForecastPrivate)
 {
     d->date = date;
 }
-DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other)
-    : d(std::make_unique<DailyWeatherForecastPrivate>())
-{
-    *d = *other.d;
-}
+DailyWeatherForecast::DailyWeatherForecast(const DailyWeatherForecast &other) = default;
 
-QJsonObject DailyWeatherForecast::toJson()
+QJsonObject DailyWeatherForecast::toJson() const
 {
     QJsonObject obj;
     QJsonArray hourlyArray;
@@ -204,11 +203,6 @@ bool DailyWeatherForecast::operator==(const DailyWeatherForecast &forecast) cons
 bool DailyWeatherForecast::operator<(const DailyWeatherForecast &forecast) const
 {
     return date() < forecast.date();
-}
-DailyWeatherForecast &DailyWeatherForecast::operator=(const DailyWeatherForecast &other)
-{
-    *d = *other.d;
-    return *this;
 }
 }
 

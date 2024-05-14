@@ -5,13 +5,20 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 #pragma once
-#include "hourlyweatherforecast.h"
-#include <QDate>
-#include <QJsonObject>
 #include <kweathercore/kweathercore_export.h>
-#include <memory>
+
+#include "hourlyweatherforecast.h"
+
+#include <QDate>
+#include <QSharedDataPointer>
+
+class QJsonObject;
+
 namespace KWeatherCore
 {
+
+class DailyWeatherForecastPrivate;
+
 /**
  * @short Class represents weatherforecast in a day
  *
@@ -46,7 +53,7 @@ public:
      * Return a QJsonObject that can be converted back with
      * DailyWeatherForecast::fromJson
      */
-    QJsonObject toJson();
+    QJsonObject toJson() const;
     /**
      * Construct a DailyWeatherForecast from QJsonObject
      */
@@ -181,7 +188,6 @@ public:
     DailyWeatherForecast &operator=(DailyWeatherForecast &&other) noexcept;
 
 private:
-    class DailyWeatherForecastPrivate;
-    std::unique_ptr<DailyWeatherForecastPrivate> d;
+    QSharedDataPointer<DailyWeatherForecastPrivate> d;
 };
 }

@@ -6,6 +6,8 @@
 #include "dailyweatherforecasttest.h"
 #include <kweathercore/hourlyweatherforecast.h>
 
+#include <QJsonObject>
+
 using namespace KWeatherCore;
 
 void DailyForecastTest::testHourlyMerge()

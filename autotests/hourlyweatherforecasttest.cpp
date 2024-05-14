@@ -7,6 +7,7 @@
 
 #include <kweathercore/hourlyweatherforecast.h>
 
+#include <QJsonObject>
 #include <QTest>
 
 using namespace KWeatherCore;

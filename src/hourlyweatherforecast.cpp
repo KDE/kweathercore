@@ -6,11 +6,13 @@
  */
 #include "hourlyweatherforecast.h"
 
+#include <QJsonObject>
+
 #include <cmath>
 
 namespace KWeatherCore
 {
-class HourlyWeatherForecast::HourlyWeatherForecastPrivate
+class HourlyWeatherForecastPrivate : public QSharedData
 {
 public:
     QDateTime date = QDateTime::currentDateTime();
@@ -29,23 +31,21 @@ public:
     double precipitationAmount = 0; // mm
 };
 HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
-    : d(std::make_unique<HourlyWeatherForecastPrivate>())
+    : d(new HourlyWeatherForecastPrivate)
 {
     d->date = date;
 }
+
 HourlyWeatherForecast::HourlyWeatherForecast(HourlyWeatherForecast &&other) noexcept = default;
+HourlyWeatherForecast &HourlyWeatherForecast::operator=(const HourlyWeatherForecast &other) = default;
 HourlyWeatherForecast::~HourlyWeatherForecast() = default;
 
 HourlyWeatherForecast::HourlyWeatherForecast()
-    : d(std::make_unique<HourlyWeatherForecastPrivate>())
+    : d(new HourlyWeatherForecastPrivate)
 {
 }
 
-HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other)
-    : d(std::make_unique<HourlyWeatherForecastPrivate>())
-{
-    *d = *other.d;
-}
+HourlyWeatherForecast::HourlyWeatherForecast(const HourlyWeatherForecast &other) = default;
 HourlyWeatherForecast &HourlyWeatherForecast::operator=(HourlyWeatherForecast &&other) noexcept = default;
 QJsonObject HourlyWeatherForecast::toJson() const
 {
@@ -215,12 +215,6 @@ void HourlyWeatherForecast::setPrecipitationAmount(double precipitationAmount)
 bool HourlyWeatherForecast::operator==(const KWeatherCore::HourlyWeatherForecast &rhs) const
 {
     return (weatherDescription() == rhs.weatherDescription() && weatherIcon() == rhs.weatherIcon() && date() == rhs.date());
-}
-
-HourlyWeatherForecast &HourlyWeatherForecast::operator=(const HourlyWeatherForecast &other)
-{
-    *d = *other.d;
-    return *this;
 }
 }
 

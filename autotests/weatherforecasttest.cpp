@@ -6,6 +6,9 @@
 #include "weatherforecasttest.h"
 #include <kweathercore/dailyweatherforecast.h>
 #include <kweathercore/hourlyweatherforecast.h>
+
+#include <QJsonObject>
+
 void WeatherForecastTest::testHourlyMerge()
 {
     auto date = QDateTime({2022, 8, 4}, {22, 0});

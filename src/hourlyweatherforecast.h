@@ -6,16 +6,20 @@
  */
 
 #pragma once
-#include <QDateTime>
-#include <QJsonObject>
-#include <QObject>
 #include <kweathercore/kweathercore_export.h>
-#include <memory>
+
+#include <QDateTime>
+#include <QSharedDataPointer>
+
+class QJsonObject;
+
 namespace KWeatherCore
 {
 Q_NAMESPACE_EXPORT(KWEATHERCORE_EXPORT)
 enum class WindDirection { N, NW, W, SW, S, SE, E, NE };
 Q_ENUM_NS(WindDirection)
+
+class HourlyWeatherForecastPrivate;
 
 /**
  * @short Class represents weatherforecast in a hour
@@ -183,7 +187,6 @@ public:
     HourlyWeatherForecast &operator=(HourlyWeatherForecast &&other) noexcept;
 
 private:
-    class HourlyWeatherForecastPrivate;
-    std::unique_ptr<HourlyWeatherForecastPrivate> d;
+    QSharedDataPointer<HourlyWeatherForecastPrivate> d;
 };
 }

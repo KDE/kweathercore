@@ -7,6 +7,7 @@
 
 #include <QFile>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QStandardPaths>
 #include <QTest>
 #include <QTimeZone>

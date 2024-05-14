@@ -6,6 +6,8 @@
  */
 #include "weatherforecast.h"
 #include <QJsonArray>
+#include <QJsonObject>
+
 namespace KWeatherCore
 {
 class WeatherForecast::WeatherForecastPrivate : public QSharedData
