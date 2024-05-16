@@ -185,39 +185,3 @@ msgstr "Bouřka se sněhovými přeháňkami"
 #, kde-format
 msgid "Unknown"
 msgstr "Neznámý"
-
-#~ msgid "Immediate"
-#~ msgstr "Okamžité"
-
-#~ msgid "Expected"
-#~ msgstr "Očekáván"
-
-#~ msgid "Future"
-#~ msgstr "Budoucí"
-
-#~ msgid "Past"
-#~ msgstr "Minulý"
-
-#~ msgid "Extreme"
-#~ msgstr "Extrémní"
-
-#~ msgid "Severe"
-#~ msgstr "Závažné"
-
-#~ msgid "Moderate"
-#~ msgstr "Střední"
-
-#~ msgid "Minor"
-#~ msgstr "Vedlejší"
-
-#~ msgid "Observed"
-#~ msgstr "Pozorované"
-
-#~ msgid "Likely"
-#~ msgstr "Pravděpodobné"
-
-#~ msgid "Possible"
-#~ msgstr "Možné"
-
-#~ msgid "Unlikely"
-#~ msgstr "Nepravděpodobné"
