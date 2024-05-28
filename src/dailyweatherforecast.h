@@ -31,15 +31,15 @@ class DailyWeatherForecastPrivate;
 class KWEATHERCORE_EXPORT DailyWeatherForecast
 {
     Q_GADGET
-    Q_PROPERTY(qreal maxTemp READ maxTemp WRITE setMaxTemp)
-    Q_PROPERTY(qreal minTemp READ minTemp WRITE setMinTemp)
-    Q_PROPERTY(qreal precipitation READ precipitation WRITE setPrecipitation)
-    Q_PROPERTY(qreal uvIndex READ uvIndex WRITE setUvIndex)
-    Q_PROPERTY(qreal humidity READ humidity WRITE setHumidity)
-    Q_PROPERTY(qreal pressure READ pressure WRITE setPressure)
-    Q_PROPERTY(QString weatherIcon READ weatherIcon WRITE setWeatherIcon)
-    Q_PROPERTY(QString weatherDescription READ weatherDescription WRITE setWeatherDescription)
-    Q_PROPERTY(QDateTime date READ dateTime WRITE setDate)
+    Q_PROPERTY(qreal maxTemp READ maxTemp)
+    Q_PROPERTY(qreal minTemp READ minTemp)
+    Q_PROPERTY(qreal precipitation READ precipitation)
+    Q_PROPERTY(qreal uvIndex READ uvIndex)
+    Q_PROPERTY(qreal humidity READ humidity)
+    Q_PROPERTY(qreal pressure READ pressure)
+    Q_PROPERTY(QString weatherIcon READ weatherIcon)
+    Q_PROPERTY(QString weatherDescription READ weatherDescription)
+    Q_PROPERTY(QDateTime date READ dateTime)
 public:
     /**
      * Creates a invalid DailyWeatherForecast.
