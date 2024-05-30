@@ -24,18 +24,8 @@ set(kweathercore_LIB_SRCS
     pendingweatherforecast_p.h
     capalertinfo.cpp
     capalertinfo.h
-    alertfeedentry.cpp
-    alertfeedentry.h
     capalertmessage.cpp
     capalertmessage.h
-    alertmanager.cpp
-    alertmanager.h
-    feedparser.cpp
-    feedparser.h
-    pendingalerts.cpp
-    pendingalerts.h
-    pendingcap.cpp
-    pendingcap.h
     capparser.cpp
     capparser.h
     caparea.cpp
@@ -82,10 +72,6 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     GeoTimezone
     CAPAlertInfo
     CAPAlertMessage
-    AlertFeedEntry
-    AlertManager
-    PendingAlerts
-    PendingCAP
     CAPParser
     CAPArea
     CAPNamedValue
