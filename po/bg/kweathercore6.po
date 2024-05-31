@@ -185,39 +185,3 @@ msgstr "Гръмотевична буря с обилен снеговалеж"
 #, kde-format
 msgid "Unknown"
 msgstr "Непознато"
-
-#~ msgid "Immediate"
-#~ msgstr "Непосредствено"
-
-#~ msgid "Expected"
-#~ msgstr "Очаквано"
-
-#~ msgid "Future"
-#~ msgstr "Бъдещи"
-
-#~ msgid "Past"
-#~ msgstr "Минали"
-
-#~ msgid "Extreme"
-#~ msgstr "Екстремно"
-
-#~ msgid "Severe"
-#~ msgstr "Тежък"
-
-#~ msgid "Moderate"
-#~ msgstr "Умерен"
-
-#~ msgid "Minor"
-#~ msgstr "Второстепенен"
-
-#~ msgid "Observed"
-#~ msgstr "Наблюдаван"
-
-#~ msgid "Likely"
-#~ msgstr "Вероятно"
-
-#~ msgid "Possible"
-#~ msgstr "Възможно"
-
-#~ msgid "Unlikely"
-#~ msgstr "Малко вероятно"
