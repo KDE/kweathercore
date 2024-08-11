@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 17)
 include(FeatureSummary)
 
 set(REQUIRED_QT_VERSION 6.5.0)
-set(KF_DEP_VERSION "5.240.0")
+set(KF_DEP_VERSION "6.3.0")
 
 find_package(ECM ${KF_DEP_VERSION}  NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://invent.kde.org/frameworks/extra-cmake-modules")
@@ -25,6 +25,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
+include(ECMDeprecationSettings)
 
 include(GenerateExportHeader)
 
@@ -48,8 +49,10 @@ add_definitions(-DTRANSLATION_DOMAIN=\"kweathercore6\")
 if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
 endif()
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050d00)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054B00)
+ecm_set_disabled_deprecation_versions(QT 6.7.2
+    KF 6.4.0
+)
+
 add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
 
