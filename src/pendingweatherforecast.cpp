@@ -66,11 +66,7 @@ void PendingWeatherForecastPrivate::parseWeatherForecastResults(QNetworkReply *r
     }
 }
 
-PendingWeatherForecast::PendingWeatherForecast(double latitude,
-                                               double longitude,
-                                               const QString &timezone,
-                                               QNetworkAccessManager *nam,
-                                               QObject *parent)
+PendingWeatherForecast::PendingWeatherForecast(double latitude, double longitude, const QString &timezone, QNetworkAccessManager *nam, QObject *parent)
     : Reply(new PendingWeatherForecastPrivate(this), parent)
 {
     Q_D(PendingWeatherForecast);

@@ -37,11 +37,7 @@ public:
 
 private:
     friend class WeatherForecastSource;
-    explicit PendingWeatherForecast(double latitude,
-                                    double longitude,
-                                    const QString &timezone,
-                                    QNetworkAccessManager *nam,
-                                    QObject *parent = nullptr);
+    explicit PendingWeatherForecast(double latitude, double longitude, const QString &timezone, QNetworkAccessManager *nam, QObject *parent = nullptr);
     explicit PendingWeatherForecast(WeatherForecast data, QObject *parent = nullptr);
     Q_DECLARE_PRIVATE(PendingWeatherForecast)
 };
