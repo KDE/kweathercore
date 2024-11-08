@@ -26,7 +26,7 @@ GeoTimezone::GeoTimezone(QNetworkAccessManager *nam, double lat, double lon, QOb
     : Reply(new GeoTimezonePrivate, parent)
 {
     Q_D(GeoTimezone);
-    QUrl url(QStringLiteral("http://api.geonames.org/timezoneJSON"));
+    QUrl url(QStringLiteral("https://secure.geonames.org/timezoneJSON"));
     QUrlQuery query;
     query.addQueryItem(QStringLiteral("lat"), QString::number(lat));
     query.addQueryItem(QStringLiteral("lng"), QString::number(lon));
