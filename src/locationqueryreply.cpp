@@ -47,7 +47,7 @@ static std::optional<QString> findSubdivision(const QJsonObject &json)
 LocationQueryReply::LocationQueryReply(const QString &name, int number, QNetworkAccessManager *nam, QObject *parent)
     : Reply(new LocationQueryReplyPrivate, parent)
 {
-    QUrl url(QStringLiteral("http://api.geonames.org/searchJSON"));
+    QUrl url(QStringLiteral("https://secure.geonames.org/searchJSON"));
     QUrlQuery urlQuery;
 
     urlQuery.addQueryItem(QStringLiteral("q"), name);
@@ -148,7 +148,7 @@ void LocationQueryReplyPrivate::requestPosition(LocationQueryReply *q, QGeoPosit
     QObject::connect(source, &QGeoPositionInfoSource::positionUpdated, q, [this, q, nam](const QGeoPositionInfo &pos) {
         const auto lat = pos.coordinate().latitude();
         const auto lon = pos.coordinate().longitude();
-        QUrl url(QStringLiteral("http://api.geonames.org/findNearbyJSON"));
+        QUrl url(QStringLiteral("https://secure.geonames.org/findNearbyJSON"));
         QUrlQuery urlQuery;
 
         urlQuery.addQueryItem(QStringLiteral("lat"), KWeatherCorePrivate::toFixedString(lat));
