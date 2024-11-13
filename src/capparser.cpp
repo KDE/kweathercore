@@ -10,12 +10,16 @@
 #include "caparea.h"
 #include "capnamedvalue.h"
 #include "capreference.h"
-#include "kweathercore_p.h"
+
 #include <KLocalizedString>
+
 #include <QDateTime>
 #include <QDebug>
+#include <QStringTokenizer>
 
 #include <optional>
+
+using namespace Qt::Literals;
 
 namespace KWeatherCore
 {
@@ -147,6 +151,45 @@ static constexpr const MapEntry<CAPAlertInfo::ResponseType> response_type_map[] 
     {"Shelter", CAPAlertInfo::ResponseType::Shelter},
 };
 
+static constexpr const MapEntry<CAPAlertInfo::Urgency> urgency_map[] = {
+    {"Expected", CAPAlertInfo::Urgency::Expected},
+    {"Future", CAPAlertInfo::Urgency::Future},
+    {"Immediate", CAPAlertInfo::Urgency::Immediate},
+    {"Past", CAPAlertInfo::Urgency::Past},
+};
+
+static constexpr const MapEntry<CAPAlertInfo::Severity> severity_map[] = {
+    {"Extreme", CAPAlertInfo::Severity::Extreme},
+    {"Minor", CAPAlertInfo::Severity::Minor},
+    {"Moderate", CAPAlertInfo::Severity::Moderate},
+    {"Severe", CAPAlertInfo::Severity::Severe},
+};
+
+static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
+    {"Likely", CAPAlertInfo::Certainty::Likely},
+    {"Observed", CAPAlertInfo::Certainty::Observed},
+    {"Possible", CAPAlertInfo::Certainty::Possible},
+    {"Unlikely", CAPAlertInfo::Certainty::Unlikely},
+};
+
+[[nodiscard]] static CAPPolygon stringToPolygon(QStringView str)
+{
+    CAPPolygon res;
+
+    for (auto coordinate : QStringTokenizer(str, ' '_L1, Qt::SkipEmptyParts)) {
+        const auto idx = coordinate.indexOf(','_L1);
+        if (idx < 0) {
+            continue;
+        }
+        bool latOk = false, lonOk = false;
+        res.push_back({coordinate.left(idx).toFloat(&latOk), coordinate.mid(idx + 1).toFloat(&lonOk)});
+        if (!latOk || !lonOk) {
+            res.pop_back();
+        }
+    }
+    return res;
+}
+
 CAPParser::CAPParser(const QByteArray &data)
     : m_xml(data)
 {
@@ -255,15 +298,33 @@ CAPAlertInfo CAPParser::parseInfo()
                 case InfoTags::EVENT:
                     info.setEvent(m_xml.readElementText());
                     break;
-                case InfoTags::URGENCY:
-                    info.setUrgency(KWeatherCorePrivate::urgencyStringToEnum(m_xml.readElementText()));
+                case InfoTags::URGENCY: {
+                    const auto s = m_xml.readElementText();
+                    if (const auto urgency = stringToValue(s, urgency_map); urgency) {
+                        info.setUrgency(*urgency);
+                    } else {
+                        qWarning() << "Unknown urgency type:" << s;
+                    }
                     break;
-                case InfoTags::SEVERITY:
-                    info.setSeverity(KWeatherCorePrivate::severityStringToEnum(m_xml.readElementText()));
+                }
+                case InfoTags::SEVERITY: {
+                    const auto s = m_xml.readElementText();
+                    if (const auto severity = stringToValue(s, severity_map); severity) {
+                        info.setSeverity(*severity);
+                    } else {
+                        qWarning() << "Unknown severity type:" << s;
+                    }
                     break;
-                case InfoTags::CERTAINITY:
-                    info.setCertainty(KWeatherCorePrivate::certaintyStringToEnum(m_xml.readElementText()));
+                }
+                case InfoTags::CERTAINITY: {
+                    const auto s = m_xml.readElementText();
+                    if (const auto certainty = stringToValue(s, certainty_map); certainty) {
+                        info.setCertainty(*certainty);
+                    } else {
+                        qWarning() << "Unknown certainty type:" << s;
+                    }
                     break;
+                }
                 case InfoTags::EFFECTIVE_TIME:
                     info.setEffectiveTime(QDateTime::fromString(m_xml.readElementText(), Qt::ISODate));
                     break;
@@ -336,7 +397,7 @@ CAPArea CAPParser::parseArea()
         } else if (m_xml.name() == QLatin1String("geocode") && !m_xml.isEndElement()) {
             area.addGeoCode(parseNamedValue());
         } else if (m_xml.name() == QLatin1String("polygon") && !m_xml.isEndElement()) {
-            area.addPolygon(KWeatherCorePrivate::stringToPolygon(m_xml.readElementText()));
+            area.addPolygon(stringToPolygon(m_xml.readElementText()));
         } else if (m_xml.name() == QLatin1String("circle") && !m_xml.isEndElement()) {
             const auto t = m_xml.readElementText();
             const auto commaIdx = t.indexOf(QLatin1Char(','));

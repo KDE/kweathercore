@@ -17,30 +17,6 @@
 
 namespace KWeatherCore
 {
-CAPPolygon KWeatherCorePrivate::stringToPolygon(const QString &str)
-{
-    CAPPolygon res;
-#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
-    const auto pairList = QStringView(str).split(QLatin1Char(' '), Qt::SkipEmptyParts);
-#else
-    const auto pairList = str.splitRef(QLatin1Char(' '), Qt::SkipEmptyParts);
-#endif
-
-    res.reserve(pairList.size());
-    for (auto &pair : pairList) {
-        auto coordinate = pair.split(QLatin1Char(','));
-        if (coordinate.size() != 2) {
-            continue;
-        }
-        bool latOk = false, lonOk = false;
-        res.push_back({coordinate.front().toFloat(&latOk), coordinate.back().toFloat(&lonOk)});
-        if (!latOk || !lonOk) {
-            res.pop_back();
-        }
-    }
-    return res;
-}
-
 QString KWeatherCorePrivate::toFixedString(double num)
 {
     std::ostringstream oss;
@@ -64,51 +40,6 @@ QDir KWeatherCorePrivate::getCacheDirectory(double latitude, double longitude)
     }
     return dir;
 #endif
-}
-
-CAPAlertInfo::Urgency KWeatherCorePrivate::urgencyStringToEnum(const QString &str)
-{
-    if (str == QLatin1String("Immediate")) {
-        return CAPAlertInfo::Urgency::Immediate;
-    } else if (str == QLatin1String("Expected")) {
-        return CAPAlertInfo::Urgency::Expected;
-    } else if (str == QLatin1String("Future")) {
-        return CAPAlertInfo::Urgency::Future;
-    } else if (str == QLatin1String("Past")) {
-        return CAPAlertInfo::Urgency::Past;
-    } else {
-        return CAPAlertInfo::Urgency::UnknownUrgency;
-    }
-}
-
-CAPAlertInfo::Severity KWeatherCorePrivate::severityStringToEnum(const QString &str)
-{
-    if (str == QLatin1String("Extreme")) {
-        return CAPAlertInfo::Severity::Extreme;
-    } else if (str == QLatin1String("Severe")) {
-        return CAPAlertInfo::Severity::Severe;
-    } else if (str == QLatin1String("Moderate")) {
-        return CAPAlertInfo::Severity::Moderate;
-    } else if (str == QLatin1String("Minor")) {
-        return CAPAlertInfo::Severity::Minor;
-    } else {
-        return CAPAlertInfo::Severity::UnknownSeverity;
-    }
-}
-
-CAPAlertInfo::Certainty KWeatherCorePrivate::certaintyStringToEnum(const QString &str)
-{
-    if (str == QLatin1String("Observed")) {
-        return CAPAlertInfo::Certainty::Observed;
-    } else if (str == QLatin1String("Likely")) {
-        return CAPAlertInfo::Certainty::Likely;
-    } else if (str == QLatin1String("Possible")) {
-        return CAPAlertInfo::Certainty::Possible;
-    } else if (str == QLatin1String("Unlikely")) {
-        return CAPAlertInfo::Certainty::Unlikely;
-    } else {
-        return CAPAlertInfo::Certainty::UnknownCertainty;
-    }
 }
 
 // rank weather (for what best describes the day overall)
