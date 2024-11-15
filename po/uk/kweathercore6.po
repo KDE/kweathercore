@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-08 00:37+0000\n"
+"POT-Creation-Date: 2024-11-15 00:39+0000\n"
 "PO-Revision-Date: 2023-11-02 17:01+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,171 +20,171 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: kweathercore.cpp:162 kweathercore.cpp:163 kweathercore.cpp:164
+#: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
 msgstr "Ясно"
 
-#: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
+#: kweathercore.cpp:96 kweathercore.cpp:97 kweathercore.cpp:98
 msgid "Cloudy"
 msgstr "Хмарно"
 
-#: kweathercore.cpp:168
+#: kweathercore.cpp:99
 msgid "Partly Sunny"
 msgstr "Частково сонячно"
 
-#: kweathercore.cpp:169 kweathercore.cpp:170
+#: kweathercore.cpp:100 kweathercore.cpp:101
 msgid "Light Clouds"
 msgstr "Легка хмарність"
 
-#: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
+#: kweathercore.cpp:102 kweathercore.cpp:103 kweathercore.cpp:104
 msgid "Fog"
 msgstr "Туман"
 
-#: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
+#: kweathercore.cpp:106 kweathercore.cpp:107 kweathercore.cpp:108
 msgid "Heavy Rain"
 msgstr "Сильний дощ"
 
-#: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
+#: kweathercore.cpp:109 kweathercore.cpp:110 kweathercore.cpp:111
 msgid "Thunderstorm with Heavy Rain"
 msgstr "Громова буря з сильним дощем"
 
-#: kweathercore.cpp:181 kweathercore.cpp:182 kweathercore.cpp:183
+#: kweathercore.cpp:112 kweathercore.cpp:113 kweathercore.cpp:114
 msgid "Heavy Rain Shower"
 msgstr "Сильна злива"
 
-#: kweathercore.cpp:184 kweathercore.cpp:185 kweathercore.cpp:186
+#: kweathercore.cpp:115 kweathercore.cpp:116 kweathercore.cpp:117
 msgid "Thunderstorm with Heavy Rain Shower"
 msgstr "Громова буря із сильною зливою"
 
-#: kweathercore.cpp:188 kweathercore.cpp:189 kweathercore.cpp:190
+#: kweathercore.cpp:119 kweathercore.cpp:120 kweathercore.cpp:121
 msgid "Heavy Sleet"
 msgstr "Сильний мокрий сніг"
 
-#: kweathercore.cpp:191 kweathercore.cpp:192 kweathercore.cpp:193
+#: kweathercore.cpp:122 kweathercore.cpp:123 kweathercore.cpp:124
 msgid "Thunderstorm with Heavy Sleet"
 msgstr "Громова буря з сильним мокрим снігом"
 
-#: kweathercore.cpp:194 kweathercore.cpp:195 kweathercore.cpp:196
+#: kweathercore.cpp:125 kweathercore.cpp:126 kweathercore.cpp:127
 msgid "Heavy Sleet Shower"
 msgstr "Сильний сніг з дощем"
 
-#: kweathercore.cpp:197 kweathercore.cpp:198 kweathercore.cpp:199
+#: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
 msgid "Thunderstorm with Heavy Sleet Shower"
 msgstr "Громова буря з сильним дощем і снігом"
 
-#: kweathercore.cpp:201 kweathercore.cpp:202 kweathercore.cpp:203
+#: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
 msgid "Heavy Snow"
 msgstr "Сильний сніг"
 
-#: kweathercore.cpp:204 kweathercore.cpp:205 kweathercore.cpp:206
+#: kweathercore.cpp:135 kweathercore.cpp:136 kweathercore.cpp:137
 msgid "Heavy Snow Shower"
 msgstr "Сильний снігопад"
 
-#: kweathercore.cpp:207 kweathercore.cpp:208 kweathercore.cpp:209
+#: kweathercore.cpp:138 kweathercore.cpp:139 kweathercore.cpp:140
 msgid "Thunderstorm with Heavy Snow Shower"
 msgstr "Громова буря із сильним снігом"
 
-#: kweathercore.cpp:211 kweathercore.cpp:212 kweathercore.cpp:213
+#: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
 msgid "Light Rain"
 msgstr "Легкий дощ"
 
-#: kweathercore.cpp:214 kweathercore.cpp:215 kweathercore.cpp:216
+#: kweathercore.cpp:145 kweathercore.cpp:146 kweathercore.cpp:147
 msgid "Thunderstorm with Light Rain"
 msgstr "Незначна грозова злива"
 
-#: kweathercore.cpp:217 kweathercore.cpp:218 kweathercore.cpp:219
+#: kweathercore.cpp:148 kweathercore.cpp:149 kweathercore.cpp:150
 msgid "Light Rain Shower"
 msgstr "Легка дощова злива"
 
-#: kweathercore.cpp:220 kweathercore.cpp:221 kweathercore.cpp:222
+#: kweathercore.cpp:151 kweathercore.cpp:152 kweathercore.cpp:153
 msgid "Thunderstorm with Light Rain Shower"
 msgstr "Громова буря з легкою зливою"
 
-#: kweathercore.cpp:224 kweathercore.cpp:225 kweathercore.cpp:226
+#: kweathercore.cpp:155 kweathercore.cpp:156 kweathercore.cpp:157
 msgid "Light Sleet"
 msgstr "Невеликий мокрий сніг"
 
-#: kweathercore.cpp:227 kweathercore.cpp:228 kweathercore.cpp:229
+#: kweathercore.cpp:158 kweathercore.cpp:159 kweathercore.cpp:160
 msgid "Thunderstorm with Light Sleet"
 msgstr "Громова буря з легким дощем зі снігом"
 
-#: kweathercore.cpp:230 kweathercore.cpp:231 kweathercore.cpp:232
+#: kweathercore.cpp:161 kweathercore.cpp:162 kweathercore.cpp:163
 msgid "Light Sleet Shower"
 msgstr "Легкий сніг з дощем"
 
-#: kweathercore.cpp:234 kweathercore.cpp:235 kweathercore.cpp:236
+#: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
 msgid "Light Snow"
 msgstr "Невеликий сніг"
 
-#: kweathercore.cpp:237 kweathercore.cpp:238 kweathercore.cpp:239
+#: kweathercore.cpp:168 kweathercore.cpp:169 kweathercore.cpp:170
 msgid "Thunderstorm with Light Snow"
 msgstr "Громова буря з легким снігом"
 
-#: kweathercore.cpp:240 kweathercore.cpp:241 kweathercore.cpp:242
+#: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
 msgid "Light Snow Shower"
 msgstr "Легкий снігопад"
 
-#: kweathercore.cpp:244 kweathercore.cpp:245 kweathercore.cpp:246
+#: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
 msgid "Thunderstorm with Light Sleet Shower"
 msgstr "Громова буря з легкою зливою зі снігом"
 
-#: kweathercore.cpp:247 kweathercore.cpp:248 kweathercore.cpp:249
+#: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
 msgid "Thunderstorm with Light Snow Shower"
 msgstr "Громова буря з легкою сніговою зливою"
 
-#: kweathercore.cpp:251 kweathercore.cpp:252 kweathercore.cpp:253
+#: kweathercore.cpp:182 kweathercore.cpp:183 kweathercore.cpp:184
 msgid "Partly Cloudy"
 msgstr "Мінлива хмарність"
 
-#: kweathercore.cpp:255 kweathercore.cpp:256 kweathercore.cpp:257
+#: kweathercore.cpp:186 kweathercore.cpp:187 kweathercore.cpp:188
 msgid "Rain"
 msgstr "Дощ"
 
-#: kweathercore.cpp:258 kweathercore.cpp:259 kweathercore.cpp:260
+#: kweathercore.cpp:189 kweathercore.cpp:190 kweathercore.cpp:191
 msgid "Thunderstorm with Rain"
 msgstr "Громова буря з дощем"
 
-#: kweathercore.cpp:261 kweathercore.cpp:262 kweathercore.cpp:263
+#: kweathercore.cpp:192 kweathercore.cpp:193 kweathercore.cpp:194
 msgid "Rain Shower"
 msgstr "Злива"
 
-#: kweathercore.cpp:264 kweathercore.cpp:265 kweathercore.cpp:266
+#: kweathercore.cpp:195 kweathercore.cpp:196 kweathercore.cpp:197
 msgid "Thunderstorm with Rain Shower"
 msgstr "Громова буря зі зливою"
 
-#: kweathercore.cpp:268 kweathercore.cpp:269 kweathercore.cpp:270
+#: kweathercore.cpp:199 kweathercore.cpp:200 kweathercore.cpp:201
 msgid "Sleet"
 msgstr "Мокрий сніг"
 
-#: kweathercore.cpp:271 kweathercore.cpp:272 kweathercore.cpp:273
+#: kweathercore.cpp:202 kweathercore.cpp:203 kweathercore.cpp:204
 msgid "Thunderstorm with Sleet"
 msgstr "Громова буря з мокрим снігом"
 
-#: kweathercore.cpp:274 kweathercore.cpp:275 kweathercore.cpp:276
+#: kweathercore.cpp:205 kweathercore.cpp:206 kweathercore.cpp:207
 msgid "Sleet Shower"
 msgstr "Дощ зі снігом"
 
-#: kweathercore.cpp:277 kweathercore.cpp:278 kweathercore.cpp:279
+#: kweathercore.cpp:208 kweathercore.cpp:209 kweathercore.cpp:210
 msgid "Thunderstorm with Sleet Shower"
 msgstr "Громова буря з дощем і снігом"
 
-#: kweathercore.cpp:281 kweathercore.cpp:282 kweathercore.cpp:283
+#: kweathercore.cpp:212 kweathercore.cpp:213 kweathercore.cpp:214
 msgid "Snow"
 msgstr "Сніг"
 
-#: kweathercore.cpp:284 kweathercore.cpp:285 kweathercore.cpp:286
+#: kweathercore.cpp:215 kweathercore.cpp:216 kweathercore.cpp:217
 msgid "Thunderstorm with Snow"
 msgstr "Громова буря зі снігом"
 
-#: kweathercore.cpp:287 kweathercore.cpp:288 kweathercore.cpp:289
+#: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
 msgid "Snow Shower"
 msgstr "Снігова злива"
 
-#: kweathercore.cpp:290 kweathercore.cpp:291 kweathercore.cpp:292
+#: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
 msgid "Thunderstorm with Snow Shower"
 msgstr "Громова буря зі снігом"
 
-#: kweathercore_p.h:23
+#: kweathercore_p.h:20
 #, kde-format
 msgid "Unknown"
 msgstr "Невідома"
