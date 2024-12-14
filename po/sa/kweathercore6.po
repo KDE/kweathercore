@@ -1,0 +1,186 @@
+# Sanskrit translations for kweathercore package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kweathercore package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kweathercore\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-11-15 00:39+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
+msgid "Clear"
+msgstr "स्पष्टः"
+
+#: kweathercore.cpp:96 kweathercore.cpp:97 kweathercore.cpp:98
+msgid "Cloudy"
+msgstr "धूमिल"
+
+#: kweathercore.cpp:99
+msgid "Partly Sunny"
+msgstr "आंशिकरूपेण सूर्य्यः"
+
+#: kweathercore.cpp:100 kweathercore.cpp:101
+msgid "Light Clouds"
+msgstr "प्रकाश मेघाः"
+
+#: kweathercore.cpp:102 kweathercore.cpp:103 kweathercore.cpp:104
+msgid "Fog"
+msgstr "धूमिका"
+
+#: kweathercore.cpp:106 kweathercore.cpp:107 kweathercore.cpp:108
+msgid "Heavy Rain"
+msgstr "प्रचण्डवृष्टिः"
+
+#: kweathercore.cpp:109 kweathercore.cpp:110 kweathercore.cpp:111
+msgid "Thunderstorm with Heavy Rain"
+msgstr "वज्रपातः प्रचण्डवृष्ट्या सह"
+
+#: kweathercore.cpp:112 kweathercore.cpp:113 kweathercore.cpp:114
+msgid "Heavy Rain Shower"
+msgstr "भारी वर्षा वर्षा"
+
+#: kweathercore.cpp:115 kweathercore.cpp:116 kweathercore.cpp:117
+msgid "Thunderstorm with Heavy Rain Shower"
+msgstr "वज्रपातः प्रचण्डवृष्ट्या सह"
+
+#: kweathercore.cpp:119 kweathercore.cpp:120 kweathercore.cpp:121
+msgid "Heavy Sleet"
+msgstr "भारी स्लीट्"
+
+#: kweathercore.cpp:122 kweathercore.cpp:123 kweathercore.cpp:124
+msgid "Thunderstorm with Heavy Sleet"
+msgstr "वज्रपातः सह भारी स्नीटः"
+
+#: kweathercore.cpp:125 kweathercore.cpp:126 kweathercore.cpp:127
+msgid "Heavy Sleet Shower"
+msgstr "भारी स्लीट बौछार"
+
+#: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
+msgid "Thunderstorm with Heavy Sleet Shower"
+msgstr "वज्रपातः सह भारी स्नीटवृष्टिः"
+
+#: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
+msgid "Heavy Snow"
+msgstr "भारी हिम"
+
+#: kweathercore.cpp:135 kweathercore.cpp:136 kweathercore.cpp:137
+msgid "Heavy Snow Shower"
+msgstr "भारी हिमवृष्टिः"
+
+#: kweathercore.cpp:138 kweathercore.cpp:139 kweathercore.cpp:140
+msgid "Thunderstorm with Heavy Snow Shower"
+msgstr "वज्रपातः प्रचण्डहिमवृष्ट्या सह"
+
+#: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
+msgid "Light Rain"
+msgstr "लघु वर्षा"
+
+#: kweathercore.cpp:145 kweathercore.cpp:146 kweathercore.cpp:147
+msgid "Thunderstorm with Light Rain"
+msgstr "लघुवृष्ट्या सह वज्रपातः"
+
+#: kweathercore.cpp:148 kweathercore.cpp:149 kweathercore.cpp:150
+msgid "Light Rain Shower"
+msgstr "हल्की वर्षा वर्षा"
+
+#: kweathercore.cpp:151 kweathercore.cpp:152 kweathercore.cpp:153
+msgid "Thunderstorm with Light Rain Shower"
+msgstr "हल्के वर्षावृष्ट्या सह वज्रपातः"
+
+#: kweathercore.cpp:155 kweathercore.cpp:156 kweathercore.cpp:157
+msgid "Light Sleet"
+msgstr "प्रकाशः स्लीट्"
+
+#: kweathercore.cpp:158 kweathercore.cpp:159 kweathercore.cpp:160
+msgid "Thunderstorm with Light Sleet"
+msgstr "प्रकाशस्लीटेन सह वज्रपातः"
+
+#: kweathercore.cpp:161 kweathercore.cpp:162 kweathercore.cpp:163
+msgid "Light Sleet Shower"
+msgstr "हल्की स्लीट शॉवर"
+
+#: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
+msgid "Light Snow"
+msgstr "लघु हिम"
+
+#: kweathercore.cpp:168 kweathercore.cpp:169 kweathercore.cpp:170
+msgid "Thunderstorm with Light Snow"
+msgstr "लघुहिमेन सह वज्रपातः"
+
+#: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
+msgid "Light Snow Shower"
+msgstr "हल्की हिमवृष्टिः"
+
+#: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
+msgid "Thunderstorm with Light Sleet Shower"
+msgstr "हल्के स्नीटवृष्ट्या सह वज्रपातः"
+
+#: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
+msgid "Thunderstorm with Light Snow Shower"
+msgstr "हल्केन हिमवृष्ट्या सह वज्रपातः"
+
+#: kweathercore.cpp:182 kweathercore.cpp:183 kweathercore.cpp:184
+msgid "Partly Cloudy"
+msgstr "आंशिकरूपेण मेघयुक्तः"
+
+#: kweathercore.cpp:186 kweathercore.cpp:187 kweathercore.cpp:188
+msgid "Rain"
+msgstr "वृष्टि"
+
+#: kweathercore.cpp:189 kweathercore.cpp:190 kweathercore.cpp:191
+msgid "Thunderstorm with Rain"
+msgstr "वज्रपातः वर्षा सह"
+
+#: kweathercore.cpp:192 kweathercore.cpp:193 kweathercore.cpp:194
+msgid "Rain Shower"
+msgstr "वर्षा वर्षा"
+
+#: kweathercore.cpp:195 kweathercore.cpp:196 kweathercore.cpp:197
+msgid "Thunderstorm with Rain Shower"
+msgstr "वज्रपातः वर्षावृष्ट्या सह"
+
+#: kweathercore.cpp:199 kweathercore.cpp:200 kweathercore.cpp:201
+msgid "Sleet"
+msgstr "स्लीट्"
+
+#: kweathercore.cpp:202 kweathercore.cpp:203 kweathercore.cpp:204
+msgid "Thunderstorm with Sleet"
+msgstr "स्लीट् इत्यनेन सह वज्रपातः"
+
+#: kweathercore.cpp:205 kweathercore.cpp:206 kweathercore.cpp:207
+msgid "Sleet Shower"
+msgstr "स्लीट शावर"
+
+#: kweathercore.cpp:208 kweathercore.cpp:209 kweathercore.cpp:210
+msgid "Thunderstorm with Sleet Shower"
+msgstr "स्नीटवृष्ट्या सह वज्रपातः"
+
+#: kweathercore.cpp:212 kweathercore.cpp:213 kweathercore.cpp:214
+msgid "Snow"
+msgstr "तुषार"
+
+#: kweathercore.cpp:215 kweathercore.cpp:216 kweathercore.cpp:217
+msgid "Thunderstorm with Snow"
+msgstr "हिमेन सह वज्रपातः"
+
+#: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
+msgid "Snow Shower"
+msgstr "हिमवृष्टिः"
+
+#: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
+msgid "Thunderstorm with Snow Shower"
+msgstr "हिमवृष्ट्या सह वज्रपातः"
+
+#: kweathercore_p.h:20
+#, kde-format
+msgid "Unknown"
+msgstr "अज्ञात"
