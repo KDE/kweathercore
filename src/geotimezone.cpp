@@ -9,6 +9,7 @@
 #include "reply_p.h"
 
 #include <QJsonDocument>
+#include <QJsonValue>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
