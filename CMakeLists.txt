@@ -26,6 +26,7 @@ include(KDECMakeSettings)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
+include(ECMQmlModule)
 
 include(GenerateExportHeader)
 
@@ -41,7 +42,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KWEATHERCORE
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KWeatherCoreConfigVersion.cmake"
                         SOVERSION 6)
 
-find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning)
+find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Network Positioning Qml)
 find_package(KF6 ${KF_DEP_VERSION} REQUIRED COMPONENTS I18n Holidays)
 
 
@@ -55,6 +56,7 @@ ecm_set_disabled_deprecation_versions(QT 6.8.0
 
 add_definitions(-DQT_NO_FOREACH)
 add_subdirectory(src)
+add_subdirectory(src/qml)
 
 option(BUILD_EXAMPLES "Build example applications" OFF)
 

@@ -18,9 +18,8 @@ namespace KWeatherCore
 class KWEATHERCORE_EXPORT CAPNamedValue
 {
     Q_GADGET
-    Q_PROPERTY(QString name)
-    Q_PROPERTY(QString value)
-    Q_PROPERTY(float radius MEMBER radius)
+    Q_PROPERTY(QString name MEMBER name)
+    Q_PROPERTY(QString value MEMBER value)
 
 public:
     QString name;

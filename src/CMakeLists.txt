@@ -30,6 +30,7 @@ set(kweathercore_LIB_SRCS
     capparser.h
     caparea.cpp
     caparea.h
+    capnamedvalue.cpp
     capreference.cpp
     capreference.h
     reply.cpp
@@ -39,6 +40,7 @@ set(kweathercore_LIB_SRCS
 
 add_library(KWeatherCore ${kweathercore_LIB_SRCS})
 generate_export_header(KWeatherCore BASE_NAME KWeatherCore EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/kweathercore/kweathercore_export.h)
+qt_extract_metatypes(KWeatherCore)
 set(kweathercore_BUILD_INCLUDE_DIRS ${KWeatherCore_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(KWeatherCore PUBLIC "$<BUILD_INTERFACE:${kweathercore_BUILD_INCLUDE_DIRS}>")
 target_include_directories(KWeatherCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KWeatherCore>")
