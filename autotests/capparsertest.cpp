@@ -27,7 +27,7 @@ private Q_SLOTS:
         QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.identifier(), QLatin1String("KSTO1055887203"));
         QCOMPARE(alert.sender(), QLatin1String("KSTO@NWS.NOAA.GOV"));
-        QCOMPARE(alert.sentTime(), QDateTime({2003, 06, 17}, {14, 57}, Qt::OffsetFromUTC, -7 * 60 * 60));
+        QCOMPARE(alert.sentTime(), QDateTime({2003, 06, 17}, {14, 57}, QTimeZone::fromSecondsAheadOfUtc(-7 * 60 * 60)));
         QCOMPARE(alert.scope(), KWeatherCore::CAPAlertMessage::Scope::Public);
         QCOMPARE(alert.note(), QString());
 
@@ -37,7 +37,7 @@ private Q_SLOTS:
         QCOMPARE(info.event(), QLatin1String("SEVERE THUNDERSTORM"));
         QCOMPARE(info.effectiveTime(), QDateTime());
         QCOMPARE(info.onsetTime(), QDateTime());
-        QCOMPARE(info.expireTime(), QDateTime({2003, 06, 17}, {16, 0}, Qt::OffsetFromUTC, -7 * 60 * 60));
+        QCOMPARE(info.expireTime(), QDateTime({2003, 06, 17}, {16, 0}, QTimeZone::fromSecondsAheadOfUtc(-7 * 60 * 60)));
         QCOMPARE(info.headline(), QLatin1String("SEVERE THUNDERSTORM WARNING"));
         QCOMPARE(info.description().isEmpty(), false);
         QCOMPARE(info.instruction().isEmpty(), false);
@@ -78,7 +78,7 @@ private Q_SLOTS:
         QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
         QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("vigilance@meteo.fr"));
-        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 10}, {16, 12, 20}, Qt::OffsetFromUTC, +2 * 60 * 60));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 10}, {16, 12, 20}, QTimeZone::fromSecondsAheadOfUtc(+2 * 60 * 60)));
 
         QCOMPARE(alert.alertInfos().size(), 2);
         auto info = alert.alertInfos()[0];
@@ -117,7 +117,7 @@ private Q_SLOTS:
         QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
         QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("ntwc@noaa.gov"));
-        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 01}, {0, 40, 48}, Qt::OffsetFromUTC, 0));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 01}, {0, 40, 48}, QTimeZone::fromSecondsAheadOfUtc(0)));
 
         QCOMPARE(alert.alertInfos().size(), 1);
         auto info = alert.alertInfos()[0];
@@ -142,7 +142,7 @@ private Q_SLOTS:
         QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
         QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Alert);
         QCOMPARE(alert.sender(), QLatin1String("info.aviso@inmet.gov.br"));
-        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 12}, {13, 22, 45}, Qt::OffsetFromUTC, -3 * 60 * 60));
+        QCOMPARE(alert.sentTime(), QDateTime({2022, 8, 12}, {13, 22, 45}, QTimeZone::fromSecondsAheadOfUtc(-3 * 60 * 60)));
 
         QCOMPARE(alert.alertInfos().size(), 1);
         auto info = alert.alertInfos()[0];
@@ -171,12 +171,12 @@ private Q_SLOTS:
         auto ref = alert.references()[0];
         QCOMPARE(ref.sender(), QLatin1String("opendata@dwd.de"));
         QCOMPARE(ref.identifier(), QLatin1String("2.49.0.0.276.0.DWD.PVW.1661542140000.7462e657-ce54-473f-91c8-abe408afe703.MUL"));
-        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {21, 29}, Qt::OffsetFromUTC, 2 * 60 * 60));
+        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {21, 29}, QTimeZone::fromSecondsAheadOfUtc(2 * 60 * 60)));
 
         ref = alert.ownReference();
         QCOMPARE(ref.sender(), QLatin1String("opendata@dwd.de"));
         QCOMPARE(ref.identifier(), QLatin1String("2.49.0.0.276.0.DWD.PVW.1661544180000.6ffa85ac-a5ed-4e69-977c-e767a423ecd6.MUL"));
-        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {22, 3}, Qt::OffsetFromUTC, 2 * 60 * 60));
+        QCOMPARE(ref.sent(), QDateTime({2022, 8, 26}, {22, 3}, QTimeZone::fromSecondsAheadOfUtc(2 * 60 * 60)));
 
         QCOMPARE(alert.alertInfos().size(), 1);
         const auto info = alert.alertInfos()[0];

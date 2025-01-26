@@ -88,8 +88,8 @@ bool MetNoParser::isDayTime(const QDateTime &dt) const
     }
 #endif
 
-    auto sunrise = QDateTime(dt.date(), sunriseTime, Qt::UTC);
-    auto sunset = QDateTime(dt.date(), sunsetTime, Qt::UTC);
+    auto sunrise = QDateTime(dt.date(), sunriseTime, QTimeZone::UTC);
+    auto sunset = QDateTime(dt.date(), sunsetTime, QTimeZone::UTC);
 
     // sunset before sunrise means the sunset actually happens the next day
     if (dt >= sunrise && sunset < sunrise) {
