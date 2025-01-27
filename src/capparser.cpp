@@ -156,6 +156,7 @@ static constexpr const MapEntry<CAPAlertInfo::Urgency> urgency_map[] = {
     {"Future", CAPAlertInfo::Urgency::Future},
     {"Immediate", CAPAlertInfo::Urgency::Immediate},
     {"Past", CAPAlertInfo::Urgency::Past},
+    {"Unknown", CAPAlertInfo::Urgency::UnknownUrgency},
 };
 
 static constexpr const MapEntry<CAPAlertInfo::Severity> severity_map[] = {
@@ -163,12 +164,14 @@ static constexpr const MapEntry<CAPAlertInfo::Severity> severity_map[] = {
     {"Minor", CAPAlertInfo::Severity::Minor},
     {"Moderate", CAPAlertInfo::Severity::Moderate},
     {"Severe", CAPAlertInfo::Severity::Severe},
+    {"Unknown", CAPAlertInfo::Severity::UnknownSeverity},
 };
 
 static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
     {"Likely", CAPAlertInfo::Certainty::Likely},
     {"Observed", CAPAlertInfo::Certainty::Observed},
     {"Possible", CAPAlertInfo::Certainty::Possible},
+    {"Unknown", CAPAlertInfo::Certainty::UnknownCertainty},
     {"Unlikely", CAPAlertInfo::Certainty::Unlikely},
 };
 
