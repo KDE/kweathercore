@@ -188,39 +188,3 @@ msgstr "Tempesta elèctrica amb precipitació de neu"
 #, kde-format
 msgid "Unknown"
 msgstr "Desconeguda"
-
-#~ msgid "Immediate"
-#~ msgstr "Immediata"
-
-#~ msgid "Expected"
-#~ msgstr "Esperada"
-
-#~ msgid "Future"
-#~ msgstr "Futura"
-
-#~ msgid "Past"
-#~ msgstr "Passada"
-
-#~ msgid "Extreme"
-#~ msgstr "Extrema"
-
-#~ msgid "Severe"
-#~ msgstr "Severa"
-
-#~ msgid "Moderate"
-#~ msgstr "Moderada"
-
-#~ msgid "Minor"
-#~ msgstr "Menor"
-
-#~ msgid "Observed"
-#~ msgstr "Observada"
-
-#~ msgid "Likely"
-#~ msgstr "Probable"
-
-#~ msgid "Possible"
-#~ msgstr "Possible"
-
-#~ msgid "Unlikely"
-#~ msgstr "Poc probable"
