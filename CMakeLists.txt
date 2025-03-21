@@ -51,7 +51,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
 endif()
 ecm_set_disabled_deprecation_versions(QT 6.8.0
-    KF 6.10.0
+    KF 6.12.0
 )
 
 add_definitions(-DQT_NO_FOREACH)
