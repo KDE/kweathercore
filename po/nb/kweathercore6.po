@@ -1,241 +1,190 @@
-# SPDX-FileCopyrightText: 2020, 2021, 2023, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# Translation of kweathercore6 to Norwegian Bokmål
+#
+# SPDX-FileCopyrightText: 2025 Martin Hansen <mh306602@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:39+0000\n"
-"PO-Revision-Date: 2025-03-19 14:05+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <French <kde-francophone@kde.org>>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2025-03-15 12:16+0100\n"
+"Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.12.3\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
-msgstr "Dégagé"
+msgstr "Klarvær"
 
 #: kweathercore.cpp:96 kweathercore.cpp:97 kweathercore.cpp:98
 msgid "Cloudy"
-msgstr "Nuageux"
+msgstr "Skyet"
 
 #: kweathercore.cpp:99
 msgid "Partly Sunny"
-msgstr "Partiellement ensoleillé"
+msgstr "Delvis sol"
 
 #: kweathercore.cpp:100 kweathercore.cpp:101
 msgid "Light Clouds"
-msgstr "Légers nuages"
+msgstr "Lettskyet"
 
 #: kweathercore.cpp:102 kweathercore.cpp:103 kweathercore.cpp:104
 msgid "Fog"
-msgstr "Brouillard"
+msgstr "Tåke"
 
 #: kweathercore.cpp:106 kweathercore.cpp:107 kweathercore.cpp:108
 msgid "Heavy Rain"
-msgstr "Forte pluie"
+msgstr "Kraftig regn"
 
 #: kweathercore.cpp:109 kweathercore.cpp:110 kweathercore.cpp:111
 msgid "Thunderstorm with Heavy Rain"
-msgstr "Orage avec une forte averse de pluie"
+msgstr "Tordenvær med kraftig regn"
 
 #: kweathercore.cpp:112 kweathercore.cpp:113 kweathercore.cpp:114
 msgid "Heavy Rain Shower"
-msgstr "Forte averse de pluie"
+msgstr "Kraftige regnbyger"
 
 #: kweathercore.cpp:115 kweathercore.cpp:116 kweathercore.cpp:117
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr "Orage avec une forte averse de pluie"
+msgstr "Tordenvær med kraftige regnbyger"
 
 #: kweathercore.cpp:119 kweathercore.cpp:120 kweathercore.cpp:121
 msgid "Heavy Sleet"
-msgstr "Fort grésil"
+msgstr "Kraftig sludd"
 
 #: kweathercore.cpp:122 kweathercore.cpp:123 kweathercore.cpp:124
 msgid "Thunderstorm with Heavy Sleet"
-msgstr "Orage avec une forte averse de grésil"
+msgstr "Tordenvær med kraftig sludd"
 
 #: kweathercore.cpp:125 kweathercore.cpp:126 kweathercore.cpp:127
 msgid "Heavy Sleet Shower"
-msgstr "Forte averse de grésil"
+msgstr "Kraftige sluddbyger"
 
 #: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr "Orage avec une forte averse de grésil"
+msgstr "Tordenvær med kraftige sluddbyger"
 
 #: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
 msgid "Heavy Snow"
-msgstr "Forte neige"
+msgstr "Kraftig snøfall"
 
 #: kweathercore.cpp:135 kweathercore.cpp:136 kweathercore.cpp:137
 msgid "Heavy Snow Shower"
-msgstr "Forte averse de neige"
+msgstr "Kraftige snøbyger"
 
 #: kweathercore.cpp:138 kweathercore.cpp:139 kweathercore.cpp:140
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr "Orage avec une forte averse de neige"
+msgstr "Tordenvær med kraftige snøbyger"
 
 #: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
 msgid "Light Rain"
-msgstr "Faible pluie"
+msgstr "Lett regn"
 
 #: kweathercore.cpp:145 kweathercore.cpp:146 kweathercore.cpp:147
 msgid "Thunderstorm with Light Rain"
-msgstr "Orage avec une légère averse de pluie"
+msgstr "Tordenvær med lett regn"
 
 #: kweathercore.cpp:148 kweathercore.cpp:149 kweathercore.cpp:150
 msgid "Light Rain Shower"
-msgstr "Légère averse de pluie"
+msgstr "Lette regnbyger"
 
 #: kweathercore.cpp:151 kweathercore.cpp:152 kweathercore.cpp:153
 msgid "Thunderstorm with Light Rain Shower"
-msgstr "Orage avec une légère averse de pluie"
+msgstr "Tordenvær med lette regnbyger"
 
 #: kweathercore.cpp:155 kweathercore.cpp:156 kweathercore.cpp:157
 msgid "Light Sleet"
-msgstr "Grésil léger"
+msgstr "Lett sludd"
 
 #: kweathercore.cpp:158 kweathercore.cpp:159 kweathercore.cpp:160
 msgid "Thunderstorm with Light Sleet"
-msgstr "Orage avec une légère averse de grésil"
+msgstr "Tordenvær med lett sludd"
 
 #: kweathercore.cpp:161 kweathercore.cpp:162 kweathercore.cpp:163
 msgid "Light Sleet Shower"
-msgstr "Légère averse de grésil"
+msgstr "Lette sluddbyger"
 
 #: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
 msgid "Light Snow"
-msgstr "Faible neige"
+msgstr "Lett snøfall"
 
 #: kweathercore.cpp:168 kweathercore.cpp:169 kweathercore.cpp:170
 msgid "Thunderstorm with Light Snow"
-msgstr "Orage avec une légère averse de neige"
+msgstr "Tordenvær med lett snøfall"
 
 #: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
 msgid "Light Snow Shower"
-msgstr "Légère averse de neige"
+msgstr "Lette snøbyger"
 
 #: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr "Orage avec une légère averse de grésil"
+msgstr "Tordenvær med lette sluddbyger"
 
 #: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
 msgid "Thunderstorm with Light Snow Shower"
-msgstr "Orage avec une légère averse de neige"
+msgstr "Tordenvær med lette snøbyger"
 
 #: kweathercore.cpp:182 kweathercore.cpp:183 kweathercore.cpp:184
 msgid "Partly Cloudy"
-msgstr "Partiellement nuageux"
+msgstr "Delvis skyet"
 
 #: kweathercore.cpp:186 kweathercore.cpp:187 kweathercore.cpp:188
 msgid "Rain"
-msgstr "Pluie"
+msgstr "Regn"
 
 #: kweathercore.cpp:189 kweathercore.cpp:190 kweathercore.cpp:191
 msgid "Thunderstorm with Rain"
-msgstr "Orage avec averse de pluie"
+msgstr "Tordenvær med regn"
 
 #: kweathercore.cpp:192 kweathercore.cpp:193 kweathercore.cpp:194
 msgid "Rain Shower"
-msgstr "Averse de pluie"
+msgstr "Regnbyger"
 
 #: kweathercore.cpp:195 kweathercore.cpp:196 kweathercore.cpp:197
 msgid "Thunderstorm with Rain Shower"
-msgstr "Orage avec une averse de pluie"
+msgstr "Tordenvær med regnbyger"
 
 #: kweathercore.cpp:199 kweathercore.cpp:200 kweathercore.cpp:201
 msgid "Sleet"
-msgstr "Grésil"
+msgstr "Sludd"
 
 #: kweathercore.cpp:202 kweathercore.cpp:203 kweathercore.cpp:204
 msgid "Thunderstorm with Sleet"
-msgstr "Orage avec averse de grésil"
+msgstr "Tordenvær med sludd"
 
 #: kweathercore.cpp:205 kweathercore.cpp:206 kweathercore.cpp:207
 msgid "Sleet Shower"
-msgstr "Averse de grésil"
+msgstr "Sluddbyger"
 
 #: kweathercore.cpp:208 kweathercore.cpp:209 kweathercore.cpp:210
 msgid "Thunderstorm with Sleet Shower"
-msgstr "Orage avec une averse de grésil"
+msgstr "Tordenvær med sluddbyger"
 
 #: kweathercore.cpp:212 kweathercore.cpp:213 kweathercore.cpp:214
 msgid "Snow"
-msgstr "Neige"
+msgstr "Snø"
 
 #: kweathercore.cpp:215 kweathercore.cpp:216 kweathercore.cpp:217
 msgid "Thunderstorm with Snow"
-msgstr "Orage avec averse de neige"
+msgstr "Tordenvær med snø"
 
 #: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
 msgid "Snow Shower"
-msgstr "Averse de neige"
+msgstr "Snøbyger"
 
 #: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
 msgid "Thunderstorm with Snow Shower"
-msgstr "Orage avec une averse de neige"
+msgstr "Tordenvær med snøbyger"
 
 #: kweathercore_p.h:20
 #, kde-format
 msgid "Unknown"
-msgstr "Inconnu"
-
-#~ msgid "Immediate"
-#~ msgstr "Immédiat"
-
-#~ msgid "Expected"
-#~ msgstr "Prévu"
-
-#~ msgid "Future"
-#~ msgstr "Futur"
-
-#~ msgid "Past"
-#~ msgstr "Ancien"
-
-#~ msgid "Extreme"
-#~ msgstr "Extrême"
-
-#~ msgid "Severe"
-#~ msgstr "Sévère"
-
-#~ msgid "Moderate"
-#~ msgstr "Modéré"
-
-#~ msgid "Minor"
-#~ msgstr "Mineur"
-
-#~ msgid "Observed"
-#~ msgstr "Observé"
-
-#~ msgid "Likely"
-#~ msgstr "Probable"
-
-#~ msgid "Possible"
-#~ msgstr "Possible"
-
-#~ msgid "Unlikely"
-#~ msgstr "Improbable"
-
-#~ msgid "Storm"
-#~ msgstr "Tempête"
-
-#~ msgid "New Moon"
-#~ msgstr "Nouvelle lune"
-
-#~ msgid "Waxing Crescent"
-#~ msgstr "Lune croissante"
-
-#~ msgid "Waxing Gibbous"
-#~ msgstr "Gibbeuse croissante"
-
-#~ msgid "Full Moon"
-#~ msgstr "Pleine lune"
-
-#~ msgid "Waning Gibbous"
-#~ msgstr "Gibbeuse décroissante"
-
-#~ msgid "Waning Crescent"
-#~ msgstr "Lune décroissante"
+msgstr "Ukjent"
