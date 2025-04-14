@@ -16,6 +16,7 @@ namespace KWeatherCore
 class ReplyPrivate
 {
 public:
+    virtual ~ReplyPrivate() = default;
     void setError(Reply::Error error, const QString &msg = {});
 
     Reply::Error m_error = Reply::NoError;
