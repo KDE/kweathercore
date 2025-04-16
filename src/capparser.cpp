@@ -175,11 +175,29 @@ static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
     {"Unlikely", CAPAlertInfo::Certainty::Unlikely},
 };
 
+[[nodiscard]] static QStringView nextCoordinate(QStringView &input)
+{
+    const auto beginIt = std::find_if(input.constBegin(), input.constEnd(), [](auto c) {
+        return !c.isSpace();
+    });
+    if (beginIt == input.constEnd()) {
+        input = {};
+        return {};
+    }
+    const auto endIt = std::find_if(std::next(beginIt), input.constEnd(), [](auto c) {
+        return c.isSpace();
+    });
+    auto s = input.sliced(std::distance(input.constBegin(), beginIt), std::distance(beginIt, endIt));
+    input.slice(std::distance(input.constBegin(), endIt));
+    return s;
+}
+
 [[nodiscard]] static CAPPolygon stringToPolygon(QStringView str)
 {
     CAPPolygon res;
 
-    for (auto coordinate : QStringTokenizer(str, ' '_L1, Qt::SkipEmptyParts)) {
+    do {
+        auto coordinate = nextCoordinate(str);
         const auto idx = coordinate.indexOf(','_L1);
         if (idx < 0) {
             continue;
@@ -189,7 +207,7 @@ static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
         if (!latOk || !lonOk) {
             res.pop_back();
         }
-    }
+    } while (!str.isEmpty());
     return res;
 }
 
@@ -400,7 +418,10 @@ CAPArea CAPParser::parseArea()
         } else if (m_xml.name() == QLatin1String("geocode") && !m_xml.isEndElement()) {
             area.addGeoCode(parseNamedValue());
         } else if (m_xml.name() == QLatin1String("polygon") && !m_xml.isEndElement()) {
-            area.addPolygon(stringToPolygon(m_xml.readElementText()));
+            auto poly = stringToPolygon(m_xml.readElementText());
+            if (poly.size() >= 4) {
+                area.addPolygon(std::move(poly));
+            }
         } else if (m_xml.name() == QLatin1String("circle") && !m_xml.isEndElement()) {
             const auto t = m_xml.readElementText();
             const auto commaIdx = t.indexOf(QLatin1Char(','));

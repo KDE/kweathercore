@@ -12,6 +12,8 @@
 #include <QFile>
 #include <QTest>
 
+using namespace Qt::Literals;
+
 class CapParserTest : public QObject
 {
     Q_OBJECT
@@ -184,6 +186,48 @@ private Q_SLOTS:
         const auto area = info.areas()[0];
         QCOMPARE(area.altitude(), 0.0f);
         QCOMPARE(area.ceiling(), 9842.5197f);
+    }
+
+    void testTabCoordinateSeparator()
+    {
+        QFile f(QFINDTESTDATA("capdata/mo-cap_monsoon.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.messageType(), KWeatherCore::CAPAlertMessage::MessageType::Update);
+        QCOMPARE(alert.references().size(), 1);
+        auto ref = alert.references()[0];
+        QCOMPARE(ref.sender(), "meteo@smg.gov.mo"_L1);
+        QCOMPARE(ref.identifier(), "SMG-Weather_MS_2025_006_03"_L1);
+        QCOMPARE(ref.sent(), QDateTime({2025, 4, 13}, {5, 52, 12}, QTimeZone::fromSecondsAheadOfUtc(8 * 60 * 60)));
+
+        QCOMPARE(alert.alertInfos().size(), 3);
+        const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.areas().size(), 1);
+        const auto area = info.areas()[0];
+        QCOMPARE(area.description(), u"澳門特別行政區行政區域圖");
+        QCOMPARE(area.polygons().size(), 1);
+        const auto poly = area.polygons()[0];
+        QCOMPARE(poly.size(), 63);
+    }
+
+    void testEmptyPolygon()
+    {
+        QFile f(QFINDTESTDATA("capdata/il-488abaaf-cad5-4d2b-93b2-703016878453.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.alertInfos().size(), 2);
+        const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.areas().size(), 3);
+        const auto area = info.areas()[0];
+        QVERIFY(!area.description().isEmpty());
+        QCOMPARE(area.geoCodes().size(), 1);
+        QCOMPARE(area.polygons().size(), 0);
     }
 };
 
