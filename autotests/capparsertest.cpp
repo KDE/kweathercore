@@ -12,6 +12,8 @@
 #include <QFile>
 #include <QTest>
 
+using namespace Qt::Literals;
+
 class CapParserTest : public QObject
 {
     Q_OBJECT
@@ -66,6 +68,22 @@ private Q_SLOTS:
         QCOMPARE(info.eventCodes().size(), 1);
         QCOMPARE(info.eventCodes()[0].name, QLatin1String("SAME"));
         QCOMPARE(info.eventCodes()[0].value, QLatin1String("SVR"));
+    }
+
+    void testAudience()
+    {
+        QFile f(QFINDTESTDATA("capdata/it-2.49.0.0.380.3.IT.250416124517.161.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        const auto alert = parser.parse();
+
+        QCOMPARE(alert.identifier(), "2.49.0.0.380.3.IT.250416124517.161"_L1);
+        QCOMPARE(alert.scope(), KWeatherCore::CAPAlertMessage::Scope::Public);
+        QCOMPARE(alert.alertInfos().size(), 2);
+
+        const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.language(), "en-GB"_L1);
+        QCOMPARE(info.audience(), "Private"_L1);
     }
 
     void testMultiArea()

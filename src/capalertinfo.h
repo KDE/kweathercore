@@ -43,6 +43,7 @@ class KWEATHERCORE_EXPORT CAPAlertInfo
     Q_PROPERTY(ResponseTypes responseTypes READ responseTypes)
     Q_PROPERTY(QString contact READ contact)
     Q_PROPERTY(QString web READ web)
+    Q_PROPERTY(QString audience READ audience)
 
 public:
     enum class Category {
@@ -160,6 +161,10 @@ public:
      */
     QString web() const;
     /**
+     * Description of the intended audience of the alert message.
+     */
+    [[nodiscard]] QString audience() const;
+    /**
      * The Parameter of the alert message
      * refer to CAP protocol v1.2
      */
@@ -186,6 +191,7 @@ public:
     void addResponseType(ResponseType responseType);
     void setContact(const QString &contact);
     void setWeb(const QString &web);
+    void setAudience(const QString &audience);
     void addParameter(CAPNamedValue &&param);
     void addArea(CAPArea &&area);
     void addEventCode(CAPNamedValue &&code);
