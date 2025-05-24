@@ -1,0 +1,16 @@
+/*!
+    \module KWeatherCore
+    \title KWeatherCore C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent CoreAddons
+
+    \brief Provides core non-GUI functionality.
+*/
+
+/*!
+ *  \qmlmodule org.kde.weathercore
+ *  \title KWeatherCore QML Types
+ *  \ingroup qmlmodules
+ *  \brief Additions to Qt Core
+ */

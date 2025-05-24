@@ -16,7 +16,7 @@ namespace KWeatherCore
 
 class CAPReferencePrivate;
 
-/** A reference to a previous CAP alert message.
+/*! A reference to a previous CAP alert message.
  *  @see https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html §3.2.1
  */
 class KWEATHERCORE_EXPORT CAPReference

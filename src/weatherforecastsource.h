@@ -21,41 +21,44 @@ namespace KWeatherCore
 class LocationQueryResult;
 class WeatherForecastSourcePrivate;
 
-/**
- * @short The WeatherForecastSource class is intended for query weather
- * information about a location
+/*!
+ * \class KWeatherCore::WeatherForecastSource
+ * \inheaderfile KWeatherCore/WeatherForecastSource
+ * \inmodule KWeatherCore
  *
- * @see WeatherForecast, PendingWeatherForecast
+ * \brief The WeatherForecastSource class is intended for query weather
+ * information about a location.
  *
- * @author Han Young <hanyoung@protonmail.com>
+ * \sa WeatherForecast, PendingWeatherForecast
  */
 class KWEATHERCORE_EXPORT WeatherForecastSource : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     *
+     */
     explicit WeatherForecastSource(QObject *parent = nullptr);
     ~WeatherForecastSource() override;
 
-    /**
-     * requestData
-     * @param latitude
-     * @param longitude
-     * @return it is the client's responsibility to delete the
+    /*!
+     * It is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak.
      */
     PendingWeatherForecast *requestData(double latitude, double longitude);
 
-    /**
-     * requestData
-     * @param result
-     * @return it is the client's responsibility to delete the
+    /*!
+     * It is the client's responsibility to delete the
      * PendingWeatherForecast afterhand to avoid memory leak.
      */
     PendingWeatherForecast *requestData(const KWeatherCore::LocationQueryResult &result);
 
-    /** Set the network access manager to use for network operations.
-     *  If not set, an instance is created internally.
-     *  Ownership is not transferred.
+    /*!
+     * Set the network access manager to use for network operations.
+     *
+     * If not set, an instance is created internally.
+     *
+     * Ownership is not transferred.
      */
     void setNetworkAccessManager(QNetworkAccessManager *nam);
 

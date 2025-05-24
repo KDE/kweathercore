@@ -83,6 +83,9 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     PREFIX KWeatherCore
     REQUIRED_HEADERS KWeatherCore_HEADERS
 )
+
+ecm_generate_qdoc(KWeatherCore kweathercore.qdocconf)
+
 install(FILES ${KWeatherCore_CamelCase_HEADERS} DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KWeatherCore/KWeatherCore COMPONENT Devel)
 
 install(TARGETS KWeatherCore EXPORT KWeatherCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -91,30 +94,6 @@ install(FILES
   ${KWeatherCore_HEADERS}
   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KWeatherCore/kweathercore COMPONENT Devel
 )
-
-if(BUILD_QCH)
-    ecm_add_qch(
-        KWeatherCore_QCH
-        NAME KWeatherCore
-        BASE_NAME KWeatherCore
-        VERSION ${PROJECT_VERSION}
-        ORG_DOMAIN org.kde
-        SOURCES # using only public headers, to cover only public API
-            ${KWeatherCore_HEADERS}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
-        LINK_QCHS
-            Qt6Core_QCH
-        INCLUDE_DIRS
-            ${kweathercore_BUILD_INCLUDE_DIRS}
-        BLANK_MACROS
-            KWEATHERCORE_EXPORT
-            KWEATHERCORE_DEPRECATED
-            KWEATHERCORE_DEPRECATED_EXPORT
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-        )
-endif()
 
 include(ECMGeneratePriFile)
 ecm_generate_pri_file(

@@ -16,8 +16,8 @@ class QTimeZone;
 namespace KWeatherCore
 {
 
-/** Parser for api.met.no replies.
- *  @internal only exported for unit tests
+/*! Parser for api.met.no replies.
+ *  \internal only exported for unit tests
  */
 class MetNoParser
 {

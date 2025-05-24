@@ -16,7 +16,7 @@ namespace KWeatherCore
 class CAPAlertInfo;
 class CAPAlertMessagePrivate;
 class CAPReference;
-/**
+/*!
  * @short Represents a single CAP Alert Message
  *
  * This class contains the information of a parsed CAP alert message.
@@ -36,7 +36,7 @@ class KWEATHERCORE_EXPORT CAPAlertMessage
     Q_PROPERTY(MessageType messageType READ messageType)
     Q_PROPERTY(Scope scope READ scope)
 public:
-    /** The code denoting the appropriate handling of the alert message. */
+    /*! The code denoting the appropriate handling of the alert message. */
     enum class Status {
         UnknownStatus,
         Actual, ///< Actionable by all targeted recipients
@@ -63,7 +63,7 @@ public:
     };
     Q_ENUM(Scope)
 
-    /**
+    /*!
      * Default constructor, Status, MsgType, Scope
      * are set to Unknown
      */
@@ -72,49 +72,49 @@ public:
     CAPAlertMessage(CAPAlertMessage &&other) noexcept;
     ~CAPAlertMessage();
 
-    /**
+    /*!
      * Unique alert message identifier.
      */
     QString identifier() const;
-    /**
+    /*!
      * The identifier of the sender of the alert message.
      */
     QString sender() const;
-    /**
+    /*!
      * The time and date of the origination of the alert message.
      */
     QDateTime sentTime() const;
-    /**
+    /*!
      * The code denoting the appropriate handling of the alert message.
      * Returns UnknownStatus if not set.
      */
     Status status() const;
-    /**
+    /*!
      * The code denoting the nature of the alert message.
      * Returns UnknownMsgType if not set.
      */
     MessageType messageType() const;
-    /**
+    /*!
      * The code denoting the intended distribution of the alert message.
      * Returns UnknownScope if not set.
      */
     Scope scope() const;
-    /**
+    /*!
      * The text describing the purpose or significance of the alert message.
      * Relevant for Exercise and Error status.
      */
     QString note() const;
-    /**
+    /*!
      * The alert info elements of this alert message.
      * @see CAPAlertInfo
      */
     const std::vector<CAPAlertInfo> &alertInfos() const;
-    /**
+    /*!
      * References to previous CAP alert messages.
      * Relevant for Update, Cancel and Ack message types.
      */
     const std::vector<CAPReference> &references() const;
-    /**
+    /*!
      * Reference of this CAP alert message.
      * @see references()
      */

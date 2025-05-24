@@ -14,7 +14,7 @@ class QNetworkAccessManager;
 namespace KWeatherCore
 {
 class PendingWeatherForecastPrivate;
-/**
+/*!
  * @short The PendingWeatherForecast class contains the reply to an asynchronous
  * weather forecast request.
  *
@@ -28,7 +28,7 @@ class KWEATHERCORE_EXPORT PendingWeatherForecast : public Reply
 public:
     ~PendingWeatherForecast() override;
 
-    /**
+    /*!
      * value pointer to the shared weather data
      * the pointer is nullptr until finished() raised
      * @return

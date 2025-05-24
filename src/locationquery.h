@@ -17,7 +17,7 @@ namespace KWeatherCore
 {
 class LocationQueryReply;
 class LocationQueryPrivate;
-/**
+/*!
  * @short Class locates current location and search locations by name
  *
  * This is a class that locates current location (GPS or IP) and search
@@ -63,24 +63,24 @@ class KWEATHERCORE_EXPORT LocationQuery : public QObject
 {
     Q_OBJECT
 public:
-    /**
+    /*!
      * LocationQuery
      */
     explicit LocationQuery(QObject *parent = nullptr);
     ~LocationQuery() override;
-    /**
+    /*!
      * query query locations by name
      * @param name name of location, not necessary in English
      * @param number max numbers of query returned, the actual size could be
      * less than @param number
      */
     LocationQueryReply *query(const QString &name, int number = 30);
-    /**
+    /*!
      * locate current location
      */
     LocationQueryReply *locate();
 
-    /** Set the network access manager to use for network operations.
+    /*! Set the network access manager to use for network operations.
      *  If not set, an instance is created internally.
      *  Ownership is not transferred.
      */

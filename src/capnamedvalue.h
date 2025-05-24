@@ -14,7 +14,7 @@
 namespace KWeatherCore
 {
 
-/** CAP key/value pairs as found in area geo codes, alert event codes or alert parameters. */
+/*! CAP key/value pairs as found in area geo codes, alert event codes or alert parameters. */
 class KWEATHERCORE_EXPORT CAPNamedValue
 {
     Q_GADGET

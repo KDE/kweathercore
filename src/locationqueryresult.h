@@ -13,7 +13,7 @@
 #include <optional>
 namespace KWeatherCore
 {
-/**
+/*!
  * @short Class represents location query result
  *
  * This is a class to hold general information about a location
@@ -35,7 +35,7 @@ class KWEATHERCORE_EXPORT LocationQueryResult
 public:
     // for QMetaType
     LocationQueryResult();
-    /**
+    /*!
      * LocationQueryResult construct location result with given data
      * @param latitude latitude
      * @param longitude longitude
@@ -60,28 +60,28 @@ public:
     double latitude() const;
 
     double longitude() const;
-    /**
+    /*!
      * toponym name of location, detailed
      */
     const QString &toponymName() const;
-    /**
+    /*!
      * display name, short
      */
     const QString &name() const;
-    /**
+    /*!
      * country code, follow no standard but should be unique
      */
     const QString &countryCode() const;
-    /**
+    /*!
      * Translated name of the country.
      */
     [[nodiscard]] QString countryName() const;
-    /**
+    /*!
      * internal unique id
      */
     const QString &geonameId() const;
 
-    /**
+    /*!
      * Country subdivision such as state, province, etc. Follows ISO 3166-2
      */
     const std::optional<QString> &subdivision() const;

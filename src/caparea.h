@@ -19,7 +19,7 @@
 namespace KWeatherCore
 {
 
-/** A geographic coordinate as part of a polygon. */
+/*! A geographic coordinate as part of a polygon. */
 class CAPCoordinate
 {
 public:
@@ -27,10 +27,10 @@ public:
     float longitude = NAN;
 };
 
-/** Geographic polygon describing the target area of a CAP alert message. */
+/*! Geographic polygon describing the target area of a CAP alert message. */
 using CAPPolygon = std::vector<CAPCoordinate>;
 
-/** Geographic circle describing the target area of a CAP alert message. */
+/*! Geographic circle describing the target area of a CAP alert message. */
 class KWEATHERCORE_EXPORT CAPCircle
 {
     Q_GADGET
@@ -46,7 +46,7 @@ public:
 
 class CAPAreaPrivate;
 
-/** Affected area of a CAP alert message.
+/*! Affected area of a CAP alert message.
  *  @see https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2.html §3.2.4
  */
 class KWEATHERCORE_EXPORT CAPArea
@@ -63,30 +63,30 @@ public:
     CAPArea &operator=(const CAPArea &other);
     CAPArea &operator=(CAPArea &&other) noexcept;
 
-    /** A text description of the message target area. */
+    /*! A text description of the message target area. */
     QString description() const;
     void setDescription(const QString &areaDesc);
 
-    /** Geographic polygon(s) enclosing the message target area. */
+    /*! Geographic polygon(s) enclosing the message target area. */
     const std::vector<CAPPolygon> &polygons() const;
     void addPolygon(CAPPolygon &&polygon);
 
-    /** Geographic circles(s) enclosing the message target area. */
+    /*! Geographic circles(s) enclosing the message target area. */
     const std::vector<CAPCircle> &circles() const;
     void addCircle(CAPCircle &&circle);
 
-    /** Any geographically-based code to describe a message target area, as key/value pair. */
+    /*! Any geographically-based code to describe a message target area, as key/value pair. */
     const std::vector<CAPNamedValue> &geoCodes() const;
     void addGeoCode(CAPNamedValue &&geoCode);
 
-    /** The specific or minimum altitude of the affected area of the alert message.
+    /*! The specific or minimum altitude of the affected area of the alert message.
      *  The altitude measure is in feet above mean sea level.
      *  If not set, NAN is returned.
      */
     float altitude() const;
     void setAltitude(float altitude);
 
-    /** The maximum altitude of the affected area of the alert message.
+    /*! The maximum altitude of the affected area of the alert message.
      *  The altitude measure is in feet above mean sea level.
      *  If not set, NAN is returned.
      */

@@ -17,7 +17,7 @@ namespace KWeatherCore
 
 class ReplyPrivate;
 
-/** Base class for all asynchronous jobs.
+/*! Base class for all asynchronous jobs.
  *  @since 0.6
  */
 class KWEATHERCORE_EXPORT Reply : public QObject
@@ -26,7 +26,7 @@ class KWEATHERCORE_EXPORT Reply : public QObject
 public:
     ~Reply() override;
 
-    /** Possible error states of the job. */
+    /*! Possible error states of the job. */
     enum Error {
         NoError,
         NetworkError, ///< Network operation failed
@@ -35,16 +35,16 @@ public:
         NoService, ///< There is no service available for obtaining the requested information.
     };
 
-    /** Error state of the job. */
+    /*! Error state of the job. */
     Error error() const;
 
-    /** Error message of the job.
+    /*! Error message of the job.
      *  Only valid if error() returns something other than NoError.
      */
     QString errorMessage() const;
 
 Q_SIGNALS:
-    /**
+    /*!
      * Emitted once the job has been finished, either successfully or with an error.
      *
      * Connect to this signal for every job you create to obtain its result and

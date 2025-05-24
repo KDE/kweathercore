@@ -13,7 +13,7 @@ class QNetworkAccessManager;
 namespace KWeatherCore
 {
 class GeoTimezonePrivate;
-/**
+/*!
  * @short Class to obtain timezone via coordinate
  *
  * This is a class to obtain timezone via coordinate and signals finished() with
@@ -25,14 +25,14 @@ class KWEATHERCORE_EXPORT GeoTimezone : public Reply
 {
     Q_OBJECT
 public:
-    /**
+    /*!
      * GeoTimezone
      * @param latitude latitude for the request location
      * @param longitude longitude for the request location
      */
     GeoTimezone(QNetworkAccessManager *nam, double latitude, double longitude, QObject *parent = nullptr);
 
-    /** The result IANA timezone string. */
+    /*! The result IANA timezone string. */
     QString timezone() const;
 
 private:

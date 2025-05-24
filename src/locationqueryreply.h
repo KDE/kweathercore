@@ -19,7 +19,7 @@ namespace KWeatherCore
 class LocationQueryResult;
 class LocationQueryReplyPrivate;
 
-/** Asynchronous reply for a location query.
+/*! Asynchronous reply for a location query.
  *  @see LocationQuery
  *  @since 0.6
  */
@@ -28,7 +28,7 @@ class KWEATHERCORE_EXPORT LocationQueryReply : public Reply
 public:
     ~LocationQueryReply() override;
 
-    /** Result of the location query.
+    /*! Result of the location query.
      *  Can be none, one or multiple elements.
      */
     const std::vector<LocationQueryResult> &result() const;

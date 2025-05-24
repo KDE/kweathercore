@@ -1,0 +1,31 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = KWeatherCore
+description = Query weather data
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+outputformats = HTML
+
+depends += \
+    kde \
+    qtcore
+
+navigation.landingpage = "KWeatherCore"
+
+qhp.projects            = KWeatherCore
+
+qhp.KWeatherCore.file                = kweathercore.qhp
+qhp.KWeatherCore.namespace           = org.kde.kweathercore.$QT_VERSION_TAG
+qhp.KWeatherCore.virtualFolder       = kweathercore
+qhp.KWeatherCore.indexTitle          = KWeatherCore
+qhp.KWeatherCore.indexRoot           =
+
+qhp.KWeatherCore.subprojects         = classes
+qhp.KWeatherCore.subprojects.classes.title = C++ Classes
+qhp.KWeatherCore.subprojects.classes.indexTitle = KWeatherCore C++ Classes
+qhp.KWeatherCore.subprojects.classes.selectors = class fake:headerfile
+qhp.KWeatherCore.subprojects.classes.sortPages = true
