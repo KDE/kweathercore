@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kweathercore/kweathercore6.pot\n"
-"X-Crowdin-File-ID: 48710\n"
+"X-Crowdin-File: /kf6-stable/messages/kweathercore/kweathercore6.pot\n"
+"X-Crowdin-File-ID: 54866\n"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
