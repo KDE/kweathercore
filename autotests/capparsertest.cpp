@@ -52,6 +52,7 @@ private Q_SLOTS:
         QCOMPARE(info.responseTypes(), KWeatherCore::CAPAlertInfo::ResponseType::Shelter);
         QCOMPARE(info.contact(), QLatin1String("BARUFFALDI/JUSKIE"));
 
+        QCOMPARE(info.hasGeometry(), true);
         QCOMPARE(info.areas().size(), 1);
         const auto area = info.areas()[0];
         QCOMPARE(area.description(),
@@ -125,6 +126,7 @@ private Q_SLOTS:
         auto info = alert.alertInfos()[0];
         QCOMPARE(info.language(), QLatin1String("en-US"));
         QCOMPARE(info.areas().size(), 1);
+        QCOMPARE(info.hasGeometry(), true);
         auto area = info.areas()[0];
         QCOMPARE(area.polygons().size(), 0);
         QCOMPARE(area.circles().size(), 1);
@@ -148,6 +150,7 @@ private Q_SLOTS:
 
         QCOMPARE(alert.alertInfos().size(), 1);
         auto info = alert.alertInfos()[0];
+        QCOMPARE(info.hasGeometry(), true);
         QCOMPARE(info.language(), QLatin1String("pt-BR"));
         QCOMPARE(info.areas().size(), 1);
         auto area = info.areas()[0];
@@ -205,6 +208,7 @@ private Q_SLOTS:
 
         QCOMPARE(alert.alertInfos().size(), 3);
         const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.hasGeometry(), true);
         QCOMPARE(info.areas().size(), 1);
         const auto area = info.areas()[0];
         QCOMPARE(area.description(), u"澳門特別行政區行政區域圖");
@@ -223,6 +227,7 @@ private Q_SLOTS:
         QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
         QCOMPARE(alert.alertInfos().size(), 2);
         const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.hasGeometry(), false);
         QCOMPARE(info.areas().size(), 3);
         const auto area = info.areas()[0];
         QVERIFY(!area.description().isEmpty());

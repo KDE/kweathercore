@@ -44,6 +44,8 @@ class KWEATHERCORE_EXPORT CAPAlertInfo
     Q_PROPERTY(QString contact READ contact)
     Q_PROPERTY(QString web READ web)
 
+    Q_PROPERTY(bool hasGeometry READ hasGeometry STORED false)
+
 public:
     enum class Category {
         Unknown = 0,
@@ -168,6 +170,12 @@ public:
     const std::vector<CAPArea> &areas() const;
     /** System-specific codes for event typing. */
     const std::vector<CAPNamedValue> &eventCodes() const;
+
+    /** Returns @c true if there is at least one CAPArea with at least one polygon
+     *  or circle geometry (which implies that intersection tests or map display are possible).
+     *  @since 25.12
+     */
+    [[nodiscard]] bool hasGeometry() const;
 
     ///@cond internal
     void setHeadline(const QString &headline);

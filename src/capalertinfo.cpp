@@ -120,6 +120,13 @@ const std::vector<CAPNamedValue> &CAPAlertInfo::eventCodes() const
     return d->eventCodes;
 }
 
+bool CAPAlertInfo::hasGeometry() const
+{
+    return std::ranges::any_of(d->areas, [](const auto &area) {
+        return !area.polygons().empty() || !area.circles().empty();
+    });
+}
+
 void CAPAlertInfo::setHeadline(const QString &headline)
 {
     d->headline = headline;
