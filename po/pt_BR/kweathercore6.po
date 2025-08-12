@@ -1,22 +1,23 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2021.
 # Jorge Santiago <jsantiago12tone@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-15 00:39+0000\n"
-"PO-Revision-Date: 2021-08-17 15:56-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"PO-Revision-Date: 2025-08-11 09:29-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
@@ -44,17 +45,15 @@ msgstr "Chuva forte"
 
 #: kweathercore.cpp:109 kweathercore.cpp:110 kweathercore.cpp:111
 msgid "Thunderstorm with Heavy Rain"
-msgstr ""
+msgstr "Tempestade com chuva forte"
 
 #: kweathercore.cpp:112 kweathercore.cpp:113 kweathercore.cpp:114
-#, fuzzy
-#| msgid "Heavy Rain"
 msgid "Heavy Rain Shower"
-msgstr "Chuva forte"
+msgstr "Pancadas de chuva forte"
 
 #: kweathercore.cpp:115 kweathercore.cpp:116 kweathercore.cpp:117
 msgid "Thunderstorm with Heavy Rain Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de chuva forte"
 
 #: kweathercore.cpp:119 kweathercore.cpp:120 kweathercore.cpp:121
 msgid "Heavy Sleet"
@@ -62,31 +61,27 @@ msgstr "Granizo forte"
 
 #: kweathercore.cpp:122 kweathercore.cpp:123 kweathercore.cpp:124
 msgid "Thunderstorm with Heavy Sleet"
-msgstr ""
+msgstr "Tempestade com granizo forte"
 
 #: kweathercore.cpp:125 kweathercore.cpp:126 kweathercore.cpp:127
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy Sleet Shower"
-msgstr "Granizo forte"
+msgstr "Pancadas de granizo forte"
 
 #: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de granizo forte"
 
 #: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
 msgid "Heavy Snow"
 msgstr "Neve forte"
 
 #: kweathercore.cpp:135 kweathercore.cpp:136 kweathercore.cpp:137
-#, fuzzy
-#| msgid "Heavy Snow"
 msgid "Heavy Snow Shower"
-msgstr "Neve forte"
+msgstr "Pancadas de neve forte"
 
 #: kweathercore.cpp:138 kweathercore.cpp:139 kweathercore.cpp:140
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de neve forte"
 
 #: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
 msgid "Light Rain"
@@ -94,17 +89,15 @@ msgstr "Chuva fraca"
 
 #: kweathercore.cpp:145 kweathercore.cpp:146 kweathercore.cpp:147
 msgid "Thunderstorm with Light Rain"
-msgstr ""
+msgstr "Tempestade com chuva fraca"
 
 #: kweathercore.cpp:148 kweathercore.cpp:149 kweathercore.cpp:150
-#, fuzzy
-#| msgid "Light Rain"
 msgid "Light Rain Shower"
-msgstr "Chuva fraca"
+msgstr "Pancadas de chuva fraca"
 
 #: kweathercore.cpp:151 kweathercore.cpp:152 kweathercore.cpp:153
 msgid "Thunderstorm with Light Rain Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de chuva fraca"
 
 #: kweathercore.cpp:155 kweathercore.cpp:156 kweathercore.cpp:157
 msgid "Light Sleet"
@@ -112,13 +105,11 @@ msgstr "Granizo leve"
 
 #: kweathercore.cpp:158 kweathercore.cpp:159 kweathercore.cpp:160
 msgid "Thunderstorm with Light Sleet"
-msgstr ""
+msgstr "Tempestade com granizo leve"
 
 #: kweathercore.cpp:161 kweathercore.cpp:162 kweathercore.cpp:163
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light Sleet Shower"
-msgstr "Granizo leve"
+msgstr "Pancadas de granizo leve"
 
 #: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
 msgid "Light Snow"
@@ -126,21 +117,19 @@ msgstr "Neve fraca"
 
 #: kweathercore.cpp:168 kweathercore.cpp:169 kweathercore.cpp:170
 msgid "Thunderstorm with Light Snow"
-msgstr ""
+msgstr "Tempestade com neve fraca"
 
 #: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
-#, fuzzy
-#| msgid "Light Snow"
 msgid "Light Snow Shower"
-msgstr "Neve fraca"
+msgstr "Pancadas de neve fraca"
 
 #: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de granizo leve"
 
 #: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
 msgid "Thunderstorm with Light Snow Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de neve fraca"
 
 #: kweathercore.cpp:182 kweathercore.cpp:183 kweathercore.cpp:184
 msgid "Partly Cloudy"
@@ -152,15 +141,15 @@ msgstr "Chuva"
 
 #: kweathercore.cpp:189 kweathercore.cpp:190 kweathercore.cpp:191
 msgid "Thunderstorm with Rain"
-msgstr ""
+msgstr "Tempestade com chuva"
 
 #: kweathercore.cpp:192 kweathercore.cpp:193 kweathercore.cpp:194
 msgid "Rain Shower"
-msgstr ""
+msgstr "Pancadas de chuva"
 
 #: kweathercore.cpp:195 kweathercore.cpp:196 kweathercore.cpp:197
 msgid "Thunderstorm with Rain Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de chuva"
 
 #: kweathercore.cpp:199 kweathercore.cpp:200 kweathercore.cpp:201
 msgid "Sleet"
@@ -168,15 +157,15 @@ msgstr "Granizo"
 
 #: kweathercore.cpp:202 kweathercore.cpp:203 kweathercore.cpp:204
 msgid "Thunderstorm with Sleet"
-msgstr ""
+msgstr "Tempestade com granizo"
 
 #: kweathercore.cpp:205 kweathercore.cpp:206 kweathercore.cpp:207
 msgid "Sleet Shower"
-msgstr ""
+msgstr "Pancadas de granizo"
 
 #: kweathercore.cpp:208 kweathercore.cpp:209 kweathercore.cpp:210
 msgid "Thunderstorm with Sleet Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de granizo"
 
 #: kweathercore.cpp:212 kweathercore.cpp:213 kweathercore.cpp:214
 msgid "Snow"
@@ -184,15 +173,15 @@ msgstr "Neve"
 
 #: kweathercore.cpp:215 kweathercore.cpp:216 kweathercore.cpp:217
 msgid "Thunderstorm with Snow"
-msgstr ""
+msgstr "Tempestade com neve"
 
 #: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
 msgid "Snow Shower"
-msgstr ""
+msgstr "Pancadas de neve"
 
 #: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
 msgid "Thunderstorm with Snow Shower"
-msgstr ""
+msgstr "Tempestade com pancadas de neve"
 
 #: kweathercore_p.h:20
 #, kde-format
