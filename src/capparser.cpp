@@ -10,12 +10,14 @@
 #include "caparea.h"
 #include "capnamedvalue.h"
 #include "capreference.h"
+#include "capresource.h"
 
 #include <KLocalizedString>
 
 #include <QDateTime>
 #include <QDebug>
 #include <QStringTokenizer>
+#include <QUrl>
 
 #include <optional>
 
@@ -93,6 +95,7 @@ enum class InfoTags {
     RESPONSETYPE,
     CONTACT,
     WEB,
+    RESOURCE,
 };
 
 static constexpr const MapEntry<InfoTags> info_tag_map[] = {
@@ -110,6 +113,7 @@ static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"language", InfoTags::LANGUAGE},
     {"onset", InfoTags::ONSET_TIME},
     {"parameter", InfoTags::PARAMETER},
+    {"resource", InfoTags::RESOURCE},
     {"responseType", InfoTags::RESPONSETYPE},
     {"senderName", InfoTags::SENDERNAME},
     {"severity", InfoTags::SEVERITY},
@@ -397,6 +401,9 @@ CAPAlertInfo CAPParser::parseInfo()
                 case InfoTags::EVENTCODE:
                     info.addEventCode(parseNamedValue());
                     break;
+                case InfoTags::RESOURCE:
+                    info.addResource(parseResource());
+                    break;
                 }
             } else {
                 if (m_xml.isStartElement()) {
@@ -477,5 +484,43 @@ std::vector<CAPReference> CAPParser::parseReferences(const QString &refsString)
     }
 
     return refs;
+}
+
+CAPResource CAPParser::parseResource()
+{
+    CAPResource res;
+    const auto elementName = m_xml.name().toString();
+    while (!m_xml.isEndElement() || m_xml.name() != elementName) {
+        m_xml.readNext();
+        if (!m_xml.isStartElement()) {
+            continue;
+        }
+
+        if (m_xml.name() == "resourceDesc"_L1) {
+            res.setDescription(m_xml.readElementText());
+        } else if (m_xml.name() == "mimeType"_L1) {
+            const auto s = m_xml.readElementText();
+            if (const auto idx = s.indexOf(';'_L1); idx > 0) {
+                // we ignore mime type parameters so far
+                res.setMimeTypeName(s.left(idx));
+            } else {
+                res.setMimeTypeName(s);
+            }
+        } else if (m_xml.name() == "size"_L1) {
+            bool ok = false;
+            qsizetype s = m_xml.readElementText().toLongLong(&ok);
+            if (ok) {
+                res.setSize(s);
+            }
+        } else if (m_xml.name() == "uri"_L1) {
+            res.setUri(QUrl(m_xml.readElementText()));
+        } else if (m_xml.name() == "digest"_L1) {
+            res.setDigest(QByteArray::fromHex(m_xml.readElementText().toLatin1()));
+        } else {
+            qDebug() << "unknown resource element:" << m_xml.name();
+        }
+    }
+
+    return res;
 }
 }

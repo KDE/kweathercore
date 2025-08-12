@@ -8,6 +8,7 @@
 #include <KWeatherCore/CAPArea>
 #include <KWeatherCore/CAPParser>
 #include <KWeatherCore/CAPReference>
+#include <KWeatherCore/CAPResource>
 
 #include <QFile>
 #include <QTest>
@@ -233,6 +234,35 @@ private Q_SLOTS:
         QVERIFY(!area.description().isEmpty());
         QCOMPARE(area.geoCodes().size(), 1);
         QCOMPARE(area.polygons().size(), 0);
+    }
+
+    void testResources()
+    {
+        QFile f(QFINDTESTDATA("capdata/431022.cap"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.alertInfos().size(), 1);
+        const auto info = alert.alertInfos()[0];
+
+        QCOMPARE(info.resources().size(), 3);
+        auto res = info.resources()[0];
+        QCOMPARE(res.description(), "Stage 2 Water Restriction Details"_L1);
+        QCOMPARE(res.mimeTypeName(), "application/pdf"_L1);
+        QCOMPARE(res.uri().toString(), "https://alerts.alertable.ca/alerts/attach/21-20250609181149.pdf"_L1);
+        QCOMPARE(res.size(), 370550);
+        QVERIFY(res.hasSize());
+        QCOMPARE(res.digest(), QByteArray::fromHex("d4cff1ae5902b9d1b97164bb07ee20ab59029906"));
+
+        res = info.resources()[1];
+        QCOMPARE(res.mimeTypeName(), "image/png"_L1);
+
+        res = info.resources()[2];
+        QCOMPARE(res.mimeTypeName(), "image/jpeg"_L1);
+        QVERIFY(res.digest().isEmpty());
+        QCOMPARE(res.size(), -1);
+        QVERIFY(!res.hasSize());
     }
 };
 

@@ -10,6 +10,7 @@
 #include <KWeatherCore/CAPAlertMessage>
 #include <KWeatherCore/CAPArea>
 #include <KWeatherCore/CAPReference>
+#include <KWeatherCore/CAPResource>
 
 #include <QQmlEngine>
 
@@ -41,5 +42,6 @@ FOREIGN_VALUE_TYPE(CAPArea, capArea)
 FOREIGN_VALUE_TYPE(CAPCircle, capCircle)
 FOREIGN_VALUE_TYPE(CAPNamedValue, capNamedValue)
 FOREIGN_VALUE_TYPE(CAPReference, capReference)
+FOREIGN_VALUE_TYPE(CAPResource, capResource)
 
 #endif

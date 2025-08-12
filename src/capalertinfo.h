@@ -16,6 +16,8 @@ namespace KWeatherCore
 {
 class CAPAlertInfoPrivate;
 class CAPArea;
+class CAPResource;
+
 /**
  * @short Represents a single CAP alert message info element.
  *
@@ -43,6 +45,7 @@ class KWEATHERCORE_EXPORT CAPAlertInfo
     Q_PROPERTY(ResponseTypes responseTypes READ responseTypes)
     Q_PROPERTY(QString contact READ contact)
     Q_PROPERTY(QString web READ web)
+    Q_PROPERTY(std::vector<CAPResource> resources READ resources)
 
     Q_PROPERTY(bool hasGeometry READ hasGeometry STORED false)
 
@@ -170,6 +173,8 @@ public:
     const std::vector<CAPArea> &areas() const;
     /** System-specific codes for event typing. */
     const std::vector<CAPNamedValue> &eventCodes() const;
+    /** Additional resource files. */
+    const std::vector<CAPResource> &resources() const;
 
     /** Returns @c true if there is at least one CAPArea with at least one polygon
      *  or circle geometry (which implies that intersection tests or map display are possible).
@@ -197,6 +202,7 @@ public:
     void addParameter(CAPNamedValue &&param);
     void addArea(CAPArea &&area);
     void addEventCode(CAPNamedValue &&code);
+    void addResource(CAPResource &&res);
     ///@endcond
 
     CAPAlertInfo &operator=(const CAPAlertInfo &other);

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>CA-ALERTABLE-LIVE-16569</identifier>
+  <sender>csrd.bc@alertable.ca</sender>
+  <sent>2025-06-17T17:36:42-00:00</sent>
+  <status>Actual</status>
+  <msgType>Update</msgType>
+  <source>Alertable - AlertHQ</source>
+  <scope>Public</scope>
+  <code>profile:CAP-CP:0.4</code>
+  <references>csrd.bc@alertable.ca,CA-ALERTABLE-LIVE-16385,2025-06-09T18:26:13-00:00</references>
+  <incidents>4fcd19b9-1889-4ab4-bfc9-c1b462ac35af</incidents>
+  <info>
+    <language>en-CA</language>
+    <category>Other</category>
+    <event>MacArthur-Reedman - Stage 2 Water Restrictions</event>
+    <urgency>Future</urgency>
+    <severity>Minor</severity>
+    <certainty>Possible</certainty>
+    <eventCode>
+      <valueName>profile:CAP-CP:Event:0.4</valueName>
+      <value>other</value>
+    </eventCode>
+    <eventCode>
+      <valueName>layer:PEASI:1.0:InformationCode</valueName>
+      <value>media</value>
+    </eventCode>
+    <senderName>Columbia Shuswap Regional District</senderName>
+    <headline>UPDATE: MacArthur-Reedman Water System at Stage 2 water restrictions. Reduce water use immediately or Stage 3 restrictions will be issued.</headline>
+    <description>UPDATE: Residents who are part of the MacArthur-Reedman Water System in Electoral Area G need to reduce their water use immediately.
+
+The MacArthur-Reedman Water System is on Stage 2 water restrictions until further notice.
+
+Stage 2 water restriction allows sprinkling two days per week for a maximum of three hours per day between 6 PM and 10 AM. 
+
+Water usage of the system remains at an excessive level and critically low levels of water have been recorded in the water reservoir. To ensure there is enough water for public consumption and possible firefighting efforts, a reduction in water use is necessary.
+
+If users do not follow the current Stage 2 restrictions, the CSRD will be required to implement Stage 3 restrictions, which will allow for sprinkling one day per week only.
+
+The CSRD is hopeful that once residents realize the seriousness of the strain on the water system, they will cooperate in reducing their water use. If so, the move to Stage 3 restrictions may not be necessary.</description>
+    <instruction>Follow all Stage 2 watering restrictions. For details, check the CSRD website https://www.csrd.bc.ca/CivicAlerts.aspx?AID=2207
+
+Odd-numbered houses watering is permitted: Tuesday/Saturday between 6 PM and 10 AM
+Even-numbered houses watering is permitted: Wednesday/Sunday between 6 PM and 10 AM</instruction>
+    <web>https://alertable.ca</web>
+    <parameter>
+      <valueName>layer:PEASI:1.0:AlternateDescription</valueName>
+      <value>PHA+VVBEQVRFOiBSZXNpZGVudHMgd2hvIGFyZSBwYXJ0IG9mIHRoZSBNYWNBcnRodXItUmVlZG1hbiBXYXRlciBTeXN0ZW0gaW4gRWxlY3RvcmFsIEFyZWEgRyBuZWVkIHRvIHJlZHVjZSB0aGVpciB3YXRlciB1c2UgaW1tZWRpYXRlbHkuPC9wPjxwPlRoZSBNYWNBcnRodXItUmVlZG1hbiBXYXRlciBTeXN0ZW0gaXMgb24gU3RhZ2UgMiB3YXRlciByZXN0cmljdGlvbnMgdW50aWwgZnVydGhlciBub3RpY2UuPC9wPjxwPlN0YWdlIDIgd2F0ZXIgcmVzdHJpY3Rpb24gYWxsb3dzIHNwcmlua2xpbmcgdHdvIGRheXMgcGVyIHdlZWsgZm9yIGEgbWF4aW11bSBvZiB0aHJlZSBob3VycyBwZXIgZGF5IGJldHdlZW4gNiBQTSBhbmQgMTAgQU0uJm5ic3A7PC9wPjxwPldhdGVyIHVzYWdlIG9mIHRoZSBzeXN0ZW0gcmVtYWlucyBhdCBhbiBleGNlc3NpdmUgbGV2ZWwgYW5kIGNyaXRpY2FsbHkgbG93IGxldmVscyBvZiB3YXRlciBoYXZlIGJlZW4gcmVjb3JkZWQgaW4gdGhlIHdhdGVyIHJlc2Vydm9pci4gVG8gZW5zdXJlIHRoZXJlIGlzIGVub3VnaCB3YXRlciBmb3IgcHVibGljIGNvbnN1bXB0aW9uIGFuZCBwb3NzaWJsZSBmaXJlZmlnaHRpbmcgZWZmb3J0cywgYSByZWR1Y3Rpb24gaW4gd2F0ZXIgdXNlIGlzIG5lY2Vzc2FyeS48L3A+PHA+SWYgdXNlcnMgZG8gbm90IGZvbGxvdyB0aGUgY3VycmVudCBTdGFnZSAyIHJlc3RyaWN0aW9ucywgdGhlIENTUkQgd2lsbCBiZSByZXF1aXJlZCB0byBpbXBsZW1lbnQgU3RhZ2UgMyByZXN0cmljdGlvbnMsIHdoaWNoIHdpbGwgYWxsb3cgZm9yIHNwcmlua2xpbmcgb25lIGRheSBwZXIgd2VlayBvbmx5LjwvcD48cD5UaGUgQ1NSRCBpcyBob3BlZnVsIHRoYXQgb25jZSByZXNpZGVudHMgcmVhbGl6ZSB0aGUgc2VyaW91c25lc3Mgb2YgdGhlIHN0cmFpbiBvbiB0aGUgd2F0ZXIgc3lzdGVtLCB0aGV5IHdpbGwgY29vcGVyYXRlIGluIHJlZHVjaW5nIHRoZWlyIHdhdGVyIHVzZS4gSWYgc28sIHRoZSBtb3ZlIHRvIFN0YWdlIDMgcmVzdHJpY3Rpb25zIG1heSBub3QgYmUgbmVjZXNzYXJ5LiA8L3A+</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:AlternateInstruction</valueName>
+      <value>PHA+Rm9sbG93IGFsbCBTdGFnZSAyIHdhdGVyaW5nIHJlc3RyaWN0aW9ucy4gRm9yIGRldGFpbHMsIGNoZWNrIHRoZSBDU1JEIHdlYnNpdGUgPGEgdGFyZ2V0PSJfYmxhbmsiIGhyZWY9Imh0dHBzOi8vd3d3LmNzcmQuYmMuY2EvQ2l2aWNBbGVydHMuYXNweD9BSUQ9MjIwNyIgYWx0PSJjc3JkLmJjLmNhL1dhdGVyUmVzdHJpY3Rpb25zIj5jc3JkLmJjLmNhL1dhdGVyUmVzdHJpY3Rpb25zPC9hPjwvcD48dWw+PGxpPk9kZC1udW1iZXJlZCBob3VzZXMgd2F0ZXJpbmcgaXMgcGVybWl0dGVkOiBUdWVzZGF5L1NhdHVyZGF5IGJldHdlZW4gNiBQTSBhbmQgMTAgQU08L2xpPjxsaT5FdmVuLW51bWJlcmVkIGhvdXNlcyB3YXRlcmluZyBpcyBwZXJtaXR0ZWQ6IFdlZG5lc2RheS9TdW5kYXkmbmJzcDtiZXR3ZWVuIDYgUE0gYW5kIDEwIEFNPC9saT48L3VsPg==</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:AreaMap</valueName>
+      <value>replace</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:ShortLink</valueName>
+      <value>alertable.co/45KgGnG</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:PhoneText</valueName>
+      <value>MacArthur-Reedman - Stage 2 Water Restrictions Alert Updated - From: Columbia Shuswap Regional District - Affected area: Electoral Area G - UPDATE: Residents who are part of the MacArthur-Reedman Water System in Electoral Area G need to reduce their water use immediately.
+
+The MacArthur-Reedman Water System is on Stage 2 water restrictions until further notice.
+
+Stage 2 water restriction allows sprinkling two days per week for a maximum of three hours per day between 6 PM and 10 AM. 
+
+Water usage of the system remains at an excessive level and critically low levels of water have been recorded in the water reservoir. To ensure there is enough water for public consumption and possible firefighting efforts, a reduction in water use is necessary.
+
+If users do not follow the current Stage 2 restrictions, the CSRD will be required to implement Stage 3 restrictions, which will allow for sprinkling one day per week only. - Follow all Stage 2 watering restrictions. For details, check the CSRD website www.csrd.bc.ca/CivicAlerts.aspx houses watering is permitted: Tuesday/Saturday between 6 PM and 10 AM
+Even-numbered houses watering is permitted: Wednesday/Sunday between 6 PM and 10 AM.</value>
+    </parameter>
+    <resource>
+      <resourceDesc>Stage 2 Water Restriction Details</resourceDesc>
+      <mimeType>application/pdf</mimeType>
+      <size>370550</size>
+      <uri>https://alerts.alertable.ca/alerts/attach/21-20250609181149.pdf</uri>
+      <digest>d4cff1ae5902b9d1b97164bb07ee20ab59029906</digest>
+    </resource>
+    <resource>
+      <resourceDesc>Location Map</resourceDesc>
+      <mimeType>image/png;type=map</mimeType>
+      <size>346717</size>
+      <uri>https://alerts.alertable.ca/alerts/attach/21-20250609182307.png</uri>
+      <digest>b353257e8c975095aaf4bdf62b1a697284963855</digest>
+    </resource>
+    <resource>
+      <resourceDesc>Columbia Shuswap Regional District</resourceDesc>
+      <mimeType>image/jpeg</mimeType>
+      <uri>https://alertable.ca/logos/csrd-logo.jpg</uri>
+    </resource>
+    <area>
+      <areaDesc>Electoral Area G</areaDesc>
+      <polygon>50.838,-119.4698 50.838,-119.4007 50.8344,-119.4007 50.8344,-119.3891 50.8307,-119.3891 50.8308,-119.3661 50.809,-119.366 50.809,-119.3429 50.8162,-119.343 50.8162,-119.3112 50.8235,-119.3112 50.8235,-119.3167 50.8258,-119.3168 50.8285,-119.3201 50.8526,-119.3199 50.8526,-119.3314 50.8745,-119.3315 50.8744,-119.343 50.8672,-119.343 50.8672,-119.3503 50.869,-119.3503 50.8717,-119.3545 50.8817,-119.3545 50.8835,-119.3588 50.889,-119.3588 50.889,-119.3546 50.8962,-119.3546 50.8962,-119.3662 50.9123,-119.3661 50.9124,-119.3928 50.919,-119.3882 50.9215,-119.3842 50.9252,-119.3737 50.9293,-119.3564 50.9354,-119.3274 50.9373,-119.3137 50.9403,-119.2778 50.941,-119.2741 50.952,-119.2586 50.9526,-119.2556 50.9535,-119.2423 50.9531,-119.2336 50.9514,-119.2096 50.9504,-119.1849 50.9503,-119.1734 50.9508,-119.1689 50.9546,-119.1487 50.959,-119.144 50.9657,-119.1354 50.9667,-119.1314 50.9681,-119.1202 50.9703,-119.0979 50.9714,-119.0938 50.9747,-119.0887 50.9839,-119.0764 50.9873,-119.07 50.9899,-119.0606 50.9925,-119.0479 50.9956,-119.0403 50.9998,-119.0328 51.0012,-119.0274 51.0016,-119.0214 51.0003,-119.013 50.9959,-118.9978 50.9949,-118.9922 50.985,-118.9959 50.9724,-118.9997 50.9646,-119.0028 50.9573,-119.0038 50.9474,-119.0095 50.9445,-119.0122 50.9406,-119.0177 50.9299,-119.0397 50.9224,-119.0553 50.9207,-119.0584 50.9179,-119.0594 50.8958,-119.0613 50.8911,-119.0619 50.8682,-119.0663 50.8643,-119.065 50.8579,-119.0616 50.8397,-119.0541 50.8328,-119.0518 50.8271,-119.0521 50.8176,-119.0604 50.8136,-119.0647 50.8054,-119.0788 50.8012,-119.0873 50.8001,-119.0924 50.8025,-119.1107 50.8038,-119.1259 50.8036,-119.1346 50.8024,-119.1416 50.7975,-119.1559 50.7887,-119.1791 50.7835,-119.1888 50.7709,-119.2112 50.7714,-119.2119 50.7534,-119.31 50.7508,-119.3237 50.7507,-119.389 50.7251,-119.389 50.7252,-119.3926 50.7231,-119.4058 50.7258,-119.4092 50.7289,-119.4098 50.7318,-119.412 50.7369,-119.418 50.7389,-119.4182 50.7429,-119.4137 50.7441,-119.4204 50.7457,-119.4235 50.7468,-119.4286 50.7435,-119.4295 50.7425,-119.4324 50.7386,-119.4379 50.7372,-119.4378 50.7341,-119.4436 50.7314,-119.4463 50.7293,-119.4509 50.7293,-119.4587 50.728,-119.4609 50.7209,-119.4668 50.7193,-119.4718 50.7176,-119.4736 50.7153,-119.4801 50.7154,-119.4897 50.7208,-119.4992 50.7232,-119.5006 50.7252,-119.5072 50.7271,-119.5104 50.7301,-119.5182 50.7303,-119.5228 50.7325,-119.5226 50.7374,-119.5172 50.7394,-119.5169 50.7424,-119.5198 50.7443,-119.5268 50.7509,-119.5273 50.7509,-119.4696 50.7852,-119.4697 50.7852,-119.4734 50.7996,-119.4735 50.7997,-119.4698 50.838,-119.4698</polygon>
+      <polygon>50.838,-119.4698 50.8381,-119.516 50.8672,-119.5159 50.8671,-119.5507 50.8817,-119.5505 50.8833,-119.5568 50.8955,-119.5376 50.898,-119.5312 50.9007,-119.513 50.9003,-119.5059 50.897,-119.4957 50.8922,-119.4773 50.8896,-119.4626 50.891,-119.4429 50.8937,-119.4217 50.8975,-119.4019 50.8994,-119.4002 50.9124,-119.3928 50.9123,-119.3661 50.8962,-119.3662 50.8962,-119.3546 50.889,-119.3546 50.889,-119.3588 50.8835,-119.3588 50.8817,-119.3545 50.8717,-119.3545 50.869,-119.3503 50.8672,-119.3503 50.8672,-119.343 50.8744,-119.343 50.8745,-119.3315 50.8526,-119.3314 50.8526,-119.3199 50.8285,-119.3201 50.8258,-119.3168 50.8235,-119.3167 50.8235,-119.3112 50.8162,-119.3112 50.8162,-119.343 50.809,-119.3429 50.809,-119.366 50.8308,-119.3661 50.8307,-119.3891 50.8344,-119.3891 50.8344,-119.4007 50.838,-119.4007 50.838,-119.4698</polygon>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939037</value>
+      </geocode>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939811</value>
+      </geocode>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939803</value>
+      </geocode>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939038</value>
+      </geocode>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939038</value>
+      </geocode>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>5939037</value>
+      </geocode>
+    </area>
+  </info>
+</alert>

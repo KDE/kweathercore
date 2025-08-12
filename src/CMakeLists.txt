@@ -33,6 +33,7 @@ set(kweathercore_LIB_SRCS
     capnamedvalue.cpp
     capreference.cpp
     capreference.h
+    capresource.cpp
     reply.cpp
     reply.h
 )
@@ -78,6 +79,7 @@ ecm_generate_headers(KWeatherCore_CamelCase_HEADERS
     CAPArea
     CAPNamedValue
     CAPReference
+    CAPResource
     Reply
 
     PREFIX KWeatherCore

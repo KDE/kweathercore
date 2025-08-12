@@ -6,6 +6,7 @@
  */
 #include "capalertinfo.h"
 #include "caparea.h"
+#include "capresource.h"
 
 namespace KWeatherCore
 {
@@ -31,6 +32,7 @@ public:
     std::vector<CAPNamedValue> parameters;
     std::vector<CAPArea> areas;
     std::vector<CAPNamedValue> eventCodes;
+    std::vector<CAPResource> resources;
 };
 
 CAPAlertInfo::CAPAlertInfo()
@@ -119,6 +121,10 @@ const std::vector<CAPNamedValue> &CAPAlertInfo::eventCodes() const
 {
     return d->eventCodes;
 }
+const std::vector<CAPResource> &CAPAlertInfo::resources() const
+{
+    return d->resources;
+}
 
 bool CAPAlertInfo::hasGeometry() const
 {
@@ -205,6 +211,11 @@ void CAPAlertInfo::addArea(CAPArea &&area)
 void CAPAlertInfo::addEventCode(CAPNamedValue &&code)
 {
     d->eventCodes.push_back(std::move(code));
+}
+
+void CAPAlertInfo::addResource(CAPResource &&res)
+{
+    d->resources.push_back(std::move(res));
 }
 }
 
