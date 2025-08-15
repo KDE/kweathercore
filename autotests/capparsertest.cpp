@@ -35,6 +35,7 @@ private Q_SLOTS:
         QCOMPARE(alert.note(), QString());
 
         QCOMPARE(alert.alertInfos().size(), 1);
+        QCOMPARE(alert.preferredInfoIndexForLocale(), 0);
         const auto &info = alert.alertInfos()[0];
 
         QCOMPARE(info.event(), QLatin1String("SEVERE THUNDERSTORM"));
@@ -46,6 +47,7 @@ private Q_SLOTS:
         QCOMPARE(info.instruction().isEmpty(), false);
         QCOMPARE(info.sender(), QLatin1String("NATIONAL WEATHER SERVICE SACRAMENTO CA"));
         QCOMPARE(info.language(), QLatin1String("en-US"));
+        QVERIFY(!info.language().isEmpty());
         QCOMPARE(info.categories(), KWeatherCore::CAPAlertInfo::Category::Meteorological);
         QCOMPARE(info.urgency(), KWeatherCore::CAPAlertInfo::Urgency::Immediate);
         QCOMPARE(info.severity(), KWeatherCore::CAPAlertInfo::Severity::Severe);

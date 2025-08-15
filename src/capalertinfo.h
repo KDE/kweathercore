@@ -42,6 +42,7 @@ class KWEATHERCORE_EXPORT CAPAlertInfo
     Q_PROPERTY(QString sender READ sender)
     Q_PROPERTY(QString instruction READ instruction)
     Q_PROPERTY(QString language READ language)
+    Q_PROPERTY(QString languageDisplayName READ languageDisplayName)
     Q_PROPERTY(ResponseTypes responseTypes READ responseTypes)
     Q_PROPERTY(QString contact READ contact)
     Q_PROPERTY(QString web READ web)
@@ -132,6 +133,10 @@ public:
      * @return Natural language identifier per [RFC 3066].
      */
     QString language() const;
+    /** A human-readable representation of language().
+     *  @since 25.12
+     */
+    [[nodiscard]] QString languageDisplayName() const;
     /**
      * The category of the alert message
      * @return default to Unknown, value is bit or-ed

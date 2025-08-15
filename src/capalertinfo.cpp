@@ -8,6 +8,10 @@
 #include "caparea.h"
 #include "capresource.h"
 
+#include <KLocalizedString>
+
+using namespace Qt::Literals;
+
 namespace KWeatherCore
 {
 class CAPAlertInfoPrivate : public QSharedData
@@ -84,6 +88,22 @@ QString CAPAlertInfo::sender() const
 QString CAPAlertInfo::language() const
 {
     return d->language;
+}
+QString CAPAlertInfo::languageDisplayName() const
+{
+    const auto idx = d->language.indexOf('-'_L1);
+    auto lang = QStringView(d->language);
+    QStringView subCode;
+    if (idx >= 2) {
+        lang = lang.left(idx);
+        subCode = lang.mid(idx + 1);
+    }
+    const auto langCode = QLocale::codeToLanguage(lang);
+    const auto countryCode = QLocale::codeToTerritory(subCode);
+    if (!subCode.isEmpty() && countryCode == QLocale::AnyTerritory) {
+        return i18nc("language (country)", "%1 (%2)", QLocale(langCode).nativeLanguageName(), countryCode);
+    }
+    return QLocale(langCode, countryCode).nativeLanguageName();
 }
 CAPAlertInfo::Urgency CAPAlertInfo::urgency() const
 {
