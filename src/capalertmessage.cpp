@@ -7,6 +7,8 @@
 #include "capalertinfo.h"
 #include "capreference.h"
 
+#include <QLocale>
+
 namespace KWeatherCore
 {
 class CAPAlertMessagePrivate : public QSharedData
@@ -64,6 +66,34 @@ QString CAPAlertMessage::note() const
 const std::vector<CAPAlertInfo> &CAPAlertMessage::alertInfos() const
 {
     return d->infoVec;
+}
+std::size_t CAPAlertMessage::preferredInfoIndexForLocale() const
+{
+    for (const auto &uiLang : QLocale().uiLanguages()) {
+        // exact match
+        for (auto it = d->infoVec.begin(); it != d->infoVec.end(); ++it) {
+            if ((*it).language().compare(uiLang, Qt::CaseInsensitive) == 0) {
+                return std::distance(d->infoVec.begin(), it);
+            }
+        }
+        // language-only match
+        for (auto it = d->infoVec.begin(); it != d->infoVec.end(); ++it) {
+            const auto lang = (*it).language();
+            QStringView l1(lang);
+            if (auto idx = l1.indexOf(QLatin1Char('-')); idx > 0) {
+                l1 = l1.left(idx);
+            }
+            QStringView l2(uiLang);
+            if (auto idx = l2.indexOf(QLatin1Char('-')); idx > 0) {
+                l2 = l2.left(idx);
+            }
+            if (l1.compare(l2, Qt::CaseInsensitive) == 0) {
+                return std::distance(d->infoVec.begin(), it);
+            }
+        }
+    }
+
+    return 0;
 }
 const std::vector<CAPReference> &CAPAlertMessage::references() const
 {

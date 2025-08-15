@@ -35,6 +35,8 @@ class KWEATHERCORE_EXPORT CAPAlertMessage
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(MessageType messageType READ messageType)
     Q_PROPERTY(Scope scope READ scope)
+    Q_PROPERTY(std::vector<CAPAlertInfo> alertInfos READ alertInfos)
+    Q_PROPERTY(quint64 preferredInfoIndexForLocale READ preferredInfoIndexForLocale)
 public:
     /** The code denoting the appropriate handling of the alert message. */
     enum class Status {
@@ -109,6 +111,10 @@ public:
      * @see CAPAlertInfo
      */
     const std::vector<CAPAlertInfo> &alertInfos() const;
+    /** Index of the preferred CAPAlertInfo for the current locale in alertInfos.
+     *  @since 25.12
+     */
+    [[nodiscard]] std::size_t preferredInfoIndexForLocale() const;
     /**
      * References to previous CAP alert messages.
      * Relevant for Update, Cancel and Ack message types.
