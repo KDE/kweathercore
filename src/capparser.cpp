@@ -95,11 +95,13 @@ enum class InfoTags {
     RESPONSETYPE,
     CONTACT,
     WEB,
+    AUDIENCE,
     RESOURCE,
 };
 
 static constexpr const MapEntry<InfoTags> info_tag_map[] = {
     {"area", InfoTags::AREA},
+    {"audience", InfoTags::AUDIENCE},
     {"category", InfoTags::CATEGORY},
     {"certainty", InfoTags::CERTAINITY},
     {"contact", InfoTags::CONTACT},
@@ -397,6 +399,9 @@ CAPAlertInfo CAPParser::parseInfo()
                     break;
                 case InfoTags::WEB:
                     info.setWeb(m_xml.readElementText());
+                    break;
+                case InfoTags::AUDIENCE:
+                    info.setAudience(m_xml.readElementText());
                     break;
                 case InfoTags::EVENTCODE:
                     info.addEventCode(parseNamedValue());

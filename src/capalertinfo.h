@@ -46,6 +46,7 @@ class KWEATHERCORE_EXPORT CAPAlertInfo
     Q_PROPERTY(ResponseTypes responseTypes READ responseTypes)
     Q_PROPERTY(QString contact READ contact)
     Q_PROPERTY(QString web READ web)
+    Q_PROPERTY(QString audience READ audience)
     Q_PROPERTY(std::vector<CAPResource> resources READ resources)
 
     Q_PROPERTY(bool hasGeometry READ hasGeometry STORED false)
@@ -170,6 +171,11 @@ public:
      */
     QString web() const;
     /**
+     * Intended audience of the alert message.
+     * @since 25.12
+     */
+    [[nodiscard]] QString audience() const;
+    /**
      * The Parameter of the alert message
      * refer to CAP protocol v1.2
      */
@@ -204,6 +210,7 @@ public:
     void addResponseType(ResponseType responseType);
     void setContact(const QString &contact);
     void setWeb(const QString &web);
+    void setAudience(const QString &audience);
     void addParameter(CAPNamedValue &&param);
     void addArea(CAPArea &&area);
     void addEventCode(CAPNamedValue &&code);

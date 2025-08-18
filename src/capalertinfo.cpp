@@ -33,6 +33,7 @@ public:
     CAPAlertInfo::ResponseTypes responseTypes = CAPAlertInfo::ResponseType::UnknownResponseType;
     QString contact;
     QString web;
+    QString audience;
     std::vector<CAPNamedValue> parameters;
     std::vector<CAPArea> areas;
     std::vector<CAPNamedValue> eventCodes;
@@ -129,6 +130,10 @@ QString CAPAlertInfo::web() const
 {
     return d->web;
 }
+QString CAPAlertInfo::audience() const
+{
+    return d->audience;
+}
 const std::vector<CAPNamedValue> &CAPAlertInfo::parameters() const
 {
     return d->parameters;
@@ -217,6 +222,10 @@ void CAPAlertInfo::setContact(const QString &contact)
 void CAPAlertInfo::setWeb(const QString &web)
 {
     d->web = web;
+}
+void CAPAlertInfo::setAudience(const QString &audience)
+{
+    d->audience = audience;
 }
 void CAPAlertInfo::addParameter(CAPNamedValue &&param)
 {

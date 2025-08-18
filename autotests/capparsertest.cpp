@@ -54,6 +54,7 @@ private Q_SLOTS:
         QCOMPARE(info.certainty(), KWeatherCore::CAPAlertInfo::Certainty::Observed);
         QCOMPARE(info.responseTypes(), KWeatherCore::CAPAlertInfo::ResponseType::Shelter);
         QCOMPARE(info.contact(), QLatin1String("BARUFFALDI/JUSKIE"));
+        QCOMPARE(info.audience(), QString());
 
         QCOMPARE(info.hasGeometry(), true);
         QCOMPARE(info.areas().size(), 1);
@@ -265,6 +266,19 @@ private Q_SLOTS:
         QVERIFY(res.digest().isEmpty());
         QCOMPARE(res.size(), -1);
         QVERIFY(!res.hasSize());
+    }
+
+    void testAudience()
+    {
+        QFile f(QFINDTESTDATA("capdata/rs-2.49.0.0.688.0.20250817210003.457535.xml"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        auto alert = parser.parse();
+
+        QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
+        QCOMPARE(alert.alertInfos().size(), 3);
+        const auto info = alert.alertInfos()[0];
+        QCOMPARE(info.audience(), "Private"_L1);
     }
 };
 
