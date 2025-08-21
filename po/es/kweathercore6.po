@@ -1,15 +1,15 @@
-# Spanish translations for libkweather5.po package.
-# Copyright (C) 2020 This file is copyright:
+# Spanish translations for kweathercore6.po package.
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
-#
 # Automatically generated, 2020.
-# SPDX-FileCopyrightText: 2020, 2021, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2020, 2021, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: libkweather5\n"
+"Project-Id-Version: kweathercore6\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-20 00:42+0000\n"
-"PO-Revision-Date: 2023-11-02 17:45+0100\n"
+"PO-Revision-Date: 2025-08-20 12:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: capalertinfo.cpp:105
 #, kde-format
 msgctxt "language (country)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
@@ -193,60 +193,3 @@ msgstr "Tormenta con nevadas"
 #, kde-format
 msgid "Unknown"
 msgstr "Desconocido"
-
-#~ msgid "Immediate"
-#~ msgstr "Inmediato"
-
-#~ msgid "Expected"
-#~ msgstr "Esperado"
-
-#~ msgid "Future"
-#~ msgstr "Futuro"
-
-#~ msgid "Past"
-#~ msgstr "Pasado"
-
-#~ msgid "Extreme"
-#~ msgstr "Extremo"
-
-#~ msgid "Severe"
-#~ msgstr "Severo"
-
-#~ msgid "Moderate"
-#~ msgstr "Moderado"
-
-#~ msgid "Minor"
-#~ msgstr "Menor"
-
-#~ msgid "Observed"
-#~ msgstr "Observado"
-
-#~ msgid "Likely"
-#~ msgstr "Probable"
-
-#~ msgid "Possible"
-#~ msgstr "Posible"
-
-#~ msgid "Unlikely"
-#~ msgstr "Poco probable"
-
-#~ msgid "Storm"
-#~ msgstr "Tormenta"
-
-#~ msgid "New Moon"
-#~ msgstr "Luna nueva"
-
-#~ msgid "Waxing Crescent"
-#~ msgstr "Luna creciente"
-
-#~ msgid "Waxing Gibbous"
-#~ msgstr "Creciente gibosa"
-
-#~ msgid "Full Moon"
-#~ msgstr "Luna llena"
-
-#~ msgid "Waning Gibbous"
-#~ msgstr "Menguante gibosa"
-
-#~ msgid "Waning Crescent"
-#~ msgstr "Luna menguante"
