@@ -21,7 +21,7 @@ msgstr ""
 #, kde-format
 msgctxt "language (country)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
