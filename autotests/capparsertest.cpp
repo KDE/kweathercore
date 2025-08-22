@@ -277,8 +277,17 @@ private Q_SLOTS:
 
         QCOMPARE(alert.status(), KWeatherCore::CAPAlertMessage::Status::Actual);
         QCOMPARE(alert.alertInfos().size(), 3);
-        const auto info = alert.alertInfos()[0];
+        auto info = alert.alertInfos()[0];
         QCOMPARE(info.audience(), "Private"_L1);
+
+        QCOMPARE(info.language(), "en-GB"_L1);
+        QCOMPARE(info.languageDisplayName(), "British English"_L1);
+        info = alert.alertInfos()[1];
+        QCOMPARE(info.language(), "sr"_L1);
+        QCOMPARE(info.languageDisplayName(), u"српски");
+        info = alert.alertInfos()[2];
+        QCOMPARE(info.language(), "sr-Latn"_L1);
+        QCOMPARE(info.languageDisplayName(), u"srpski");
     }
 };
 

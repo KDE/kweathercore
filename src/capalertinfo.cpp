@@ -96,15 +96,18 @@ QString CAPAlertInfo::languageDisplayName() const
     auto lang = QStringView(d->language);
     QStringView subCode;
     if (idx >= 2) {
-        lang = lang.left(idx);
         subCode = lang.mid(idx + 1);
+        lang = lang.left(idx);
     }
+
     const auto langCode = QLocale::codeToLanguage(lang);
     const auto countryCode = QLocale::codeToTerritory(subCode);
-    if (!subCode.isEmpty() && countryCode == QLocale::AnyTerritory) {
-        return i18nc("language (country)", "%1 (%2)", QLocale(langCode).nativeLanguageName(), countryCode);
+    const auto scriptCode = QLocale::codeToScript(subCode);
+
+    if (!subCode.isEmpty() && countryCode == QLocale::AnyTerritory && scriptCode == QLocale::AnyScript) {
+        return i18nc("language (country)", "%1 (%2)", QLocale(langCode).nativeLanguageName(), subCode.toString());
     }
-    return QLocale(langCode, countryCode).nativeLanguageName();
+    return QLocale(langCode, scriptCode, countryCode).nativeLanguageName();
 }
 CAPAlertInfo::Urgency CAPAlertInfo::urgency() const
 {
