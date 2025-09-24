@@ -20,6 +20,8 @@ public:
     CAPAlertMessage::Status status = CAPAlertMessage::Status::UnknownStatus;
     CAPAlertMessage::MessageType msgType = CAPAlertMessage::MessageType::UnknownMessageType;
     CAPAlertMessage::Scope scope = CAPAlertMessage::Scope::UnknownScope;
+    QStringList addresses;
+    QStringList codes;
     QString note;
     std::vector<CAPAlertInfo> infoVec;
     std::vector<CAPReference> references;
@@ -58,6 +60,14 @@ CAPAlertMessage::MessageType CAPAlertMessage::messageType() const
 CAPAlertMessage::Scope CAPAlertMessage::scope() const
 {
     return d->scope;
+}
+QStringList CAPAlertMessage::addresses() const
+{
+    return d->addresses;
+}
+QStringList CAPAlertMessage::codes() const
+{
+    return d->codes;
 }
 QString CAPAlertMessage::note() const
 {
@@ -126,6 +136,14 @@ void CAPAlertMessage::setMessageType(MessageType msgType)
 void CAPAlertMessage::setScope(Scope scope)
 {
     d->scope = scope;
+}
+void CAPAlertMessage::setAddresses(const QStringList &addresses)
+{
+    d->addresses = addresses;
+}
+void CAPAlertMessage::addCode(const QString &code)
+{
+    d->codes.push_back(code);
 }
 void CAPAlertMessage::setNote(const QString &note)
 {

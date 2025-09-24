@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>CA-ALERTABLE-LIVE-19070</identifier>
+  <sender>redacted.ca@alertable.ca</sender>
+  <sent>2025-09-23T21:17:00-00:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <source>Alertable - AlertHQ</source>
+  <scope>Private</scope>
+  <addresses>CA1-P-136</addresses>
+  <code>profile:CAP-CP:0.4</code>
+  <incidents>460db9d2-5996-4ab4-a3af-9ee9f35f1a2a</incidents>
+  <info>
+    <language>en-CA</language>
+    <category>Safety</category>
+    <event>EMOC Activation [...] Incident</event>
+    <urgency>Immediate</urgency>
+    <severity>Extreme</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-CP:Event:0.4</valueName>
+      <value>product</value>
+    </eventCode>
+    <senderName>[...] Communications Inc.</senderName>
+    <headline>[...]: EMOC Activation Alert: [...]</headline>
+    <description>Hello EMOC members and participants, [...]</description>
+    <instruction>The EMOC will convene [...]</instruction>
+    <web>https://alertable.ca</web>
+    <parameter>
+      <valueName>layer:SOREM:2.0:WirelessImmediate</valueName>
+      <value>no</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:InternalGroupNames</valueName>
+      <value>EMOC</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:PEASI:1.0:AreaMap</valueName>
+      <value>hide</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:NetAlerts:NAS:DeliveryFilter</valueName>
+      <value>AlertSocial</value>
+    </parameter>
+    <parameter>
+      <valueName>layer:SOREM:1.0:Broadcast_Immediately</valueName>
+      <value>Yes</value>
+    </parameter>
+    <area>
+      <areaDesc>Group: EMOC</areaDesc>
+      <polygon>74.503428,-141.20553 60.272043,-141.01664 58.870093,-137.47904 59.377504,-135.12797 58.355131,-133.56791 57.266649,-132.55717 56.619453,-131.70023 55.850116,-130.14018 54.749442,-130.62357 54.187599,-133.45805 53.185718,-132.93070 51.903026,-131.17289 50.134055,-128.09672 48.490497,-124.78434 48.216719,-123.54289 48.282560,-123.21879 48.410341,-123.11991 48.820706,-122.99357 49.001220,-123.30668 49.001220,-122.68046 49.001220,-95.148721 48.443147,-92.528481 47.945149,-89.688515 48.304488,-88.370156 46.882073,-84.849038 46.463694,-84.563393 46.467478,-84.129433 46.072571,-83.964638 45.328310,-82.519936 43.595617,-82.129922 42.983862,-82.426553 42.584744,-82.607827 42.345662,-82.964883 42.288797,-83.129678 41.999618,-83.146157 41.754213,-82.904458 41.668098,-82.388100 42.191194,-81.234536 42.859163,-78.877969 43.460203,-79.158120 43.635387,-76.785073 44.570227,-75.680947 45.006863,-74.708657 45.010746,-71.500649 45.724692,-70.391030 47.423727,-69.231972 47.338178,-68.303628 47.043277,-67.825722 45.851098,-67.814736 44.687507,-66.979775 43.204482,-65.754800 46.833059,-52.081411 49.083863,-52.279165 53.709151,-55.674844 60.610640,-64.232290 66.730847,-60.772500 74.409219,-73.178182 74.503428,-141.20553</polygon>
+      <geocode>
+        <valueName>profile:CAP-CP:Location:0.4</valueName>
+        <value>01</value>
+      </geocode>
+    </area>
+  </info>
+</alert>

@@ -35,6 +35,8 @@ class KWEATHERCORE_EXPORT CAPAlertMessage
     Q_PROPERTY(Status status READ status)
     Q_PROPERTY(MessageType messageType READ messageType)
     Q_PROPERTY(Scope scope READ scope)
+    Q_PROPERTY(QStringList addresses READ addresses)
+    Q_PROPERTY(QStringList codes READ codes)
     Q_PROPERTY(std::vector<CAPAlertInfo> alertInfos READ alertInfos)
     Q_PROPERTY(quint64 preferredInfoIndexForLocale READ preferredInfoIndexForLocale)
 public:
@@ -102,6 +104,16 @@ public:
      */
     Scope scope() const;
     /**
+     *  Addressees of the alert, for messages with Private scope.
+     *  @since 25.12
+     */
+    [[nodiscard]] QStringList addresses() const;
+    /**
+     * Feed-defined message codes.
+     * @since 25.12
+     */
+    [[nodiscard]] QStringList codes() const;
+    /**
      * The text describing the purpose or significance of the alert message.
      * Relevant for Exercise and Error status.
      */
@@ -134,6 +146,8 @@ public:
     void setStatus(Status status);
     void setMessageType(MessageType msgType);
     void setScope(Scope scope);
+    void setAddresses(const QStringList &addresses);
+    void addCode(const QString &code);
     void setNote(const QString &note);
     void addInfo(CAPAlertInfo &&alertInfo);
     void setReferences(std::vector<CAPReference> &&references);

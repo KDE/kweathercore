@@ -60,10 +60,25 @@ static constexpr const MapEntry<CAPAlertInfo::Category> category_map[] = {
     {"Transport", CAPAlertInfo::Category::Transport},
 };
 
-enum class Tags { ALERT, IDENTIFIER, SENDER, SENT_TIME, STATUS, MSG_TYPE, SCOPE, NOTE, INFO, REFERENCES };
+enum class Tags {
+    ADDRESSES,
+    ALERT,
+    CODE,
+    IDENTIFIER,
+    SENDER,
+    SENT_TIME,
+    STATUS,
+    MSG_TYPE,
+    SCOPE,
+    NOTE,
+    INFO,
+    REFERENCES
+};
 
 static constexpr const MapEntry<Tags> tag_map[] = {
+    {"addresses", Tags::ADDRESSES},
     {"alert", Tags::ALERT},
+    {"code", Tags::CODE},
     {"identifier", Tags::IDENTIFIER},
     {"info", Tags::INFO},
     {"msgType", Tags::MSG_TYPE},
@@ -217,6 +232,37 @@ static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
     return res;
 }
 
+[[nodiscard]] static QStringList parseAddresses(const QString &str)
+{
+    QStringList l;
+    bool inQuote = false;
+    qsizetype beginIdx = -1;
+    for (qsizetype i = 0; i < str.size(); ++i) {
+        if (str[i] == '"'_L1) {
+            if (inQuote) {
+                l.push_back(str.mid(beginIdx, i - beginIdx));
+                beginIdx = -1;
+            } else {
+                beginIdx = i + 1;
+            }
+            inQuote = !inQuote;
+        } else if (str[i].isSpace() && !inQuote) {
+            if (beginIdx >= 0) {
+                l.push_back(str.mid(beginIdx, i - beginIdx));
+                beginIdx = -1;
+            }
+        } else if (!inQuote) {
+            if (beginIdx < 0) {
+                beginIdx = i;
+            }
+        }
+    }
+    if (beginIdx >= 0) {
+        l.push_back(str.mid(beginIdx, str.size() - beginIdx));
+    }
+    return l;
+}
+
 CAPParser::CAPParser(const QByteArray &data)
     : m_xml(data)
 {
@@ -293,6 +339,12 @@ CAPAlertMessage CAPParser::parse()
         }
         case Tags::REFERENCES:
             entry.setReferences(parseReferences(m_xml.readElementText()));
+            break;
+        case Tags::ADDRESSES:
+            entry.setAddresses(parseAddresses(m_xml.readElementText()));
+            break;
+        case Tags::CODE:
+            entry.addCode(m_xml.readElementText());
             break;
         default:
             m_xml.skipCurrentElement();
@@ -412,7 +464,7 @@ CAPAlertInfo CAPParser::parseInfo()
                 }
             } else {
                 if (m_xml.isStartElement()) {
-                    qWarning() << "unknown element: " << m_xml.name();
+                    qWarning() << "unknown element: " << m_xml.name() << m_xml.lineNumber() << m_xml.columnNumber();
                 }
             }
         }

@@ -289,6 +289,21 @@ private Q_SLOTS:
         QCOMPARE(info.language(), "sr-Latn"_L1);
         QCOMPARE(info.languageDisplayName(), u"srpski");
     }
+
+    void testScope()
+    {
+        QFile f(QFINDTESTDATA("capdata/454888.cap"));
+        QVERIFY(f.open(QFile::ReadOnly));
+        KWeatherCore::CAPParser parser(f.readAll());
+        const auto alert = parser.parse();
+
+        QCOMPARE(alert.alertInfos().size(), 1);
+        QCOMPARE(alert.scope(), KWeatherCore::CAPAlertMessage::Scope::Private);
+        QCOMPARE(alert.addresses().size(), 1);
+        QCOMPARE(alert.addresses()[0], "CA1-P-136"_L1);
+        QCOMPARE(alert.codes().size(), 1);
+        QCOMPARE(alert.codes()[0], "profile:CAP-CP:0.4"_L1);
+    }
 };
 
 QTEST_GUILESS_MAIN(CapParserTest)
