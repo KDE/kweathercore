@@ -11,7 +11,7 @@ class PendingWeatherForecast;
 class PendingWeatherForecastPrivate : public ReplyPrivate
 {
 public:
-    PendingWeatherForecastPrivate(PendingWeatherForecast *qq);
+    explicit PendingWeatherForecastPrivate(PendingWeatherForecast *qq);
 
     void parseWeatherForecastResults(QNetworkReply *ret);
     void parseTimezoneResult(const QString &timezone);

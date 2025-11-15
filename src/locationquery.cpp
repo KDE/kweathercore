@@ -17,7 +17,7 @@ namespace KWeatherCore
 class LocationQueryPrivate
 {
 public:
-    LocationQueryPrivate(LocationQuery *parent);
+    explicit LocationQueryPrivate(LocationQuery *parent);
     void positionUpdated(const QGeoPositionInfo &update);
     QNetworkAccessManager *networkAccessManager();
 
