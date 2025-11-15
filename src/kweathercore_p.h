@@ -19,7 +19,7 @@ namespace KWeatherCore
 struct ResolvedWeatherDesc {
     QString icon = QStringLiteral("weather-none-available"), desc = i18n("Unknown");
     ResolvedWeatherDesc() = default;
-    ResolvedWeatherDesc(QString icon, QString desc)
+    ResolvedWeatherDesc(const QString &icon, const QString &desc)
     {
         this->icon = icon;
         this->desc = desc;
