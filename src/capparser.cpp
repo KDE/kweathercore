@@ -266,8 +266,8 @@ static constexpr const MapEntry<CAPAlertInfo::Certainty> certainty_map[] = {
 CAPParser::CAPParser(const QByteArray &data)
     : m_xml(data)
 {
-    bool flag = false;
     if (!data.isEmpty()) {
+        bool flag = false;
         while (m_xml.readNextStartElement()) {
             if (m_xml.name() == QStringLiteral("alert")) {
                 flag = true;
