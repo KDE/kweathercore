@@ -34,11 +34,11 @@ class LocationQueryPrivate;
  * LocationQuery m_locationSource;
  *
  * // find places called "Oslo"
- * auto reply = m_locationSource.query("Oslo")
- * connect(reply, &LocationQueryReply::finished, []()
+ * auto reply = m_locationSource.query("Oslo");
+ * connect(reply, &LocationQueryReply::finished, [reply]()
  *          {
  *              reply->deleteLater();
- *              if (reply != LocationQueryReply::NoError) {
+ *              if (reply->error() != LocationQueryReply::NoError) {
  *                  qDebug() << "can't find this place";
  *                  return;
  *              }
