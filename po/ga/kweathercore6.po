@@ -1,27 +1,28 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2026 Charlotte <altronic25@protonmail.com>
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:40+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2026-01-10 01:23+0000\n"
+"Last-Translator: Charlotte <altronic25@protonmail.com>\n"
+"Language-Team: Irish\n"
+"Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
+"3 : 4\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: capalertinfo.cpp:108
 #, kde-format
 msgctxt "language (country)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
@@ -89,7 +90,7 @@ msgstr ""
 
 #: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
 msgid "Light Rain"
-msgstr ""
+msgstr "Báisteach Éadrom"
 
 #: kweathercore.cpp:145 kweathercore.cpp:146 kweathercore.cpp:147
 msgid "Thunderstorm with Light Rain"
@@ -117,7 +118,7 @@ msgstr ""
 
 #: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
 msgid "Light Snow"
-msgstr ""
+msgstr "Sneachta Éadrom"
 
 #: kweathercore.cpp:168 kweathercore.cpp:169 kweathercore.cpp:170
 msgid "Thunderstorm with Light Snow"
@@ -141,7 +142,7 @@ msgstr ""
 
 #: kweathercore.cpp:186 kweathercore.cpp:187 kweathercore.cpp:188
 msgid "Rain"
-msgstr ""
+msgstr "Báisteach"
 
 #: kweathercore.cpp:189 kweathercore.cpp:190 kweathercore.cpp:191
 msgid "Thunderstorm with Rain"
@@ -149,7 +150,7 @@ msgstr ""
 
 #: kweathercore.cpp:192 kweathercore.cpp:193 kweathercore.cpp:194
 msgid "Rain Shower"
-msgstr ""
+msgstr "Cith Báistí"
 
 #: kweathercore.cpp:195 kweathercore.cpp:196 kweathercore.cpp:197
 msgid "Thunderstorm with Rain Shower"
@@ -173,7 +174,7 @@ msgstr ""
 
 #: kweathercore.cpp:212 kweathercore.cpp:213 kweathercore.cpp:214
 msgid "Snow"
-msgstr ""
+msgstr "Sneachta"
 
 #: kweathercore.cpp:215 kweathercore.cpp:216 kweathercore.cpp:217
 msgid "Thunderstorm with Snow"
@@ -181,7 +182,7 @@ msgstr ""
 
 #: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
 msgid "Snow Shower"
-msgstr ""
+msgstr "Cith Sneachta"
 
 #: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
 msgid "Thunderstorm with Snow Shower"
@@ -190,4 +191,4 @@ msgstr ""
 #: kweathercore_p.h:20
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Anaithnid"
