@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Viorel-Catalin Rapiteanu <rapiteanu.catalin@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -29,6 +30,7 @@ public:
     double fog = 0; // %
     double uvIndex = 0; // 0-1
     double precipitationAmount = 0; // mm
+    double dewPointTemperature = 0; // celsius
 };
 HourlyWeatherForecast::HourlyWeatherForecast(const QDateTime &date)
     : d(new HourlyWeatherForecastPrivate)
@@ -62,6 +64,7 @@ QJsonObject HourlyWeatherForecast::toJson() const
     obj[QLatin1String("fog")] = fog();
     obj[QLatin1String("uvIndex")] = uvIndex();
     obj[QLatin1String("precipitationAmount")] = precipitationAmount();
+    obj[QLatin1String("dewPointTemperature")] = dewPointTemperature();
     return obj;
 }
 HourlyWeatherForecast HourlyWeatherForecast::fromJson(const QJsonObject &obj)
@@ -78,6 +81,7 @@ HourlyWeatherForecast HourlyWeatherForecast::fromJson(const QJsonObject &obj)
     ret.setFog(obj[QLatin1String("fog")].toDouble());
     ret.setUvIndex(obj[QLatin1String("uvIndex")].toDouble());
     ret.setPrecipitationAmount(obj[QLatin1String("precipitationAmount")].toDouble());
+    ret.setDewPointTemperature(obj[QLatin1String("dewPointTemperature")].toDouble());
     return ret;
 }
 const QDateTime &HourlyWeatherForecast::date() const
@@ -211,6 +215,14 @@ double HourlyWeatherForecast::precipitationAmount() const
 void HourlyWeatherForecast::setPrecipitationAmount(double precipitationAmount)
 {
     d->precipitationAmount = precipitationAmount;
+}
+double HourlyWeatherForecast::dewPointTemperature() const
+{
+    return d->dewPointTemperature;
+}
+void HourlyWeatherForecast::setDewPointTemperature(double dewPointTemperature)
+{
+    d->dewPointTemperature = dewPointTemperature;
 }
 bool HourlyWeatherForecast::operator==(const KWeatherCore::HourlyWeatherForecast &rhs) const
 {

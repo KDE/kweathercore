@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Viorel-Catalin Rapiteanu <rapiteanu.catalin@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -46,6 +47,7 @@ class KWEATHERCORE_EXPORT HourlyWeatherForecast
     Q_PROPERTY(qreal fog READ fog)
     Q_PROPERTY(qreal uvIndex READ uvIndex)
     Q_PROPERTY(qreal precipitationAmount READ precipitationAmount)
+    Q_PROPERTY(qreal dewPointTemperature READ dewPointTemperature)
 public:
     /**
      * HourlyWeatherForecast construct a null forecast
@@ -179,6 +181,16 @@ public:
      * set precipitation in mm
      */
     void setPrecipitationAmount(double precipitationAmount);
+    /**
+     * dew point temperature in celsius
+     * @since 26.08
+     */
+    double dewPointTemperature() const;
+    /**
+     * set dew point temperature in celsius
+     * @since 26.08
+     */
+    void setDewPointTemperature(double dewPointTemperature);
     /**
      * @return true if date, weather icon and description is same
      */

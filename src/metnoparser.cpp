@@ -1,7 +1,7 @@
 /*
- * SPDX-FileCopyrightText: 2026 Viorel-Catalin Rapiteanu <rapiteanu.catalin@gmail.com>
  * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Viorel-Catalin Rapiteanu <rapiteanu.catalin@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -73,6 +73,7 @@ void MetNoParser::parseOneElement(const QJsonObject &obj)
     hourForecast.setFog(instant[QLatin1String("fog_area_fraction")].toDouble());
     hourForecast.setUvIndex(instant[QLatin1String("ultraviolet_index_clear_sky")].toDouble());
     hourForecast.setPrecipitationAmount(precipitationAmount);
+    hourForecast.setDewPointTemperature(instant[QLatin1String("dew_point_temperature")].toDouble());
     hourForecast.setSymbolCode(symbolCode);
     hourlyForecast.push_back(std::move(hourForecast));
 }

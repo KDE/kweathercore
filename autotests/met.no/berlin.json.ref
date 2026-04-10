@@ -5,6 +5,7 @@
             "hourly": [
                 {
                     "date": "2022-08-02T18:00:00+02:00",
+                    "dewPointTemperature": 7.4,
                     "fog": 0,
                     "humidity": 31.8,
                     "neutralWeatherIcon": "weather-clouds",
@@ -19,6 +20,7 @@
                 },
                 {
                     "date": "2022-08-02T19:00:00+02:00",
+                    "dewPointTemperature": 8.3,
                     "fog": 0,
                     "humidity": 34.6,
                     "neutralWeatherIcon": "weather-clouds",
@@ -33,6 +35,7 @@
                 },
                 {
                     "date": "2022-08-02T20:00:00+02:00",
+                    "dewPointTemperature": 9.7,
                     "fog": 0,
                     "humidity": 40.8,
                     "neutralWeatherIcon": "weather-clouds",
@@ -47,6 +50,7 @@
                 },
                 {
                     "date": "2022-08-02T21:00:00+02:00",
+                    "dewPointTemperature": 10.7,
                     "fog": 0,
                     "humidity": 48.8,
                     "neutralWeatherIcon": "weather-clouds",
@@ -61,6 +65,7 @@
                 },
                 {
                     "date": "2022-08-02T22:00:00+02:00",
+                    "dewPointTemperature": 11.3,
                     "fog": 0,
                     "humidity": 56.9,
                     "neutralWeatherIcon": "weather-clouds",
@@ -75,6 +80,7 @@
                 },
                 {
                     "date": "2022-08-02T23:00:00+02:00",
+                    "dewPointTemperature": 10.9,
                     "fog": 0,
                     "humidity": 59.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -102,6 +108,7 @@
             "hourly": [
                 {
                     "date": "2022-08-03T00:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 62.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -116,6 +123,7 @@
                 },
                 {
                     "date": "2022-08-03T01:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 65.7,
                     "neutralWeatherIcon": "weather-clouds",
@@ -130,6 +138,7 @@
                 },
                 {
                     "date": "2022-08-03T02:00:00+02:00",
+                    "dewPointTemperature": 11.5,
                     "fog": 0,
                     "humidity": 69.2,
                     "neutralWeatherIcon": "weather-clouds",
@@ -144,6 +153,7 @@
                 },
                 {
                     "date": "2022-08-03T03:00:00+02:00",
+                    "dewPointTemperature": 11.2,
                     "fog": 0,
                     "humidity": 68.4,
                     "neutralWeatherIcon": "weather-clouds",
@@ -158,6 +168,7 @@
                 },
                 {
                     "date": "2022-08-03T04:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 69.2,
                     "neutralWeatherIcon": "weather-clouds",
@@ -172,6 +183,7 @@
                 },
                 {
                     "date": "2022-08-03T05:00:00+02:00",
+                    "dewPointTemperature": 11.0,
                     "fog": 0,
                     "humidity": 69.9,
                     "neutralWeatherIcon": "weather-clouds",
@@ -186,6 +198,7 @@
                 },
                 {
                     "date": "2022-08-03T06:00:00+02:00",
+                    "dewPointTemperature": 11.6,
                     "fog": 0,
                     "humidity": 72.8,
                     "neutralWeatherIcon": "weather-clouds",
@@ -200,6 +213,7 @@
                 },
                 {
                     "date": "2022-08-03T07:00:00+02:00",
+                    "dewPointTemperature": 12.1,
                     "fog": 0,
                     "humidity": 68,
                     "neutralWeatherIcon": "weather-clouds",
@@ -214,6 +228,7 @@
                 },
                 {
                     "date": "2022-08-03T08:00:00+02:00",
+                    "dewPointTemperature": 12.3,
                     "fog": 0,
                     "humidity": 58.6,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -228,6 +243,7 @@
                 },
                 {
                     "date": "2022-08-03T09:00:00+02:00",
+                    "dewPointTemperature": 12.1,
                     "fog": 0,
                     "humidity": 47.2,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -242,6 +258,7 @@
                 },
                 {
                     "date": "2022-08-03T10:00:00+02:00",
+                    "dewPointTemperature": 11.9,
                     "fog": 0,
                     "humidity": 41.1,
                     "neutralWeatherIcon": "weather-clouds",
@@ -256,6 +273,7 @@
                 },
                 {
                     "date": "2022-08-03T11:00:00+02:00",
+                    "dewPointTemperature": 12.1,
                     "fog": 0,
                     "humidity": 37.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -270,6 +288,7 @@
                 },
                 {
                     "date": "2022-08-03T12:00:00+02:00",
+                    "dewPointTemperature": 12.2,
                     "fog": 0,
                     "humidity": 34.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -284,6 +303,7 @@
                 },
                 {
                     "date": "2022-08-03T13:00:00+02:00",
+                    "dewPointTemperature": 12.5,
                     "fog": 0,
                     "humidity": 33.1,
                     "neutralWeatherIcon": "weather-clouds",
@@ -298,6 +318,7 @@
                 },
                 {
                     "date": "2022-08-03T14:00:00+02:00",
+                    "dewPointTemperature": 12.5,
                     "fog": 0,
                     "humidity": 31.7,
                     "neutralWeatherIcon": "weather-clouds",
@@ -312,6 +333,7 @@
                 },
                 {
                     "date": "2022-08-03T15:00:00+02:00",
+                    "dewPointTemperature": 12.5,
                     "fog": 0,
                     "humidity": 30.7,
                     "neutralWeatherIcon": "weather-clouds",
@@ -326,6 +348,7 @@
                 },
                 {
                     "date": "2022-08-03T16:00:00+02:00",
+                    "dewPointTemperature": 12.5,
                     "fog": 0,
                     "humidity": 30.4,
                     "neutralWeatherIcon": "weather-clouds",
@@ -340,6 +363,7 @@
                 },
                 {
                     "date": "2022-08-03T17:00:00+02:00",
+                    "dewPointTemperature": 12.8,
                     "fog": 0,
                     "humidity": 31.9,
                     "neutralWeatherIcon": "weather-clouds",
@@ -354,6 +378,7 @@
                 },
                 {
                     "date": "2022-08-03T18:00:00+02:00",
+                    "dewPointTemperature": 13.1,
                     "fog": 0,
                     "humidity": 32.9,
                     "neutralWeatherIcon": "weather-clouds",
@@ -368,6 +393,7 @@
                 },
                 {
                     "date": "2022-08-03T19:00:00+02:00",
+                    "dewPointTemperature": 13.2,
                     "fog": 0,
                     "humidity": 34.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -382,6 +408,7 @@
                 },
                 {
                     "date": "2022-08-03T20:00:00+02:00",
+                    "dewPointTemperature": 14.4,
                     "fog": 0,
                     "humidity": 40.1,
                     "neutralWeatherIcon": "weather-clouds",
@@ -396,6 +423,7 @@
                 },
                 {
                     "date": "2022-08-03T21:00:00+02:00",
+                    "dewPointTemperature": 14.9,
                     "fog": 0,
                     "humidity": 47.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -410,6 +438,7 @@
                 },
                 {
                     "date": "2022-08-03T22:00:00+02:00",
+                    "dewPointTemperature": 15.0,
                     "fog": 0,
                     "humidity": 54.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -424,6 +453,7 @@
                 },
                 {
                     "date": "2022-08-03T23:00:00+02:00",
+                    "dewPointTemperature": 14.9,
                     "fog": 0,
                     "humidity": 58.1,
                     "neutralWeatherIcon": "weather-clouds",
@@ -451,6 +481,7 @@
             "hourly": [
                 {
                     "date": "2022-08-04T00:00:00+02:00",
+                    "dewPointTemperature": 14.3,
                     "fog": 0,
                     "humidity": 59.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -465,6 +496,7 @@
                 },
                 {
                     "date": "2022-08-04T01:00:00+02:00",
+                    "dewPointTemperature": 14.6,
                     "fog": 0,
                     "humidity": 59.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -479,6 +511,7 @@
                 },
                 {
                     "date": "2022-08-04T02:00:00+02:00",
+                    "dewPointTemperature": 14.4,
                     "fog": 0,
                     "humidity": 61.9,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -493,6 +526,7 @@
                 },
                 {
                     "date": "2022-08-04T03:00:00+02:00",
+                    "dewPointTemperature": 14.2,
                     "fog": 0,
                     "humidity": 65.3,
                     "neutralWeatherIcon": "weather-clear",
@@ -507,6 +541,7 @@
                 },
                 {
                     "date": "2022-08-04T04:00:00+02:00",
+                    "dewPointTemperature": 14.4,
                     "fog": 0,
                     "humidity": 69.9,
                     "neutralWeatherIcon": "weather-clear",
@@ -521,6 +556,7 @@
                 },
                 {
                     "date": "2022-08-04T05:00:00+02:00",
+                    "dewPointTemperature": 14.4,
                     "fog": 0,
                     "humidity": 72,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -535,6 +571,7 @@
                 },
                 {
                     "date": "2022-08-04T06:00:00+02:00",
+                    "dewPointTemperature": 14.6,
                     "fog": 0,
                     "humidity": 74,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -549,6 +586,7 @@
                 },
                 {
                     "date": "2022-08-04T07:00:00+02:00",
+                    "dewPointTemperature": 14.9,
                     "fog": 0,
                     "humidity": 70.5,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -563,6 +601,7 @@
                 },
                 {
                     "date": "2022-08-04T08:00:00+02:00",
+                    "dewPointTemperature": 15.9,
                     "fog": 0,
                     "humidity": 65.9,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -577,6 +616,7 @@
                 },
                 {
                     "date": "2022-08-04T09:00:00+02:00",
+                    "dewPointTemperature": 14.6,
                     "fog": 0,
                     "humidity": 47.5,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -591,6 +631,7 @@
                 },
                 {
                     "date": "2022-08-04T10:00:00+02:00",
+                    "dewPointTemperature": 13.4,
                     "fog": 0,
                     "humidity": 36.9,
                     "neutralWeatherIcon": "weather-clear",
@@ -605,6 +646,7 @@
                 },
                 {
                     "date": "2022-08-04T11:00:00+02:00",
+                    "dewPointTemperature": 12.7,
                     "fog": 0,
                     "humidity": 31.7,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -619,6 +661,7 @@
                 },
                 {
                     "date": "2022-08-04T12:00:00+02:00",
+                    "dewPointTemperature": 11.9,
                     "fog": 0,
                     "humidity": 27.7,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -633,6 +676,7 @@
                 },
                 {
                     "date": "2022-08-04T13:00:00+02:00",
+                    "dewPointTemperature": 11.9,
                     "fog": 0,
                     "humidity": 26.3,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -647,6 +691,7 @@
                 },
                 {
                     "date": "2022-08-04T14:00:00+02:00",
+                    "dewPointTemperature": 11.8,
                     "fog": 0,
                     "humidity": 25.3,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -661,6 +706,7 @@
                 },
                 {
                     "date": "2022-08-04T15:00:00+02:00",
+                    "dewPointTemperature": 11.6,
                     "fog": 0,
                     "humidity": 24.2,
                     "neutralWeatherIcon": "weather-clouds",
@@ -675,6 +721,7 @@
                 },
                 {
                     "date": "2022-08-04T16:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 23.1,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -689,6 +736,7 @@
                 },
                 {
                     "date": "2022-08-04T17:00:00+02:00",
+                    "dewPointTemperature": 10.7,
                     "fog": 0,
                     "humidity": 22.4,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -703,6 +751,7 @@
                 },
                 {
                     "date": "2022-08-04T18:00:00+02:00",
+                    "dewPointTemperature": 10.4,
                     "fog": 0,
                     "humidity": 22.2,
                     "neutralWeatherIcon": "weather-clear",
@@ -717,6 +766,7 @@
                 },
                 {
                     "date": "2022-08-04T19:00:00+02:00",
+                    "dewPointTemperature": 10.2,
                     "fog": 0,
                     "humidity": 22.8,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -731,6 +781,7 @@
                 },
                 {
                     "date": "2022-08-04T20:00:00+02:00",
+                    "dewPointTemperature": 11.7,
                     "fog": 0,
                     "humidity": 27.7,
                     "neutralWeatherIcon": "weather-clouds",
@@ -745,6 +796,7 @@
                 },
                 {
                     "date": "2022-08-04T21:00:00+02:00",
+                    "dewPointTemperature": 10.4,
                     "fog": 0,
                     "humidity": 29.3,
                     "neutralWeatherIcon": "weather-clouds",
@@ -759,6 +811,7 @@
                 },
                 {
                     "date": "2022-08-04T22:00:00+02:00",
+                    "dewPointTemperature": 11.6,
                     "fog": 0,
                     "humidity": 38,
                     "neutralWeatherIcon": "weather-clouds",
@@ -773,6 +826,7 @@
                 },
                 {
                     "date": "2022-08-04T23:00:00+02:00",
+                    "dewPointTemperature": 16.2,
                     "fog": 0,
                     "humidity": 53,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -800,6 +854,7 @@
             "hourly": [
                 {
                     "date": "2022-08-05T00:00:00+02:00",
+                    "dewPointTemperature": 16.1,
                     "fog": 0,
                     "humidity": 56.1,
                     "neutralWeatherIcon": "weather-clouds",
@@ -814,6 +869,7 @@
                 },
                 {
                     "date": "2022-08-05T01:00:00+02:00",
+                    "dewPointTemperature": 15.6,
                     "fog": 0,
                     "humidity": 57.6,
                     "neutralWeatherIcon": "weather-clouds",
@@ -828,6 +884,7 @@
                 },
                 {
                     "date": "2022-08-05T02:00:00+02:00",
+                    "dewPointTemperature": 15.6,
                     "fog": 0,
                     "humidity": 61.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -842,6 +899,7 @@
                 },
                 {
                     "date": "2022-08-05T08:00:00+02:00",
+                    "dewPointTemperature": 18.4,
                     "fog": 0,
                     "humidity": 83.7,
                     "neutralWeatherIcon": "weather-showers",
@@ -856,6 +914,7 @@
                 },
                 {
                     "date": "2022-08-05T14:00:00+02:00",
+                    "dewPointTemperature": 15.6,
                     "fog": 0,
                     "humidity": 69.5,
                     "neutralWeatherIcon": "weather-clouds",
@@ -870,6 +929,7 @@
                 },
                 {
                     "date": "2022-08-05T20:00:00+02:00",
+                    "dewPointTemperature": 10.1,
                     "fog": 0,
                     "humidity": 56.1,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -897,6 +957,7 @@
             "hourly": [
                 {
                     "date": "2022-08-06T02:00:00+02:00",
+                    "dewPointTemperature": 10.7,
                     "fog": 0,
                     "humidity": 77.1,
                     "neutralWeatherIcon": "weather-clear",
@@ -911,6 +972,7 @@
                 },
                 {
                     "date": "2022-08-06T08:00:00+02:00",
+                    "dewPointTemperature": 11.0,
                     "fog": 0,
                     "humidity": 75.4,
                     "neutralWeatherIcon": "weather-clear",
@@ -925,6 +987,7 @@
                 },
                 {
                     "date": "2022-08-06T14:00:00+02:00",
+                    "dewPointTemperature": 7.6,
                     "fog": 0,
                     "humidity": 42,
                     "neutralWeatherIcon": "weather-clouds",
@@ -939,6 +1002,7 @@
                 },
                 {
                     "date": "2022-08-06T20:00:00+02:00",
+                    "dewPointTemperature": 6.8,
                     "fog": 0,
                     "humidity": 49.9,
                     "neutralWeatherIcon": "weather-clear",
@@ -966,6 +1030,7 @@
             "hourly": [
                 {
                     "date": "2022-08-07T02:00:00+02:00",
+                    "dewPointTemperature": 8.8,
                     "fog": 0,
                     "humidity": 76.7,
                     "neutralWeatherIcon": "weather-clear",
@@ -980,6 +1045,7 @@
                 },
                 {
                     "date": "2022-08-07T08:00:00+02:00",
+                    "dewPointTemperature": 10.2,
                     "fog": 0,
                     "humidity": 71.5,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -994,6 +1060,7 @@
                 },
                 {
                     "date": "2022-08-07T14:00:00+02:00",
+                    "dewPointTemperature": 7.9,
                     "fog": 0,
                     "humidity": 46.2,
                     "neutralWeatherIcon": "weather-clouds",
@@ -1008,6 +1075,7 @@
                 },
                 {
                     "date": "2022-08-07T20:00:00+02:00",
+                    "dewPointTemperature": 8.8,
                     "fog": 0,
                     "humidity": 54.4,
                     "neutralWeatherIcon": "weather-clouds",
@@ -1035,6 +1103,7 @@
             "hourly": [
                 {
                     "date": "2022-08-08T02:00:00+02:00",
+                    "dewPointTemperature": 9.8,
                     "fog": 0,
                     "humidity": 80.4,
                     "neutralWeatherIcon": "weather-clear",
@@ -1049,6 +1118,7 @@
                 },
                 {
                     "date": "2022-08-08T08:00:00+02:00",
+                    "dewPointTemperature": 11.2,
                     "fog": 0,
                     "humidity": 75,
                     "neutralWeatherIcon": "weather-clear",
@@ -1063,6 +1133,7 @@
                 },
                 {
                     "date": "2022-08-08T14:00:00+02:00",
+                    "dewPointTemperature": 10.0,
                     "fog": 0,
                     "humidity": 49.6,
                     "neutralWeatherIcon": "weather-clouds",
@@ -1077,6 +1148,7 @@
                 },
                 {
                     "date": "2022-08-08T20:00:00+02:00",
+                    "dewPointTemperature": 10.5,
                     "fog": 0,
                     "humidity": 57,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -1104,6 +1176,7 @@
             "hourly": [
                 {
                     "date": "2022-08-09T02:00:00+02:00",
+                    "dewPointTemperature": 11.9,
                     "fog": 0,
                     "humidity": 88.1,
                     "neutralWeatherIcon": "weather-clear",
@@ -1118,6 +1191,7 @@
                 },
                 {
                     "date": "2022-08-09T08:00:00+02:00",
+                    "dewPointTemperature": 12.7,
                     "fog": 0,
                     "humidity": 80.3,
                     "neutralWeatherIcon": "weather-clear",
@@ -1132,6 +1206,7 @@
                 },
                 {
                     "date": "2022-08-09T14:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 46.9,
                     "neutralWeatherIcon": "weather-clouds",
@@ -1146,6 +1221,7 @@
                 },
                 {
                     "date": "2022-08-09T20:00:00+02:00",
+                    "dewPointTemperature": 10.7,
                     "fog": 0,
                     "humidity": 55.3,
                     "neutralWeatherIcon": "weather-few-clouds",
@@ -1173,6 +1249,7 @@
             "hourly": [
                 {
                     "date": "2022-08-10T02:00:00+02:00",
+                    "dewPointTemperature": 12.0,
                     "fog": 0,
                     "humidity": 82.6,
                     "neutralWeatherIcon": "weather-clear",
@@ -1187,6 +1264,7 @@
                 },
                 {
                     "date": "2022-08-10T08:00:00+02:00",
+                    "dewPointTemperature": 12.4,
                     "fog": 0,
                     "humidity": 76.3,
                     "neutralWeatherIcon": "weather-clear",
@@ -1201,6 +1279,7 @@
                 },
                 {
                     "date": "2022-08-10T14:00:00+02:00",
+                    "dewPointTemperature": 13.6,
                     "fog": 0,
                     "humidity": 53.8,
                     "neutralWeatherIcon": "weather-clouds",
@@ -1215,6 +1294,7 @@
                 },
                 {
                     "date": "2022-08-10T20:00:00+02:00",
+                    "dewPointTemperature": 11.1,
                     "fog": 0,
                     "humidity": 53.4,
                     "neutralWeatherIcon": "weather-clear",
@@ -1242,6 +1322,7 @@
             "hourly": [
                 {
                     "date": "2022-08-11T02:00:00+02:00",
+                    "dewPointTemperature": 12.2,
                     "fog": 0,
                     "humidity": 82.8,
                     "neutralWeatherIcon": "weather-clear",
@@ -1256,6 +1337,7 @@
                 },
                 {
                     "date": "2022-08-11T08:00:00+02:00",
+                    "dewPointTemperature": 13.1,
                     "fog": 0,
                     "humidity": 75.2,
                     "neutralWeatherIcon": "weather-clear",
@@ -1270,6 +1352,7 @@
                 },
                 {
                     "date": "2022-08-11T14:00:00+02:00",
+                    "dewPointTemperature": 12.6,
                     "fog": 0,
                     "humidity": 51.6,
                     "neutralWeatherIcon": "weather-clouds",
