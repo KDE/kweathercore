@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 20)
 include(FeatureSummary)
 
 set(REQUIRED_QT_VERSION 6.5.0)
-set(KF_DEP_VERSION "6.3.0")
+set(KF_DEP_VERSION "6.15.0")
 
 find_package(ECM ${KF_DEP_VERSION}  NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://invent.kde.org/frameworks/extra-cmake-modules")
@@ -51,7 +51,7 @@ if (IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/po")
     ki18n_install(po)
 endif()
 ecm_set_disabled_deprecation_versions(QT 6.10.0
-    KF 6.14.0
+    KF 6.26.0
 )
 
 add_definitions(-DQT_NO_FOREACH)

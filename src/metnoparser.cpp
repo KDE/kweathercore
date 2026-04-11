@@ -1,4 +1,5 @@
 /*
+ * SPDX-FileCopyrightText: 2026 Viorel-Catalin Rapiteanu <rapiteanu.catalin@gmail.com>
  * SPDX-FileCopyrightText: 2020-2021 Han Young <hanyoung@protonmail.com>
  * SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
  *
@@ -8,7 +9,7 @@
 #include "kweathercore_p.h"
 #include "metnoparser_p.h"
 
-#include <KHolidays/SunRiseSet>
+#include <KHolidays/SunEvents>
 #include <kholidays_version.h>
 
 #include <QJsonArray>
@@ -78,24 +79,13 @@ void MetNoParser::parseOneElement(const QJsonObject &obj)
 
 bool MetNoParser::isDayTime(const QDateTime &dt) const
 {
-    const auto sunriseTime = KHolidays::SunRiseSet::utcSunrise(dt.date(), forecast.latitude(), forecast.longitude());
-    const auto sunsetTime = KHolidays::SunRiseSet::utcSunset(dt.date(), forecast.latitude(), forecast.longitude());
+    const KHolidays::SunEvents sunEvents(dt, forecast.latitude(), forecast.longitude());
+    auto sunrise = sunEvents.sunrise();
+    auto sunset = sunEvents.sunset();
 
-#if KHOLIDAYS_VERSION >= QT_VERSION_CHECK(5, 97, 0)
     // polar day/night: there is no sunrise/sunset
-    if (!sunriseTime.isValid() || !sunsetTime.isValid()) {
-        return KHolidays::SunRiseSet::isPolarDay(dt.date(), forecast.latitude());
-    }
-#endif
-
-    auto sunrise = QDateTime(dt.date(), sunriseTime, QTimeZone::UTC);
-    auto sunset = QDateTime(dt.date(), sunsetTime, QTimeZone::UTC);
-
-    // sunset before sunrise means the sunset actually happens the next day
-    if (dt >= sunrise && sunset < sunrise) {
-        sunset = sunset.addDays(1);
-    } else if (dt < sunrise && sunset < sunrise) {
-        sunrise = sunrise.addDays(-1);
+    if (!sunrise.isValid() || !sunset.isValid()) {
+        return sunEvents.isPolarDay();
     }
 
     // 30 min threshold
