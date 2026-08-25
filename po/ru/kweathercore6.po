@@ -1,13 +1,16 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kweathercore package.
 #
-# SPDX-FileCopyrightText: 2021, 2023, 2024, 2025 Alexander Yavorsky <kekcuha@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2023, 2024, 2025, 2026 Alexander Yavorsky <kekcuha@gmail.com>
+# Термины осадков приведены в соответствие с наставлением по
+# метеорологическим наблюдениям: http://meteocenter.net/meteolib/ww.htm
+# (ливневый характер осадков не тождествен их интенсивности).
 msgid ""
 msgstr ""
 "Project-Id-Version: kweathercore\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2025-11-27 19:33+0300\n"
+"PO-Revision-Date: 2026-08-24 20:15+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -62,19 +65,19 @@ msgstr "Сильный ливневый дождь с грозами"
 
 #: kweathercore.cpp:119 kweathercore.cpp:120 kweathercore.cpp:121
 msgid "Heavy Sleet"
-msgstr "Сильный мокрый снег"
+msgstr "Сильный дождь со снегом"
 
 #: kweathercore.cpp:122 kweathercore.cpp:123 kweathercore.cpp:124
 msgid "Thunderstorm with Heavy Sleet"
-msgstr "Сильный мокрый снег с грозами"
+msgstr "Сильный дождь со снегом и грозами"
 
 #: kweathercore.cpp:125 kweathercore.cpp:126 kweathercore.cpp:127
 msgid "Heavy Sleet Shower"
-msgstr "Сильный дождь со снегом"
+msgstr "Сильный ливневый дождь со снегом"
 
 #: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr "Сильный дождь со снегом и грозами"
+msgstr "Сильный ливневый дождь со снегом и грозами"
 
 #: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
 msgid "Heavy Snow"
@@ -82,11 +85,11 @@ msgstr "Сильный снег"
 
 #: kweathercore.cpp:135 kweathercore.cpp:136 kweathercore.cpp:137
 msgid "Heavy Snow Shower"
-msgstr "Сильный снегопад"
+msgstr "Сильный ливневый снег"
 
 #: kweathercore.cpp:138 kweathercore.cpp:139 kweathercore.cpp:140
 msgid "Thunderstorm with Heavy Snow Shower"
-msgstr "Сильный снегопад с грозами"
+msgstr "Сильный ливневый снег с грозами"
 
 #: kweathercore.cpp:142 kweathercore.cpp:143 kweathercore.cpp:144
 msgid "Light Rain"
@@ -114,7 +117,7 @@ msgstr "Слабый дождь со снегом и грозами"
 
 #: kweathercore.cpp:161 kweathercore.cpp:162 kweathercore.cpp:163
 msgid "Light Sleet Shower"
-msgstr "Слабый дождь со снегом"
+msgstr "Слабый ливневый дождь со снегом"
 
 #: kweathercore.cpp:165 kweathercore.cpp:166 kweathercore.cpp:167
 msgid "Light Snow"
@@ -126,15 +129,15 @@ msgstr "Слабый снег с грозами"
 
 #: kweathercore.cpp:171 kweathercore.cpp:172 kweathercore.cpp:173
 msgid "Light Snow Shower"
-msgstr "Слабый снегопад"
+msgstr "Слабый ливневый снег"
 
 #: kweathercore.cpp:175 kweathercore.cpp:176 kweathercore.cpp:177
 msgid "Thunderstorm with Light Sleet Shower"
-msgstr "Слабый дождь со снегом с грозой"
+msgstr "Слабый ливневый дождь со снегом и грозами"
 
 #: kweathercore.cpp:178 kweathercore.cpp:179 kweathercore.cpp:180
 msgid "Thunderstorm with Light Snow Shower"
-msgstr "Слабый снегопад с грозами"
+msgstr "Слабый ливневый снег с грозами"
 
 #: kweathercore.cpp:182 kweathercore.cpp:183 kweathercore.cpp:184
 msgid "Partly Cloudy"
@@ -182,11 +185,11 @@ msgstr "Снегопад с грозами"
 
 #: kweathercore.cpp:218 kweathercore.cpp:219 kweathercore.cpp:220
 msgid "Snow Shower"
-msgstr "Сильный снегопад"
+msgstr "Ливневый снег"
 
 #: kweathercore.cpp:221 kweathercore.cpp:222 kweathercore.cpp:223
 msgid "Thunderstorm with Snow Shower"
-msgstr "Сильный снегопад с грозами"
+msgstr "Ливневый снег с грозами"
 
 #: kweathercore_p.h:20
 #, kde-format
