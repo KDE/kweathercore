@@ -22,10 +22,10 @@ msgstr ""
 "X-Generator: Lokalize 26.08.1\n"
 
 #: capalertinfo.cpp:108
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "language (country)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: kweathercore.cpp:93 kweathercore.cpp:94 kweathercore.cpp:95
 msgid "Clear"
@@ -82,7 +82,7 @@ msgstr "Έντονη Μπόρες Χαλαζιού"
 #: kweathercore.cpp:128 kweathercore.cpp:129 kweathercore.cpp:130
 #, fuzzy
 msgid "Thunderstorm with Heavy Sleet Shower"
-msgstr "Καταιγίδα με 'Εντονες Μπόρες Χαλαζιού"
+msgstr "Καταιγίδα με Έντονες Μπόρες Χαλαζιού"
 
 #: kweathercore.cpp:132 kweathercore.cpp:133 kweathercore.cpp:134
 msgid "Heavy Snow"
